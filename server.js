@@ -379,22 +379,22 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
   }
 })
 
-// Route for all HTML pages
+// Route for all HTML pages - CORRECTED PATHS
 app.get(["/", "/custom-web/login", "/custom-web/admin"], (req, res) => {
   const requestPath = req.path;
   
   if (requestPath === "/custom-web/login") {
-    res.sendFile(path.join(__dirname, "login.html"));
+    res.sendFile(path.join(__dirname, "public", "login.html"));
   } else if (requestPath === "/custom-web/admin") {
-    res.sendFile(path.join(__dirname, "admin.html"));
+    res.sendFile(path.join(__dirname, "public", "admin.html"));
   } else {
-    res.sendFile(path.join(__dirname, "index.html"));
+    res.sendFile(path.join(__dirname, "public", "index.html"));
   }
 });
 
-// 404 route
+// 404 route - CORRECTED PATH
 app.use((req, res) => {
-  res.status(404).sendFile(path.join(__dirname, "404.html"));
+  res.status(404).sendFile(path.join(__dirname, "public", "404.html"));
 });
 
 // Start server
