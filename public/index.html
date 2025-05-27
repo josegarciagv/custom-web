@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Web Profile</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      :root {
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Custom Web Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
         --primary-color: #4f46e5;
         --text-color: #333;
         --bg-color: #fff;
@@ -23,33 +17,33 @@
         --error-color: #ef4444;
         --gallery-bg: #f9fafb;
         --services-bg: #ffffff;
-      }
-
-      * {
+    }
+    
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--bg-color);
-      }
-
-      .container {
+    }
+    
+    .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
-      }
-
-      header {
+    }
+    
+    header {
         text-align: center;
         margin-bottom: 3rem;
-      }
-
-      .profile-image {
+    }
+    
+    .profile-image {
         width: 150px;
         height: 150px;
         border-radius: 50%;
@@ -57,56 +51,56 @@
         margin-bottom: 1.5rem;
         border: 3px solid var(--primary-color);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      }
-
-      .profile-name {
+    }
+    
+    .profile-name {
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
         color: var(--text-color);
-      }
-
-      .profile-description {
+    }
+    
+    .profile-description {
         font-size: 1.1rem;
         max-width: 700px;
         margin: 0 auto 2rem;
         color: #666;
-      }
-
-      .section-title {
+    }
+    
+    .section-title {
         font-size: 1.8rem;
         font-weight: 600;
         margin-bottom: 1.5rem;
         text-align: center;
-      }
-
-      .services-section {
+    }
+    
+    .services-section {
         padding: 3rem 0;
         background-color: var(--services-bg);
         margin-bottom: 3rem;
-      }
-
-      .services-grid {
+    }
+    
+    .services-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 2rem;
         margin-bottom: 1rem;
-      }
-
-      .service-card {
+    }
+    
+    .service-card {
         background-color: var(--secondary-bg);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-      }
-
-      .service-card:hover {
+    }
+    
+    .service-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-      }
-
-      .service-icon {
+    }
+    
+    .service-icon {
         width: 50px;
         height: 50px;
         border-radius: 50%;
@@ -117,34 +111,34 @@
         justify-content: center;
         margin-bottom: 1rem;
         font-size: 1.5rem;
-      }
-
-      .service-title {
+    }
+    
+    .service-title {
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: var(--text-color);
-      }
-
-      .service-description {
+    }
+    
+    .service-description {
         color: #666;
         font-size: 0.95rem;
-      }
-
-      .gallery-section {
+    }
+    
+    .gallery-section {
         padding: 3rem 0;
         background-color: var(--gallery-bg);
         margin-bottom: 3rem;
-      }
-
-      .gallery {
+    }
+    
+    .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1.5rem;
         margin-bottom: 1rem;
-      }
-
-      .gallery-item {
+    }
+    
+    .gallery-item {
         position: relative;
         border-radius: 0.5rem;
         overflow: hidden;
@@ -152,28 +146,28 @@
         cursor: pointer;
         transition: transform 0.3s ease;
         aspect-ratio: 3/2;
-      }
-
-      .gallery-item:hover {
+    }
+    
+    .gallery-item:hover {
         transform: translateY(-5px);
-      }
-
-      .gallery-image {
+    }
+    
+    .gallery-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-      }
-
-      .links-container {
+    }
+    
+    .links-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 1rem;
         margin: 2rem auto;
         max-width: 600px;
-      }
-
-      .social-link {
+    }
+    
+    .social-link {
         display: flex;
         align-items: center;
         padding: 0.5rem 1rem;
@@ -183,64 +177,62 @@
         text-decoration: none;
         font-weight: 500;
         transition: all 0.3s ease;
-      }
-
-      .social-link:hover {
+    }
+    
+    .social-link:hover {
         background-color: var(--primary-color);
         color: white;
-      }
-
-      .social-link i {
+    }
+    
+    .social-link i {
         margin-right: 0.5rem;
-      }
-
-      .contact-section {
+    }
+    
+    .contact-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
-      }
-
-      .contact-form {
+    }
+    
+    .contact-form {
         max-width: 600px;
         margin: 0 auto;
         background-color: var(--secondary-bg);
         padding: 2rem;
         border-radius: 0.75rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      }
-
-      .form-group {
+    }
+    
+    .form-group {
         margin-bottom: 1.5rem;
-      }
-
-      .form-label {
+    }
+    
+    .form-label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: 500;
-      }
-
-      .form-input,
-      .form-textarea {
+    }
+    
+    .form-input, .form-textarea {
         width: 100%;
         padding: 0.75rem;
         border: 1px solid var(--border-color);
         border-radius: 0.5rem;
         font-size: 1rem;
         transition: border-color 0.3s ease;
-      }
-
-      .form-textarea {
+    }
+    
+    .form-textarea {
         min-height: 150px;
         resize: vertical;
-      }
-
-      .form-input:focus,
-      .form-textarea:focus {
+    }
+    
+    .form-input:focus, .form-textarea:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-      }
-
-      .submit-button {
+    }
+    
+    .submit-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -253,18 +245,18 @@
         border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
-      }
-
-      .submit-button:hover {
+    }
+    
+    .submit-button:hover {
         background-color: #4338ca;
-      }
-
-      .submit-button:disabled {
+    }
+    
+    .submit-button:disabled {
         background-color: #9ca3af;
         cursor: not-allowed;
-      }
-
-      .loading {
+    }
+    
+    .loading {
         display: inline-block;
         width: 1rem;
         height: 1rem;
@@ -273,34 +265,32 @@
         border-top-color: white;
         animation: spin 1s ease-in-out infinite;
         margin-right: 0.5rem;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .alert {
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .alert {
         padding: 1rem;
         border-radius: 0.5rem;
         margin-bottom: 1.5rem;
         display: none;
-      }
-
-      .alert-success {
+    }
+    
+    .alert-success {
         background-color: #d1fae5;
         color: #065f46;
         border: 1px solid #34d399;
-      }
-
-      .alert-error {
+    }
+    
+    .alert-error {
         background-color: #fee2e2;
         color: #b91c1c;
         border: 1px solid #f87171;
-      }
-
-      .modal {
+    }
+    
+    .modal {
         display: none;
         position: fixed;
         top: 0;
@@ -311,20 +301,20 @@
         z-index: 1000;
         justify-content: center;
         align-items: center;
-      }
-
-      .modal-content {
+    }
+    
+    .modal-content {
         max-width: 90%;
         max-height: 90%;
-      }
-
-      .modal-image {
+    }
+    
+    .modal-image {
         max-width: 100%;
         max-height: 90vh;
         object-fit: contain;
-      }
-
-      .close-modal {
+    }
+    
+    .close-modal {
         position: absolute;
         top: 20px;
         right: 30px;
@@ -332,426 +322,582 @@
         font-size: 40px;
         font-weight: bold;
         cursor: pointer;
-      }
-
-      .admin-link {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        color: #999;
-        font-size: 0.9rem;
-        text-decoration: none;
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .info-section {
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+        background-color: var(--secondary-bg);
+    }
+    
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+    
+    .info-card {
+        background-color: var(--bg-color);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .info-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: var(--primary-color);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+    
+    .info-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+    }
+    
+    .info-content {
+        color: #666;
+    }
+    
+    .faq-section {
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+    }
+    
+    .faq-container {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .faq-item {
+        margin-bottom: 1.5rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.75rem;
+        overflow: hidden;
         transition: all 0.3s ease;
-        z-index: 100;
-      }
-
-      .admin-link:hover {
-        color: var(--primary-color);
-        background-color: white;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      }
-
-      footer {
+    }
+    
+    .faq-question {
+        padding: 1.25rem;
+        background-color: var(--secondary-bg);
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .faq-question:hover {
+        background-color: rgba(79, 70, 229, 0.05);
+    }
+    
+    .faq-answer {
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: all 0.3s ease;
+    }
+    
+    .faq-answer-content {
+        padding: 0 1.25rem 1.25rem;
+        color: #666;
+    }
+    
+    .faq-item.active {
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+    
+    .faq-item.active .faq-answer {
+        max-height: 1000px;
+        transition: max-height 0.5s ease;
+    }
+    
+    .footer {
         text-align: center;
         margin-top: 4rem;
         padding-top: 2rem;
         border-top: 1px solid var(--border-color);
         color: #666;
         font-size: 0.9rem;
-      }
-
-      .hidden {
+    }
+    
+    .hidden {
         display: none;
-      }
-
-      @media (max-width: 768px) {
+    }
+    
+    @media (max-width: 768px) {
         .container {
-          padding: 1rem;
+            padding: 1rem;
         }
-
+        
         .profile-name {
-          font-size: 2rem;
+            font-size: 2rem;
         }
-
+        
         .services-grid {
-          grid-template-columns: 1fr;
-          gap: 1rem;
+            grid-template-columns: 1fr;
+            gap: 1rem;
         }
-
+        
         .gallery {
-          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-          gap: 1rem;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
         }
-
-        .admin-link {
-          top: 10px;
-          right: 10px;
-          font-size: 0.8rem;
-          padding: 0.4rem 0.8rem;
+        
+        .info-grid {
+            grid-template-columns: 1fr;
         }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <a href="/custom-web/login" class="admin-link" target="_blank">Admin</a>
-
-      <header>
-        <img
-          src="/images/profile.jpg"
-          alt="Profile"
-          class="profile-image"
-          id="profile-image"
-        />
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
         <h1 class="profile-name" id="profile-name">John Doe</h1>
-        <p class="profile-description" id="profile-description">
-          Welcome to my personal profile! I'm a passionate web developer with
-          expertise in creating responsive and user-friendly websites. Feel free
-          to browse through my work and get in touch if you'd like to
-          collaborate.
-        </p>
-      </header>
-
-      <div class="links-container" id="links-container">
+        <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
+    </header>
+    
+    <div class="links-container" id="links-container">
         <!-- Social links will be loaded dynamically -->
-      </div>
-
-      <section id="services-section" class="services-section">
-        <div class="container">
-          <h2 class="section-title">My Services</h2>
-          <div class="services-grid" id="services-grid">
-            <!-- Services will be loaded dynamically -->
-          </div>
-        </div>
-      </section>
-
-      <section id="gallery-section" class="gallery-section">
-        <div class="container">
-          <h2 class="section-title">My Gallery</h2>
-          <div class="gallery" id="gallery">
-            <!-- Gallery images will be loaded dynamically -->
-          </div>
-        </div>
-      </section>
-
-      <section id="contact-section" class="contact-section">
-        <div class="container">
-          <h2 class="section-title">Contact Me</h2>
-          <div class="contact-form">
-            <div class="alert alert-success" id="success-alert">
-              Your message has been sent successfully! I'll get back to you
-              soon.
-            </div>
-            <div class="alert alert-error" id="error-alert">
-              There was an error sending your message. Please try again.
-            </div>
-            <form id="contact-form">
-              <div class="form-group">
-                <label for="name" class="form-label">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="form-input"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="email" class="form-label">Email</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-input"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div class="form-group">
-                <label for="message" class="form-label">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  class="form-textarea"
-                  placeholder="Enter your message"
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" class="submit-button" id="submit-button">
-                <span id="loading" class="loading hidden"></span>
-                <span id="button-text">Send Message</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
     </div>
+    
+    <section id="services-section" class="services-section">
+        <div class="container">
+            <h2 class="section-title" id="services-title">My Services</h2>
+            <div class="services-grid" id="services-grid">
+                <!-- Services will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="gallery-section" class="gallery-section">
+        <div class="container">
+            <h2 class="section-title" id="gallery-title">My Gallery</h2>
+            <div class="gallery" id="gallery">
+                <!-- Gallery images will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="info-section" class="info-section">
+        <div class="container">
+            <h2 class="section-title" id="info-title">Contact Information</h2>
+            <div class="info-grid" id="info-grid">
+                <!-- Contact info will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="faq-section" class="faq-section">
+        <div class="container">
+            <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+            <div class="faq-container" id="faq-container">
+                <!-- FAQs will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact-section" class="contact-section">
+        <div class="container">
+            <h2 class="section-title" id="contact-title">Contact Me</h2>
+            <div class="contact-form">
+                <div class="alert alert-success" id="success-alert">
+                    Your message has been sent successfully! I'll get back to you soon.
+                </div>
+                <div class="alert alert-error" id="error-alert">
+                    There was an error sending your message. Please try again.
+                </div>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button" id="submit-button">
+                        <span id="loading" class="loading hidden"></span>
+                        <span id="button-text">Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
 
-    <div class="modal" id="image-modal">
-      <span class="close-modal" id="close-modal">&times;</span>
-      <div class="modal-content">
-        <img
-          src="/placeholder.svg"
-          alt="Gallery Image"
-          class="modal-image"
-          id="modal-image"
-        />
-      </div>
+<div class="modal" id="image-modal">
+    <span class="close-modal" id="close-modal">&times;</span>
+    <div class="modal-content">
+        <img src="/placeholder.svg" alt="Gallery Image" class="modal-image" id="modal-image">
     </div>
+</div>
 
-    <footer>
-      <p>
-        &copy; <span id="current-year"></span>
-        <span id="footer-name">Custom Web Profile</span>. All rights reserved.
-      </p>
-    </footer>
+<footer class="footer">
+    <p>&copy; <span id="current-year"></span> <span id="footer-name">Custom Web Profile</span>. All rights reserved.</p>
+</footer>
 
-    <script>
-      // Set current year in footer
-      document.getElementById("current-year").textContent =
-        new Date().getFullYear();
-
-      // Fetch profile data
-      async function fetchProfileData() {
+<script>
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Fetch profile data
+    async function fetchProfileData() {
         try {
-          const response = await fetch("/api/profile");
-          if (!response.ok) {
-            throw new Error("Failed to fetch profile data");
-          }
-
-          const data = await response.json();
-
-          // Apply theme colors
-          document.documentElement.style.setProperty(
-            "--bg-color",
-            data.backgroundColor || "#ffffff"
-          );
-          document.documentElement.style.setProperty(
-            "--text-color",
-            data.textColor || "#333333"
-          );
-          document.documentElement.style.setProperty(
-            "--primary-color",
-            data.accentColor || "#4f46e5"
-          );
-          document.documentElement.style.setProperty(
-            "--gallery-bg",
-            data.galleryBgColor || "#f9fafb"
-          );
-          document.documentElement.style.setProperty(
-            "--services-bg",
-            data.servicesBgColor || "#ffffff"
-          );
-
-          // Update profile information
-          document.getElementById("profile-name").textContent = data.name;
-          document.getElementById("profile-description").textContent =
-            data.description;
-          document.getElementById("profile-image").src = data.profileImage;
-
-          // Update footer name
-          document.getElementById("footer-name").textContent = data.name;
-
-          // Set favicon
-          const favicon = document.createElement("link");
-          favicon.rel = "icon";
-          favicon.href = data.profileImage;
-          document.head.appendChild(favicon);
-
-          // Set meta tags for SEO
-          const metaTitle = document.createElement("meta");
-          metaTitle.name = "title";
-          metaTitle.content = data.name + " - Profile";
-          document.head.appendChild(metaTitle);
-
-          const metaDescription = document.createElement("meta");
-          metaDescription.name = "description";
-          metaDescription.content = data.description;
-          document.head.appendChild(metaDescription);
-
-          // Update page title
-          document.title = data.name + " - Profile";
-
-          // Load social links
-          loadSocialLinks(data.links || []);
-
-          // Load services
-          loadServices(data.services || []);
-
-          // Load gallery images
-          loadGalleryImages(data.galleryImages || []);
-
-          // Show/hide contact form based on settings
-          if (!data.showContactForm) {
-            document.getElementById("contact-section").classList.add("hidden");
-          }
+            const response = await fetch('/api/profile');
+            if (!response.ok) {
+                throw new Error('Failed to fetch profile data');
+            }
+            
+            const data = await response.json();
+            
+            // Apply theme colors
+            document.documentElement.style.setProperty('--bg-color', data.backgroundColor || '#ffffff');
+            document.documentElement.style.setProperty('--text-color', data.textColor || '#333333');
+            document.documentElement.style.setProperty('--primary-color', data.accentColor || '#4f46e5');
+            document.documentElement.style.setProperty('--gallery-bg', data.galleryBgColor || '#f9fafb');
+            document.documentElement.style.setProperty('--services-bg', data.servicesBgColor || '#ffffff');
+            
+            // Update profile information
+            document.getElementById('profile-name').textContent = data.name;
+            document.getElementById('profile-description').textContent = data.description;
+            document.getElementById('profile-image').src = data.profileImage;
+            
+            // Update section titles
+            if (data.servicesSectionTitle) {
+                document.getElementById('services-title').textContent = data.servicesSectionTitle;
+            }
+            
+            if (data.gallerySectionTitle) {
+                document.getElementById('gallery-title').textContent = data.gallerySectionTitle;
+            }
+            
+            if (data.contactSectionTitle) {
+                document.getElementById('contact-title').textContent = data.contactSectionTitle;
+            }
+            
+            if (data.infoSectionTitle) {
+                document.getElementById('info-title').textContent = data.infoSectionTitle;
+            }
+            
+            if (data.faqSectionTitle) {
+                document.getElementById('faq-title').textContent = data.faqSectionTitle;
+            }
+            
+            // Update footer name
+            document.getElementById('footer-name').textContent = data.name;
+            
+            // Set favicon
+            const favicon = document.createElement('link');
+            favicon.rel = 'icon';
+            favicon.href = data.profileImage;
+            document.head.appendChild(favicon);
+            
+            // Set meta tags for SEO
+            const metaTitle = document.createElement('meta');
+            metaTitle.name = 'title';
+            metaTitle.content = data.name + ' - Profile';
+            document.head.appendChild(metaTitle);
+            
+            const metaDescription = document.createElement('meta');
+            metaDescription.name = 'description';
+            metaDescription.content = data.description;
+            document.head.appendChild(metaDescription);
+            
+            // Update page title
+            document.title = data.name + ' - Profile';
+            
+            // Load social links
+            loadSocialLinks(data.links || []);
+            
+            // Load services
+            loadServices(data.services || []);
+            
+            // Load gallery images
+            loadGalleryImages(data.galleryImages || []);
+            
+            // Load contact information
+            loadContactInfo(data.contactInfo || []);
+            
+            // Load FAQs
+            loadFaqs(data.faqs || []);
+            
+            // Show/hide sections based on settings
+            if (!data.showContactForm) {
+                document.getElementById('contact-section').classList.add('hidden');
+            }
+            
+            if (!data.contactInfo || data.contactInfo.length === 0) {
+                document.getElementById('info-section').classList.add('hidden');
+            }
+            
+            if (!data.faqs || data.faqs.length === 0) {
+                document.getElementById('faq-section').classList.add('hidden');
+            }
         } catch (error) {
-          console.error("Error fetching profile data:", error);
+            console.error('Error fetching profile data:', error);
         }
-      }
-
-      // Load social links
-      function loadSocialLinks(links) {
-        const linksContainer = document.getElementById("links-container");
-        linksContainer.innerHTML = "";
-
+    }
+    
+    // Load social links
+    function loadSocialLinks(links) {
+        const linksContainer = document.getElementById('links-container');
+        linksContainer.innerHTML = '';
+        
         if (links.length > 0) {
-          links.forEach((link) => {
-            const socialLink = document.createElement("a");
-            socialLink.href = link.url;
-            socialLink.className = "social-link";
-            socialLink.target = "_blank";
-            socialLink.rel = "noopener noreferrer";
-
-            const icon = document.createElement("i");
-            icon.className = `fab fa-${link.icon}`;
-
-            const text = document.createTextNode(link.text);
-
-            socialLink.appendChild(icon);
-            socialLink.appendChild(text);
-            linksContainer.appendChild(socialLink);
-          });
+            links.forEach(link => {
+                const socialLink = document.createElement('a');
+                socialLink.href = link.url;
+                socialLink.className = 'social-link';
+                socialLink.target = '_blank';
+                socialLink.rel = 'noopener noreferrer';
+                
+                const icon = document.createElement('i');
+                icon.className = `fab fa-${link.icon}`;
+                
+                const text = document.createTextNode(link.text);
+                
+                socialLink.appendChild(icon);
+                socialLink.appendChild(text);
+                linksContainer.appendChild(socialLink);
+            });
         }
-      }
-
-      // Load services
-      function loadServices(services) {
-        const servicesGrid = document.getElementById("services-grid");
-        servicesGrid.innerHTML = "";
-
+    }
+    
+    // Load services
+    function loadServices(services) {
+        const servicesGrid = document.getElementById('services-grid');
+        servicesGrid.innerHTML = '';
+        
         if (services.length > 0) {
-          services.forEach((service) => {
-            const serviceCard = document.createElement("div");
-            serviceCard.className = "service-card";
-
-            const serviceIcon = document.createElement("div");
-            serviceIcon.className = "service-icon";
-            serviceIcon.innerHTML = `<i class="fas fa-${service.icon}"></i>`;
-
-            const serviceTitle = document.createElement("h3");
-            serviceTitle.className = "service-title";
-            serviceTitle.textContent = service.title;
-
-            const serviceDescription = document.createElement("p");
-            serviceDescription.className = "service-description";
-            serviceDescription.textContent = service.description;
-
-            serviceCard.appendChild(serviceIcon);
-            serviceCard.appendChild(serviceTitle);
-            serviceCard.appendChild(serviceDescription);
-
-            servicesGrid.appendChild(serviceCard);
-          });
+            services.forEach(service => {
+                const serviceCard = document.createElement('div');
+                serviceCard.className = 'service-card';
+                
+                const serviceIcon = document.createElement('div');
+                serviceIcon.className = 'service-icon';
+                serviceIcon.innerHTML = `<i class="fas fa-${service.icon}"></i>`;
+                
+                const serviceTitle = document.createElement('h3');
+                serviceTitle.className = 'service-title';
+                serviceTitle.textContent = service.title;
+                
+                const serviceDescription = document.createElement('p');
+                serviceDescription.className = 'service-description';
+                serviceDescription.textContent = service.description;
+                
+                serviceCard.appendChild(serviceIcon);
+                serviceCard.appendChild(serviceTitle);
+                serviceCard.appendChild(serviceDescription);
+                
+                servicesGrid.appendChild(serviceCard);
+            });
         } else {
-          document.getElementById("services-section").classList.add("hidden");
+            document.getElementById('services-section').classList.add('hidden');
         }
-      }
-
-      // Load gallery images
-      function loadGalleryImages(images) {
-        const gallery = document.getElementById("gallery");
-        gallery.innerHTML = "";
-
+    }
+    
+    // Load gallery images
+    function loadGalleryImages(images) {
+        const gallery = document.getElementById('gallery');
+        gallery.innerHTML = '';
+        
         if (images.length > 0) {
-          images.forEach((image) => {
-            const galleryItem = document.createElement("div");
-            galleryItem.className = "gallery-item";
-            galleryItem.addEventListener("click", () => openModal(image));
-
-            const img = document.createElement("img");
-            img.src = image;
-            img.alt = "Gallery Image";
-            img.className = "gallery-image";
-
-            galleryItem.appendChild(img);
-            gallery.appendChild(galleryItem);
-          });
+            images.forEach(image => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                galleryItem.addEventListener('click', () => openModal(image));
+                
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = 'Gallery Image';
+                img.className = 'gallery-image';
+                
+                galleryItem.appendChild(img);
+                gallery.appendChild(galleryItem);
+            });
         } else {
-          document.getElementById("gallery-section").classList.add("hidden");
+            document.getElementById('gallery-section').classList.add('hidden');
         }
-      }
-
-      // Contact form submission
-      const contactForm = document.getElementById("contact-form");
-      const submitButton = document.getElementById("submit-button");
-      const loadingSpinner = document.getElementById("loading");
-      const buttonText = document.getElementById("button-text");
-      const successAlert = document.getElementById("success-alert");
-      const errorAlert = document.getElementById("error-alert");
-
-      contactForm.addEventListener("submit", async (e) => {
+    }
+    
+    // Load contact information
+    function loadContactInfo(contactInfo) {
+        const infoGrid = document.getElementById('info-grid');
+        infoGrid.innerHTML = '';
+        
+        if (contactInfo.length > 0) {
+            contactInfo.forEach(info => {
+                const infoCard = document.createElement('div');
+                infoCard.className = 'info-card';
+                
+                const infoIcon = document.createElement('div');
+                infoIcon.className = 'info-icon';
+                infoIcon.innerHTML = `<i class="fas fa-${info.icon}"></i>`;
+                
+                const infoTitle = document.createElement('h3');
+                infoTitle.className = 'info-title';
+                infoTitle.textContent = info.title;
+                
+                const infoContent = document.createElement('p');
+                infoContent.className = 'info-content';
+                
+                if (info.type === 'link' && info.value) {
+                    const link = document.createElement('a');
+                    link.href = info.type === 'email' ? `mailto:${info.value}` : 
+                                info.type === 'phone' ? `tel:${info.value}` : 
+                                info.value;
+                    link.textContent = info.value;
+                    link.target = '_blank';
+                    link.rel = 'noopener noreferrer';
+                    infoContent.appendChild(link);
+                } else {
+                    infoContent.textContent = info.value;
+                }
+                
+                infoCard.appendChild(infoIcon);
+                infoCard.appendChild(infoTitle);
+                infoCard.appendChild(infoContent);
+                
+                infoGrid.appendChild(infoCard);
+            });
+        } else {
+            document.getElementById('info-section').classList.add('hidden');
+        }
+    }
+    
+    // Load FAQs
+    function loadFaqs(faqs) {
+        const faqContainer = document.getElementById('faq-container');
+        faqContainer.innerHTML = '';
+        
+        if (faqs.length > 0) {
+            faqs.forEach((faq, index) => {
+                const faqItem = document.createElement('div');
+                faqItem.className = 'faq-item';
+                faqItem.id = `faq-${index}`;
+                
+                const faqQuestion = document.createElement('div');
+                faqQuestion.className = 'faq-question';
+                faqQuestion.innerHTML = `
+                    <span>${faq.question}</span>
+                    <i class="fas fa-chevron-down"></i>
+                `;
+                
+                const faqAnswer = document.createElement('div');
+                faqAnswer.className = 'faq-answer';
+                
+                const faqAnswerContent = document.createElement('div');
+                faqAnswerContent.className = 'faq-answer-content';
+                faqAnswerContent.textContent = faq.answer;
+                
+                faqAnswer.appendChild(faqAnswerContent);
+                
+                faqItem.appendChild(faqQuestion);
+                faqItem.appendChild(faqAnswer);
+                
+                faqQuestion.addEventListener('click', () => {
+                    faqItem.classList.toggle('active');
+                });
+                
+                faqContainer.appendChild(faqItem);
+            });
+        } else {
+            document.getElementById('faq-section').classList.add('hidden');
+        }
+    }
+    
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    const submitButton = document.getElementById('submit-button');
+    const loadingSpinner = document.getElementById('loading');
+    const buttonText = document.getElementById('button-text');
+    const successAlert = document.getElementById('success-alert');
+    const errorAlert = document.getElementById('error-alert');
+    
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         // Reset alerts
-        successAlert.style.display = "none";
-        errorAlert.style.display = "none";
-
+        successAlert.style.display = 'none';
+        errorAlert.style.display = 'none';
+        
         // Show loading state
         submitButton.disabled = true;
-        loadingSpinner.classList.remove("hidden");
-        buttonText.textContent = "Sending...";
-
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
-
+        loadingSpinner.classList.remove('hidden');
+        buttonText.textContent = 'Sending...';
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
         try {
-          const response = await fetch("/api/contact", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ name, email, message }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to send message");
-          }
-
-          // Show success message
-          successAlert.style.display = "block";
-
-          // Reset form
-          contactForm.reset();
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, email, message })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to send message');
+            }
+            
+            // Show success message
+            successAlert.style.display = 'block';
+            
+            // Reset form
+            contactForm.reset();
         } catch (error) {
-          console.error("Error sending message:", error);
-          errorAlert.style.display = "block";
+            console.error('Error sending message:', error);
+            errorAlert.style.display = 'block';
         } finally {
-          // Reset button state
-          submitButton.disabled = false;
-          loadingSpinner.classList.add("hidden");
-          buttonText.textContent = "Send Message";
+            // Reset button state
+            submitButton.disabled = false;
+            loadingSpinner.classList.add('hidden');
+            buttonText.textContent = 'Send Message';
         }
-      });
-
-      // Modal functionality
-      const modal = document.getElementById("image-modal");
-      const modalImage = document.getElementById("modal-image");
-      const closeModal = document.getElementById("close-modal");
-
-      function openModal(imageSrc) {
-        modal.style.display = "flex";
+    });
+    
+    // Modal functionality
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const closeModal = document.getElementById('close-modal');
+    
+    function openModal(imageSrc) {
+        modal.style.display = 'flex';
         modalImage.src = imageSrc;
-      }
-
-      closeModal.addEventListener("click", () => {
-        modal.style.display = "none";
-      });
-
-      window.addEventListener("click", (event) => {
+    }
+    
+    closeModal.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+    
+    window.addEventListener('click', (event) => {
         if (event.target === modal) {
-          modal.style.display = "none";
+            modal.style.display = 'none';
         }
-      });
-
-      // Load profile data when page loads
-      document.addEventListener("DOMContentLoaded", fetchProfileData);
-    </script>
-  </body>
+    });
+    
+    // Load profile data when page loads
+    document.addEventListener('DOMContentLoaded', fetchProfileData);
+</script>
+</body>
 </html>

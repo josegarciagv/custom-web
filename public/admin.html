@@ -1,19 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Admin Panel - Custom Web</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
-    <style>
-      :root {
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - Custom Web</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+    :root {
         --primary-color: #4f46e5;
         --text-color: #333;
         --bg-color: #fff;
@@ -22,27 +16,27 @@
         --success-color: #10b981;
         --error-color: #ef4444;
         --warning-color: #f59e0b;
-      }
-
-      * {
+    }
+    
+    * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-      }
-
-      body {
-        font-family: "Inter", sans-serif;
+    }
+    
+    body {
+        font-family: 'Inter', sans-serif;
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--secondary-bg);
-      }
-
-      .admin-container {
+    }
+    
+    .admin-container {
         display: flex;
         min-height: 100vh;
-      }
-
-      .sidebar {
+    }
+    
+    .sidebar {
         width: 250px;
         background-color: var(--bg-color);
         border-right: 1px solid var(--border-color);
@@ -51,36 +45,36 @@
         height: 100vh;
         overflow-y: auto;
         z-index: 10;
-      }
-
-      .sidebar-header {
+    }
+    
+    .sidebar-header {
         display: flex;
         align-items: center;
         margin-bottom: 2rem;
-      }
-
-      .sidebar-logo {
+    }
+    
+    .sidebar-logo {
         width: 40px;
         height: 40px;
         border-radius: 50%;
         margin-right: 0.75rem;
-      }
-
-      .sidebar-title {
+    }
+    
+    .sidebar-title {
         font-size: 1.25rem;
         font-weight: 700;
         color: var(--text-color);
-      }
-
-      .sidebar-nav {
+    }
+    
+    .sidebar-nav {
         list-style: none;
-      }
-
-      .sidebar-nav-item {
+    }
+    
+    .sidebar-nav-item {
         margin-bottom: 0.5rem;
-      }
-
-      .sidebar-nav-link {
+    }
+    
+    .sidebar-nav-link {
         display: flex;
         align-items: center;
         padding: 0.75rem;
@@ -88,42 +82,41 @@
         color: #666;
         text-decoration: none;
         transition: background-color 0.3s ease;
-      }
-
-      .sidebar-nav-link:hover,
-      .sidebar-nav-link.active {
+    }
+    
+    .sidebar-nav-link:hover, .sidebar-nav-link.active {
         background-color: var(--secondary-bg);
         color: var(--primary-color);
-      }
-
-      .sidebar-nav-icon {
+    }
+    
+    .sidebar-nav-icon {
         margin-right: 0.75rem;
         width: 20px;
         text-align: center;
-      }
-
-      .main-content {
+    }
+    
+    .main-content {
         flex: 1;
         margin-left: 250px;
         padding: 2rem;
-      }
-
-      .page-header {
+    }
+    
+    .page-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 2rem;
         padding-bottom: 1rem;
         border-bottom: 1px solid var(--border-color);
-      }
-
-      .page-title {
+    }
+    
+    .page-title {
         font-size: 1.5rem;
         font-weight: 700;
         color: var(--text-color);
-      }
-
-      .logout-button {
+    }
+    
+    .logout-button {
         display: inline-flex;
         align-items: center;
         background-color: transparent;
@@ -135,88 +128,84 @@
         font-weight: 500;
         cursor: pointer;
         transition: all 0.3s ease;
-      }
-
-      .logout-button:hover {
+    }
+    
+    .logout-button:hover {
         background-color: #fee2e2;
         color: var(--error-color);
         border-color: var(--error-color);
-      }
-
-      .logout-icon {
+    }
+    
+    .logout-icon {
         margin-right: 0.5rem;
-      }
-
-      .card {
+    }
+    
+    .card {
         background-color: var(--bg-color);
         border-radius: 0.75rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         padding: 1.5rem;
         margin-bottom: 2rem;
-      }
-
-      .card-header {
+    }
+    
+    .card-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1.5rem;
-      }
-
-      .card-title {
+    }
+    
+    .card-title {
         font-size: 1.25rem;
         font-weight: 600;
         color: var(--text-color);
-      }
-
-      .form-group {
+    }
+    
+    .form-group {
         margin-bottom: 1.5rem;
-      }
-
-      .form-label {
+    }
+    
+    .form-label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: 500;
         color: var(--text-color);
-      }
-
-      .form-input,
-      .form-textarea,
-      .form-select {
+    }
+    
+    .form-input, .form-textarea, .form-select {
         width: 100%;
         padding: 0.75rem;
         border: 1px solid var(--border-color);
         border-radius: 0.5rem;
         font-size: 1rem;
         transition: border-color 0.3s ease;
-      }
-
-      .form-textarea {
+    }
+    
+    .form-textarea {
         min-height: 150px;
         resize: vertical;
-      }
-
-      .form-input:focus,
-      .form-textarea:focus,
-      .form-select:focus {
+    }
+    
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-      }
-
-      .color-input-container {
+    }
+    
+    .color-input-container {
         display: flex;
         align-items: center;
-      }
-
-      .color-preview {
+    }
+    
+    .color-preview {
         width: 40px;
         height: 40px;
         border-radius: 0.5rem;
         margin-right: 1rem;
         border: 1px solid var(--border-color);
-      }
-
-      .button {
+    }
+    
+    .button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -227,94 +216,94 @@
         cursor: pointer;
         transition: background-color 0.3s ease;
         border: none;
-      }
-
-      .primary-button {
+    }
+    
+    .primary-button {
         background-color: var(--primary-color);
         color: white;
-      }
-
-      .primary-button:hover {
+    }
+    
+    .primary-button:hover {
         background-color: #4338ca;
-      }
-
-      .secondary-button {
+    }
+    
+    .secondary-button {
         background-color: white;
         color: var(--text-color);
         border: 1px solid var(--border-color);
-      }
-
-      .secondary-button:hover {
+    }
+    
+    .secondary-button:hover {
         background-color: var(--secondary-bg);
-      }
-
-      .danger-button {
+    }
+    
+    .danger-button {
         background-color: #fee2e2;
         color: var(--error-color);
         border: 1px solid var(--error-color);
-      }
-
-      .danger-button:hover {
+    }
+    
+    .danger-button:hover {
         background-color: var(--error-color);
         color: white;
-      }
-
-      .button-icon {
+    }
+    
+    .button-icon {
         margin-right: 0.5rem;
-      }
-
-      .profile-preview {
+    }
+    
+    .profile-preview {
         display: flex;
         align-items: center;
         margin-bottom: 1.5rem;
-      }
-
-      .profile-image-preview {
+    }
+    
+    .profile-image-preview {
         width: 100px;
         height: 100px;
         border-radius: 50%;
         object-fit: cover;
         margin-right: 1.5rem;
         border: 3px solid var(--primary-color);
-      }
-
-      .profile-info-preview {
+    }
+    
+    .profile-info-preview {
         flex: 1;
-      }
-
-      .profile-name-preview {
+    }
+    
+    .profile-name-preview {
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-      }
-
-      .profile-description-preview {
+    }
+    
+    .profile-description-preview {
         color: #666;
         font-size: 0.875rem;
-      }
-
-      .image-upload-container {
+    }
+    
+    .image-upload-container {
         display: flex;
         align-items: center;
         margin-bottom: 1rem;
-      }
-
-      .image-preview {
+    }
+    
+    .image-preview {
         width: 80px;
         height: 80px;
         border-radius: 0.5rem;
         object-fit: cover;
         margin-right: 1rem;
         border: 1px solid var(--border-color);
-      }
-
-      .file-input-wrapper {
+    }
+    
+    .file-input-wrapper {
         position: relative;
         overflow: hidden;
         display: inline-block;
-      }
-
-      .file-input {
+    }
+    
+    .file-input {
         position: absolute;
         left: 0;
         top: 0;
@@ -323,38 +312,38 @@
         width: 100%;
         height: 100%;
         z-index: 1;
-      }
-
-      .gallery-grid {
+    }
+    
+    .gallery-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
         gap: 1rem;
         margin-top: 1.5rem;
-      }
-
-      .gallery-item {
+    }
+    
+    .gallery-item {
         position: relative;
         border-radius: 0.5rem;
         overflow: hidden;
         aspect-ratio: 3/2;
-      }
-
-      .gallery-image {
+    }
+    
+    .gallery-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-      }
-
-      .gallery-item-actions {
+    }
+    
+    .gallery-item-actions {
         position: absolute;
         top: 0.5rem;
         right: 0.5rem;
         display: flex;
         gap: 0.5rem;
         z-index: 5;
-      }
-
-      .gallery-item-button {
+    }
+    
+    .gallery-item-button {
         width: 30px;
         height: 30px;
         border-radius: 50%;
@@ -368,19 +357,19 @@
         font-size: 0.875rem;
         transition: all 0.3s ease;
         z-index: 10;
-      }
-
-      .gallery-item-button:hover {
+    }
+    
+    .gallery-item-button:hover {
         background-color: white;
         transform: scale(1.1);
-      }
-
-      .gallery-item-button.delete:hover {
+    }
+    
+    .gallery-item-button.delete:hover {
         background-color: var(--error-color);
         color: white;
-      }
-
-      .add-image-card {
+    }
+    
+    .add-image-card {
         border: 2px dashed var(--border-color);
         border-radius: 0.5rem;
         display: flex;
@@ -393,25 +382,25 @@
         height: 100%;
         aspect-ratio: 3/2;
         position: relative;
-      }
-
-      .add-image-card:hover {
+    }
+    
+    .add-image-card:hover {
         border-color: var(--primary-color);
         background-color: rgba(79, 70, 229, 0.05);
-      }
-
-      .add-image-icon {
+    }
+    
+    .add-image-icon {
         font-size: 1.5rem;
         color: #666;
         margin-bottom: 0.5rem;
-      }
-
-      .add-image-text {
+    }
+    
+    .add-image-text {
         font-size: 0.875rem;
         color: #666;
-      }
-
-      .add-image-input {
+    }
+    
+    .add-image-input {
         position: absolute;
         top: 0;
         left: 0;
@@ -420,15 +409,13 @@
         opacity: 0;
         cursor: pointer;
         z-index: 2;
-      }
-
-      .links-list,
-      .services-list {
+    }
+    
+    .links-list, .services-list, .contact-info-list, .faqs-list {
         margin-top: 1.5rem;
-      }
-
-      .link-item,
-      .service-item {
+    }
+    
+    .link-item, .service-item, .contact-info-item, .faq-item {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -436,16 +423,15 @@
         background-color: var(--secondary-bg);
         border-radius: 0.5rem;
         margin-bottom: 1rem;
-      }
-
-      .link-info,
-      .service-info {
+    }
+    
+    .link-info, .service-info, .contact-info-info, .faq-info {
         display: flex;
         align-items: center;
-      }
-
-      .link-icon,
-      .service-icon {
+        flex: 1;
+    }
+    
+    .link-icon, .service-icon, .contact-info-icon, .faq-icon {
         width: 40px;
         height: 40px;
         border-radius: 50%;
@@ -455,39 +441,34 @@
         align-items: center;
         justify-content: center;
         margin-right: 1rem;
-      }
-
-      .link-content,
-      .service-content {
+    }
+    
+    .link-content, .service-content, .contact-info-content, .faq-content {
         flex: 1;
-      }
-
-      .link-text,
-      .service-title {
+    }
+    
+    .link-text, .service-title, .contact-info-title, .faq-question {
         font-weight: 500;
-      }
-
-      .link-url,
-      .service-description {
+    }
+    
+    .link-url, .service-description, .contact-info-value, .faq-answer {
         color: #666;
         font-size: 0.875rem;
         margin-top: 0.25rem;
-      }
-
-      .link-actions,
-      .service-actions {
+    }
+    
+    .link-actions, .service-actions, .contact-info-actions, .faq-actions {
         display: flex;
         gap: 0.5rem;
-      }
-
-      .add-link-form,
-      .add-service-form {
+    }
+    
+    .add-link-form, .add-service-form, .add-contact-info-form, .add-faq-form, .section-titles-form {
         margin-top: 1.5rem;
         padding-top: 1.5rem;
         border-top: 1px solid var(--border-color);
-      }
-
-      .notification {
+    }
+    
+    .notification {
         position: fixed;
         top: 1rem;
         right: 1rem;
@@ -501,48 +482,48 @@
         transform: translateX(calc(100% + 1rem));
         transition: transform 0.3s ease;
         z-index: 1000;
-      }
-
-      .notification.show {
+    }
+    
+    .notification.show {
         transform: translateX(0);
-      }
-
-      .notification-icon {
+    }
+    
+    .notification-icon {
         margin-right: 0.75rem;
         font-size: 1.25rem;
-      }
-
-      .notification-content {
+    }
+    
+    .notification-content {
         flex: 1;
-      }
-
-      .notification-title {
+    }
+    
+    .notification-title {
         font-weight: 600;
         margin-bottom: 0.25rem;
-      }
-
-      .notification-message {
+    }
+    
+    .notification-message {
         font-size: 0.875rem;
         color: #666;
-      }
-
-      .notification.success {
+    }
+    
+    .notification.success {
         border-left: 4px solid var(--success-color);
-      }
-
-      .notification.success .notification-icon {
+    }
+    
+    .notification.success .notification-icon {
         color: var(--success-color);
-      }
-
-      .notification.error {
+    }
+    
+    .notification.error {
         border-left: 4px solid var(--error-color);
-      }
-
-      .notification.error .notification-icon {
+    }
+    
+    .notification.error .notification-icon {
         color: var(--error-color);
-      }
-
-      .loading {
+    }
+    
+    .loading {
         display: inline-block;
         width: 1rem;
         height: 1rem;
@@ -551,22 +532,22 @@
         border-top-color: white;
         animation: spin 1s ease-in-out infinite;
         margin-right: 0.5rem;
-      }
-
-      .switch {
+    }
+    
+    .switch {
         position: relative;
         display: inline-block;
         width: 50px;
         height: 24px;
-      }
-
-      .switch input {
+    }
+    
+    .switch input {
         opacity: 0;
         width: 0;
         height: 0;
-      }
-
-      .slider {
+    }
+    
+    .slider {
         position: absolute;
         cursor: pointer;
         top: 0;
@@ -574,11 +555,11 @@
         right: 0;
         bottom: 0;
         background-color: #ccc;
-        transition: 0.4s;
+        transition: .4s;
         border-radius: 24px;
-      }
-
-      .slider:before {
+    }
+    
+    .slider:before {
         position: absolute;
         content: "";
         height: 16px;
@@ -586,23 +567,23 @@
         left: 4px;
         bottom: 4px;
         background-color: white;
-        transition: 0.4s;
+        transition: .4s;
         border-radius: 50%;
-      }
-
-      input:checked + .slider {
+    }
+    
+    input:checked + .slider {
         background-color: var(--primary-color);
-      }
-
-      input:focus + .slider {
+    }
+    
+    input:focus + .slider {
         box-shadow: 0 0 1px var(--primary-color);
-      }
-
-      input:checked + .slider:before {
+    }
+    
+    input:checked + .slider:before {
         transform: translateX(26px);
-      }
-
-      .icon-grid {
+    }
+    
+    .icon-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         gap: 1rem;
@@ -612,9 +593,9 @@
         padding: 0.5rem;
         border: 1px solid var(--border-color);
         border-radius: 0.5rem;
-      }
-
-      .icon-item {
+    }
+    
+    .icon-item {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -622,1708 +603,1887 @@
         border-radius: 0.5rem;
         cursor: pointer;
         transition: all 0.2s ease;
-      }
-
-      .icon-item:hover {
+    }
+    
+    .icon-item:hover {
         background-color: var(--secondary-bg);
-      }
-
-      .icon-item.selected {
+    }
+    
+    .icon-item.selected {
         background-color: rgba(79, 70, 229, 0.1);
         border: 1px solid var(--primary-color);
-      }
-
-      .icon-preview {
+    }
+    
+    .icon-preview {
         font-size: 1.5rem;
         margin-bottom: 0.5rem;
         color: var(--text-color);
-      }
-
-      .icon-name {
+    }
+    
+    .icon-name {
         font-size: 0.75rem;
         text-align: center;
         color: #666;
-      }
-
-      @keyframes spin {
-        to {
-          transform: rotate(360deg);
-        }
-      }
-
-      .hidden {
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .hidden {
         display: none;
-      }
-
-      @media (max-width: 768px) {
+    }
+    
+    @media (max-width: 768px) {
         .sidebar {
-          width: 100%;
-          height: auto;
-          position: relative;
-          padding: 1rem;
+            width: 100%;
+            height: auto;
+            position: relative;
+            padding: 1rem;
         }
-
+        
         .main-content {
-          margin-left: 0;
-          padding: 1rem;
+            margin-left: 0;
+            padding: 1rem;
         }
-
+        
         .admin-container {
-          flex-direction: column;
+            flex-direction: column;
         }
-
+        
         .sidebar-nav {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
         }
-
+        
         .sidebar-nav-item {
-          margin-bottom: 0;
+            margin-bottom: 0;
         }
-
+        
         .sidebar-nav-link {
-          padding: 0.5rem;
+            padding: 0.5rem;
         }
-
+        
         .sidebar-nav-text {
-          display: none;
+            display: none;
         }
-
+        
         .sidebar-nav-icon {
-          margin-right: 0;
+            margin-right: 0;
         }
-      }
-    </style>
-  </head>
-  <body>
-    <div class="admin-container">
-      <aside class="sidebar">
+    }
+</style>
+</head>
+<body>
+<div class="admin-container">
+    <aside class="sidebar">
         <div class="sidebar-header">
-          <img
-            src="/images/profile.jpg"
-            alt="Logo"
-            class="sidebar-logo"
-            id="sidebar-logo"
-          />
-          <h1 class="sidebar-title">Admin Panel</h1>
+            <img src="/images/profile.jpg" alt="Logo" class="sidebar-logo" id="sidebar-logo">
+            <h1 class="sidebar-title">Admin Panel</h1>
         </div>
-
+        
         <ul class="sidebar-nav">
-          <li class="sidebar-nav-item">
-            <a
-              href="#profile"
-              class="sidebar-nav-link active"
-              data-section="profile-section"
-            >
-              <i class="fas fa-user sidebar-nav-icon"></i>
-              <span class="sidebar-nav-text">Profile</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a
-              href="#appearance"
-              class="sidebar-nav-link"
-              data-section="appearance-section"
-            >
-              <i class="fas fa-palette sidebar-nav-icon"></i>
-              <span class="sidebar-nav-text">Appearance</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a
-              href="#gallery"
-              class="sidebar-nav-link"
-              data-section="gallery-section"
-            >
-              <i class="fas fa-images sidebar-nav-icon"></i>
-              <span class="sidebar-nav-text">Gallery</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a
-              href="#services"
-              class="sidebar-nav-link"
-              data-section="services-section"
-            >
-              <i class="fas fa-briefcase sidebar-nav-icon"></i>
-              <span class="sidebar-nav-text">Services</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a
-              href="#links"
-              class="sidebar-nav-link"
-              data-section="links-section"
-            >
-              <i class="fas fa-share-alt sidebar-nav-icon"></i>
-              <span class="sidebar-nav-text">Links</span>
-            </a>
-          </li>
-          <li class="sidebar-nav-item">
-            <a
-              href="#contact"
-              class="sidebar-nav-link"
-              data-section="contact-section"
-            >
-              <i class="fas fa-envelope sidebar-nav-icon"></i>
-              <span class="sidebar-nav-text">Contact</span>
-            </a>
-          </li>
+            <li class="sidebar-nav-item">
+                <a href="#profile" class="sidebar-nav-link active" data-section="profile-section">
+                    <i class="fas fa-user sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Profile</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#titles" class="sidebar-nav-link" data-section="titles-section">
+                    <i class="fas fa-heading sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Section Titles</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#appearance" class="sidebar-nav-link" data-section="appearance-section">
+                    <i class="fas fa-palette sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Appearance</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#gallery" class="sidebar-nav-link" data-section="gallery-section">
+                    <i class="fas fa-images sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Gallery</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#services" class="sidebar-nav-link" data-section="services-section">
+                    <i class="fas fa-briefcase sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Services</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#links" class="sidebar-nav-link" data-section="links-section">
+                    <i class="fas fa-share-alt sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Links</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#info" class="sidebar-nav-link" data-section="info-section">
+                    <i class="fas fa-info-circle sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Contact Info</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#faq" class="sidebar-nav-link" data-section="faq-section">
+                    <i class="fas fa-question-circle sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">FAQ</span>
+                </a>
+            </li>
+            <li class="sidebar-nav-item">
+                <a href="#contact" class="sidebar-nav-link" data-section="contact-section">
+                    <i class="fas fa-envelope sidebar-nav-icon"></i>
+                    <span class="sidebar-nav-text">Contact Form</span>
+                </a>
+            </li>
         </ul>
-      </aside>
-
-      <main class="main-content">
+    </aside>
+    
+    <main class="main-content">
         <header class="page-header">
-          <h1 class="page-title">Dashboard</h1>
-          <button class="logout-button" id="logout-button">
-            <i class="fas fa-sign-out-alt logout-icon"></i>
-            Logout
-          </button>
+            <h1 class="page-title">Dashboard</h1>
+            <button class="logout-button" id="logout-button">
+                <i class="fas fa-sign-out-alt logout-icon"></i>
+                Logout
+            </button>
         </header>
-
+        
         <!-- Profile Section -->
         <section id="profile-section" class="section">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Profile Information</h2>
-            </div>
-
-            <div class="profile-preview">
-              <img
-                src="/images/profile.jpg"
-                alt="Profile"
-                class="profile-image-preview"
-                id="profile-image-preview"
-              />
-              <div class="profile-info-preview">
-                <h3 class="profile-name-preview" id="profile-name-preview">
-                  John Doe
-                </h3>
-                <p
-                  class="profile-description-preview"
-                  id="profile-description-preview"
-                >
-                  Welcome to my personal profile!
-                </p>
-              </div>
-            </div>
-
-            <form id="profile-form">
-              <div class="form-group">
-                <label for="profile-image" class="form-label"
-                  >Profile Image</label
-                >
-                <div class="image-upload-container">
-                  <img
-                    src="/images/profile.jpg"
-                    alt="Profile"
-                    class="image-preview"
-                    id="profile-image-upload-preview"
-                  />
-                  <div class="file-input-wrapper">
-                    <button type="button" class="button secondary-button">
-                      <i class="fas fa-upload button-icon"></i>
-                      Choose Image
-                    </button>
-                    <input
-                      type="file"
-                      id="profile-image"
-                      class="file-input"
-                      accept="image/*"
-                    />
-                  </div>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Profile Information</h2>
                 </div>
-              </div>
-
-              <div class="form-group">
-                <label for="name" class="form-label">Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  class="form-input"
-                  placeholder="Enter your name"
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="description" class="form-label">Description</label>
-                <textarea
-                  id="description"
-                  class="form-textarea"
-                  placeholder="Enter your description"
-                ></textarea>
-              </div>
-
-              <div class="form-group">
-                <label for="logo-image" class="form-label">Logo Image</label>
-                <div class="image-upload-container">
-                  <img
-                    src="/images/logo.png"
-                    alt="Logo"
-                    class="image-preview"
-                    id="logo-preview"
-                  />
-                  <div class="file-input-wrapper">
-                    <button type="button" class="button secondary-button">
-                      <i class="fas fa-upload button-icon"></i>
-                      Choose Logo
-                    </button>
-                    <input
-                      type="file"
-                      id="logo-image"
-                      class="file-input"
-                      accept="image/*"
-                    />
-                  </div>
+                
+                <div class="profile-preview">
+                    <img src="/images/profile.jpg" alt="Profile" class="profile-image-preview" id="profile-image-preview">
+                    <div class="profile-info-preview">
+                        <h3 class="profile-name-preview" id="profile-name-preview">John Doe</h3>
+                        <p class="profile-description-preview" id="profile-description-preview">Welcome to my personal profile!</p>
+                    </div>
                 </div>
-              </div>
-
-              <button
-                type="submit"
-                class="button primary-button"
-                id="save-profile-button"
-              >
-                <span id="profile-loading" class="loading hidden"></span>
-                <span id="profile-button-text">Save Changes</span>
-              </button>
-            </form>
-          </div>
+                
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label for="profile-image" class="form-label">Profile Image</label>
+                        <div class="image-upload-container">
+                            <img src="/images/profile.jpg" alt="Profile" class="image-preview" id="profile-image-upload-preview">
+                            <div class="file-input-wrapper">
+                                <button type="button" class="button secondary-button">
+                                    <i class="fas fa-upload button-icon"></i>
+                                    Choose Image
+                                </button>
+                                <input type="file" id="profile-image" class="file-input" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" class="form-input" placeholder="Enter your name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="description" class="form-label">Description</label>
+                        <textarea id="description" class="form-textarea" placeholder="Enter your description"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="logo-image" class="form-label">Logo Image</label>
+                        <div class="image-upload-container">
+                            <img src="/images/logo.png" alt="Logo" class="image-preview" id="logo-preview">
+                            <div class="file-input-wrapper">
+                                <button type="button" class="button secondary-button">
+                                    <i class="fas fa-upload button-icon"></i>
+                                    Choose Logo
+                                </button>
+                                <input type="file" id="logo-image" class="file-input" accept="image/*">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="button primary-button" id="save-profile-button">
+                        <span id="profile-loading" class="loading hidden"></span>
+                        <span id="profile-button-text">Save Changes</span>
+                    </button>
+                </form>
+            </div>
         </section>
-
+        
+        <!-- Section Titles Section -->
+        <section id="titles-section" class="section hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Section Titles</h2>
+                </div>
+                
+                <form id="section-titles-form" class="section-titles-form">
+                    <div class="form-group">
+                        <label for="services-section-title" class="form-label">Services Section Title</label>
+                        <input type="text" id="services-section-title" class="form-input" placeholder="My Services">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gallery-section-title" class="form-label">Gallery Section Title</label>
+                        <input type="text" id="gallery-section-title" class="form-input" placeholder="My Gallery">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="info-section-title" class="form-label">Contact Info Section Title</label>
+                        <input type="text" id="info-section-title" class="form-input" placeholder="Contact Information">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="faq-section-title" class="form-label">FAQ Section Title</label>
+                        <input type="text" id="faq-section-title" class="form-input" placeholder="Frequently Asked Questions">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="contact-section-title" class="form-label">Contact Form Section Title</label>
+                        <input type="text" id="contact-section-title" class="form-input" placeholder="Contact Me">
+                    </div>
+                    
+                    <button type="submit" class="button primary-button" id="save-titles-button">
+                        <span id="titles-loading" class="loading hidden"></span>
+                        <span id="titles-button-text">Save Changes</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+        
         <!-- Appearance Section -->
         <section id="appearance-section" class="section hidden">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Appearance Settings</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Appearance Settings</h2>
+                </div>
+                
+                <form id="appearance-form">
+                    <div class="form-group">
+                        <label for="background-color" class="form-label">Background Color</label>
+                        <div class="color-input-container">
+                            <div class="color-preview" id="background-color-preview"></div>
+                            <input type="color" id="background-color" class="form-input" value="#ffffff">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="text-color" class="form-label">Text Color</label>
+                        <div class="color-input-container">
+                            <div class="color-preview" id="text-color-preview"></div>
+                            <input type="color" id="text-color" class="form-input" value="#333333">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="accent-color" class="form-label">Accent Color</label>
+                        <div class="color-input-container">
+                            <div class="color-preview" id="accent-color-preview"></div>
+                            <input type="color" id="accent-color" class="form-input" value="#4f46e5">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gallery-bg-color" class="form-label">Gallery Section Background</label>
+                        <div class="color-input-container">
+                            <div class="color-preview" id="gallery-bg-color-preview"></div>
+                            <input type="color" id="gallery-bg-color" class="form-input" value="#f9fafb">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="services-bg-color" class="form-label">Services Section Background</label>
+                        <div class="color-input-container">
+                            <div class="color-preview" id="services-bg-color-preview"></div>
+                            <input type="color" id="services-bg-color" class="form-input" value="#ffffff">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="button primary-button" id="save-appearance-button">
+                        <span id="appearance-loading" class="loading hidden"></span>
+                        <span id="appearance-button-text">Save Changes</span>
+                    </button>
+                </form>
             </div>
-
-            <form id="appearance-form">
-              <div class="form-group">
-                <label for="background-color" class="form-label"
-                  >Background Color</label
-                >
-                <div class="color-input-container">
-                  <div
-                    class="color-preview"
-                    id="background-color-preview"
-                  ></div>
-                  <input
-                    type="color"
-                    id="background-color"
-                    class="form-input"
-                    value="#ffffff"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="text-color" class="form-label">Text Color</label>
-                <div class="color-input-container">
-                  <div class="color-preview" id="text-color-preview"></div>
-                  <input
-                    type="color"
-                    id="text-color"
-                    class="form-input"
-                    value="#333333"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="accent-color" class="form-label"
-                  >Accent Color</label
-                >
-                <div class="color-input-container">
-                  <div class="color-preview" id="accent-color-preview"></div>
-                  <input
-                    type="color"
-                    id="accent-color"
-                    class="form-input"
-                    value="#4f46e5"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="gallery-bg-color" class="form-label"
-                  >Gallery Section Background</label
-                >
-                <div class="color-input-container">
-                  <div
-                    class="color-preview"
-                    id="gallery-bg-color-preview"
-                  ></div>
-                  <input
-                    type="color"
-                    id="gallery-bg-color"
-                    class="form-input"
-                    value="#f9fafb"
-                  />
-                </div>
-              </div>
-
-              <div class="form-group">
-                <label for="services-bg-color" class="form-label"
-                  >Services Section Background</label
-                >
-                <div class="color-input-container">
-                  <div
-                    class="color-preview"
-                    id="services-bg-color-preview"
-                  ></div>
-                  <input
-                    type="color"
-                    id="services-bg-color"
-                    class="form-input"
-                    value="#ffffff"
-                  />
-                </div>
-              </div>
-
-              <button
-                type="submit"
-                class="button primary-button"
-                id="save-appearance-button"
-              >
-                <span id="appearance-loading" class="loading hidden"></span>
-                <span id="appearance-button-text">Save Changes</span>
-              </button>
-            </form>
-          </div>
         </section>
-
+        
         <!-- Gallery Section -->
         <section id="gallery-section" class="section hidden">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Gallery Images</h2>
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Gallery Images</h2>
+                </div>
+                
+                <div class="gallery-grid" id="gallery-grid">
+                    <!-- Gallery items will be loaded dynamically -->
+                    
+                    <div class="add-image-card" id="add-gallery-image">
+                        <i class="fas fa-plus add-image-icon"></i>
+                        <span class="add-image-text">Add Image</span>
+                        <input type="file" id="gallery-image-input" class="add-image-input" accept="image/*" multiple>
+                    </div>
+                </div>
             </div>
-
-            <div class="gallery-grid" id="gallery-grid">
-              <!-- Gallery items will be loaded dynamically -->
-
-              <div class="add-image-card" id="add-gallery-image">
-                <i class="fas fa-plus add-image-icon"></i>
-                <span class="add-image-text">Add Image</span>
-                <input
-                  type="file"
-                  id="gallery-image-input"
-                  class="add-image-input"
-                  accept="image/*"
-                  multiple
-                />
-              </div>
-            </div>
-          </div>
         </section>
-
+        
         <!-- Services Section -->
         <section id="services-section" class="section hidden">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Services</h2>
-            </div>
-
-            <div class="services-list" id="services-list">
-              <!-- Services will be loaded dynamically -->
-            </div>
-
-            <div class="add-service-form">
-              <h3 class="form-title">Add New Service</h3>
-              <form id="add-service-form">
-                <div class="form-group">
-                  <label for="service-title" class="form-label">Title</label>
-                  <input
-                    type="text"
-                    id="service-title"
-                    class="form-input"
-                    placeholder="Enter service title"
-                  />
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Services</h2>
                 </div>
-
-                <div class="form-group">
-                  <label for="service-description" class="form-label"
-                    >Description</label
-                  >
-                  <textarea
-                    id="service-description"
-                    class="form-textarea"
-                    placeholder="Enter service description"
-                  ></textarea>
+                
+                <div class="services-list" id="services-list">
+                    <!-- Services will be loaded dynamically -->
                 </div>
-
-                <div class="form-group">
-                  <label for="service-icon" class="form-label">Icon</label>
-                  <input
-                    type="text"
-                    id="service-icon-search"
-                    class="form-input"
-                    placeholder="Search icons..."
-                    style="margin-bottom: 1rem"
-                  />
-
-                  <div class="icon-grid" id="service-icon-grid">
-                    <!-- Icons will be loaded dynamically -->
-                  </div>
-
-                  <input type="hidden" id="service-icon" value="code" />
+                
+                <div class="add-service-form">
+                    <h3 class="form-title">Add New Service</h3>
+                    <form id="add-service-form">
+                        <div class="form-group">
+                            <label for="service-title" class="form-label">Title</label>
+                            <input type="text" id="service-title" class="form-input" placeholder="Enter service title">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service-description" class="form-label">Description</label>
+                            <textarea id="service-description" class="form-textarea" placeholder="Enter service description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="service-icon" class="form-label">Icon</label>
+                            <input type="text" id="service-icon-search" class="form-input" placeholder="Search icons..." style="margin-bottom: 1rem;">
+                            
+                            <div class="icon-grid" id="service-icon-grid">
+                                <!-- Icons will be loaded dynamically -->
+                            </div>
+                            
+                            <input type="hidden" id="service-icon" value="code">
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="add-service-button">
+                            <span id="add-service-loading" class="loading hidden"></span>
+                            <span id="add-service-button-text">Add Service</span>
+                        </button>
+                    </form>
                 </div>
-
-                <button
-                  type="submit"
-                  class="button primary-button"
-                  id="add-service-button"
-                >
-                  <span id="add-service-loading" class="loading hidden"></span>
-                  <span id="add-service-button-text">Add Service</span>
-                </button>
-              </form>
             </div>
-          </div>
         </section>
-
+        
         <!-- Links Section -->
         <section id="links-section" class="section hidden">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Social Links</h2>
-            </div>
-
-            <div class="links-list" id="links-list">
-              <!-- Links will be loaded dynamically -->
-            </div>
-
-            <div class="add-link-form">
-              <h3 class="form-title">Add New Link</h3>
-              <form id="add-link-form">
-                <div class="form-group">
-                  <label for="link-text" class="form-label">Link Text</label>
-                  <input
-                    type="text"
-                    id="link-text"
-                    class="form-input"
-                    placeholder="Enter link text"
-                  />
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Social Links</h2>
                 </div>
-
-                <div class="form-group">
-                  <label for="link-url" class="form-label">Link URL</label>
-                  <input
-                    type="url"
-                    id="link-url"
-                    class="form-input"
-                    placeholder="Enter link URL"
-                  />
+                
+                <div class="links-list" id="links-list">
+                    <!-- Links will be loaded dynamically -->
                 </div>
-
-                <div class="form-group">
-                  <label for="link-icon" class="form-label">Icon</label>
-                  <select id="link-icon" class="form-select">
-                    <option value="link">Link</option>
-                    <option value="github">GitHub</option>
-                    <option value="linkedin">LinkedIn</option>
-                    <option value="twitter">Twitter</option>
-                    <option value="instagram">Instagram</option>
-                    <option value="facebook">Facebook</option>
-                    <option value="youtube">YouTube</option>
-                    <option value="twitch">Twitch</option>
-                    <option value="discord">Discord</option>
-                    <option value="telegram">Telegram</option>
-                    <option value="whatsapp">WhatsApp</option>
-                    <option value="tiktok">TikTok</option>
-                    <option value="pinterest">Pinterest</option>
-                    <option value="reddit">Reddit</option>
-                    <option value="snapchat">Snapchat</option>
-                    <option value="spotify">Spotify</option>
-                    <option value="dribbble">Dribbble</option>
-                    <option value="behance">Behance</option>
-                    <option value="medium">Medium</option>
-                    <option value="slack">Slack</option>
-                    <option value="envelope">Email</option>
-                  </select>
+                
+                <div class="add-link-form">
+                    <h3 class="form-title">Add New Link</h3>
+                    <form id="add-link-form">
+                        <div class="form-group">
+                            <label for="link-text" class="form-label">Link Text</label>
+                            <input type="text" id="link-text" class="form-input" placeholder="Enter link text">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="link-url" class="form-label">Link URL</label>
+                            <input type="url" id="link-url" class="form-input" placeholder="Enter link URL">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="link-icon" class="form-label">Icon</label>
+                            <select id="link-icon" class="form-select">
+                                <option value="link">Link</option>
+                                <option value="github">GitHub</option>
+                                <option value="linkedin">LinkedIn</option>
+                                <option value="twitter">Twitter</option>
+                                <option value="instagram">Instagram</option>
+                                <option value="facebook">Facebook</option>
+                                <option value="youtube">YouTube</option>
+                                <option value="twitch">Twitch</option>
+                                <option value="discord">Discord</option>
+                                <option value="telegram">Telegram</option>
+                                <option value="whatsapp">WhatsApp</option>
+                                <option value="tiktok">TikTok</option>
+                                <option value="pinterest">Pinterest</option>
+                                <option value="reddit">Reddit</option>
+                                <option value="snapchat">Snapchat</option>
+                                <option value="spotify">Spotify</option>
+                                <option value="dribbble">Dribbble</option>
+                                <option value="behance">Behance</option>
+                                <option value="medium">Medium</option>
+                                <option value="slack">Slack</option>
+                                <option value="envelope">Email</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="add-link-button">
+                            <span id="add-link-loading" class="loading hidden"></span>
+                            <span id="add-link-button-text">Add Link</span>
+                        </button>
+                    </form>
                 </div>
-
-                <button
-                  type="submit"
-                  class="button primary-button"
-                  id="add-link-button"
-                >
-                  <span id="add-link-loading" class="loading hidden"></span>
-                  <span id="add-link-button-text">Add Link</span>
-                </button>
-              </form>
             </div>
-          </div>
         </section>
-
+        
+        <!-- Contact Info Section -->
+        <section id="info-section" class="section hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Contact Information</h2>
+                </div>
+                
+                <div class="contact-info-list" id="contact-info-list">
+                    <!-- Contact info will be loaded dynamically -->
+                </div>
+                
+                <div class="add-contact-info-form">
+                    <h3 class="form-title">Add New Contact Information</h3>
+                    <form id="add-contact-info-form">
+                        <div class="form-group">
+                            <label for="contact-info-title" class="form-label">Title</label>
+                            <input type="text" id="contact-info-title" class="form-input" placeholder="Enter title (e.g., Email, Phone, Address)">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-info-value" class="form-label">Value</label>
+                            <input type="text" id="contact-info-value" class="form-input" placeholder="Enter value">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-info-type" class="form-label">Type</label>
+                            <select id="contact-info-type" class="form-select">
+                                <option value="text">Text</option>
+                                <option value="email">Email</option>
+                                <option value="phone">Phone</option>
+                                <option value="link">Link</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contact-info-icon" class="form-label">Icon</label>
+                            <select id="contact-info-icon" class="form-select">
+                                <option value="envelope">Email</option>
+                                <option value="phone">Phone</option>
+                                <option value="map-marker-alt">Address</option>
+                                <option value="clock">Hours</option>
+                                <option value="globe">Website</option>
+                                <option value="building">Office</option>
+                                <option value="fax">Fax</option>
+                                <option value="id-card">Contact</option>
+                                <option value="users">Team</option>
+                                <option value="calendar">Schedule</option>
+                            </select>
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="add-contact-info-button">
+                            <span id="add-contact-info-loading" class="loading hidden"></span>
+                            <span id="add-contact-info-button-text">Add Contact Info</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FAQ Section -->
+        <section id="faq-section" class="section hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Frequently Asked Questions</h2>
+                </div>
+                
+                <div class="faqs-list" id="faqs-list">
+                    <!-- FAQs will be loaded dynamically -->
+                </div>
+                
+                <div class="add-faq-form">
+                    <h3 class="form-title">Add New FAQ</h3>
+                    <form id="add-faq-form">
+                        <div class="form-group">
+                            <label for="faq-question" class="form-label">Question</label>
+                            <input type="text" id="faq-question" class="form-input" placeholder="Enter question">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="faq-answer" class="form-label">Answer</label>
+                            <textarea id="faq-answer" class="form-textarea" placeholder="Enter answer"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="add-faq-button">
+                            <span id="add-faq-loading" class="loading hidden"></span>
+                            <span id="add-faq-button-text">Add FAQ</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        
         <!-- Contact Section -->
         <section id="contact-section" class="section hidden">
-          <div class="card">
-            <div class="card-header">
-              <h2 class="card-title">Contact Settings</h2>
-            </div>
-
-            <form id="contact-form">
-              <div class="form-group">
-                <label for="contact-email" class="form-label"
-                  >Contact Email</label
-                >
-                <input
-                  type="email"
-                  id="contact-email"
-                  class="form-input"
-                  placeholder="Enter contact email"
-                />
-                <small class="form-text"
-                  >Messages from the contact form will be sent to this email
-                  address.</small
-                >
-              </div>
-
-              <div class="form-group">
-                <label class="form-label">Show Contact Form</label>
-                <div style="display: flex; align-items: center">
-                  <label class="switch">
-                    <input type="checkbox" id="show-contact-form" checked />
-                    <span class="slider"></span>
-                  </label>
-                  <span style="margin-left: 1rem" id="contact-form-status"
-                    >Enabled</span
-                  >
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="card-title">Contact Form Settings</h2>
                 </div>
-                <small class="form-text"
-                  >Enable or disable the contact form on your profile
-                  page.</small
-                >
-              </div>
-
-              <button
-                type="submit"
-                class="button primary-button"
-                id="save-contact-button"
-              >
-                <span id="contact-loading" class="loading hidden"></span>
-                <span id="contact-button-text">Save Changes</span>
-              </button>
-            </form>
-          </div>
+                
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="contact-email" class="form-label">Contact Email</label>
+                        <input type="email" id="contact-email" class="form-input" placeholder="Enter contact email">
+                        <small class="form-text">Messages from the contact form will be sent to this email address.</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Show Contact Form</label>
+                        <div style="display: flex; align-items: center;">
+                            <label class="switch">
+                                <input type="checkbox" id="show-contact-form" checked>
+                                <span class="slider"></span>
+                            </label>
+                            <span style="margin-left: 1rem;" id="contact-form-status">Enabled</span>
+                        </div>
+                        <small class="form-text">Enable or disable the contact form on your profile page.</small>
+                    </div>
+                    
+                    <button type="submit" class="button primary-button" id="save-contact-button">
+                        <span id="contact-loading" class="loading hidden"></span>
+                        <span id="contact-button-text">Save Changes</span>
+                    </button>
+                </form>
+            </div>
         </section>
-      </main>
-    </div>
+    </main>
+</div>
 
-    <!-- Notification -->
-    <div class="notification" id="notification">
-      <i class="notification-icon" id="notification-icon"></i>
-      <div class="notification-content">
+<!-- Notification -->
+<div class="notification" id="notification">
+    <i class="notification-icon" id="notification-icon"></i>
+    <div class="notification-content">
         <div class="notification-title" id="notification-title"></div>
         <div class="notification-message" id="notification-message"></div>
-      </div>
     </div>
+</div>
 
-    <script>
-      // DOM Elements
-      const logoutButton = document.getElementById("logout-button");
-      const sidebarLinks = document.querySelectorAll(".sidebar-nav-link");
-      const sections = document.querySelectorAll(".section");
-      const notification = document.getElementById("notification");
-      const notificationIcon = document.getElementById("notification-icon");
-      const notificationTitle = document.getElementById("notification-title");
-      const notificationMessage = document.getElementById(
-        "notification-message"
-      );
-
-      // Profile Elements
-      const profileForm = document.getElementById("profile-form");
-      const profileImageInput = document.getElementById("profile-image");
-      const profileImagePreview = document.getElementById(
-        "profile-image-upload-preview"
-      );
-      const profileImageDisplay = document.getElementById(
-        "profile-image-preview"
-      );
-      const logoImageInput = document.getElementById("logo-image");
-      const logoPreview = document.getElementById("logo-preview");
-      const sidebarLogo = document.getElementById("sidebar-logo");
-      const nameInput = document.getElementById("name");
-      const descriptionInput = document.getElementById("description");
-      const profileNamePreview = document.getElementById(
-        "profile-name-preview"
-      );
-      const profileDescriptionPreview = document.getElementById(
-        "profile-description-preview"
-      );
-      const saveProfileButton = document.getElementById("save-profile-button");
-      const profileLoading = document.getElementById("profile-loading");
-      const profileButtonText = document.getElementById("profile-button-text");
-
-      // Appearance Elements
-      const appearanceForm = document.getElementById("appearance-form");
-      const backgroundColorInput = document.getElementById("background-color");
-      const textColorInput = document.getElementById("text-color");
-      const accentColorInput = document.getElementById("accent-color");
-      const galleryBgColorInput = document.getElementById("gallery-bg-color");
-      const servicesBgColorInput = document.getElementById("services-bg-color");
-      const backgroundColorPreview = document.getElementById(
-        "background-color-preview"
-      );
-      const textColorPreview = document.getElementById("text-color-preview");
-      const accentColorPreview = document.getElementById(
-        "accent-color-preview"
-      );
-      const galleryBgColorPreview = document.getElementById(
-        "gallery-bg-color-preview"
-      );
-      const servicesBgColorPreview = document.getElementById(
-        "services-bg-color-preview"
-      );
-      const saveAppearanceButton = document.getElementById(
-        "save-appearance-button"
-      );
-      const appearanceLoading = document.getElementById("appearance-loading");
-      const appearanceButtonText = document.getElementById(
-        "appearance-button-text"
-      );
-
-      // Gallery Elements
-      const galleryGrid = document.getElementById("gallery-grid");
-      const addGalleryImage = document.getElementById("add-gallery-image");
-      const galleryImageInput = document.getElementById("gallery-image-input");
-
-      // Services Elements
-      const servicesList = document.getElementById("services-list");
-      const addServiceForm = document.getElementById("add-service-form");
-      const serviceTitleInput = document.getElementById("service-title");
-      const serviceDescriptionInput = document.getElementById(
-        "service-description"
-      );
-      const serviceIconInput = document.getElementById("service-icon");
-      const serviceIconGrid = document.getElementById("service-icon-grid");
-      const serviceIconSearch = document.getElementById("service-icon-search");
-      const addServiceButton = document.getElementById("add-service-button");
-      const addServiceLoading = document.getElementById("add-service-loading");
-      const addServiceButtonText = document.getElementById(
-        "add-service-button-text"
-      );
-
-      // Links Elements
-      const linksList = document.getElementById("links-list");
-      const addLinkForm = document.getElementById("add-link-form");
-      const linkTextInput = document.getElementById("link-text");
-      const linkUrlInput = document.getElementById("link-url");
-      const linkIconInput = document.getElementById("link-icon");
-      const addLinkButton = document.getElementById("add-link-button");
-      const addLinkLoading = document.getElementById("add-link-loading");
-      const addLinkButtonText = document.getElementById("add-link-button-text");
-
-      // Contact Elements
-      const contactForm = document.getElementById("contact-form");
-      const contactEmailInput = document.getElementById("contact-email");
-      const showContactFormToggle =
-        document.getElementById("show-contact-form");
-      const contactFormStatus = document.getElementById("contact-form-status");
-      const saveContactButton = document.getElementById("save-contact-button");
-      const contactLoading = document.getElementById("contact-loading");
-      const contactButtonText = document.getElementById("contact-button-text");
-
-      // Service Icons List
-      const serviceIcons = [
-        "code",
-        "paint-brush",
-        "mobile",
-        "laptop",
-        "chart-line",
-        "bullhorn",
-        "camera",
-        "video",
-        "pencil-alt",
-        "search",
-        "star",
-        "cog",
-        "wrench",
-        "server",
-        "database",
-        "cloud",
-        "desktop",
-        "globe",
-        "shopping-cart",
-        "credit-card",
-        "dollar-sign",
-        "chart-bar",
-        "users",
-        "user-tie",
-        "handshake",
-        "comments",
-        "headset",
-        "phone",
-        "envelope",
-        "file-alt",
-        "file-code",
-        "file-image",
-        "file-video",
-        "file-audio",
-        "file-pdf",
-        "book",
-        "graduation-cap",
-        "university",
-        "briefcase",
-        "building",
-        "home",
-        "palette",
-        "brush",
-        "pen",
-        "pen-fancy",
-        "pen-nib",
-        "pencil-ruler",
-        "ruler",
-        "ruler-combined",
-        "compass",
-        "drafting-compass",
-        "crop",
-        "layer-group",
-        "object-group",
-        "object-ungroup",
-        "shapes",
-        "puzzle-piece",
-        "brain",
-        "lightbulb",
-        "rocket",
-        "atom",
-        "microscope",
-        "flask",
-        "heartbeat",
-        "heart",
-        "medkit",
-        "hospital",
-        "stethoscope",
-        "pills",
-        "dumbbell",
-        "running",
-        "bicycle",
-        "swimmer",
-        "futbol",
-        "basketball-ball",
-        "utensils",
-        "coffee",
-        "glass-martini",
-        "wine-glass",
-        "hamburger",
-        "pizza-slice",
-        "car",
-        "truck",
-        "plane",
-        "ship",
-        "train",
-        "subway",
-        "map-marker-alt",
-        "map",
-        "compass",
-        "route",
-        "directions",
-        "music",
-        "headphones",
-        "guitar",
-        "drum",
-        "microphone",
-        "podcast",
-        "photo-video",
-        "film",
-        "theater-masks",
-        "ticket-alt",
-        "gamepad",
-        "shield-alt",
-        "lock",
-        "key",
-        "fingerprint",
-        "user-shield",
-        "user-lock",
-        "sun",
-        "moon",
-        "cloud-sun",
-        "cloud-moon",
-        "cloud-rain",
-        "snowflake",
-        "temperature-high",
-        "temperature-low",
-        "wind",
-        "rainbow",
-      ];
-
-      // State
-      let profileData = {
-        name: "",
-        description: "",
-        profileImage: "",
-        logoImage: "",
-        backgroundColor: "#ffffff",
-        textColor: "#333333",
-        accentColor: "#4f46e5",
-        galleryBgColor: "#f9fafb",
-        servicesBgColor: "#ffffff",
+<script>
+    // DOM Elements
+    const logoutButton = document.getElementById('logout-button');
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav-link');
+    const sections = document.querySelectorAll('.section');
+    const notification = document.getElementById('notification');
+    const notificationIcon = document.getElementById('notification-icon');
+    const notificationTitle = document.getElementById('notification-title');
+    const notificationMessage = document.getElementById('notification-message');
+    
+    // Profile Elements
+    const profileForm = document.getElementById('profile-form');
+    const profileImageInput = document.getElementById('profile-image');
+    const profileImagePreview = document.getElementById('profile-image-upload-preview');
+    const profileImageDisplay = document.getElementById('profile-image-preview');
+    const logoImageInput = document.getElementById('logo-image');
+    const logoPreview = document.getElementById('logo-preview');
+    const sidebarLogo = document.getElementById('sidebar-logo');
+    const nameInput = document.getElementById('name');
+    const descriptionInput = document.getElementById('description');
+    const profileNamePreview = document.getElementById('profile-name-preview');
+    const profileDescriptionPreview = document.getElementById('profile-description-preview');
+    const saveProfileButton = document.getElementById('save-profile-button');
+    const profileLoading = document.getElementById('profile-loading');
+    const profileButtonText = document.getElementById('profile-button-text');
+    
+    // Section Titles Elements
+    const sectionTitlesForm = document.getElementById('section-titles-form');
+    const servicesSectionTitleInput = document.getElementById('services-section-title');
+    const gallerySectionTitleInput = document.getElementById('gallery-section-title');
+    const infoSectionTitleInput = document.getElementById('info-section-title');
+    const faqSectionTitleInput = document.getElementById('faq-section-title');
+    const contactSectionTitleInput = document.getElementById('contact-section-title');
+    const saveTitlesButton = document.getElementById('save-titles-button');
+    const titlesLoading = document.getElementById('titles-loading');
+    const titlesButtonText = document.getElementById('titles-button-text');
+    
+    // Appearance Elements
+    const appearanceForm = document.getElementById('appearance-form');
+    const backgroundColorInput = document.getElementById('background-color');
+    const textColorInput = document.getElementById('text-color');
+    const accentColorInput = document.getElementById('accent-color');
+    const galleryBgColorInput = document.getElementById('gallery-bg-color');
+    const servicesBgColorInput = document.getElementById('services-bg-color');
+    const backgroundColorPreview = document.getElementById('background-color-preview');
+    const textColorPreview = document.getElementById('text-color-preview');
+    const accentColorPreview = document.getElementById('accent-color-preview');
+    const galleryBgColorPreview = document.getElementById('gallery-bg-color-preview');
+    const servicesBgColorPreview = document.getElementById('services-bg-color-preview');
+    const saveAppearanceButton = document.getElementById('save-appearance-button');
+    const appearanceLoading = document.getElementById('appearance-loading');
+    const appearanceButtonText = document.getElementById('appearance-button-text');
+    
+    // Gallery Elements
+    const galleryGrid = document.getElementById('gallery-grid');
+    const addGalleryImage = document.getElementById('add-gallery-image');
+    const galleryImageInput = document.getElementById('gallery-image-input');
+    
+    // Services Elements
+    const servicesList = document.getElementById('services-list');
+    const addServiceForm = document.getElementById('add-service-form');
+    const serviceTitleInput = document.getElementById('service-title');
+    const serviceDescriptionInput = document.getElementById('service-description');
+    const serviceIconInput = document.getElementById('service-icon');
+    const serviceIconGrid = document.getElementById('service-icon-grid');
+    const serviceIconSearch = document.getElementById('service-icon-search');
+    const addServiceButton = document.getElementById('add-service-button');
+    const addServiceLoading = document.getElementById('add-service-loading');
+    const addServiceButtonText = document.getElementById('add-service-button-text');
+    
+    // Links Elements
+    const linksList = document.getElementById('links-list');
+    const addLinkForm = document.getElementById('add-link-form');
+    const linkTextInput = document.getElementById('link-text');
+    const linkUrlInput = document.getElementById('link-url');
+    const linkIconInput = document.getElementById('link-icon');
+    const addLinkButton = document.getElementById('add-link-button');
+    const addLinkLoading = document.getElementById('add-link-loading');
+    const addLinkButtonText = document.getElementById('add-link-button-text');
+    
+    // Contact Info Elements
+    const contactInfoList = document.getElementById('contact-info-list');
+    const addContactInfoForm = document.getElementById('add-contact-info-form');
+    const contactInfoTitleInput = document.getElementById('contact-info-title');
+    const contactInfoValueInput = document.getElementById('contact-info-value');
+    const contactInfoTypeInput = document.getElementById('contact-info-type');
+    const contactInfoIconInput = document.getElementById('contact-info-icon');
+    const addContactInfoButton = document.getElementById('add-contact-info-button');
+    const addContactInfoLoading = document.getElementById('add-contact-info-loading');
+    const addContactInfoButtonText = document.getElementById('add-contact-info-button-text');
+    
+    // FAQ Elements
+    const faqsList = document.getElementById('faqs-list');
+    const addFaqForm = document.getElementById('add-faq-form');
+    const faqQuestionInput = document.getElementById('faq-question');
+    const faqAnswerInput = document.getElementById('faq-answer');
+    const addFaqButton = document.getElementById('add-faq-button');
+    const addFaqLoading = document.getElementById('add-faq-loading');
+    const addFaqButtonText = document.getElementById('add-faq-button-text');
+    
+    // Contact Elements
+    const contactForm = document.getElementById('contact-form');
+    const contactEmailInput = document.getElementById('contact-email');
+    const showContactFormToggle = document.getElementById('show-contact-form');
+    const contactFormStatus = document.getElementById('contact-form-status');
+    const saveContactButton = document.getElementById('save-contact-button');
+    const contactLoading = document.getElementById('contact-loading');
+    const contactButtonText = document.getElementById('contact-button-text');
+    
+    // Service Icons List
+    const serviceIcons = [
+        'code', 'paint-brush', 'mobile', 'laptop', 'chart-line', 'bullhorn', 'camera', 'video',
+        'pencil-alt', 'search', 'star', 'cog', 'wrench', 'server', 'database', 'cloud',
+        'desktop', 'globe', 'shopping-cart', 'credit-card', 'dollar-sign', 'chart-bar',
+        'users', 'user-tie', 'handshake', 'comments', 'headset', 'phone', 'envelope',
+        'file-alt', 'file-code', 'file-image', 'file-video', 'file-audio', 'file-pdf',
+        'book', 'graduation-cap', 'university', 'briefcase', 'building', 'home',
+        'palette', 'brush', 'pen', 'pen-fancy', 'pen-nib', 'pencil-ruler',
+        'ruler', 'ruler-combined', 'compass', 'drafting-compass', 'crop',
+        'layer-group', 'object-group', 'object-ungroup', 'shapes', 'puzzle-piece',
+        'brain', 'lightbulb', 'rocket', 'atom', 'microscope', 'flask',
+        'heartbeat', 'heart', 'medkit', 'hospital', 'stethoscope', 'pills',
+        'dumbbell', 'running', 'bicycle', 'swimmer', 'futbol', 'basketball-ball',
+        'utensils', 'coffee', 'glass-martini', 'wine-glass', 'hamburger', 'pizza-slice',
+        'car', 'truck', 'plane', 'ship', 'train', 'subway',
+        'map-marker-alt', 'map', 'compass', 'route', 'directions',
+        'music', 'headphones', 'guitar', 'drum', 'microphone', 'podcast',
+        'photo-video', 'film', 'theater-masks', 'ticket-alt', 'gamepad',
+        'shield-alt', 'lock', 'key', 'fingerprint', 'user-shield', 'user-lock',
+        'sun', 'moon', 'cloud-sun', 'cloud-moon', 'cloud-rain', 'snowflake',
+        'temperature-high', 'temperature-low', 'wind', 'rainbow'
+    ];
+    
+    // State
+    let profileData = {
+        name: '',
+        description: '',
+        profileImage: '',
+        logoImage: '',
+        backgroundColor: '#ffffff',
+        textColor: '#333333',
+        accentColor: '#4f46e5',
+        galleryBgColor: '#f9fafb',
+        servicesBgColor: '#ffffff',
+        servicesSectionTitle: 'My Services',
+        gallerySectionTitle: 'My Gallery',
+        infoSectionTitle: 'Contact Information',
+        faqSectionTitle: 'Frequently Asked Questions',
+        contactSectionTitle: 'Contact Me',
         showContactForm: true,
-        contactEmail: "",
+        contactEmail: '',
         links: [],
         services: [],
-        galleryImages: [],
-      };
-
-      // Check if user is logged in
-      function checkAuthStatus() {
-        const token = localStorage.getItem("authToken");
+        contactInfo: [],
+        faqs: [],
+        galleryImages: []
+    };
+    
+    // Check if user is logged in
+    function checkAuthStatus() {
+        const token = localStorage.getItem('authToken');
         if (!token) {
-          // Redirect to login page
-          window.location.href = "/custom-web/login";
+            // Redirect to login page
+            window.location.href = '/custom-web/login';
         }
-
+        
         // Set auth header for all fetch requests
         return token;
-      }
-
-      // Show notification
-      function showNotification(type, title, message) {
-        notification.className = "notification show " + type;
-
-        if (type === "success") {
-          notificationIcon.className = "fas fa-check-circle notification-icon";
-        } else if (type === "error") {
-          notificationIcon.className =
-            "fas fa-exclamation-circle notification-icon";
+    }
+    
+    // Show notification
+    function showNotification(type, title, message) {
+        notification.className = 'notification show ' + type;
+        
+        if (type === 'success') {
+            notificationIcon.className = 'fas fa-check-circle notification-icon';
+        } else if (type === 'error') {
+            notificationIcon.className = 'fas fa-exclamation-circle notification-icon';
         }
-
+        
         notificationTitle.textContent = title;
         notificationMessage.textContent = message;
-
+        
         setTimeout(() => {
-          notification.className = "notification";
+            notification.className = 'notification';
         }, 3000);
-      }
-
-      // Initialize service icons
-      function initServiceIcons() {
-        serviceIconGrid.innerHTML = "";
-
+    }
+    
+    // Initialize service icons
+    function initServiceIcons() {
+        serviceIconGrid.innerHTML = '';
+        
         const searchTerm = serviceIconSearch.value.toLowerCase();
-        const filteredIcons = searchTerm
-          ? serviceIcons.filter((icon) => icon.includes(searchTerm))
-          : serviceIcons;
-
-        filteredIcons.forEach((icon) => {
-          const iconItem = document.createElement("div");
-          iconItem.className = "icon-item";
-          iconItem.dataset.icon = icon;
-
-          if (icon === serviceIconInput.value) {
-            iconItem.classList.add("selected");
-          }
-
-          const iconPreview = document.createElement("div");
-          iconPreview.className = "icon-preview";
-          iconPreview.innerHTML = `<i class="fas fa-${icon}"></i>`;
-
-          const iconName = document.createElement("div");
-          iconName.className = "icon-name";
-          iconName.textContent = icon;
-
-          iconItem.appendChild(iconPreview);
-          iconItem.appendChild(iconName);
-
-          iconItem.addEventListener("click", () => {
-            // Remove selected class from all icons
-            document.querySelectorAll(".icon-item").forEach((item) => {
-              item.classList.remove("selected");
+        const filteredIcons = searchTerm 
+            ? serviceIcons.filter(icon => icon.includes(searchTerm))
+            : serviceIcons;
+        
+        filteredIcons.forEach(icon => {
+            const iconItem = document.createElement('div');
+            iconItem.className = 'icon-item';
+            iconItem.dataset.icon = icon;
+            
+            if (icon === serviceIconInput.value) {
+                iconItem.classList.add('selected');
+            }
+            
+            const iconPreview = document.createElement('div');
+            iconPreview.className = 'icon-preview';
+            iconPreview.innerHTML = `<i class="fas fa-${icon}"></i>`;
+            
+            const iconName = document.createElement('div');
+            iconName.className = 'icon-name';
+            iconName.textContent = icon;
+            
+            iconItem.appendChild(iconPreview);
+            iconItem.appendChild(iconName);
+            
+            iconItem.addEventListener('click', () => {
+                // Remove selected class from all icons
+                document.querySelectorAll('.icon-item').forEach(item => {
+                    item.classList.remove('selected');
+                });
+                
+                // Add selected class to clicked icon
+                iconItem.classList.add('selected');
+                
+                // Update hidden input
+                serviceIconInput.value = icon;
             });
-
-            // Add selected class to clicked icon
-            iconItem.classList.add("selected");
-
-            // Update hidden input
-            serviceIconInput.value = icon;
-          });
-
-          serviceIconGrid.appendChild(iconItem);
+            
+            serviceIconGrid.appendChild(iconItem);
         });
-      }
-
-      // Fetch profile data
-      async function fetchProfileData() {
+    }
+    
+    // Fetch profile data
+    async function fetchProfileData() {
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch("/api/profile");
-
-          if (!response.ok) {
-            throw new Error("Failed to fetch profile data");
-          }
-
-          const data = await response.json();
-          profileData = data;
-
-          // Update UI with profile data
-          updateProfileUI(data);
-
-          return data;
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/profile');
+            
+            if (!response.ok) {
+                throw new Error('Failed to fetch profile data');
+            }
+            
+            const data = await response.json();
+            profileData = data;
+            
+            // Update UI with profile data
+            updateProfileUI(data);
+            
+            return data;
         } catch (error) {
-          console.error("Error fetching profile data:", error);
-          showNotification("error", "Error", "Failed to load profile data");
+            console.error('Error fetching profile data:', error);
+            showNotification('error', 'Error', 'Failed to load profile data');
         }
-      }
-
-      // Update profile UI
-      function updateProfileUI(data) {
+    }
+    
+    // Update profile UI
+    function updateProfileUI(data) {
         // Profile section
-        nameInput.value = data.name || "";
-        descriptionInput.value = data.description || "";
-        profileImagePreview.src = data.profileImage || "/images/profile.jpg";
-        profileImageDisplay.src = data.profileImage || "/images/profile.jpg";
-        logoPreview.src = data.logoImage || "/images/logo.png";
-        sidebarLogo.src = data.profileImage || "/images/profile.jpg";
-        profileNamePreview.textContent = data.name || "John Doe";
-        profileDescriptionPreview.textContent =
-          data.description || "Welcome to my personal profile!";
-
+        nameInput.value = data.name || '';
+        descriptionInput.value = data.description || '';
+        profileImagePreview.src = data.profileImage || '/images/profile.jpg';
+        profileImageDisplay.src = data.profileImage || '/images/profile.jpg';
+        logoPreview.src = data.logoImage || '/images/logo.png';
+        sidebarLogo.src = data.profileImage || '/images/profile.jpg';
+        profileNamePreview.textContent = data.name || 'John Doe';
+        profileDescriptionPreview.textContent = data.description || 'Welcome to my personal profile!';
+        
+        // Section titles
+        servicesSectionTitleInput.value = data.servicesSectionTitle || 'My Services';
+        gallerySectionTitleInput.value = data.gallerySectionTitle || 'My Gallery';
+        infoSectionTitleInput.value = data.infoSectionTitle || 'Contact Information';
+        faqSectionTitleInput.value = data.faqSectionTitle || 'Frequently Asked Questions';
+        contactSectionTitleInput.value = data.contactSectionTitle || 'Contact Me';
+        
         // Appearance section
-        backgroundColorInput.value = data.backgroundColor || "#ffffff";
-        textColorInput.value = data.textColor || "#333333";
-        accentColorInput.value = data.accentColor || "#4f46e5";
-        galleryBgColorInput.value = data.galleryBgColor || "#f9fafb";
-        servicesBgColorInput.value = data.servicesBgColor || "#ffffff";
-        backgroundColorPreview.style.backgroundColor =
-          data.backgroundColor || "#ffffff";
-        textColorPreview.style.backgroundColor = data.textColor || "#333333";
-        accentColorPreview.style.backgroundColor =
-          data.accentColor || "#4f46e5";
-        galleryBgColorPreview.style.backgroundColor =
-          data.galleryBgColor || "#f9fafb";
-        servicesBgColorPreview.style.backgroundColor =
-          data.servicesBgColor || "#ffffff";
-
+        backgroundColorInput.value = data.backgroundColor || '#ffffff';
+        textColorInput.value = data.textColor || '#333333';
+        accentColorInput.value = data.accentColor || '#4f46e5';
+        galleryBgColorInput.value = data.galleryBgColor || '#f9fafb';
+        servicesBgColorInput.value = data.servicesBgColor || '#ffffff';
+        backgroundColorPreview.style.backgroundColor = data.backgroundColor || '#ffffff';
+        textColorPreview.style.backgroundColor = data.textColor || '#333333';
+        accentColorPreview.style.backgroundColor = data.accentColor || '#4f46e5';
+        galleryBgColorPreview.style.backgroundColor = data.galleryBgColor || '#f9fafb';
+        servicesBgColorPreview.style.backgroundColor = data.servicesBgColor || '#ffffff';
+        
         // Contact section
-        contactEmailInput.value = data.contactEmail || "";
+        contactEmailInput.value = data.contactEmail || '';
         showContactFormToggle.checked = data.showContactForm !== false;
-        contactFormStatus.textContent =
-          data.showContactForm !== false ? "Enabled" : "Disabled";
-
+        contactFormStatus.textContent = data.showContactForm !== false ? 'Enabled' : 'Disabled';
+        
         // Links section
         updateLinksList(data.links || []);
-
+        
         // Services section
         updateServicesList(data.services || []);
-
+        
+        // Contact info section
+        updateContactInfoList(data.contactInfo || []);
+        
+        // FAQ section
+        updateFaqsList(data.faqs || []);
+        
         // Gallery section
         updateGalleryGrid(data.galleryImages || []);
-
+        
         // Initialize service icons
         initServiceIcons();
-      }
-
-      // Update services list
-      function updateServicesList(services) {
-        servicesList.innerHTML = "";
-
+    }
+    
+    // Update services list
+    function updateServicesList(services) {
+        servicesList.innerHTML = '';
+        
         if (!services || services.length === 0) {
-          const emptyMessage = document.createElement("p");
-          emptyMessage.textContent =
-            "No services added yet. Add your first service below.";
-          emptyMessage.style.textAlign = "center";
-          emptyMessage.style.color = "#666";
-          emptyMessage.style.padding = "2rem 0";
-          servicesList.appendChild(emptyMessage);
-          return;
+            const emptyMessage = document.createElement('p');
+            emptyMessage.textContent = 'No services added yet. Add your first service below.';
+            emptyMessage.style.textAlign = 'center';
+            emptyMessage.style.color = '#666';
+            emptyMessage.style.padding = '2rem 0';
+            servicesList.appendChild(emptyMessage);
+            return;
         }
-
+        
         services.forEach((service, index) => {
-          const serviceItem = document.createElement("div");
-          serviceItem.className = "service-item";
-
-          const serviceInfo = document.createElement("div");
-          serviceInfo.className = "service-info";
-
-          const serviceIcon = document.createElement("div");
-          serviceIcon.className = "service-icon";
-          serviceIcon.innerHTML = `<i class="fas fa-${
-            service.icon || "star"
-          }"></i>`;
-
-          const serviceContent = document.createElement("div");
-          serviceContent.className = "service-content";
-
-          const serviceTitle = document.createElement("div");
-          serviceTitle.className = "service-title";
-          serviceTitle.textContent = service.title;
-
-          const serviceDescription = document.createElement("div");
-          serviceDescription.className = "service-description";
-          serviceDescription.textContent = service.description;
-
-          serviceContent.appendChild(serviceTitle);
-          serviceContent.appendChild(serviceDescription);
-
-          serviceInfo.appendChild(serviceIcon);
-          serviceInfo.appendChild(serviceContent);
-
-          const serviceActions = document.createElement("div");
-          serviceActions.className = "service-actions";
-
-          const deleteButton = document.createElement("button");
-          deleteButton.className = "button danger-button";
-          deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-          deleteButton.addEventListener("click", () => deleteService(index));
-
-          serviceActions.appendChild(deleteButton);
-
-          serviceItem.appendChild(serviceInfo);
-          serviceItem.appendChild(serviceActions);
-
-          servicesList.appendChild(serviceItem);
+            const serviceItem = document.createElement('div');
+            serviceItem.className = 'service-item';
+            
+            const serviceInfo = document.createElement('div');
+            serviceInfo.className = 'service-info';
+            
+            const serviceIcon = document.createElement('div');
+            serviceIcon.className = 'service-icon';
+            serviceIcon.innerHTML = `<i class="fas fa-${service.icon || 'star'}"></i>`;
+            
+            const serviceContent = document.createElement('div');
+            serviceContent.className = 'service-content';
+            
+            const serviceTitle = document.createElement('div');
+            serviceTitle.className = 'service-title';
+            serviceTitle.textContent = service.title;
+            
+            const serviceDescription = document.createElement('div');
+            serviceDescription.className = 'service-description';
+            serviceDescription.textContent = service.description;
+            
+            serviceContent.appendChild(serviceTitle);
+            serviceContent.appendChild(serviceDescription);
+            
+            serviceInfo.appendChild(serviceIcon);
+            serviceInfo.appendChild(serviceContent);
+            
+            const serviceActions = document.createElement('div');
+            serviceActions.className = 'service-actions';
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'button danger-button';
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteButton.addEventListener('click', () => deleteService(index));
+            
+            serviceActions.appendChild(deleteButton);
+            
+            serviceItem.appendChild(serviceInfo);
+            serviceItem.appendChild(serviceActions);
+            
+            servicesList.appendChild(serviceItem);
         });
-      }
-
-      // Delete service
-      async function deleteService(index) {
-        try {
-          const token = checkAuthStatus();
-
-          const response = await fetch(`/api/services/${index}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to delete service");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          // Update UI
-          updateServicesList(profileData.services);
-
-          showNotification(
-            "success",
-            "Success",
-            "Service deleted successfully"
-          );
-        } catch (error) {
-          console.error("Error deleting service:", error);
-          showNotification(
-            "error",
-            "Error",
-            "Failed to delete service: " + error.message
-          );
+    }
+    
+    // Update contact info list
+    function updateContactInfoList(contactInfo) {
+        contactInfoList.innerHTML = '';
+        
+        if (!contactInfo || contactInfo.length === 0) {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.textContent = 'No contact information added yet. Add your first contact info below.';
+            emptyMessage.style.textAlign = 'center';
+            emptyMessage.style.color = '#666';
+            emptyMessage.style.padding = '2rem 0';
+            contactInfoList.appendChild(emptyMessage);
+            return;
         }
-      }
-
-      // Update links list
-      function updateLinksList(links) {
-        linksList.innerHTML = "";
-
+        
+        contactInfo.forEach((info, index) => {
+            const infoItem = document.createElement('div');
+            infoItem.className = 'contact-info-item';
+            
+            const infoInfo = document.createElement('div');
+            infoInfo.className = 'contact-info-info';
+            
+            const infoIcon = document.createElement('div');
+            infoIcon.className = 'contact-info-icon';
+            infoIcon.innerHTML = `<i class="fas fa-${info.icon || 'info-circle'}"></i>`;
+            
+            const infoContent = document.createElement('div');
+            infoContent.className = 'contact-info-content';
+            
+            const infoTitle = document.createElement('div');
+            infoTitle.className = 'contact-info-title';
+            infoTitle.textContent = info.title;
+            
+            const infoValue = document.createElement('div');
+            infoValue.className = 'contact-info-value';
+            infoValue.textContent = info.value;
+            
+            infoContent.appendChild(infoTitle);
+            infoContent.appendChild(infoValue);
+            
+            infoInfo.appendChild(infoIcon);
+            infoInfo.appendChild(infoContent);
+            
+            const infoActions = document.createElement('div');
+            infoActions.className = 'contact-info-actions';
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'button danger-button';
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteButton.addEventListener('click', () => deleteContactInfo(index));
+            
+            infoActions.appendChild(deleteButton);
+            
+            infoItem.appendChild(infoInfo);
+            infoItem.appendChild(infoActions);
+            
+            contactInfoList.appendChild(infoItem);
+        });
+    }
+    
+    // Update FAQs list
+    function updateFaqsList(faqs) {
+        faqsList.innerHTML = '';
+        
+        if (!faqs || faqs.length === 0) {
+            const emptyMessage = document.createElement('p');
+            emptyMessage.textContent = 'No FAQs added yet. Add your first FAQ below.';
+            emptyMessage.style.textAlign = 'center';
+            emptyMessage.style.color = '#666';
+            emptyMessage.style.padding = '2rem 0';
+            faqsList.appendChild(emptyMessage);
+            return;
+        }
+        
+        faqs.forEach((faq, index) => {
+            const faqItem = document.createElement('div');
+            faqItem.className = 'faq-item';
+            
+            const faqInfo = document.createElement('div');
+            faqInfo.className = 'faq-info';
+            
+            const faqIcon = document.createElement('div');
+            faqIcon.className = 'faq-icon';
+            faqIcon.innerHTML = '<i class="fas fa-question-circle"></i>';
+            
+            const faqContent = document.createElement('div');
+            faqContent.className = 'faq-content';
+            
+            const faqQuestion = document.createElement('div');
+            faqQuestion.className = 'faq-question';
+            faqQuestion.textContent = faq.question;
+            
+            const faqAnswer = document.createElement('div');
+            faqAnswer.className = 'faq-answer';
+            faqAnswer.textContent = faq.answer;
+            
+            faqContent.appendChild(faqQuestion);
+            faqContent.appendChild(faqAnswer);
+            
+            faqInfo.appendChild(faqIcon);
+            faqInfo.appendChild(faqContent);
+            
+            const faqActions = document.createElement('div');
+            faqActions.className = 'faq-actions';
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'button danger-button';
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteButton.addEventListener('click', () => deleteFaq(index));
+            
+            faqActions.appendChild(deleteButton);
+            
+            faqItem.appendChild(faqInfo);
+            faqItem.appendChild(faqActions);
+            
+            faqsList.appendChild(faqItem);
+        });
+    }
+    
+    // Delete service
+    async function deleteService(index) {
+        try {
+            const token = checkAuthStatus();
+            
+            const response = await fetch(`/api/services/${index}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to delete service');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateServicesList(profileData.services);
+            
+            showNotification('success', 'Success', 'Service deleted successfully');
+        } catch (error) {
+            console.error('Error deleting service:', error);
+            showNotification('error', 'Error', 'Failed to delete service: ' + error.message);
+        }
+    }
+    
+    // Delete contact info
+    async function deleteContactInfo(index) {
+        try {
+            const token = checkAuthStatus();
+            
+            const response = await fetch(`/api/contactInfo/${index}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to delete contact info');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateContactInfoList(profileData.contactInfo);
+            
+            showNotification('success', 'Success', 'Contact information deleted successfully');
+        } catch (error) {
+            console.error('Error deleting contact info:', error);
+            showNotification('error', 'Error', 'Failed to delete contact info: ' + error.message);
+        }
+    }
+    
+    // Delete FAQ
+    async function deleteFaq(index) {
+        try {
+            const token = checkAuthStatus();
+            
+            const response = await fetch(`/api/faqs/${index}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to delete FAQ');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateFaqsList(profileData.faqs);
+            
+            showNotification('success', 'Success', 'FAQ deleted successfully');
+        } catch (error) {
+            console.error('Error deleting FAQ:', error);
+            showNotification('error', 'Error', 'Failed to delete FAQ: ' + error.message);
+        }
+    }
+    
+    // Update links list
+    function updateLinksList(links) {
+        linksList.innerHTML = '';
+        
         if (!links || links.length === 0) {
-          const emptyMessage = document.createElement("p");
-          emptyMessage.textContent =
-            "No links added yet. Add your first link below.";
-          emptyMessage.style.textAlign = "center";
-          emptyMessage.style.color = "#666";
-          emptyMessage.style.padding = "2rem 0";
-          linksList.appendChild(emptyMessage);
-          return;
+            const emptyMessage = document.createElement('p');
+            emptyMessage.textContent = 'No links added yet. Add your first link below.';
+            emptyMessage.style.textAlign = 'center';
+            emptyMessage.style.color = '#666';
+            emptyMessage.style.padding = '2rem 0';
+            linksList.appendChild(emptyMessage);
+            return;
         }
-
+        
         links.forEach((link, index) => {
-          const linkItem = document.createElement("div");
-          linkItem.className = "link-item";
-
-          const linkInfo = document.createElement("div");
-          linkInfo.className = "link-info";
-
-          const linkIcon = document.createElement("div");
-          linkIcon.className = "link-icon";
-          linkIcon.innerHTML = `<i class="fab fa-${link.icon || "link"}"></i>`;
-
-          const linkContent = document.createElement("div");
-          linkContent.className = "link-content";
-
-          const linkText = document.createElement("div");
-          linkText.className = "link-text";
-          linkText.textContent = link.text;
-
-          const linkUrl = document.createElement("div");
-          linkUrl.className = "link-url";
-          linkUrl.textContent = link.url;
-
-          linkContent.appendChild(linkText);
-          linkContent.appendChild(linkUrl);
-
-          linkInfo.appendChild(linkIcon);
-          linkInfo.appendChild(linkContent);
-
-          const linkActions = document.createElement("div");
-          linkActions.className = "link-actions";
-
-          const deleteButton = document.createElement("button");
-          deleteButton.className = "button danger-button";
-          deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-          deleteButton.addEventListener("click", () => deleteLink(index));
-
-          linkActions.appendChild(deleteButton);
-
-          linkItem.appendChild(linkInfo);
-          linkItem.appendChild(linkActions);
-
-          linksList.appendChild(linkItem);
+            const linkItem = document.createElement('div');
+            linkItem.className = 'link-item';
+            
+            const linkInfo = document.createElement('div');
+            linkInfo.className = 'link-info';
+            
+            const linkIcon = document.createElement('div');
+            linkIcon.className = 'link-icon';
+            linkIcon.innerHTML = `<i class="fab fa-${link.icon || 'link'}"></i>`;
+            
+            const linkContent = document.createElement('div');
+            linkContent.className = 'link-content';
+            
+            const linkText = document.createElement('div');
+            linkText.className = 'link-text';
+            linkText.textContent = link.text;
+            
+            const linkUrl = document.createElement('div');
+            linkUrl.className = 'link-url';
+            linkUrl.textContent = link.url;
+            
+            linkContent.appendChild(linkText);
+            linkContent.appendChild(linkUrl);
+            
+            linkInfo.appendChild(linkIcon);
+            linkInfo.appendChild(linkContent);
+            
+            const linkActions = document.createElement('div');
+            linkActions.className = 'link-actions';
+            
+            const deleteButton = document.createElement('button');
+            deleteButton.className = 'button danger-button';
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteButton.addEventListener('click', () => deleteLink(index));
+            
+            linkActions.appendChild(deleteButton);
+            
+            linkItem.appendChild(linkInfo);
+            linkItem.appendChild(linkActions);
+            
+            linksList.appendChild(linkItem);
         });
-      }
-
-      // Delete link
-      async function deleteLink(index) {
+    }
+    
+    // Delete link
+    async function deleteLink(index) {
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch(`/api/links/${index}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to delete link");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          // Update UI
-          updateLinksList(profileData.links);
-
-          showNotification("success", "Success", "Link deleted successfully");
+            const token = checkAuthStatus();
+            
+            const response = await fetch(`/api/links/${index}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to delete link');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateLinksList(profileData.links);
+            
+            showNotification('success', 'Success', 'Link deleted successfully');
         } catch (error) {
-          console.error("Error deleting link:", error);
-          showNotification(
-            "error",
-            "Error",
-            "Failed to delete link: " + error.message
-          );
+            console.error('Error deleting link:', error);
+            showNotification('error', 'Error', 'Failed to delete link: ' + error.message);
         }
-      }
-
-      // Update gallery grid
-      function updateGalleryGrid(images) {
+    }
+    
+    // Update gallery grid
+    function updateGalleryGrid(images) {
         // Clear existing gallery items except the add button
-        const galleryItems = galleryGrid.querySelectorAll(".gallery-item");
-        galleryItems.forEach((item) => item.remove());
-
+        const galleryItems = galleryGrid.querySelectorAll('.gallery-item');
+        galleryItems.forEach(item => item.remove());
+        
         // Add gallery items
         if (images && images.length > 0) {
-          images.forEach((image, index) => {
-            const galleryItem = document.createElement("div");
-            galleryItem.className = "gallery-item";
-
-            const img = document.createElement("img");
-            img.src = image;
-            img.alt = "Gallery Image";
-            img.className = "gallery-image";
-
-            const actions = document.createElement("div");
-            actions.className = "gallery-item-actions";
-
-            const deleteButton = document.createElement("button");
-            deleteButton.className = "gallery-item-button delete";
-            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-            deleteButton.setAttribute("data-index", index);
-            deleteButton.addEventListener("click", function (e) {
-              e.preventDefault();
-              e.stopPropagation();
-              const idx = parseInt(this.getAttribute("data-index"));
-              deleteGalleryImage(idx);
+            images.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = 'Gallery Image';
+                img.className = 'gallery-image';
+                
+                const actions = document.createElement('div');
+                actions.className = 'gallery-item-actions';
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'gallery-item-button delete';
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.setAttribute('data-index', index);
+                deleteButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const idx = parseInt(this.getAttribute('data-index'));
+                    deleteGalleryImage(idx);
+                });
+                
+                actions.appendChild(deleteButton);
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(actions);
+                
+                // Insert before the add button
+                galleryGrid.insertBefore(galleryItem, addGalleryImage);
             });
-
-            actions.appendChild(deleteButton);
-            galleryItem.appendChild(img);
-            galleryItem.appendChild(actions);
-
-            // Insert before the add button
-            galleryGrid.insertBefore(galleryItem, addGalleryImage);
-          });
         }
-      }
-
-      // Delete gallery image
-      async function deleteGalleryImage(index) {
+    }
+    
+    // Delete gallery image
+    async function deleteGalleryImage(index) {
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch(`/api/gallery/${index}`, {
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to delete image");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          // Update UI
-          updateGalleryGrid(profileData.galleryImages);
-
-          showNotification("success", "Success", "Image deleted successfully");
-        } catch (error) {
-          console.error("Error deleting gallery image:", error);
-          showNotification(
-            "error",
-            "Error",
-            "Failed to delete image: " + error.message
-          );
-        }
-      }
-
-      // Handle profile image change
-      profileImageInput.addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            profileImagePreview.src = e.target.result;
-            profileImageDisplay.src = e.target.result;
-            sidebarLogo.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-
-      // Handle logo image change
-      logoImageInput.addEventListener("change", (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = (e) => {
-            logoPreview.src = e.target.result;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-
-      // Handle color input changes
-      backgroundColorInput.addEventListener("input", (e) => {
-        backgroundColorPreview.style.backgroundColor = e.target.value;
-      });
-
-      textColorInput.addEventListener("input", (e) => {
-        textColorPreview.style.backgroundColor = e.target.value;
-      });
-
-      accentColorInput.addEventListener("input", (e) => {
-        accentColorPreview.style.backgroundColor = e.target.value;
-      });
-
-      galleryBgColorInput.addEventListener("input", (e) => {
-        galleryBgColorPreview.style.backgroundColor = e.target.value;
-      });
-
-      servicesBgColorInput.addEventListener("input", (e) => {
-        servicesBgColorPreview.style.backgroundColor = e.target.value;
-      });
-
-      // Handle contact form toggle
-      showContactFormToggle.addEventListener("change", (e) => {
-        contactFormStatus.textContent = e.target.checked
-          ? "Enabled"
-          : "Disabled";
-      });
-
-      // Handle service icon search
-      serviceIconSearch.addEventListener("input", () => {
-        initServiceIcons();
-      });
-
-      // Handle gallery image upload
-      galleryImageInput.addEventListener("change", async (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const files = e.target.files;
-        if (files.length > 0) {
-          try {
             const token = checkAuthStatus();
-
-            // Create FormData
-            const formData = new FormData();
-            for (let i = 0; i < files.length; i++) {
-              formData.append("images", files[i]);
-            }
-
-            const response = await fetch("/api/gallery", {
-              method: "POST",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              body: formData,
+            
+            const response = await fetch(`/api/gallery/${index}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
             });
-
+            
             if (!response.ok) {
-              throw new Error("Failed to upload images");
+                throw new Error('Failed to delete image');
             }
-
+            
             const data = await response.json();
-
+            
             // Update local state
             profileData = data.profile;
-
+            
             // Update UI
             updateGalleryGrid(profileData.galleryImages);
-
-            showNotification(
-              "success",
-              "Success",
-              "Images uploaded successfully"
-            );
-          } catch (error) {
-            console.error("Error uploading gallery images:", error);
-            showNotification("error", "Error", "Failed to upload images");
-          }
-
-          // Reset input
-          galleryImageInput.value = "";
+            
+            showNotification('success', 'Success', 'Image deleted successfully');
+        } catch (error) {
+            console.error('Error deleting gallery image:', error);
+            showNotification('error', 'Error', 'Failed to delete image: ' + error.message);
         }
-      });
-
-      // Handle profile form submission
-      profileForm.addEventListener("submit", async (e) => {
+    }
+    
+    // Handle profile image change
+    profileImageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                profileImagePreview.src = e.target.result;
+                profileImageDisplay.src = e.target.result;
+                sidebarLogo.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Handle logo image change
+    logoImageInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                logoPreview.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+    
+    // Handle color input changes
+    backgroundColorInput.addEventListener('input', (e) => {
+        backgroundColorPreview.style.backgroundColor = e.target.value;
+    });
+    
+    textColorInput.addEventListener('input', (e) => {
+        textColorPreview.style.backgroundColor = e.target.value;
+    });
+    
+    accentColorInput.addEventListener('input', (e) => {
+        accentColorPreview.style.backgroundColor = e.target.value;
+    });
+    
+    galleryBgColorInput.addEventListener('input', (e) => {
+        galleryBgColorPreview.style.backgroundColor = e.target.value;
+    });
+    
+    servicesBgColorInput.addEventListener('input', (e) => {
+        servicesBgColorPreview.style.backgroundColor = e.target.value;
+    });
+    
+    // Handle contact form toggle
+    showContactFormToggle.addEventListener('change', (e) => {
+        contactFormStatus.textContent = e.target.checked ? 'Enabled' : 'Disabled';
+    });
+    
+    // Handle service icon search
+    serviceIconSearch.addEventListener('input', () => {
+        initServiceIcons();
+    });
+    
+    // Handle gallery image upload
+    galleryImageInput.addEventListener('change', async (e) => {
         e.preventDefault();
-
+        e.stopPropagation();
+        
+        const files = e.target.files;
+        if (files.length > 0) {
+            try {
+                const token = checkAuthStatus();
+                
+                // Create FormData
+                const formData = new FormData();
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('images', files[i]);
+                }
+                
+                const response = await fetch('/api/gallery', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to upload images');
+                }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = data.profile;
+                
+                // Update UI
+                updateGalleryGrid(profileData.galleryImages);
+                
+                showNotification('success', 'Success', 'Images uploaded successfully');
+            } catch (error) {
+                console.error('Error uploading gallery images:', error);
+                showNotification('error', 'Error', 'Failed to upload images');
+            }
+            
+            // Reset input
+            galleryImageInput.value = '';
+        }
+    });
+    
+    // Handle profile form submission
+    profileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
         // Show loading state
         saveProfileButton.disabled = true;
-        profileLoading.classList.remove("hidden");
-        profileButtonText.textContent = "Saving...";
-
+        profileLoading.classList.remove('hidden');
+        profileButtonText.textContent = 'Saving...';
+        
         try {
-          const token = checkAuthStatus();
-
-          // Create FormData
-          const formData = new FormData();
-          formData.append("name", nameInput.value);
-          formData.append("description", descriptionInput.value);
-
-          if (profileImageInput.files[0]) {
-            formData.append("profileImage", profileImageInput.files[0]);
-          }
-
-          const response = await fetch("/api/profile", {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-            body: formData,
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to update profile");
-          }
-
-          const data = await response.json();
-
-          // Update logo if provided
-          if (logoImageInput.files[0]) {
-            const logoFormData = new FormData();
-            logoFormData.append("logoImage", logoImageInput.files[0]);
-
-            const logoResponse = await fetch("/api/logo", {
-              method: "PUT",
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-              body: logoFormData,
-            });
-
-            if (!logoResponse.ok) {
-              throw new Error("Failed to update logo");
+            const token = checkAuthStatus();
+            
+            // Create FormData
+            const formData = new FormData();
+            formData.append('name', nameInput.value);
+            formData.append('description', descriptionInput.value);
+            
+            if (profileImageInput.files[0]) {
+                formData.append('profileImage', profileImageInput.files[0]);
             }
-
-            const logoData = await logoResponse.json();
-
-            // Update profile data with logo update
-            profileData = logoData.profile;
-          } else {
+            
+            const response = await fetch('/api/profile', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                },
+                body: formData
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to update profile');
+            }
+            
+            const data = await response.json();
+            
+            // Update logo if provided
+            if (logoImageInput.files[0]) {
+                const logoFormData = new FormData();
+                logoFormData.append('logoImage', logoImageInput.files[0]);
+                
+                const logoResponse = await fetch('/api/logo', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: logoFormData
+                });
+                
+                if (!logoResponse.ok) {
+                    throw new Error('Failed to update logo');
+                }
+                
+                const logoData = await logoResponse.json();
+                
+                // Update profile data with logo update
+                profileData = logoData.profile;
+            } else {
+                // Update local state
+                profileData = data.profile;
+            }
+            
+            // Update preview
+            profileNamePreview.textContent = nameInput.value;
+            profileDescriptionPreview.textContent = descriptionInput.value;
+            
+            showNotification('success', 'Success', 'Profile updated successfully');
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            showNotification('error', 'Error', 'Failed to update profile');
+        } finally {
+            // Reset button state
+            saveProfileButton.disabled = false;
+            profileLoading.classList.add('hidden');
+            profileButtonText.textContent = 'Save Changes';
+        }
+    });
+    
+    // Handle section titles form submission
+    sectionTitlesForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading state
+        saveTitlesButton.disabled = true;
+        titlesLoading.classList.remove('hidden');
+        titlesButtonText.textContent = 'Saving...';
+        
+        try {
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/profile', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    servicesSectionTitle: servicesSectionTitleInput.value,
+                    gallerySectionTitle: gallerySectionTitleInput.value,
+                    infoSectionTitle: infoSectionTitleInput.value,
+                    faqSectionTitle: faqSectionTitleInput.value,
+                    contactSectionTitle: contactSectionTitleInput.value
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to update section titles');
+            }
+            
+            const data = await response.json();
+            
             // Update local state
             profileData = data.profile;
-          }
-
-          // Update preview
-          profileNamePreview.textContent = nameInput.value;
-          profileDescriptionPreview.textContent = descriptionInput.value;
-
-          showNotification(
-            "success",
-            "Success",
-            "Profile updated successfully"
-          );
+            
+            showNotification('success', 'Success', 'Section titles updated successfully');
         } catch (error) {
-          console.error("Error updating profile:", error);
-          showNotification("error", "Error", "Failed to update profile");
+            console.error('Error updating section titles:', error);
+            showNotification('error', 'Error', 'Failed to update section titles');
         } finally {
-          // Reset button state
-          saveProfileButton.disabled = false;
-          profileLoading.classList.add("hidden");
-          profileButtonText.textContent = "Save Changes";
+            // Reset button state
+            saveTitlesButton.disabled = false;
+            titlesLoading.classList.add('hidden');
+            titlesButtonText.textContent = 'Save Changes';
         }
-      });
-
-      // Handle appearance form submission
-      appearanceForm.addEventListener("submit", async (e) => {
+    });
+    
+    // Handle appearance form submission
+    appearanceForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         // Show loading state
         saveAppearanceButton.disabled = true;
-        appearanceLoading.classList.remove("hidden");
-        appearanceButtonText.textContent = "Saving...";
-
+        appearanceLoading.classList.remove('hidden');
+        appearanceButtonText.textContent = 'Saving...';
+        
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch("/api/profile", {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              backgroundColor: backgroundColorInput.value,
-              textColor: textColorInput.value,
-              accentColor: accentColorInput.value,
-              galleryBgColor: galleryBgColorInput.value,
-              servicesBgColor: servicesBgColorInput.value,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to update appearance");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          showNotification(
-            "success",
-            "Success",
-            "Appearance updated successfully"
-          );
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/profile', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    backgroundColor: backgroundColorInput.value,
+                    textColor: textColorInput.value,
+                    accentColor: accentColorInput.value,
+                    galleryBgColor: galleryBgColorInput.value,
+                    servicesBgColor: servicesBgColorInput.value
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to update appearance');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            showNotification('success', 'Success', 'Appearance updated successfully');
         } catch (error) {
-          console.error("Error updating appearance:", error);
-          showNotification("error", "Error", "Failed to update appearance");
+            console.error('Error updating appearance:', error);
+            showNotification('error', 'Error', 'Failed to update appearance');
         } finally {
-          // Reset button state
-          saveAppearanceButton.disabled = false;
-          appearanceLoading.classList.add("hidden");
-          appearanceButtonText.textContent = "Save Changes";
+            // Reset button state
+            saveAppearanceButton.disabled = false;
+            appearanceLoading.classList.add('hidden');
+            appearanceButtonText.textContent = 'Save Changes';
         }
-      });
-
-      // Handle contact form submission
-      contactForm.addEventListener("submit", async (e) => {
+    });
+    
+    // Handle contact form submission
+    contactForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         // Show loading state
         saveContactButton.disabled = true;
-        contactLoading.classList.remove("hidden");
-        contactButtonText.textContent = "Saving...";
-
+        contactLoading.classList.remove('hidden');
+        contactButtonText.textContent = 'Saving...';
+        
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch("/api/profile", {
-            method: "PUT",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              contactEmail: contactEmailInput.value,
-              showContactForm: showContactFormToggle.checked,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to update contact settings");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          showNotification(
-            "success",
-            "Success",
-            "Contact settings updated successfully"
-          );
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/profile', {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    contactEmail: contactEmailInput.value,
+                    showContactForm: showContactFormToggle.checked
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to update contact settings');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            showNotification('success', 'Success', 'Contact settings updated successfully');
         } catch (error) {
-          console.error("Error updating contact settings:", error);
-          showNotification(
-            "error",
-            "Error",
-            "Failed to update contact settings"
-          );
+            console.error('Error updating contact settings:', error);
+            showNotification('error', 'Error', 'Failed to update contact settings');
         } finally {
-          // Reset button state
-          saveContactButton.disabled = false;
-          contactLoading.classList.add("hidden");
-          contactButtonText.textContent = "Save Changes";
+            // Reset button state
+            saveContactButton.disabled = false;
+            contactLoading.classList.add('hidden');
+            contactButtonText.textContent = 'Save Changes';
         }
-      });
-
-      // Handle add service form submission
-      addServiceForm.addEventListener("submit", async (e) => {
+    });
+    
+    // Handle add service form submission
+    addServiceForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         // Show loading state
         addServiceButton.disabled = true;
-        addServiceLoading.classList.remove("hidden");
-        addServiceButtonText.textContent = "Adding...";
-
+        addServiceLoading.classList.remove('hidden');
+        addServiceButtonText.textContent = 'Adding...';
+        
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch("/api/services", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              title: serviceTitleInput.value,
-              description: serviceDescriptionInput.value,
-              icon: serviceIconInput.value,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to add service");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          // Update UI
-          updateServicesList(profileData.services);
-
-          // Reset form
-          serviceTitleInput.value = "";
-          serviceDescriptionInput.value = "";
-          serviceIconInput.value = "code";
-          initServiceIcons();
-
-          showNotification("success", "Success", "Service added successfully");
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/services', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: serviceTitleInput.value,
+                    description: serviceDescriptionInput.value,
+                    icon: serviceIconInput.value
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to add service');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateServicesList(profileData.services);
+            
+            // Reset form
+            serviceTitleInput.value = '';
+            serviceDescriptionInput.value = '';
+            serviceIconInput.value = 'code';
+            initServiceIcons();
+            
+            showNotification('success', 'Success', 'Service added successfully');
         } catch (error) {
-          console.error("Error adding service:", error);
-          showNotification("error", "Error", "Failed to add service");
+            console.error('Error adding service:', error);
+            showNotification('error', 'Error', 'Failed to add service');
         } finally {
-          // Reset button state
-          addServiceButton.disabled = false;
-          addServiceLoading.classList.add("hidden");
-          addServiceButtonText.textContent = "Add Service";
+            // Reset button state
+            addServiceButton.disabled = false;
+            addServiceLoading.classList.add('hidden');
+            addServiceButtonText.textContent = 'Add Service';
         }
-      });
-
-      // Handle add link form submission
-      addLinkForm.addEventListener("submit", async (e) => {
+    });
+    
+    // Handle add link form submission
+    addLinkForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-
+        
         // Show loading state
         addLinkButton.disabled = true;
-        addLinkLoading.classList.remove("hidden");
-        addLinkButtonText.textContent = "Adding...";
-
+        addLinkLoading.classList.remove('hidden');
+        addLinkButtonText.textContent = 'Adding...';
+        
         try {
-          const token = checkAuthStatus();
-
-          const response = await fetch("/api/links", {
-            method: "POST",
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              text: linkTextInput.value,
-              url: linkUrlInput.value,
-              icon: linkIconInput.value,
-            }),
-          });
-
-          if (!response.ok) {
-            throw new Error("Failed to add link");
-          }
-
-          const data = await response.json();
-
-          // Update local state
-          profileData = data.profile;
-
-          // Update UI
-          updateLinksList(profileData.links);
-
-          // Reset form
-          linkTextInput.value = "";
-          linkUrlInput.value = "";
-          linkIconInput.value = "link";
-
-          showNotification("success", "Success", "Link added successfully");
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/links', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    text: linkTextInput.value,
+                    url: linkUrlInput.value,
+                    icon: linkIconInput.value
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to add link');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateLinksList(profileData.links);
+            
+            // Reset form
+            linkTextInput.value = '';
+            linkUrlInput.value = '';
+            linkIconInput.value = 'link';
+            
+            showNotification('success', 'Success', 'Link added successfully');
         } catch (error) {
-          console.error("Error adding link:", error);
-          showNotification("error", "Error", "Failed to add link");
+            console.error('Error adding link:', error);
+            showNotification('error', 'Error', 'Failed to add link');
         } finally {
-          // Reset button state
-          addLinkButton.disabled = false;
-          addLinkLoading.classList.add("hidden");
-          addLinkButtonText.textContent = "Add Link";
+            // Reset button state
+            addLinkButton.disabled = false;
+            addLinkLoading.classList.add('hidden');
+            addLinkButtonText.textContent = 'Add Link';
         }
-      });
-
-      // Handle sidebar navigation
-      sidebarLinks.forEach((link) => {
-        link.addEventListener("click", (e) => {
-          e.preventDefault();
-          e.stopPropagation();
-
-          // Remove active class from all links
-          sidebarLinks.forEach((link) => link.classList.remove("active"));
-
-          // Add active class to clicked link
-          link.classList.add("active");
-
-          // Hide all sections
-          sections.forEach((section) => section.classList.add("hidden"));
-
-          // Show selected section
-          const sectionId = link.getAttribute("data-section");
-          document.getElementById(sectionId).classList.remove("hidden");
+    });
+    
+    // Handle add contact info form submission
+    addContactInfoForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading state
+        addContactInfoButton.disabled = true;
+        addContactInfoLoading.classList.remove('hidden');
+        addContactInfoButtonText.textContent = 'Adding...';
+        
+        try {
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/contactInfo', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    title: contactInfoTitleInput.value,
+                    value: contactInfoValueInput.value,
+                    type: contactInfoTypeInput.value,
+                    icon: contactInfoIconInput.value
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to add contact info');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateContactInfoList(profileData.contactInfo);
+            
+            // Reset form
+            contactInfoTitleInput.value = '';
+            contactInfoValueInput.value = '';
+            contactInfoTypeInput.value = 'text';
+            contactInfoIconInput.value = 'envelope';
+            
+            showNotification('success', 'Success', 'Contact info added successfully');
+        } catch (error) {
+            console.error('Error adding contact info:', error);
+            showNotification('error', 'Error', 'Failed to add contact info');
+        } finally {
+            // Reset button state
+            addContactInfoButton.disabled = false;
+            addContactInfoLoading.classList.add('hidden');
+            addContactInfoButtonText.textContent = 'Add Contact Info';
+        }
+    });
+    
+    // Handle add FAQ form submission
+    addFaqForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        // Show loading state
+        addFaqButton.disabled = true;
+        addFaqLoading.classList.remove('hidden');
+        addFaqButtonText.textContent = 'Adding...';
+        
+        try {
+            const token = checkAuthStatus();
+            
+            const response = await fetch('/api/faqs', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    question: faqQuestionInput.value,
+                    answer: faqAnswerInput.value
+                })
+            });
+            
+            if (!response.ok) {
+                throw new Error('Failed to add FAQ');
+            }
+            
+            const data = await response.json();
+            
+            // Update local state
+            profileData = data.profile;
+            
+            // Update UI
+            updateFaqsList(profileData.faqs);
+            
+            // Reset form
+            faqQuestionInput.value = '';
+            faqAnswerInput.value = '';
+            
+            showNotification('success', 'Success', 'FAQ added successfully');
+        } catch (error) {
+            console.error('Error adding FAQ:', error);
+            showNotification('error', 'Error', 'Failed to add FAQ');
+        } finally {
+            // Reset button state
+            addFaqButton.disabled = false;
+            addFaqLoading.classList.add('hidden');
+            addFaqButtonText.textContent = 'Add FAQ';
+        }
+    });
+    
+    // Handle sidebar navigation
+    sidebarLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Remove active class from all links
+            sidebarLinks.forEach(link => link.classList.remove('active'));
+            
+            // Add active class to clicked link
+            link.classList.add('active');
+            
+            // Hide all sections
+            sections.forEach(section => section.classList.add('hidden'));
+            
+            // Show selected section
+            const sectionId = link.getAttribute('data-section');
+            document.getElementById(sectionId).classList.remove('hidden');
         });
-      });
-
-      // Handle logout
-      logoutButton.addEventListener("click", () => {
-        localStorage.removeItem("authToken");
-        window.location.href = "/custom-web/login";
-      });
-
-      // Initialize
-      document.addEventListener("DOMContentLoaded", () => {
+    });
+    
+    // Handle logout
+    logoutButton.addEventListener('click', () => {
+        localStorage.removeItem('authToken');
+        window.location.href = '/custom-web/login';
+    });
+    
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
         fetchProfileData();
-      });
-    </script>
-  </body>
+    });
+</script>
+</body>
 </html>
