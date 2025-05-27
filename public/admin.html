@@ -44,6 +44,7 @@
             position: fixed;
             height: 100vh;
             overflow-y: auto;
+            z-index: 10;
         }
         
         .sidebar-header {
@@ -310,6 +311,7 @@
             cursor: pointer;
             width: 100%;
             height: 100%;
+            z-index: 1;
         }
         
         .gallery-grid {
@@ -338,6 +340,7 @@
             right: 0.5rem;
             display: flex;
             gap: 0.5rem;
+            z-index: 5;
         }
         
         .gallery-item-button {
@@ -353,6 +356,7 @@
             border: none;
             font-size: 0.875rem;
             transition: all 0.3s ease;
+            z-index: 10;
         }
         
         .gallery-item-button:hover {
@@ -377,6 +381,7 @@
             transition: all 0.3s ease;
             height: 100%;
             aspect-ratio: 3/2;
+            position: relative;
         }
         
         .add-image-card:hover {
@@ -393,6 +398,17 @@
         .add-image-text {
             font-size: 0.875rem;
             color: #666;
+        }
+        
+        .add-image-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            z-index: 2;
         }
         
         .links-list {
@@ -714,7 +730,7 @@
                         <div class="add-image-card" id="add-gallery-image">
                             <i class="fas fa-plus add-image-icon"></i>
                             <span class="add-image-text">Add Image</span>
-                            <input type="file" id="gallery-image-input" class="file-input" accept="image/*" multiple>
+                            <input type="file" id="gallery-image-input" class="add-image-input" accept="image/*" multiple>
                         </div>
                     </div>
                 </div>
@@ -955,13 +971,13 @@
         // Update profile UI
         function updateProfileUI(data) {
             // Profile section
-            nameInput.value = data.name;
-            descriptionInput.value = data.description;
-            profileImagePreview.src = data.profileImage;
-            profileImageDisplay.src = data.profileImage;
-            sidebarLogo.src = data.profileImage;
-            profileNamePreview.textContent = data.name;
-            profileDescriptionPreview.textContent = data.description;
+            nameInput.value = data.name || '';
+            descriptionInput.value = data.description || '';
+            profileImagePreview.src = data.profileImage || '/images/profile.jpg';
+            profileImageDisplay.src = data.profileImage || '/images/profile.jpg';
+            sidebarLogo.src = data.profileImage || '/images/profile.jpg';
+            profileNamePreview.textContent = data.name || 'John Doe';
+            profileDescriptionPreview.textContent = data.description || 'Welcome to my personal profile!';
             
             // Appearance section
             backgroundColorInput.value = data.backgroundColor || '#ffffff';
@@ -972,22 +988,22 @@
             accentColorPreview.style.backgroundColor = data.accentColor || '#4f46e5';
             
             // Button section
-            buttonLogoPreview.src = data.logoImage;
-            buttonTextInput.value = data.buttonText;
-            buttonUrlInput.value = data.buttonUrl;
+            buttonLogoPreview.src = data.logoImage || '/images/logo.png';
+            buttonTextInput.value = data.buttonText || '';
+            buttonUrlInput.value = data.buttonUrl || '';
             
             // Links section
             updateLinksList(data.links || []);
             
             // Gallery section
-            updateGalleryGrid(data.galleryImages);
+            updateGalleryGrid(data.galleryImages || []);
         }
         
         // Update links list
         function updateLinksList(links) {
             linksList.innerHTML = '';
             
-            if (links.length === 0) {
+            if (!links || links.length === 0) {
                 const emptyMessage = document.createElement('p');
                 emptyMessage.textContent = 'No links added yet. Add your first link below.';
                 emptyMessage.style.textAlign = 'center';
@@ -1080,33 +1096,38 @@
             galleryItems.forEach(item => item.remove());
             
             // Add gallery items
-            images.forEach((image, index) => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = 'Gallery Image';
-                img.className = 'gallery-image';
-                
-                const actions = document.createElement('div');
-                actions.className = 'gallery-item-actions';
-                
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'gallery-item-button delete';
-                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-                deleteButton.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    deleteGalleryImage(index);
+            if (images && images.length > 0) {
+                images.forEach((image, index) => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    
+                    const img = document.createElement('img');
+                    img.src = image;
+                    img.alt = 'Gallery Image';
+                    img.className = 'gallery-image';
+                    
+                    const actions = document.createElement('div');
+                    actions.className = 'gallery-item-actions';
+                    
+                    const deleteButton = document.createElement('button');
+                    deleteButton.className = 'gallery-item-button delete';
+                    deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                    deleteButton.setAttribute('data-index', index);
+                    deleteButton.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const idx = parseInt(this.getAttribute('data-index'));
+                        deleteGalleryImage(idx);
+                    });
+                    
+                    actions.appendChild(deleteButton);
+                    galleryItem.appendChild(img);
+                    galleryItem.appendChild(actions);
+                    
+                    // Insert before the add button
+                    galleryGrid.insertBefore(galleryItem, addGalleryImage);
                 });
-                
-                actions.appendChild(deleteButton);
-                galleryItem.appendChild(img);
-                galleryItem.appendChild(actions);
-                
-                // Insert before the add button
-                galleryGrid.insertBefore(galleryItem, addGalleryImage);
-            });
+            }
         }
         
         // Delete gallery image
@@ -1181,6 +1202,9 @@
         
         // Handle gallery image upload
         galleryImageInput.addEventListener('change', async (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            
             const files = e.target.files;
             if (files.length > 0) {
                 try {
@@ -1431,6 +1455,7 @@
         sidebarLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 
                 // Remove active class from all links
                 sidebarLinks.forEach(link => link.classList.remove('active'));
