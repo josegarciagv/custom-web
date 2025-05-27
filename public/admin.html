@@ -1,0 +1,1046 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Custom Web</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --text-color: #333;
+            --bg-color: #fff;
+            --secondary-bg: #f9fafb;
+            --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
+            --warning-color: #f59e0b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--secondary-bg);
+        }
+        
+        .admin-container {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 250px;
+            background-color: var(--bg-color);
+            border-right: 1px solid var(--border-color);
+            padding: 1.5rem;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .sidebar-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        
+        .sidebar-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+        
+        .sidebar-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .sidebar-nav {
+            list-style: none;
+        }
+        
+        .sidebar-nav-item {
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-nav-link {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            color: #666;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        
+        .sidebar-nav-link:hover, .sidebar-nav-link.active {
+            background-color: var(--secondary-bg);
+            color: var(--primary-color);
+        }
+        
+        .sidebar-nav-icon {
+            margin-right: 0.75rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .main-content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 2rem;
+        }
+        
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+        
+        .logout-button {
+            display: inline-flex;
+            align-items: center;
+            background-color: transparent;
+            color: #666;
+            border: 1px solid var(--border-color);
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .logout-button:hover {
+            background-color: #fee2e2;
+            color: var(--error-color);
+            border-color: var(--error-color);
+        }
+        
+        .logout-icon {
+            margin-right: 0.5rem;
+        }
+        
+        .card {
+            background-color: var(--bg-color);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            border: none;
+        }
+        
+        .primary-button {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .primary-button:hover {
+            background-color: #4338ca;
+        }
+        
+        .secondary-button {
+            background-color: white;
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+        }
+        
+        .secondary-button:hover {
+            background-color: var(--secondary-bg);
+        }
+        
+        .danger-button {
+            background-color: #fee2e2;
+            color: var(--error-color);
+            border: 1px solid var(--error-color);
+        }
+        
+        .danger-button:hover {
+            background-color: var(--error-color);
+            color: white;
+        }
+        
+        .button-icon {
+            margin-right: 0.5rem;
+        }
+        
+        .profile-preview {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .profile-image-preview {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1.5rem;
+            border: 3px solid var(--primary-color);
+        }
+        
+        .profile-info-preview {
+            flex: 1;
+        }
+        
+        .profile-name-preview {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .profile-description-preview {
+            color: #666;
+            font-size: 0.875rem;
+        }
+        
+        .image-upload-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .image-preview {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            margin-right: 1rem;
+            border: 1px solid var(--border-color);
+        }
+        
+        .file-input-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+        }
+        
+        .file-input {
+            position: absolute;
+            left: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            aspect-ratio: 3/2;
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-item-actions {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .gallery-item-button {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: var(--text-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .gallery-item-button:hover {
+            background-color: white;
+            transform: scale(1.1);
+        }
+        
+        .gallery-item-button.delete:hover {
+            background-color: var(--error-color);
+            color: white;
+        }
+        
+        .add-image-card {
+            border: 2px dashed var(--border-color);
+            border-radius: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            height: 100%;
+            aspect-ratio: 3/2;
+        }
+        
+        .add-image-card:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(79, 70, 229, 0.05);
+        }
+        
+        .add-image-icon {
+            font-size: 1.5rem;
+            color: #666;
+            margin-bottom: 0.5rem;
+        }
+        
+        .add-image-text {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .notification {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            background-color: white;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            max-width: 350px;
+            transform: translateX(calc(100% + 1rem));
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification-icon {
+            margin-right: 0.75rem;
+            font-size: 1.25rem;
+        }
+        
+        .notification-content {
+            flex: 1;
+        }
+        
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        
+        .notification-message {
+            font-size: 0.875rem;
+            color: #666;
+        }
+        
+        .notification.success {
+            border-left: 4px solid var(--success-color);
+        }
+        
+        .notification.success .notification-icon {
+            color: var(--success-color);
+        }
+        
+        .notification.error {
+            border-left: 4px solid var(--error-color);
+        }
+        
+        .notification.error .notification-icon {
+            color: var(--error-color);
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 1rem;
+            }
+            
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+            
+            .admin-container {
+                flex-direction: column;
+            }
+            
+            .sidebar-nav {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+            
+            .sidebar-nav-item {
+                margin-bottom: 0;
+            }
+            
+            .sidebar-nav-link {
+                padding: 0.5rem;
+            }
+            
+            .sidebar-nav-text {
+                display: none;
+            }
+            
+            .sidebar-nav-icon {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/images/profile.jpg" alt="Logo" class="sidebar-logo" id="sidebar-logo">
+                <h1 class="sidebar-title">Admin Panel</h1>
+            </div>
+            
+            <ul class="sidebar-nav">
+                <li class="sidebar-nav-item">
+                    <a href="#profile" class="sidebar-nav-link active" data-section="profile-section">
+                        <i class="fas fa-user sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Profile</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#gallery" class="sidebar-nav-link" data-section="gallery-section">
+                        <i class="fas fa-images sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Gallery</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#button" class="sidebar-nav-link" data-section="button-section">
+                        <i class="fas fa-link sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Button</span>
+                    </a>
+                </li>
+            </ul>
+        </aside>
+        
+        <main class="main-content">
+            <header class="page-header">
+                <h1 class="page-title">Dashboard</h1>
+                <button class="logout-button" id="logout-button">
+                    <i class="fas fa-sign-out-alt logout-icon"></i>
+                    Logout
+                </button>
+            </header>
+            
+            <!-- Profile Section -->
+            <section id="profile-section" class="section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Profile Information</h2>
+                    </div>
+                    
+                    <div class="profile-preview">
+                        <img src="/images/profile.jpg" alt="Profile" class="profile-image-preview" id="profile-image-preview">
+                        <div class="profile-info-preview">
+                            <h3 class="profile-name-preview" id="profile-name-preview">John Doe</h3>
+                            <p class="profile-description-preview" id="profile-description-preview">Welcome to my personal profile!</p>
+                        </div>
+                    </div>
+                    
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="profile-image" class="form-label">Profile Image</label>
+                            <div class="image-upload-container">
+                                <img src="/images/profile.jpg" alt="Profile" class="image-preview" id="profile-image-upload-preview">
+                                <div class="file-input-wrapper">
+                                    <button type="button" class="button secondary-button">
+                                        <i class="fas fa-upload button-icon"></i>
+                                        Choose Image
+                                    </button>
+                                    <input type="file" id="profile-image" class="file-input" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" class="form-input" placeholder="Enter your name">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="description" class="form-label">Description</label>
+                            <textarea id="description" class="form-textarea" placeholder="Enter your description"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="save-profile-button">
+                            <span id="profile-loading" class="loading hidden"></span>
+                            <span id="profile-button-text">Save Changes</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Gallery Section -->
+            <section id="gallery-section" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Gallery Images</h2>
+                    </div>
+                    
+                    <div class="gallery-grid" id="gallery-grid">
+                        <!-- Gallery items will be loaded dynamically -->
+                        
+                        <div class="add-image-card" id="add-gallery-image">
+                            <i class="fas fa-plus add-image-icon"></i>
+                            <span class="add-image-text">Add Image</span>
+                            <input type="file" id="gallery-image-input" class="file-input" accept="image/*" multiple>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Button Section -->
+            <section id="button-section" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Button Settings</h2>
+                    </div>
+                    
+                    <form id="button-form">
+                        <div class="form-group">
+                            <label for="button-logo" class="form-label">Button Logo</label>
+                            <div class="image-upload-container">
+                                <img src="/images/logo.png" alt="Logo" class="image-preview" id="button-logo-preview">
+                                <div class="file-input-wrapper">
+                                    <button type="button" class="button secondary-button">
+                                        <i class="fas fa-upload button-icon"></i>
+                                        Choose Logo
+                                    </button>
+                                    <input type="file" id="button-logo" class="file-input" accept="image/*">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="button-text" class="form-label">Button Text</label>
+                            <input type="text" id="button-text-input" class="form-input" placeholder="Enter button text">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="button-url" class="form-label">Button URL</label>
+                            <input type="url" id="button-url" class="form-input" placeholder="Enter button URL">
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="save-button-settings">
+                            <span id="button-loading" class="loading hidden"></span>
+                            <span id="button-button-text">Save Changes</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+        </main>
+    </div>
+    
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <i class="notification-icon" id="notification-icon"></i>
+        <div class="notification-content">
+            <div class="notification-title" id="notification-title"></div>
+            <div class="notification-message" id="notification-message"></div>
+        </div>
+    </div>
+    
+    <script>
+        // DOM Elements
+        const logoutButton = document.getElementById('logout-button');
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav-link');
+        const sections = document.querySelectorAll('.section');
+        const notification = document.getElementById('notification');
+        const notificationIcon = document.getElementById('notification-icon');
+        const notificationTitle = document.getElementById('notification-title');
+        const notificationMessage = document.getElementById('notification-message');
+        
+        // Profile Elements
+        const profileForm = document.getElementById('profile-form');
+        const profileImageInput = document.getElementById('profile-image');
+        const profileImagePreview = document.getElementById('profile-image-upload-preview');
+        const profileImageDisplay = document.getElementById('profile-image-preview');
+        const sidebarLogo = document.getElementById('sidebar-logo');
+        const nameInput = document.getElementById('name');
+        const descriptionInput = document.getElementById('description');
+        const profileNamePreview = document.getElementById('profile-name-preview');
+        const profileDescriptionPreview = document.getElementById('profile-description-preview');
+        const saveProfileButton = document.getElementById('save-profile-button');
+        const profileLoading = document.getElementById('profile-loading');
+        const profileButtonText = document.getElementById('profile-button-text');
+        
+        // Gallery Elements
+        const galleryGrid = document.getElementById('gallery-grid');
+        const addGalleryImage = document.getElementById('add-gallery-image');
+        const galleryImageInput = document.getElementById('gallery-image-input');
+        
+        // Button Elements
+        const buttonForm = document.getElementById('button-form');
+        const buttonLogoInput = document.getElementById('button-logo');
+        const buttonLogoPreview = document.getElementById('button-logo-preview');
+        const buttonTextInput = document.getElementById('button-text-input');
+        const buttonUrlInput = document.getElementById('button-url');
+        const saveButtonSettings = document.getElementById('save-button-settings');
+        const buttonLoading = document.getElementById('button-loading');
+        const buttonButtonText = document.getElementById('button-button-text');
+        
+        // State
+        let profileData = {
+            name: '',
+            description: '',
+            profileImage: '',
+            logoImage: '',
+            buttonText: '',
+            buttonUrl: '',
+            galleryImages: []
+        };
+        
+        // Check if user is logged in
+        function checkAuthStatus() {
+            const token = localStorage.getItem('authToken');
+            if (!token) {
+                // Redirect to login page
+                window.location.href = '/custom-web/login';
+            }
+            
+            // Set auth header for all fetch requests
+            return token;
+        }
+        
+        // Show notification
+        function showNotification(type, title, message) {
+            notification.className = 'notification show ' + type;
+            
+            if (type === 'success') {
+                notificationIcon.className = 'fas fa-check-circle notification-icon';
+            } else if (type === 'error') {
+                notificationIcon.className = 'fas fa-exclamation-circle notification-icon';
+            }
+            
+            notificationTitle.textContent = title;
+            notificationMessage.textContent = message;
+            
+            setTimeout(() => {
+                notification.className = 'notification';
+            }, 3000);
+        }
+        
+        // Fetch profile data
+        async function fetchProfileData() {
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch('/api/profile', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to fetch profile data');
+                }
+                
+                const data = await response.json();
+                profileData = data;
+                
+                // Update UI with profile data
+                updateProfileUI(data);
+                
+                return data;
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+                showNotification('error', 'Error', 'Failed to load profile data');
+            }
+        }
+        
+        // Update profile UI
+        function updateProfileUI(data) {
+            // Profile section
+            nameInput.value = data.name;
+            descriptionInput.value = data.description;
+            profileImagePreview.src = data.profileImage;
+            profileImageDisplay.src = data.profileImage;
+            sidebarLogo.src = data.profileImage;
+            profileNamePreview.textContent = data.name;
+            profileDescriptionPreview.textContent = data.description;
+            
+            // Button section
+            buttonLogoPreview.src = data.logoImage;
+            buttonTextInput.value = data.buttonText;
+            buttonUrlInput.value = data.buttonUrl;
+            
+            // Gallery section
+            updateGalleryGrid(data.galleryImages);
+        }
+        
+        // Update gallery grid
+        function updateGalleryGrid(images) {
+            // Clear existing gallery items except the add button
+            const galleryItems = galleryGrid.querySelectorAll('.gallery-item');
+            galleryItems.forEach(item => item.remove());
+            
+            // Add gallery items
+            images.forEach((image, index) => {
+                const galleryItem = document.createElement('div');
+                galleryItem.className = 'gallery-item';
+                
+                const img = document.createElement('img');
+                img.src = image;
+                img.alt = 'Gallery Image';
+                img.className = 'gallery-image';
+                
+                const actions = document.createElement('div');
+                actions.className = 'gallery-item-actions';
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'gallery-item-button delete';
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    deleteGalleryImage(index);
+                });
+                
+                actions.appendChild(deleteButton);
+                galleryItem.appendChild(img);
+                galleryItem.appendChild(actions);
+                
+                // Insert before the add button
+                galleryGrid.insertBefore(galleryItem, addGalleryImage);
+            });
+        }
+        
+        // Delete gallery image
+        async function deleteGalleryImage(index) {
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch(`/api/gallery/${index}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to delete image');
+                }
+                
+                // Update local state
+                profileData.galleryImages.splice(index, 1);
+                
+                // Update UI
+                updateGalleryGrid(profileData.galleryImages);
+                
+                showNotification('success', 'Success', 'Image deleted successfully');
+            } catch (error) {
+                console.error('Error deleting gallery image:', error);
+                showNotification('error', 'Error', 'Failed to delete image');
+            }
+        }
+        
+        // Handle profile image change
+        profileImageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    profileImagePreview.src = e.target.result;
+                    profileImageDisplay.src = e.target.result;
+                    sidebarLogo.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Handle button logo change
+        buttonLogoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    buttonLogoPreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // Handle gallery image upload
+        galleryImageInput.addEventListener('change', async (e) => {
+            const files = e.target.files;
+            if (files.length > 0) {
+                try {
+                    const token = checkAuthStatus();
+                    
+                    // Create FormData
+                    const formData = new FormData();
+                    for (let i = 0; i < files.length; i++) {
+                        formData.append('images', files[i]);
+                    }
+                    
+                    const response = await fetch('/api/gallery', {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: formData
+                    });
+                    
+                    if (!response.ok) {
+                        throw new Error('Failed to upload images');
+                    }
+                    
+                    const data = await response.json();
+                    
+                    // Update local state
+                    profileData.galleryImages = [...profileData.galleryImages, ...data.images];
+                    
+                    // Update UI
+                    updateGalleryGrid(profileData.galleryImages);
+                    
+                    showNotification('success', 'Success', 'Images uploaded successfully');
+                } catch (error) {
+                    console.error('Error uploading gallery images:', error);
+                    showNotification('error', 'Error', 'Failed to upload images');
+                }
+                
+                // Reset input
+                galleryImageInput.value = '';
+            }
+        });
+        
+        // Handle profile form submission
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            saveProfileButton.disabled = true;
+            profileLoading.classList.remove('hidden');
+            profileButtonText.textContent = 'Saving...';
+            
+            try {
+                const token = checkAuthStatus();
+                
+                // Create FormData
+                const formData = new FormData();
+                formData.append('name', nameInput.value);
+                formData.append('description', descriptionInput.value);
+                
+                if (profileImageInput.files[0]) {
+                    formData.append('profileImage', profileImageInput.files[0]);
+                }
+                
+                const response = await fetch('/api/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to update profile');
+                }
+                
+                // Update preview
+                profileNamePreview.textContent = nameInput.value;
+                profileDescriptionPreview.textContent = descriptionInput.value;
+                
+                showNotification('success', 'Success', 'Profile updated successfully');
+            } catch (error) {
+                console.error('Error updating profile:', error);
+                showNotification('error', 'Error', 'Failed to update profile');
+            } finally {
+                // Reset button state
+                saveProfileButton.disabled = false;
+                profileLoading.classList.add('hidden');
+                profileButtonText.textContent = 'Save Changes';
+            }
+        });
+        
+        // Handle button form submission
+        buttonForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            saveButtonSettings.disabled = true;
+            buttonLoading.classList.remove('hidden');
+            buttonButtonText.textContent = 'Saving...';
+            
+            try {
+                const token = checkAuthStatus();
+                
+                // Create FormData
+                const formData = new FormData();
+                formData.append('buttonText', buttonTextInput.value);
+                formData.append('buttonUrl', buttonUrlInput.value);
+                
+                if (buttonLogoInput.files[0]) {
+                    formData.append('logoImage', buttonLogoInput.files[0]);
+                }
+                
+                const response = await fetch('/api/button', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to update button settings');
+                }
+                
+                showNotification('success', 'Success', 'Button settings updated successfully');
+            } catch (error) {
+                console.error('Error updating button settings:', error);
+                showNotification('error', 'Error', 'Failed to update button settings');
+            } finally {
+                // Reset button state
+                saveButtonSettings.disabled = false;
+                buttonLoading.classList.add('hidden');
+                buttonButtonText.textContent = 'Save Changes';
+            }
+        });
+        
+        // Handle sidebar navigation
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links
+                sidebarLinks.forEach(link => link.classList.remove('active'));
+                
+                // Add active class to clicked link
+                link.classList.add('active');
+                
+                // Hide all sections
+                sections.forEach(section => section.classList.add('hidden'));
+                
+                // Show selected section
+                const sectionId = link.getAttribute('data-section');
+                document.getElementById(sectionId).classList.remove('hidden');
+            });
+        });
+        
+        // Handle logout
+        logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('authToken');
+            window.location.href = '/custom-web/login';
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchProfileData();
+        });
+    </script>
+</body>
+</html>

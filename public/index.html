@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Web Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #4f46e5;
+            --text-color: #333;
+            --bg-color: #fff;
+            --secondary-bg: #f9fafb;
+            --border-color: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1.5rem;
+            border: 3px solid var(--primary-color);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-name {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .profile-description {
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: #666;
+        }
+        
+        .gallery-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 0.5rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            aspect-ratio: 3/2;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .cta-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 0 auto;
+            max-width: 250px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #4338ca;
+        }
+        
+        .button-logo {
+            width: 24px;
+            height: 24px;
+            margin-right: 0.75rem;
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: white;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .admin-link {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            color: #999;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+        
+        .admin-link:hover {
+            color: var(--primary-color);
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .profile-name {
+                font-size: 2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
+            <h1 class="profile-name" id="profile-name">John Doe</h1>
+            <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
+        </header>
+        
+        <h2 class="gallery-title">My Gallery</h2>
+        <div class="gallery" id="gallery">
+            <!-- Gallery images will be loaded dynamically -->
+        </div>
+        
+        <a href="#" class="cta-button" id="cta-button">
+            <img src="/images/logo.png" alt="Logo" class="button-logo" id="button-logo">
+            <span id="button-text">Visit My Website</span>
+        </a>
+    </div>
+    
+    <div class="modal" id="image-modal">
+        <span class="close-modal" id="close-modal">&times;</span>
+        <div class="modal-content">
+            <img src="/placeholder.svg" alt="Gallery Image" class="modal-image" id="modal-image">
+        </div>
+    </div>
+    
+    <a href="/custom-web/login" class="admin-link">Admin</a>
+    
+    <footer>
+        <p>&copy; <span id="current-year"></span> Custom Web Profile. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        // Fetch profile data
+        async function fetchProfileData() {
+            try {
+                const response = await fetch('/api/profile');
+                if (!response.ok) {
+                    throw new Error('Failed to fetch profile data');
+                }
+                
+                const data = await response.json();
+                
+                // Update profile information
+                document.getElementById('profile-name').textContent = data.name;
+                document.getElementById('profile-description').textContent = data.description;
+                document.getElementById('profile-image').src = data.profileImage;
+                document.getElementById('button-logo').src = data.logoImage;
+                document.getElementById('button-text').textContent = data.buttonText;
+                document.getElementById('cta-button').href = data.buttonUrl;
+                
+                // Set favicon
+                const favicon = document.createElement('link');
+                favicon.rel = 'icon';
+                favicon.href = data.profileImage;
+                document.head.appendChild(favicon);
+                
+                // Set meta tags for SEO
+                const metaTitle = document.createElement('meta');
+                metaTitle.name = 'title';
+                metaTitle.content = data.name + ' - Profile';
+                document.head.appendChild(metaTitle);
+                
+                const metaDescription = document.createElement('meta');
+                metaDescription.name = 'description';
+                metaDescription.content = data.description;
+                document.head.appendChild(metaDescription);
+                
+                // Update page title
+                document.title = data.name + ' - Profile';
+                
+                // Load gallery images
+                const gallery = document.getElementById('gallery');
+                gallery.innerHTML = '';
+                
+                data.galleryImages.forEach(image => {
+                    const galleryItem = document.createElement('div');
+                    galleryItem.className = 'gallery-item';
+                    galleryItem.addEventListener('click', () => openModal(image));
+                    
+                    const img = document.createElement('img');
+                    img.src = image;
+                    img.alt = 'Gallery Image';
+                    img.className = 'gallery-image';
+                    
+                    galleryItem.appendChild(img);
+                    gallery.appendChild(galleryItem);
+                });
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        }
+        
+        // Modal functionality
+        const modal = document.getElementById('image-modal');
+        const modalImage = document.getElementById('modal-image');
+        const closeModal = document.getElementById('close-modal');
+        
+        function openModal(imageSrc) {
+            modal.style.display = 'flex';
+            modalImage.src = imageSrc;
+        }
+        
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // Load profile data when page loads
+        document.addEventListener('DOMContentLoaded', fetchProfileData);
+    </script>
+</body>
+</html>
