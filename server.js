@@ -16,6 +16,9 @@ dotenv.config()
 // Initialize Express app
 const app = express()
 const PORT = process.env.PORT || 3000
+const DOMAIN = process.env.DOMAIN || 'localhost'
+const PROTOCOL = process.env.NODE_ENV === 'production' ? 'https' : 'http'
+const BASE_URL = `${PROTOCOL}://${DOMAIN}${PORT === 80 || PORT === 443 ? '' : `:${PORT}`}`
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Middleware
@@ -380,11 +383,11 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
 
 // Route for all HTML pages
 app.get(["/", "/custom-web/login", "/custom-web/admin"], (req, res) => {
-  const path = req.path;
+  const requestPath = req.path;
   
-  if (path === "/custom-web/login") {
+  if (requestPath === "/custom-web/login") {
     res.sendFile(path.join(__dirname, "login.html"));
-  } else if (path === "/custom-web/admin") {
+  } else if (requestPath === "/custom-web/admin") {
     res.sendFile(path.join(__dirname, "admin.html"));
   } else {
     res.sendFile(path.join(__dirname, "index.html"));
@@ -405,7 +408,8 @@ async function startServer() {
     
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
-      console.log(`Visit http://localhost:${PORT} to access the application`);
+      console.log(`Application URL: ${BASE_URL}`);
+      console.log(`Admin login: ${BASE_URL}/custom-web/login`);
     });
   } catch (error) {
     console.error("Server startup error:", error);
