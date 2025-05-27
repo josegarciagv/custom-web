@@ -104,6 +104,9 @@ const profileSchema = new mongoose.Schema({
   backgroundColor: { type: String, default: "#ffffff" },
   textColor: { type: String, default: "#333333" },
   accentColor: { type: String, default: "#4f46e5" },
+  galleryBgColor: { type: String, default: "#f9fafb" },
+  servicesBgColor: { type: String, default: "#ffffff" },
+  showContactForm: { type: Boolean, default: true },
   links: [linkSchema],
   services: [serviceSchema],
   contactEmail: { type: String, default: "admin@example.com" },
@@ -156,6 +159,9 @@ async function initializeDefaultProfile() {
         backgroundColor: "#ffffff",
         textColor: "#333333",
         accentColor: "#4f46e5",
+        galleryBgColor: "#f9fafb",
+        servicesBgColor: "#ffffff",
+        showContactForm: true,
         contactEmail: "admin@example.com",
         links: [
           { text: "GitHub", url: "https://github.com", icon: "github" },
@@ -269,7 +275,17 @@ app.get("/api/profile", async (req, res) => {
 // Update profile (authenticated)
 app.put("/api/profile", authenticate, upload.single("profileImage"), async (req, res) => {
   try {
-    const { name, description, backgroundColor, textColor, accentColor, contactEmail } = req.body
+    const { 
+      name, 
+      description, 
+      backgroundColor, 
+      textColor, 
+      accentColor, 
+      contactEmail,
+      galleryBgColor,
+      servicesBgColor,
+      showContactForm
+    } = req.body
     
     const profile = await Profile.findOne()
     
@@ -285,9 +301,14 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (backgroundColor) profile.backgroundColor = backgroundColor
     if (textColor) profile.textColor = textColor
     if (accentColor) profile.accentColor = accentColor
+    if (galleryBgColor) profile.galleryBgColor = galleryBgColor
+    if (servicesBgColor) profile.servicesBgColor = servicesBgColor
     
-    // Update contact email if provided
+    // Update contact settings
     if (contactEmail) profile.contactEmail = contactEmail
+    if (showContactForm !== undefined) {
+      profile.showContactForm = showContactForm === 'true' || showContactForm === true
+    }
     
     // Update profile image if provided
     if (req.file) {
@@ -569,6 +590,11 @@ app.post("/api/contact", async (req, res) => {
     
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if contact form is enabled
+    if (!profile.showContactForm) {
+      return res.status(403).json({ message: "Contact form is disabled" })
     }
     
     const toEmail = profile.contactEmail || "admin@example.com"
