@@ -520,12 +520,11 @@ app.put("/api/services/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
+
     if (index < 0 || index >= profile.services.length) {
       return res.status(400).json({ message: "Invalid service index" })
     }
     
-    // Update service
     if (title) profile.services[index].title = title
     if (description) profile.services[index].description = description
     if (icon) profile.services[index].icon = icon
