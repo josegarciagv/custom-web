@@ -16,7 +16,7 @@ dotenv.config()
 // Initialize Express app
 const app = express()
 const PORT = process.env.PORT || 3000
-const DOMAIN = process.env.DOMAIN || 'custom-web-production.up.railway.app'
+const DOMAIN = process.env.DOMAIN || ''
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Middleware
@@ -69,7 +69,7 @@ const upload = multer({
 
 // Connect to MongoDB
 mongoose
-  .connect(process.env.MONGO_URL || "mongodb://localhost:27017/custom-web")
+  .connect(process.env.MONGO_URL || "")
   .then(() => console.log("Connected to MongoDB"))
   .catch((err) => console.error("MongoDB connection error:", err))
 
@@ -109,7 +109,7 @@ const profileSchema = new mongoose.Schema({
   showContactForm: { type: Boolean, default: true },
   links: [linkSchema],
   services: [serviceSchema],
-  contactEmail: { type: String, default: "admin@example.com" },
+  contactEmail: { type: String, default: "" },
   galleryImages: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
@@ -207,10 +207,10 @@ async function initializeDefaultAdmin() {
     if (adminCount === 0) {
       // Hash password
       const salt = await bcrypt.genSalt(10)
-      const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || "admin123", salt)
+      const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || "", salt)
       
       const defaultAdmin = new User({
-        email: process.env.ADMIN_EMAIL || "admin@example.com",
+        email: process.env.ADMIN_EMAIL || "",
         password: hashedPassword
       })
       
