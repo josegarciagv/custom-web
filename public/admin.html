@@ -739,11 +739,7 @@
             try {
                 const token = checkAuthStatus();
                 
-                const response = await fetch('/api/profile', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
+                const response = await fetch('/api/profile');
                 
                 if (!response.ok) {
                     throw new Error('Failed to fetch profile data');
@@ -818,7 +814,7 @@
             });
         }
         
-        // Delete gallery image
+        // Delete gallery image - CORREGIDO
         async function deleteGalleryImage(index) {
             try {
                 const token = checkAuthStatus();
@@ -834,6 +830,8 @@
                     throw new Error('Failed to delete image');
                 }
                 
+                const data = await response.json();
+                
                 // Update local state
                 profileData.galleryImages.splice(index, 1);
                 
@@ -843,7 +841,7 @@
                 showNotification('success', 'Success', 'Image deleted successfully');
             } catch (error) {
                 console.error('Error deleting gallery image:', error);
-                showNotification('error', 'Error', 'Failed to delete image');
+                showNotification('error', 'Error', 'Failed to delete image: ' + error.message);
             }
         }
         
@@ -950,6 +948,11 @@
                     throw new Error('Failed to update profile');
                 }
                 
+                const data = await response.json();
+                
+                // Update local state
+                profileData = { ...profileData, ...data.profile };
+                
                 // Update preview
                 profileNamePreview.textContent = nameInput.value;
                 profileDescriptionPreview.textContent = descriptionInput.value;
@@ -998,6 +1001,11 @@
                 if (!response.ok) {
                     throw new Error('Failed to update button settings');
                 }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = { ...profileData, ...data.profile };
                 
                 showNotification('success', 'Success', 'Button settings updated successfully');
             } catch (error) {
