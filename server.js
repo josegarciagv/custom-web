@@ -18,7 +18,7 @@ const app = express()
 const PORT = process.env.PORT || 3000
 const DOMAIN = process.env.DOMAIN || 'localhost'
 const PROTOCOL = process.env.NODE_ENV === 'production' ? 'https' : 'http'
-const BASE_URL = `${PROTOCOL}://${DOMAIN}${PORT === 80 || PORT === 443 ? '' : `:${PORT}`}`
+const BASE_URL = `${PROTOCOL}://${DOMAIN}`
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Middleware
