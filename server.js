@@ -88,20 +88,26 @@ const linkSchema = new mongoose.Schema({
   icon: { type: String, default: "link" }
 })
 
+// Service Schema
+const serviceSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  icon: { type: String, default: "star" }
+})
+
 // Profile Schema - Updated with new fields
 const profileSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
   profileImage: { type: String, required: true },
   logoImage: { type: String, required: true },
-  buttonText: { type: String, required: true },
-  buttonUrl: { type: String, required: true },
-  galleryImages: [{ type: String }],
-  // New fields
   backgroundColor: { type: String, default: "#ffffff" },
   textColor: { type: String, default: "#333333" },
   accentColor: { type: String, default: "#4f46e5" },
   links: [linkSchema],
+  services: [serviceSchema],
+  contactEmail: { type: String, default: "admin@example.com" },
+  galleryImages: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })
@@ -147,17 +153,35 @@ async function initializeDefaultProfile() {
         description: "Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.",
         profileImage: "/images/profile.jpg",
         logoImage: "/images/logo.png",
-        buttonText: "Visit My Website",
-        buttonUrl: "https://example.com",
         backgroundColor: "#ffffff",
         textColor: "#333333",
         accentColor: "#4f46e5",
+        contactEmail: "admin@example.com",
         links: [
           { text: "GitHub", url: "https://github.com", icon: "github" },
           { text: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" }
         ],
+        services: [
+          { 
+            title: "Web Development", 
+            description: "Custom websites and web applications built with the latest technologies.",
+            icon: "code"
+          },
+          { 
+            title: "UI/UX Design", 
+            description: "User-friendly interfaces that provide a great user experience.",
+            icon: "paint-brush"
+          },
+          { 
+            title: "Mobile Apps", 
+            description: "Native and cross-platform mobile applications for iOS and Android.",
+            icon: "mobile"
+          }
+        ],
         galleryImages: [
-        
+          "/images/gallery-1.jpg",
+          "/images/gallery-2.jpg",
+          "/images/gallery-3.jpg"
         ]
       })
       
@@ -245,7 +269,7 @@ app.get("/api/profile", async (req, res) => {
 // Update profile (authenticated)
 app.put("/api/profile", authenticate, upload.single("profileImage"), async (req, res) => {
   try {
-    const { name, description, backgroundColor, textColor, accentColor } = req.body
+    const { name, description, backgroundColor, textColor, accentColor, contactEmail } = req.body
     
     const profile = await Profile.findOne()
     
@@ -254,13 +278,16 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     }
     
     // Update fields
-    profile.name = name || profile.name
-    profile.description = description || profile.description
+    if (name) profile.name = name
+    if (description) profile.description = description
     
     // Update colors if provided
     if (backgroundColor) profile.backgroundColor = backgroundColor
     if (textColor) profile.textColor = textColor
     if (accentColor) profile.accentColor = accentColor
+    
+    // Update contact email if provided
+    if (contactEmail) profile.contactEmail = contactEmail
     
     // Update profile image if provided
     if (req.file) {
@@ -289,20 +316,14 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
   }
 })
 
-// Update button settings (authenticated)
-app.put("/api/button", authenticate, upload.single("logoImage"), async (req, res) => {
+// Update logo (authenticated)
+app.put("/api/logo", authenticate, upload.single("logoImage"), async (req, res) => {
   try {
-    const { buttonText, buttonUrl } = req.body
-    
     const profile = await Profile.findOne()
     
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" })
     }
-    
-    // Update fields
-    profile.buttonText = buttonText || profile.buttonText
-    profile.buttonUrl = buttonUrl || profile.buttonUrl
     
     // Update logo image if provided
     if (req.file) {
@@ -322,12 +343,12 @@ app.put("/api/button", authenticate, upload.single("logoImage"), async (req, res
     await profile.save()
     
     res.json({
-      message: "Button settings updated successfully",
+      message: "Logo updated successfully",
       profile
     })
   } catch (error) {
-    console.error("Error updating button settings:", error)
-    res.status(500).json({ message: "Failed to update button settings", error: error.message })
+    console.error("Error updating logo:", error)
+    res.status(500).json({ message: "Failed to update logo", error: error.message })
   }
 })
 
@@ -430,6 +451,159 @@ app.delete("/api/links/:index", authenticate, async (req, res) => {
   } catch (error) {
     console.error("Error deleting link:", error)
     res.status(500).json({ message: "Failed to delete link", error: error.message })
+  }
+})
+
+// Add service (authenticated)
+app.post("/api/services", authenticate, async (req, res) => {
+  try {
+    const { title, description, icon } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Add new service
+    profile.services.push({
+      title,
+      description,
+      icon: icon || "star"
+    })
+    
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Service added successfully",
+      service: profile.services[profile.services.length - 1],
+      profile
+    })
+  } catch (error) {
+    console.error("Error adding service:", error)
+    res.status(500).json({ message: "Failed to add service", error: error.message })
+  }
+})
+
+// Update service (authenticated)
+app.put("/api/services/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+    const { title, description, icon } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.services.length) {
+      return res.status(400).json({ message: "Invalid service index" })
+    }
+    
+    // Update service
+    if (title) profile.services[index].title = title
+    if (description) profile.services[index].description = description
+    if (icon) profile.services[index].icon = icon
+    
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Service updated successfully",
+      service: profile.services[index],
+      profile
+    })
+  } catch (error) {
+    console.error("Error updating service:", error)
+    res.status(500).json({ message: "Failed to update service", error: error.message })
+  }
+})
+
+// Delete service (authenticated)
+app.delete("/api/services/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.services.length) {
+      return res.status(400).json({ message: "Invalid service index" })
+    }
+    
+    // Remove service
+    profile.services.splice(index, 1)
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Service deleted successfully",
+      profile
+    })
+  } catch (error) {
+    console.error("Error deleting service:", error)
+    res.status(500).json({ message: "Failed to delete service", error: error.message })
+  }
+})
+
+// Send contact email (public)
+app.post("/api/contact", async (req, res) => {
+  try {
+    const { name, email, message } = req.body
+    
+    if (!name || !email || !message) {
+      return res.status(400).json({ message: "All fields are required" })
+    }
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    const toEmail = profile.contactEmail || "admin@example.com"
+    
+    // Send email using external service
+    const response = await fetch('https://2.vil0.com/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "from": "Custom Web Contact Form",  
+        "replyTo": email,
+        "to": toEmail,
+        "subject": `New contact from ${name}`,
+        "body": `
+          <h1>New Contact Message</h1>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Message:</strong></p>
+          <p>${message}</p>
+        `
+      })
+    })
+    
+    if (!response.ok) {
+      throw new Error('Failed to send email')
+    }
+    
+    res.json({
+      message: "Message sent successfully"
+    })
+  } catch (error) {
+    console.error("Error sending contact email:", error)
+    res.status(500).json({ message: "Failed to send message", error: error.message })
   }
 })
 

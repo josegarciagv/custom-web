@@ -411,11 +411,11 @@
             z-index: 2;
         }
         
-        .links-list {
+        .links-list, .services-list {
             margin-top: 1.5rem;
         }
         
-        .link-item {
+        .link-item, .service-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -425,12 +425,12 @@
             margin-bottom: 1rem;
         }
         
-        .link-info {
+        .link-info, .service-info {
             display: flex;
             align-items: center;
         }
         
-        .link-icon {
+        .link-icon, .service-icon {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -442,22 +442,26 @@
             margin-right: 1rem;
         }
         
-        .link-text {
+        .link-content, .service-content {
+            flex: 1;
+        }
+        
+        .link-text, .service-title {
             font-weight: 500;
         }
         
-        .link-url {
+        .link-url, .service-description {
             color: #666;
             font-size: 0.875rem;
             margin-top: 0.25rem;
         }
         
-        .link-actions {
+        .link-actions, .service-actions {
             display: flex;
             gap: 0.5rem;
         }
         
-        .add-link-form {
+        .add-link-form, .add-service-form {
             margin-top: 1.5rem;
             padding-top: 1.5rem;
             border-top: 1px solid var(--border-color);
@@ -606,15 +610,21 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
-                    <a href="#button" class="sidebar-nav-link" data-section="button-section">
-                        <i class="fas fa-link sidebar-nav-icon"></i>
-                        <span class="sidebar-nav-text">Button</span>
+                    <a href="#services" class="sidebar-nav-link" data-section="services-section">
+                        <i class="fas fa-briefcase sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Services</span>
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
                     <a href="#links" class="sidebar-nav-link" data-section="links-section">
                         <i class="fas fa-share-alt sidebar-nav-icon"></i>
                         <span class="sidebar-nav-text">Links</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#contact" class="sidebar-nav-link" data-section="contact-section">
+                        <i class="fas fa-envelope sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Contact</span>
                     </a>
                 </li>
             </ul>
@@ -667,6 +677,20 @@
                         <div class="form-group">
                             <label for="description" class="form-label">Description</label>
                             <textarea id="description" class="form-textarea" placeholder="Enter your description"></textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="logo-image" class="form-label">Logo Image</label>
+                            <div class="image-upload-container">
+                                <img src="/images/logo.png" alt="Logo" class="image-preview" id="logo-preview">
+                                <div class="file-input-wrapper">
+                                    <button type="button" class="button secondary-button">
+                                        <i class="fas fa-upload button-icon"></i>
+                                        Choose Logo
+                                    </button>
+                                    <input type="file" id="logo-image" class="file-input" accept="image/*">
+                                </div>
+                            </div>
                         </div>
                         
                         <button type="submit" class="button primary-button" id="save-profile-button">
@@ -736,43 +760,53 @@
                 </div>
             </section>
             
-            <!-- Button Section -->
-            <section id="button-section" class="section hidden">
+            <!-- Services Section -->
+            <section id="services-section" class="section hidden">
                 <div class="card">
                     <div class="card-header">
-                        <h2 class="card-title">Button Settings</h2>
+                        <h2 class="card-title">Services</h2>
                     </div>
                     
-                    <form id="button-form">
-                        <div class="form-group">
-                            <label for="button-logo" class="form-label">Button Logo</label>
-                            <div class="image-upload-container">
-                                <img src="/images/logo.png" alt="Logo" class="image-preview" id="button-logo-preview">
-                                <div class="file-input-wrapper">
-                                    <button type="button" class="button secondary-button">
-                                        <i class="fas fa-upload button-icon"></i>
-                                        Choose Logo
-                                    </button>
-                                    <input type="file" id="button-logo" class="file-input" accept="image/*">
-                                </div>
+                    <div class="services-list" id="services-list">
+                        <!-- Services will be loaded dynamically -->
+                    </div>
+                    
+                    <div class="add-service-form">
+                        <h3 class="form-title">Add New Service</h3>
+                        <form id="add-service-form">
+                            <div class="form-group">
+                                <label for="service-title" class="form-label">Title</label>
+                                <input type="text" id="service-title" class="form-input" placeholder="Enter service title">
                             </div>
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="button-text" class="form-label">Button Text</label>
-                            <input type="text" id="button-text-input" class="form-input" placeholder="Enter button text">
-                        </div>
-                        
-                        <div class="form-group">
-                            <label for="button-url" class="form-label">Button URL</label>
-                            <input type="url" id="button-url" class="form-input" placeholder="Enter button URL">
-                        </div>
-                        
-                        <button type="submit" class="button primary-button" id="save-button-settings">
-                            <span id="button-loading" class="loading hidden"></span>
-                            <span id="button-button-text">Save Changes</span>
-                        </button>
-                    </form>
+                            
+                            <div class="form-group">
+                                <label for="service-description" class="form-label">Description</label>
+                                <textarea id="service-description" class="form-textarea" placeholder="Enter service description"></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="service-icon" class="form-label">Icon</label>
+                                <select id="service-icon" class="form-select">
+                                    <option value="code">Code</option>
+                                    <option value="paint-brush">Paint Brush</option>
+                                    <option value="mobile">Mobile</option>
+                                    <option value="laptop">Laptop</option>
+                                    <option value="chart-line">Chart</option>
+                                    <option value="bullhorn">Marketing</option>
+                                    <option value="camera">Camera</option>
+                                    <option value="video">Video</option>
+                                    <option value="pencil-alt">Design</option>
+                                    <option value="search">SEO</option>
+                                    <option value="star">Star</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="button primary-button" id="add-service-button">
+                                <span id="add-service-loading" class="loading hidden"></span>
+                                <span id="add-service-button-text">Add Service</span>
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </section>
             
@@ -826,6 +860,28 @@
                     </div>
                 </div>
             </section>
+            
+            <!-- Contact Section -->
+            <section id="contact-section" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Contact Settings</h2>
+                    </div>
+                    
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="contact-email" class="form-label">Contact Email</label>
+                            <input type="email" id="contact-email" class="form-input" placeholder="Enter contact email">
+                            <small class="form-text">Messages from the contact form will be sent to this email address.</small>
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="save-contact-button">
+                            <span id="contact-loading" class="loading hidden"></span>
+                            <span id="contact-button-text">Save Changes</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
         </main>
     </div>
     
@@ -853,6 +909,8 @@
         const profileImageInput = document.getElementById('profile-image');
         const profileImagePreview = document.getElementById('profile-image-upload-preview');
         const profileImageDisplay = document.getElementById('profile-image-preview');
+        const logoImageInput = document.getElementById('logo-image');
+        const logoPreview = document.getElementById('logo-preview');
         const sidebarLogo = document.getElementById('sidebar-logo');
         const nameInput = document.getElementById('name');
         const descriptionInput = document.getElementById('description');
@@ -879,15 +937,15 @@
         const addGalleryImage = document.getElementById('add-gallery-image');
         const galleryImageInput = document.getElementById('gallery-image-input');
         
-        // Button Elements
-        const buttonForm = document.getElementById('button-form');
-        const buttonLogoInput = document.getElementById('button-logo');
-        const buttonLogoPreview = document.getElementById('button-logo-preview');
-        const buttonTextInput = document.getElementById('button-text-input');
-        const buttonUrlInput = document.getElementById('button-url');
-        const saveButtonSettings = document.getElementById('save-button-settings');
-        const buttonLoading = document.getElementById('button-loading');
-        const buttonButtonText = document.getElementById('button-button-text');
+        // Services Elements
+        const servicesList = document.getElementById('services-list');
+        const addServiceForm = document.getElementById('add-service-form');
+        const serviceTitleInput = document.getElementById('service-title');
+        const serviceDescriptionInput = document.getElementById('service-description');
+        const serviceIconInput = document.getElementById('service-icon');
+        const addServiceButton = document.getElementById('add-service-button');
+        const addServiceLoading = document.getElementById('add-service-loading');
+        const addServiceButtonText = document.getElementById('add-service-button-text');
         
         // Links Elements
         const linksList = document.getElementById('links-list');
@@ -899,18 +957,25 @@
         const addLinkLoading = document.getElementById('add-link-loading');
         const addLinkButtonText = document.getElementById('add-link-button-text');
         
+        // Contact Elements
+        const contactForm = document.getElementById('contact-form');
+        const contactEmailInput = document.getElementById('contact-email');
+        const saveContactButton = document.getElementById('save-contact-button');
+        const contactLoading = document.getElementById('contact-loading');
+        const contactButtonText = document.getElementById('contact-button-text');
+        
         // State
         let profileData = {
             name: '',
             description: '',
             profileImage: '',
             logoImage: '',
-            buttonText: '',
-            buttonUrl: '',
             backgroundColor: '#ffffff',
             textColor: '#333333',
             accentColor: '#4f46e5',
+            contactEmail: '',
             links: [],
+            services: [],
             galleryImages: []
         };
         
@@ -975,6 +1040,7 @@
             descriptionInput.value = data.description || '';
             profileImagePreview.src = data.profileImage || '/images/profile.jpg';
             profileImageDisplay.src = data.profileImage || '/images/profile.jpg';
+            logoPreview.src = data.logoImage || '/images/logo.png';
             sidebarLogo.src = data.profileImage || '/images/profile.jpg';
             profileNamePreview.textContent = data.name || 'John Doe';
             profileDescriptionPreview.textContent = data.description || 'Welcome to my personal profile!';
@@ -987,16 +1053,107 @@
             textColorPreview.style.backgroundColor = data.textColor || '#333333';
             accentColorPreview.style.backgroundColor = data.accentColor || '#4f46e5';
             
-            // Button section
-            buttonLogoPreview.src = data.logoImage || '/images/logo.png';
-            buttonTextInput.value = data.buttonText || '';
-            buttonUrlInput.value = data.buttonUrl || '';
+            // Contact section
+            contactEmailInput.value = data.contactEmail || '';
             
             // Links section
             updateLinksList(data.links || []);
             
+            // Services section
+            updateServicesList(data.services || []);
+            
             // Gallery section
             updateGalleryGrid(data.galleryImages || []);
+        }
+        
+        // Update services list
+        function updateServicesList(services) {
+            servicesList.innerHTML = '';
+            
+            if (!services || services.length === 0) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.textContent = 'No services added yet. Add your first service below.';
+                emptyMessage.style.textAlign = 'center';
+                emptyMessage.style.color = '#666';
+                emptyMessage.style.padding = '2rem 0';
+                servicesList.appendChild(emptyMessage);
+                return;
+            }
+            
+            services.forEach((service, index) => {
+                const serviceItem = document.createElement('div');
+                serviceItem.className = 'service-item';
+                
+                const serviceInfo = document.createElement('div');
+                serviceInfo.className = 'service-info';
+                
+                const serviceIcon = document.createElement('div');
+                serviceIcon.className = 'service-icon';
+                serviceIcon.innerHTML = `<i class="fas fa-${service.icon || 'star'}"></i>`;
+                
+                const serviceContent = document.createElement('div');
+                serviceContent.className = 'service-content';
+                
+                const serviceTitle = document.createElement('div');
+                serviceTitle.className = 'service-title';
+                serviceTitle.textContent = service.title;
+                
+                const serviceDescription = document.createElement('div');
+                serviceDescription.className = 'service-description';
+                serviceDescription.textContent = service.description;
+                
+                serviceContent.appendChild(serviceTitle);
+                serviceContent.appendChild(serviceDescription);
+                
+                serviceInfo.appendChild(serviceIcon);
+                serviceInfo.appendChild(serviceContent);
+                
+                const serviceActions = document.createElement('div');
+                serviceActions.className = 'service-actions';
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'button danger-button';
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.addEventListener('click', () => deleteService(index));
+                
+                serviceActions.appendChild(deleteButton);
+                
+                serviceItem.appendChild(serviceInfo);
+                serviceItem.appendChild(serviceActions);
+                
+                servicesList.appendChild(serviceItem);
+            });
+        }
+        
+        // Delete service
+        async function deleteService(index) {
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch(`/api/services/${index}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to delete service');
+                }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = data.profile;
+                
+                // Update UI
+                updateServicesList(profileData.services);
+                
+                showNotification('success', 'Success', 'Service deleted successfully');
+            } catch (error) {
+                console.error('Error deleting service:', error);
+                showNotification('error', 'Error', 'Failed to delete service: ' + error.message);
+            }
         }
         
         // Update links list
@@ -1175,6 +1332,18 @@
             }
         });
         
+        // Handle logo image change
+        logoImageInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    logoPreview.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
         // Handle color input changes
         backgroundColorInput.addEventListener('input', (e) => {
             backgroundColorPreview.style.backgroundColor = e.target.value;
@@ -1186,18 +1355,6 @@
         
         accentColorInput.addEventListener('input', (e) => {
             accentColorPreview.style.backgroundColor = e.target.value;
-        });
-        
-        // Handle button logo change
-        buttonLogoInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    buttonLogoPreview.src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
         });
         
         // Handle gallery image upload
@@ -1282,8 +1439,31 @@
                 
                 const data = await response.json();
                 
-                // Update local state
-                profileData = data.profile;
+                // Update logo if provided
+                if (logoImageInput.files[0]) {
+                    const logoFormData = new FormData();
+                    logoFormData.append('logoImage', logoImageInput.files[0]);
+                    
+                    const logoResponse = await fetch('/api/logo', {
+                        method: 'PUT',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: logoFormData
+                    });
+                    
+                    if (!logoResponse.ok) {
+                        throw new Error('Failed to update logo');
+                    }
+                    
+                    const logoData = await logoResponse.json();
+                    
+                    // Update profile data with logo update
+                    profileData = logoData.profile;
+                } else {
+                    // Update local state
+                    profileData = data.profile;
+                }
                 
                 // Update preview
                 profileNamePreview.textContent = nameInput.value;
@@ -1347,37 +1527,31 @@
             }
         });
         
-        // Handle button form submission
-        buttonForm.addEventListener('submit', async (e) => {
+        // Handle contact form submission
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             
             // Show loading state
-            saveButtonSettings.disabled = true;
-            buttonLoading.classList.remove('hidden');
-            buttonButtonText.textContent = 'Saving...';
+            saveContactButton.disabled = true;
+            contactLoading.classList.remove('hidden');
+            contactButtonText.textContent = 'Saving...';
             
             try {
                 const token = checkAuthStatus();
                 
-                // Create FormData
-                const formData = new FormData();
-                formData.append('buttonText', buttonTextInput.value);
-                formData.append('buttonUrl', buttonUrlInput.value);
-                
-                if (buttonLogoInput.files[0]) {
-                    formData.append('logoImage', buttonLogoInput.files[0]);
-                }
-                
-                const response = await fetch('/api/button', {
+                const response = await fetch('/api/profile', {
                     method: 'PUT',
                     headers: {
-                        'Authorization': `Bearer ${token}`
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
                     },
-                    body: formData
+                    body: JSON.stringify({
+                        contactEmail: contactEmailInput.value
+                    })
                 });
                 
                 if (!response.ok) {
-                    throw new Error('Failed to update button settings');
+                    throw new Error('Failed to update contact settings');
                 }
                 
                 const data = await response.json();
@@ -1385,15 +1559,69 @@
                 // Update local state
                 profileData = data.profile;
                 
-                showNotification('success', 'Success', 'Button settings updated successfully');
+                showNotification('success', 'Success', 'Contact settings updated successfully');
             } catch (error) {
-                console.error('Error updating button settings:', error);
-                showNotification('error', 'Error', 'Failed to update button settings');
+                console.error('Error updating contact settings:', error);
+                showNotification('error', 'Error', 'Failed to update contact settings');
             } finally {
                 // Reset button state
-                saveButtonSettings.disabled = false;
-                buttonLoading.classList.add('hidden');
-                buttonButtonText.textContent = 'Save Changes';
+                saveContactButton.disabled = false;
+                contactLoading.classList.add('hidden');
+                contactButtonText.textContent = 'Save Changes';
+            }
+        });
+        
+        // Handle add service form submission
+        addServiceForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            addServiceButton.disabled = true;
+            addServiceLoading.classList.remove('hidden');
+            addServiceButtonText.textContent = 'Adding...';
+            
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch('/api/services', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        title: serviceTitleInput.value,
+                        description: serviceDescriptionInput.value,
+                        icon: serviceIconInput.value
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to add service');
+                }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = data.profile;
+                
+                // Update UI
+                updateServicesList(profileData.services);
+                
+                // Reset form
+                serviceTitleInput.value = '';
+                serviceDescriptionInput.value = '';
+                serviceIconInput.value = 'code';
+                
+                showNotification('success', 'Success', 'Service added successfully');
+            } catch (error) {
+                console.error('Error adding service:', error);
+                showNotification('error', 'Error', 'Failed to add service');
+            } finally {
+                // Reset button state
+                addServiceButton.disabled = false;
+                addServiceLoading.classList.add('hidden');
+                addServiceButtonText.textContent = 'Add Service';
             }
         });
         

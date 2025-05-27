@@ -13,6 +13,8 @@
             --bg-color: #fff;
             --secondary-bg: #f9fafb;
             --border-color: #e5e7eb;
+            --success-color: #10b981;
+            --error-color: #ef4444;
         }
         
         * {
@@ -63,11 +65,56 @@
             color: #666;
         }
         
-        .gallery-title {
+        .section-title {
             font-size: 1.8rem;
             font-weight: 600;
             margin-bottom: 1.5rem;
             text-align: center;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .service-card {
+            background-color: var(--secondary-bg);
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .service-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        }
+        
+        .service-description {
+            color: #666;
+            font-size: 0.95rem;
         }
         
         .gallery {
@@ -95,31 +142,6 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-        }
-        
-        .cta-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            margin: 0 auto;
-            max-width: 250px;
-            transition: background-color 0.3s ease;
-        }
-        
-        .cta-button:hover {
-            background-color: #4338ca;
-        }
-        
-        .button-logo {
-            width: 24px;
-            height: 24px;
-            margin-right: 0.75rem;
         }
         
         .links-container {
@@ -150,6 +172,103 @@
         
         .social-link i {
             margin-right: 0.5rem;
+        }
+        
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            background-color: var(--secondary-bg);
+            padding: 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .submit-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        .submit-button:hover {
+            background-color: #4338ca;
+        }
+        
+        .submit-button:disabled {
+            background-color: #9ca3af;
+            cursor: not-allowed;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 0.5rem;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .alert {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+        
+        .alert-success {
+            background-color: #d1fae5;
+            color: #065f46;
+            border: 1px solid #34d399;
+        }
+        
+        .alert-error {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #f87171;
         }
         
         .modal {
@@ -198,6 +317,7 @@
             border-radius: 0.5rem;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
+            z-index: 100;
         }
         
         .admin-link:hover {
@@ -215,6 +335,10 @@
             font-size: 0.9rem;
         }
         
+        .hidden {
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 1rem;
@@ -222,6 +346,11 @@
             
             .profile-name {
                 font-size: 2rem;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
             
             .gallery {
@@ -240,7 +369,7 @@
 </head>
 <body>
     <div class="container">
-        <a href="/custom-web/login" class="admin-link">Admin</a>
+        <a href="/custom-web/login" class="admin-link" target="_blank">Admin</a>
         
         <header>
             <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
@@ -248,19 +377,53 @@
             <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
         </header>
         
-        <a href="#" class="cta-button" id="cta-button">
-            <img src="/images/logo.png" alt="Logo" class="button-logo" id="button-logo">
-            <span id="button-text">Visit My Website</span>
-        </a>
-        
         <div class="links-container" id="links-container">
             <!-- Social links will be loaded dynamically -->
         </div>
         
-        <h2 class="gallery-title">My Gallery</h2>
-        <div class="gallery" id="gallery">
-            <!-- Gallery images will be loaded dynamically -->
-        </div>
+        <section id="services-section">
+            <h2 class="section-title">My Services</h2>
+            <div class="services-grid" id="services-grid">
+                <!-- Services will be loaded dynamically -->
+            </div>
+        </section>
+        
+        <section id="gallery-section">
+            <h2 class="section-title">My Gallery</h2>
+            <div class="gallery" id="gallery">
+                <!-- Gallery images will be loaded dynamically -->
+            </div>
+        </section>
+        
+        <section id="contact-section">
+            <h2 class="section-title">Contact Me</h2>
+            <div class="contact-form">
+                <div class="alert alert-success" id="success-alert">
+                    Your message has been sent successfully! I'll get back to you soon.
+                </div>
+                <div class="alert alert-error" id="error-alert">
+                    There was an error sending your message. Please try again.
+                </div>
+                <form id="contact-form">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Name</label>
+                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-button" id="submit-button">
+                        <span id="loading" class="loading hidden"></span>
+                        <span id="button-text">Send Message</span>
+                    </button>
+                </form>
+            </div>
+        </section>
     </div>
     
     <div class="modal" id="image-modal">
@@ -297,9 +460,6 @@
                 document.getElementById('profile-name').textContent = data.name;
                 document.getElementById('profile-description').textContent = data.description;
                 document.getElementById('profile-image').src = data.profileImage;
-                document.getElementById('button-logo').src = data.logoImage;
-                document.getElementById('button-text').textContent = data.buttonText;
-                document.getElementById('cta-button').href = data.buttonUrl;
                 
                 // Set favicon
                 const favicon = document.createElement('link');
@@ -322,33 +482,83 @@
                 document.title = data.name + ' - Profile';
                 
                 // Load social links
-                const linksContainer = document.getElementById('links-container');
-                linksContainer.innerHTML = '';
+                loadSocialLinks(data.links || []);
                 
-                if (data.links && data.links.length > 0) {
-                    data.links.forEach(link => {
-                        const socialLink = document.createElement('a');
-                        socialLink.href = link.url;
-                        socialLink.className = 'social-link';
-                        socialLink.target = '_blank';
-                        socialLink.rel = 'noopener noreferrer';
-                        
-                        const icon = document.createElement('i');
-                        icon.className = `fab fa-${link.icon}`;
-                        
-                        const text = document.createTextNode(link.text);
-                        
-                        socialLink.appendChild(icon);
-                        socialLink.appendChild(text);
-                        linksContainer.appendChild(socialLink);
-                    });
-                }
+                // Load services
+                loadServices(data.services || []);
                 
                 // Load gallery images
-                const gallery = document.getElementById('gallery');
-                gallery.innerHTML = '';
-                
-                data.galleryImages.forEach(image => {
+                loadGalleryImages(data.galleryImages || []);
+            } catch (error) {
+                console.error('Error fetching profile data:', error);
+            }
+        }
+        
+        // Load social links
+        function loadSocialLinks(links) {
+            const linksContainer = document.getElementById('links-container');
+            linksContainer.innerHTML = '';
+            
+            if (links.length > 0) {
+                links.forEach(link => {
+                    const socialLink = document.createElement('a');
+                    socialLink.href = link.url;
+                    socialLink.className = 'social-link';
+                    socialLink.target = '_blank';
+                    socialLink.rel = 'noopener noreferrer';
+                    
+                    const icon = document.createElement('i');
+                    icon.className = `fab fa-${link.icon}`;
+                    
+                    const text = document.createTextNode(link.text);
+                    
+                    socialLink.appendChild(icon);
+                    socialLink.appendChild(text);
+                    linksContainer.appendChild(socialLink);
+                });
+            }
+        }
+        
+        // Load services
+        function loadServices(services) {
+            const servicesGrid = document.getElementById('services-grid');
+            servicesGrid.innerHTML = '';
+            
+            if (services.length > 0) {
+                services.forEach(service => {
+                    const serviceCard = document.createElement('div');
+                    serviceCard.className = 'service-card';
+                    
+                    const serviceIcon = document.createElement('div');
+                    serviceIcon.className = 'service-icon';
+                    serviceIcon.innerHTML = `<i class="fas fa-${service.icon}"></i>`;
+                    
+                    const serviceTitle = document.createElement('h3');
+                    serviceTitle.className = 'service-title';
+                    serviceTitle.textContent = service.title;
+                    
+                    const serviceDescription = document.createElement('p');
+                    serviceDescription.className = 'service-description';
+                    serviceDescription.textContent = service.description;
+                    
+                    serviceCard.appendChild(serviceIcon);
+                    serviceCard.appendChild(serviceTitle);
+                    serviceCard.appendChild(serviceDescription);
+                    
+                    servicesGrid.appendChild(serviceCard);
+                });
+            } else {
+                document.getElementById('services-section').classList.add('hidden');
+            }
+        }
+        
+        // Load gallery images
+        function loadGalleryImages(images) {
+            const gallery = document.getElementById('gallery');
+            gallery.innerHTML = '';
+            
+            if (images.length > 0) {
+                images.forEach(image => {
                     const galleryItem = document.createElement('div');
                     galleryItem.className = 'gallery-item';
                     galleryItem.addEventListener('click', () => openModal(image));
@@ -361,10 +571,63 @@
                     galleryItem.appendChild(img);
                     gallery.appendChild(galleryItem);
                 });
-            } catch (error) {
-                console.error('Error fetching profile data:', error);
+            } else {
+                document.getElementById('gallery-section').classList.add('hidden');
             }
         }
+        
+        // Contact form submission
+        const contactForm = document.getElementById('contact-form');
+        const submitButton = document.getElementById('submit-button');
+        const loadingSpinner = document.getElementById('loading');
+        const buttonText = document.getElementById('button-text');
+        const successAlert = document.getElementById('success-alert');
+        const errorAlert = document.getElementById('error-alert');
+        
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Reset alerts
+            successAlert.style.display = 'none';
+            errorAlert.style.display = 'none';
+            
+            // Show loading state
+            submitButton.disabled = true;
+            loadingSpinner.classList.remove('hidden');
+            buttonText.textContent = 'Sending...';
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            
+            try {
+                const response = await fetch('/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ name, email, message })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to send message');
+                }
+                
+                // Show success message
+                successAlert.style.display = 'block';
+                
+                // Reset form
+                contactForm.reset();
+            } catch (error) {
+                console.error('Error sending message:', error);
+                errorAlert.style.display = 'block';
+            } finally {
+                // Reset button state
+                submitButton.disabled = false;
+                loadingSpinner.classList.add('hidden');
+                buttonText.textContent = 'Send Message';
+            }
+        });
         
         // Modal functionality
         const modal = document.getElementById('image-modal');
