@@ -157,9 +157,7 @@ async function initializeDefaultProfile() {
           { text: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" }
         ],
         galleryImages: [
-          "/images/gallery-1.jpg",
-          "/images/gallery-2.jpg",
-          "/images/gallery-3.jpg"
+        
         ]
       })
       
