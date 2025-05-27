@@ -109,7 +109,7 @@ const faqSchema = new mongoose.Schema({
   answer: { type: String, required: true }
 })
 
-// Profile Schema - Updated with new fields
+// Profile Schema - Updated with new fields for FAQ and Contact backgrounds
 const profileSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -120,6 +120,8 @@ const profileSchema = new mongoose.Schema({
   accentColor: { type: String, default: "#4f46e5" },
   galleryBgColor: { type: String, default: "#f9fafb" },
   servicesBgColor: { type: String, default: "#ffffff" },
+  faqBgColor: { type: String, default: "#ffffff" }, // New field for FAQ background
+  contactBgColor: { type: String, default: "#f9fafb" }, // New field for Contact background
   servicesSectionTitle: { type: String, default: "My Services" },
   gallerySectionTitle: { type: String, default: "My Gallery" },
   infoSectionTitle: { type: String, default: "Contact Information" },
@@ -182,6 +184,8 @@ async function initializeDefaultProfile() {
         accentColor: "#4f46e5",
         galleryBgColor: "#f9fafb",
         servicesBgColor: "#ffffff",
+        faqBgColor: "#ffffff", // Default FAQ background
+        contactBgColor: "#f9fafb", // Default Contact background
         servicesSectionTitle: "My Services",
         gallerySectionTitle: "My Gallery",
         infoSectionTitle: "Contact Information",
@@ -340,6 +344,8 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
       contactEmail,
       galleryBgColor,
       servicesBgColor,
+      faqBgColor, // New field
+      contactBgColor, // New field
       showContactForm,
       servicesSectionTitle,
       gallerySectionTitle,
@@ -371,6 +377,8 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (accentColor) profile.accentColor = accentColor
     if (galleryBgColor) profile.galleryBgColor = galleryBgColor
     if (servicesBgColor) profile.servicesBgColor = servicesBgColor
+    if (faqBgColor) profile.faqBgColor = faqBgColor // New field
+    if (contactBgColor) profile.contactBgColor = contactBgColor // New field
     
     // Update contact settings
     if (contactEmail) profile.contactEmail = contactEmail

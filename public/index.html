@@ -17,6 +17,8 @@
         --error-color: #ef4444;
         --gallery-bg: #f9fafb;
         --services-bg: #ffffff;
+        --faq-bg: #ffffff;
+        --contact-bg: #f9fafb;
     }
     
     * {
@@ -191,6 +193,7 @@
     .contact-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
+        background-color: var(--contact-bg);
     }
     
     .contact-form {
@@ -373,6 +376,7 @@
     .faq-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
+        background-color: var(--faq-bg);
     }
     
     .faq-container {
@@ -573,6 +577,8 @@
             document.documentElement.style.setProperty('--primary-color', data.accentColor || '#4f46e5');
             document.documentElement.style.setProperty('--gallery-bg', data.galleryBgColor || '#f9fafb');
             document.documentElement.style.setProperty('--services-bg', data.servicesBgColor || '#ffffff');
+            document.documentElement.style.setProperty('--faq-bg', data.faqBgColor || '#ffffff');
+            document.documentElement.style.setProperty('--contact-bg', data.contactBgColor || '#f9fafb');
             
             // Update profile information
             document.getElementById('profile-name').textContent = data.name;
