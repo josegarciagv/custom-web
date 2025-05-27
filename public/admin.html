@@ -171,7 +171,7 @@
             color: var(--text-color);
         }
         
-        .form-input, .form-textarea {
+        .form-input, .form-textarea, .form-select {
             width: 100%;
             padding: 0.75rem;
             border: 1px solid var(--border-color);
@@ -185,10 +185,23 @@
             resize: vertical;
         }
         
-        .form-input:focus, .form-textarea:focus {
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+        
+        .color-input-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.5rem;
+            margin-right: 1rem;
+            border: 1px solid var(--border-color);
         }
         
         .button {
@@ -382,6 +395,58 @@
             color: #666;
         }
         
+        .links-list {
+            margin-top: 1.5rem;
+        }
+        
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            background-color: var(--secondary-bg);
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .link-info {
+            display: flex;
+            align-items: center;
+        }
+        
+        .link-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+        }
+        
+        .link-text {
+            font-weight: 500;
+        }
+        
+        .link-url {
+            color: #666;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .link-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .add-link-form {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-color);
+        }
+        
         .notification {
             position: fixed;
             top: 1rem;
@@ -513,6 +578,12 @@
                     </a>
                 </li>
                 <li class="sidebar-nav-item">
+                    <a href="#appearance" class="sidebar-nav-link" data-section="appearance-section">
+                        <i class="fas fa-palette sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Appearance</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
                     <a href="#gallery" class="sidebar-nav-link" data-section="gallery-section">
                         <i class="fas fa-images sidebar-nav-icon"></i>
                         <span class="sidebar-nav-text">Gallery</span>
@@ -522,6 +593,12 @@
                     <a href="#button" class="sidebar-nav-link" data-section="button-section">
                         <i class="fas fa-link sidebar-nav-icon"></i>
                         <span class="sidebar-nav-text">Button</span>
+                    </a>
+                </li>
+                <li class="sidebar-nav-item">
+                    <a href="#links" class="sidebar-nav-link" data-section="links-section">
+                        <i class="fas fa-share-alt sidebar-nav-icon"></i>
+                        <span class="sidebar-nav-text">Links</span>
                     </a>
                 </li>
             </ul>
@@ -579,6 +656,46 @@
                         <button type="submit" class="button primary-button" id="save-profile-button">
                             <span id="profile-loading" class="loading hidden"></span>
                             <span id="profile-button-text">Save Changes</span>
+                        </button>
+                    </form>
+                </div>
+            </section>
+            
+            <!-- Appearance Section -->
+            <section id="appearance-section" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Appearance Settings</h2>
+                    </div>
+                    
+                    <form id="appearance-form">
+                        <div class="form-group">
+                            <label for="background-color" class="form-label">Background Color</label>
+                            <div class="color-input-container">
+                                <div class="color-preview" id="background-color-preview"></div>
+                                <input type="color" id="background-color" class="form-input" value="#ffffff">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="text-color" class="form-label">Text Color</label>
+                            <div class="color-input-container">
+                                <div class="color-preview" id="text-color-preview"></div>
+                                <input type="color" id="text-color" class="form-input" value="#333333">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="accent-color" class="form-label">Accent Color</label>
+                            <div class="color-input-container">
+                                <div class="color-preview" id="accent-color-preview"></div>
+                                <input type="color" id="accent-color" class="form-input" value="#4f46e5">
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="button primary-button" id="save-appearance-button">
+                            <span id="appearance-loading" class="loading hidden"></span>
+                            <span id="appearance-button-text">Save Changes</span>
                         </button>
                     </form>
                 </div>
@@ -642,6 +759,57 @@
                     </form>
                 </div>
             </section>
+            
+            <!-- Links Section -->
+            <section id="links-section" class="section hidden">
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">Social Links</h2>
+                    </div>
+                    
+                    <div class="links-list" id="links-list">
+                        <!-- Links will be loaded dynamically -->
+                    </div>
+                    
+                    <div class="add-link-form">
+                        <h3 class="form-title">Add New Link</h3>
+                        <form id="add-link-form">
+                            <div class="form-group">
+                                <label for="link-text" class="form-label">Link Text</label>
+                                <input type="text" id="link-text" class="form-input" placeholder="Enter link text">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="link-url" class="form-label">Link URL</label>
+                                <input type="url" id="link-url" class="form-input" placeholder="Enter link URL">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="link-icon" class="form-label">Icon</label>
+                                <select id="link-icon" class="form-select">
+                                    <option value="link">Link</option>
+                                    <option value="github">GitHub</option>
+                                    <option value="linkedin">LinkedIn</option>
+                                    <option value="twitter">Twitter</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="facebook">Facebook</option>
+                                    <option value="youtube">YouTube</option>
+                                    <option value="twitch">Twitch</option>
+                                    <option value="discord">Discord</option>
+                                    <option value="telegram">Telegram</option>
+                                    <option value="whatsapp">WhatsApp</option>
+                                    <option value="envelope">Email</option>
+                                </select>
+                            </div>
+                            
+                            <button type="submit" class="button primary-button" id="add-link-button">
+                                <span id="add-link-loading" class="loading hidden"></span>
+                                <span id="add-link-button-text">Add Link</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
     
@@ -678,6 +846,18 @@
         const profileLoading = document.getElementById('profile-loading');
         const profileButtonText = document.getElementById('profile-button-text');
         
+        // Appearance Elements
+        const appearanceForm = document.getElementById('appearance-form');
+        const backgroundColorInput = document.getElementById('background-color');
+        const textColorInput = document.getElementById('text-color');
+        const accentColorInput = document.getElementById('accent-color');
+        const backgroundColorPreview = document.getElementById('background-color-preview');
+        const textColorPreview = document.getElementById('text-color-preview');
+        const accentColorPreview = document.getElementById('accent-color-preview');
+        const saveAppearanceButton = document.getElementById('save-appearance-button');
+        const appearanceLoading = document.getElementById('appearance-loading');
+        const appearanceButtonText = document.getElementById('appearance-button-text');
+        
         // Gallery Elements
         const galleryGrid = document.getElementById('gallery-grid');
         const addGalleryImage = document.getElementById('add-gallery-image');
@@ -693,6 +873,16 @@
         const buttonLoading = document.getElementById('button-loading');
         const buttonButtonText = document.getElementById('button-button-text');
         
+        // Links Elements
+        const linksList = document.getElementById('links-list');
+        const addLinkForm = document.getElementById('add-link-form');
+        const linkTextInput = document.getElementById('link-text');
+        const linkUrlInput = document.getElementById('link-url');
+        const linkIconInput = document.getElementById('link-icon');
+        const addLinkButton = document.getElementById('add-link-button');
+        const addLinkLoading = document.getElementById('add-link-loading');
+        const addLinkButtonText = document.getElementById('add-link-button-text');
+        
         // State
         let profileData = {
             name: '',
@@ -701,6 +891,10 @@
             logoImage: '',
             buttonText: '',
             buttonUrl: '',
+            backgroundColor: '#ffffff',
+            textColor: '#333333',
+            accentColor: '#4f46e5',
+            links: [],
             galleryImages: []
         };
         
@@ -769,13 +963,114 @@
             profileNamePreview.textContent = data.name;
             profileDescriptionPreview.textContent = data.description;
             
+            // Appearance section
+            backgroundColorInput.value = data.backgroundColor || '#ffffff';
+            textColorInput.value = data.textColor || '#333333';
+            accentColorInput.value = data.accentColor || '#4f46e5';
+            backgroundColorPreview.style.backgroundColor = data.backgroundColor || '#ffffff';
+            textColorPreview.style.backgroundColor = data.textColor || '#333333';
+            accentColorPreview.style.backgroundColor = data.accentColor || '#4f46e5';
+            
             // Button section
             buttonLogoPreview.src = data.logoImage;
             buttonTextInput.value = data.buttonText;
             buttonUrlInput.value = data.buttonUrl;
             
+            // Links section
+            updateLinksList(data.links || []);
+            
             // Gallery section
             updateGalleryGrid(data.galleryImages);
+        }
+        
+        // Update links list
+        function updateLinksList(links) {
+            linksList.innerHTML = '';
+            
+            if (links.length === 0) {
+                const emptyMessage = document.createElement('p');
+                emptyMessage.textContent = 'No links added yet. Add your first link below.';
+                emptyMessage.style.textAlign = 'center';
+                emptyMessage.style.color = '#666';
+                emptyMessage.style.padding = '2rem 0';
+                linksList.appendChild(emptyMessage);
+                return;
+            }
+            
+            links.forEach((link, index) => {
+                const linkItem = document.createElement('div');
+                linkItem.className = 'link-item';
+                
+                const linkInfo = document.createElement('div');
+                linkInfo.className = 'link-info';
+                
+                const linkIcon = document.createElement('div');
+                linkIcon.className = 'link-icon';
+                linkIcon.innerHTML = `<i class="fab fa-${link.icon || 'link'}"></i>`;
+                
+                const linkContent = document.createElement('div');
+                linkContent.className = 'link-content';
+                
+                const linkText = document.createElement('div');
+                linkText.className = 'link-text';
+                linkText.textContent = link.text;
+                
+                const linkUrl = document.createElement('div');
+                linkUrl.className = 'link-url';
+                linkUrl.textContent = link.url;
+                
+                linkContent.appendChild(linkText);
+                linkContent.appendChild(linkUrl);
+                
+                linkInfo.appendChild(linkIcon);
+                linkInfo.appendChild(linkContent);
+                
+                const linkActions = document.createElement('div');
+                linkActions.className = 'link-actions';
+                
+                const deleteButton = document.createElement('button');
+                deleteButton.className = 'button danger-button';
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.addEventListener('click', () => deleteLink(index));
+                
+                linkActions.appendChild(deleteButton);
+                
+                linkItem.appendChild(linkInfo);
+                linkItem.appendChild(linkActions);
+                
+                linksList.appendChild(linkItem);
+            });
+        }
+        
+        // Delete link
+        async function deleteLink(index) {
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch(`/api/links/${index}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to delete link');
+                }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = data.profile;
+                
+                // Update UI
+                updateLinksList(profileData.links);
+                
+                showNotification('success', 'Success', 'Link deleted successfully');
+            } catch (error) {
+                console.error('Error deleting link:', error);
+                showNotification('error', 'Error', 'Failed to delete link: ' + error.message);
+            }
         }
         
         // Update gallery grid
@@ -814,7 +1109,7 @@
             });
         }
         
-        // Delete gallery image - CORREGIDO
+        // Delete gallery image
         async function deleteGalleryImage(index) {
             try {
                 const token = checkAuthStatus();
@@ -833,7 +1128,7 @@
                 const data = await response.json();
                 
                 // Update local state
-                profileData.galleryImages.splice(index, 1);
+                profileData = data.profile;
                 
                 // Update UI
                 updateGalleryGrid(profileData.galleryImages);
@@ -857,6 +1152,19 @@
                 };
                 reader.readAsDataURL(file);
             }
+        });
+        
+        // Handle color input changes
+        backgroundColorInput.addEventListener('input', (e) => {
+            backgroundColorPreview.style.backgroundColor = e.target.value;
+        });
+        
+        textColorInput.addEventListener('input', (e) => {
+            textColorPreview.style.backgroundColor = e.target.value;
+        });
+        
+        accentColorInput.addEventListener('input', (e) => {
+            accentColorPreview.style.backgroundColor = e.target.value;
         });
         
         // Handle button logo change
@@ -899,7 +1207,7 @@
                     const data = await response.json();
                     
                     // Update local state
-                    profileData.galleryImages = [...profileData.galleryImages, ...data.images];
+                    profileData = data.profile;
                     
                     // Update UI
                     updateGalleryGrid(profileData.galleryImages);
@@ -951,7 +1259,7 @@
                 const data = await response.json();
                 
                 // Update local state
-                profileData = { ...profileData, ...data.profile };
+                profileData = data.profile;
                 
                 // Update preview
                 profileNamePreview.textContent = nameInput.value;
@@ -966,6 +1274,52 @@
                 saveProfileButton.disabled = false;
                 profileLoading.classList.add('hidden');
                 profileButtonText.textContent = 'Save Changes';
+            }
+        });
+        
+        // Handle appearance form submission
+        appearanceForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            saveAppearanceButton.disabled = true;
+            appearanceLoading.classList.remove('hidden');
+            appearanceButtonText.textContent = 'Saving...';
+            
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch('/api/profile', {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        backgroundColor: backgroundColorInput.value,
+                        textColor: textColorInput.value,
+                        accentColor: accentColorInput.value
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to update appearance');
+                }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = data.profile;
+                
+                showNotification('success', 'Success', 'Appearance updated successfully');
+            } catch (error) {
+                console.error('Error updating appearance:', error);
+                showNotification('error', 'Error', 'Failed to update appearance');
+            } finally {
+                // Reset button state
+                saveAppearanceButton.disabled = false;
+                appearanceLoading.classList.add('hidden');
+                appearanceButtonText.textContent = 'Save Changes';
             }
         });
         
@@ -1005,7 +1359,7 @@
                 const data = await response.json();
                 
                 // Update local state
-                profileData = { ...profileData, ...data.profile };
+                profileData = data.profile;
                 
                 showNotification('success', 'Success', 'Button settings updated successfully');
             } catch (error) {
@@ -1016,6 +1370,60 @@
                 saveButtonSettings.disabled = false;
                 buttonLoading.classList.add('hidden');
                 buttonButtonText.textContent = 'Save Changes';
+            }
+        });
+        
+        // Handle add link form submission
+        addLinkForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            addLinkButton.disabled = true;
+            addLinkLoading.classList.remove('hidden');
+            addLinkButtonText.textContent = 'Adding...';
+            
+            try {
+                const token = checkAuthStatus();
+                
+                const response = await fetch('/api/links', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        text: linkTextInput.value,
+                        url: linkUrlInput.value,
+                        icon: linkIconInput.value
+                    })
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Failed to add link');
+                }
+                
+                const data = await response.json();
+                
+                // Update local state
+                profileData = data.profile;
+                
+                // Update UI
+                updateLinksList(profileData.links);
+                
+                // Reset form
+                linkTextInput.value = '';
+                linkUrlInput.value = '';
+                linkIconInput.value = 'link';
+                
+                showNotification('success', 'Success', 'Link added successfully');
+            } catch (error) {
+                console.error('Error adding link:', error);
+                showNotification('error', 'Error', 'Failed to add link');
+            } finally {
+                // Reset button state
+                addLinkButton.disabled = false;
+                addLinkLoading.classList.add('hidden');
+                addLinkButtonText.textContent = 'Add Link';
             }
         });
         

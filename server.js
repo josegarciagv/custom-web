@@ -81,7 +81,14 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", userSchema)
 
-// Profile Schema
+// Link Schema
+const linkSchema = new mongoose.Schema({
+  text: { type: String, required: true },
+  url: { type: String, required: true },
+  icon: { type: String, default: "link" }
+})
+
+// Profile Schema - Updated with new fields
 const profileSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -90,6 +97,11 @@ const profileSchema = new mongoose.Schema({
   buttonText: { type: String, required: true },
   buttonUrl: { type: String, required: true },
   galleryImages: [{ type: String }],
+  // New fields
+  backgroundColor: { type: String, default: "#ffffff" },
+  textColor: { type: String, default: "#333333" },
+  accentColor: { type: String, default: "#4f46e5" },
+  links: [linkSchema],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })
@@ -137,6 +149,13 @@ async function initializeDefaultProfile() {
         logoImage: "/images/logo.png",
         buttonText: "Visit My Website",
         buttonUrl: "https://example.com",
+        backgroundColor: "#ffffff",
+        textColor: "#333333",
+        accentColor: "#4f46e5",
+        links: [
+          { text: "GitHub", url: "https://github.com", icon: "github" },
+          { text: "LinkedIn", url: "https://linkedin.com", icon: "linkedin" }
+        ],
         galleryImages: [
           "/images/gallery-1.jpg",
           "/images/gallery-2.jpg",
@@ -228,7 +247,7 @@ app.get("/api/profile", async (req, res) => {
 // Update profile (authenticated)
 app.put("/api/profile", authenticate, upload.single("profileImage"), async (req, res) => {
   try {
-    const { name, description } = req.body
+    const { name, description, backgroundColor, textColor, accentColor } = req.body
     
     const profile = await Profile.findOne()
     
@@ -239,6 +258,11 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     // Update fields
     profile.name = name || profile.name
     profile.description = description || profile.description
+    
+    // Update colors if provided
+    if (backgroundColor) profile.backgroundColor = backgroundColor
+    if (textColor) profile.textColor = textColor
+    if (accentColor) profile.accentColor = accentColor
     
     // Update profile image if provided
     if (req.file) {
@@ -309,6 +333,108 @@ app.put("/api/button", authenticate, upload.single("logoImage"), async (req, res
   }
 })
 
+// Add link (authenticated)
+app.post("/api/links", authenticate, async (req, res) => {
+  try {
+    const { text, url, icon } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Add new link
+    profile.links.push({
+      text,
+      url,
+      icon: icon || "link"
+    })
+    
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Link added successfully",
+      link: profile.links[profile.links.length - 1],
+      profile
+    })
+  } catch (error) {
+    console.error("Error adding link:", error)
+    res.status(500).json({ message: "Failed to add link", error: error.message })
+  }
+})
+
+// Update link (authenticated)
+app.put("/api/links/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+    const { text, url, icon } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.links.length) {
+      return res.status(400).json({ message: "Invalid link index" })
+    }
+    
+    // Update link
+    if (text) profile.links[index].text = text
+    if (url) profile.links[index].url = url
+    if (icon) profile.links[index].icon = icon
+    
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Link updated successfully",
+      link: profile.links[index],
+      profile
+    })
+  } catch (error) {
+    console.error("Error updating link:", error)
+    res.status(500).json({ message: "Failed to update link", error: error.message })
+  }
+})
+
+// Delete link (authenticated)
+app.delete("/api/links/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.links.length) {
+      return res.status(400).json({ message: "Invalid link index" })
+    }
+    
+    // Remove link
+    profile.links.splice(index, 1)
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Link deleted successfully",
+      profile
+    })
+  } catch (error) {
+    console.error("Error deleting link:", error)
+    res.status(500).json({ message: "Failed to delete link", error: error.message })
+  }
+})
+
 // Upload gallery images (authenticated)
 app.post("/api/gallery", authenticate, upload.array("images", 10), async (req, res) => {
   try {
@@ -329,7 +455,8 @@ app.post("/api/gallery", authenticate, upload.array("images", 10), async (req, r
     
     res.json({
       message: "Images uploaded successfully",
-      images: uploadedImages
+      images: uploadedImages,
+      profile
     })
   } catch (error) {
     console.error("Error uploading gallery images:", error)
@@ -371,7 +498,8 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
     }
     
     res.json({
-      message: "Image deleted successfully"
+      message: "Image deleted successfully",
+      profile
     })
   } catch (error) {
     console.error("Error deleting gallery image:", error)
