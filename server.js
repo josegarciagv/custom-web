@@ -16,9 +16,7 @@ dotenv.config()
 // Initialize Express app
 const app = express()
 const PORT = process.env.PORT || 3000
-const DOMAIN = process.env.DOMAIN || 'localhost'
-const PROTOCOL = process.env.NODE_ENV === 'production' ? 'https' : 'http'
-const BASE_URL = `${PROTOCOL}://${DOMAIN}`
+const DOMAIN = process.env.DOMAIN || 'custom-web-production.up.railway.app'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Middleware
@@ -408,8 +406,8 @@ async function startServer() {
     
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
-      console.log(`Application URL: ${BASE_URL}`);
-      console.log(`Admin login: ${BASE_URL}/custom-web/login`);
+      console.log(`Application URL: https://${DOMAIN}`);
+      console.log(`Admin login: https://${DOMAIN}/custom-web/login`);
     });
   } catch (error) {
     console.error("Server startup error:", error);
