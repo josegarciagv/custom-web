@@ -19,6 +19,7 @@
         --services-bg: #ffffff;
         --faq-bg: #ffffff;
         --contact-bg: #f9fafb;
+        --header-height: 70px;
     }
     
     * {
@@ -32,6 +33,240 @@
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--bg-color);
+        padding-top: var(--header-height);
+    }
+
+    /* Header Styles */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--header-height);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+    }
+
+    .header-logo:hover {
+        color: var(--primary-color);
+    }
+
+    .header-favicon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--primary-color);
+        transition: all 0.3s ease;
+    }
+
+    .header-favicon:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
+    }
+
+    .share-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 45px;
+        height: 45px;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+    }
+
+    .share-button:hover {
+        background-color: #4338ca;
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
+    }
+
+    .share-button:active {
+        transform: scale(0.95);
+    }
+
+    /* Share Modal Styles */
+    .share-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+    }
+
+    .share-modal.active {
+        display: flex;
+    }
+
+    .share-modal-content {
+        background-color: var(--bg-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        transform: scale(0.9);
+        transition: all 0.3s ease;
+    }
+
+    .share-modal.active .share-modal-content {
+        transform: scale(1);
+    }
+
+    .share-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .share-modal-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    .share-modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #666;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+
+    .share-modal-close:hover {
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+    }
+
+    .share-options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .share-option {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 1rem;
+        background-color: var(--secondary-bg);
+        border-radius: 0.75rem;
+        text-decoration: none;
+        color: var(--text-color);
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: none;
+        font-family: inherit;
+    }
+
+    .share-option:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .share-option-icon {
+        font-size: 1.5rem;
+    }
+
+    .share-option-text {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .share-url-container {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .share-url-label {
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+    }
+
+    .share-url-input-container {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .share-url-input {
+        flex: 1;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+    }
+
+    .copy-url-button {
+        padding: 0.75rem 1rem;
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        font-size: 0.9rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .copy-url-button:hover {
+        background-color: #4338ca;
+    }
+
+    .copy-url-button.copied {
+        background-color: var(--success-color);
     }
     
     /* Loading Screen Styles */
@@ -567,6 +802,29 @@
     }
     
     @media (max-width: 768px) {
+        .header-container {
+            padding: 0 1rem;
+        }
+
+        .header-favicon {
+            width: 35px;
+            height: 35px;
+        }
+
+        .share-button {
+            width: 40px;
+            height: 40px;
+            font-size: 1.1rem;
+        }
+
+        .share-modal-content {
+            padding: 1.5rem;
+        }
+
+        .share-options {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
         .container {
             padding: 1rem;
         }
@@ -626,6 +884,72 @@
 </style>
 </head>
 <body>
+<!-- Header -->
+<div class="header" id="header">
+    <div class="header-container">
+        <a href="#" class="header-logo" id="header-logo">
+            <img src="/images/profile.jpg" alt="Favicon" class="header-favicon" id="header-favicon">
+            <span id="header-name">Profile</span>
+        </a>
+        
+        <button class="share-button" id="share-button" title="Share this profile">
+            <i class="fas fa-share-alt"></i>
+        </button>
+    </div>
+</div>
+
+<!-- Share Modal -->
+<div class="share-modal" id="share-modal">
+    <div class="share-modal-content">
+        <div class="share-modal-header">
+            <h3 class="share-modal-title">Share Profile</h3>
+            <button class="share-modal-close" id="share-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="share-options">
+            <button class="share-option" id="share-native" title="Share via device">
+                <i class="fas fa-share-alt share-option-icon"></i>
+                <span class="share-option-text">Share</span>
+            </button>
+            
+            <a class="share-option" id="share-twitter" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-twitter share-option-icon"></i>
+                <span class="share-option-text">Twitter</span>
+            </a>
+            
+            <a class="share-option" id="share-facebook" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-facebook-f share-option-icon"></i>
+                <span class="share-option-text">Facebook</span>
+            </a>
+            
+            <a class="share-option" id="share-linkedin" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-linkedin-in share-option-icon"></i>
+                <span class="share-option-text">LinkedIn</span>
+            </a>
+            
+            <a class="share-option" id="share-whatsapp" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-whatsapp share-option-icon"></i>
+                <span class="share-option-text">WhatsApp</span>
+            </a>
+            
+            <a class="share-option" id="share-telegram" target="_blank" rel="noopener noreferrer">
+                <i class="fab fa-telegram-plane share-option-icon"></i>
+                <span class="share-option-text">Telegram</span>
+            </a>
+        </div>
+        
+        <div class="share-url-container">
+            <div class="share-url-label">Copy Link</div>
+            <div class="share-url-input-container">
+                <input type="text" class="share-url-input" id="share-url-input" readonly>
+                <button class="copy-url-button" id="copy-url-button">Copy</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Loading Screen -->
 <div class="loading-screen" id="loading-screen">
     <div class="loading-spinner"></div>
@@ -742,9 +1066,152 @@
     let isImagesLoaded = false;
     let galleryImages = [];
     let currentImageIndex = 0;
+    let profileData = {};
     
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+
+    // Share functionality
+    const shareButton = document.getElementById('share-button');
+    const shareModal = document.getElementById('share-modal');
+    const shareModalClose = document.getElementById('share-modal-close');
+    const shareUrlInput = document.getElementById('share-url-input');
+    const copyUrlButton = document.getElementById('copy-url-button');
+
+    // Share button click
+    shareButton.addEventListener('click', () => {
+        openShareModal();
+    });
+
+    // Close share modal
+    shareModalClose.addEventListener('click', () => {
+        closeShareModal();
+    });
+
+    // Close modal when clicking outside
+    shareModal.addEventListener('click', (e) => {
+        if (e.target === shareModal) {
+            closeShareModal();
+        }
+    });
+
+    // ESC key to close modal
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && shareModal.classList.contains('active')) {
+            closeShareModal();
+        }
+    });
+
+    function openShareModal() {
+        const currentUrl = window.location.href;
+        const title = profileData.name ? `${profileData.name} - Profile` : 'Check out this profile';
+        const description = profileData.description || 'Amazing profile to check out!';
+
+        // Set URL in input
+        shareUrlInput.value = currentUrl;
+
+        // Update share links
+        updateShareLinks(currentUrl, title, description);
+
+        // Show modal
+        shareModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeShareModal() {
+        shareModal.classList.remove('active');
+        document.body.style.overflow = 'auto';
+        
+        // Reset copy button
+        copyUrlButton.textContent = 'Copy';
+        copyUrlButton.classList.remove('copied');
+    }
+
+    function updateShareLinks(url, title, description) {
+        const encodedUrl = encodeURIComponent(url);
+        const encodedTitle = encodeURIComponent(title);
+        const encodedDescription = encodeURIComponent(description);
+
+        // Twitter
+        document.getElementById('share-twitter').href = 
+            `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+
+        // Facebook
+        document.getElementById('share-facebook').href = 
+            `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+
+        // LinkedIn
+        document.getElementById('share-linkedin').href = 
+            `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+
+        // WhatsApp
+        document.getElementById('share-whatsapp').href = 
+            `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+
+        // Telegram
+        document.getElementById('share-telegram').href = 
+            `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
+    }
+
+    // Native share API
+    document.getElementById('share-native').addEventListener('click', async () => {
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: profileData.name ? `${profileData.name} - Profile` : 'Check out this profile',
+                    text: profileData.description || 'Amazing profile to check out!',
+                    url: window.location.href
+                });
+                closeShareModal();
+            } catch (error) {
+                console.log('Error sharing:', error);
+                // Fallback to copy URL
+                copyToClipboard();
+            }
+        } else {
+            // Fallback to copy URL
+            copyToClipboard();
+        }
+    });
+
+    // Copy URL functionality
+    copyUrlButton.addEventListener('click', () => {
+        copyToClipboard();
+    });
+
+    async function copyToClipboard() {
+        try {
+            await navigator.clipboard.writeText(shareUrlInput.value);
+            copyUrlButton.textContent = 'Copied!';
+            copyUrlButton.classList.add('copied');
+            
+            setTimeout(() => {
+                copyUrlButton.textContent = 'Copy';
+                copyUrlButton.classList.remove('copied');
+            }, 2000);
+        } catch (error) {
+            // Fallback for older browsers
+            shareUrlInput.select();
+            document.execCommand('copy');
+            copyUrlButton.textContent = 'Copied!';
+            copyUrlButton.classList.add('copied');
+            
+            setTimeout(() => {
+                copyUrlButton.textContent = 'Copy';
+                copyUrlButton.classList.remove('copied');
+            }, 2000);
+        }
+    }
     
     // Hide loading screen when everything is ready
     function hideLoadingScreen() {
@@ -837,6 +1304,7 @@
             }
             
             const data = await response.json();
+            profileData = data; // Store for share functionality
             
             // Apply theme colors
             document.documentElement.style.setProperty('--bg-color', data.backgroundColor || '#ffffff');
@@ -846,6 +1314,10 @@
             document.documentElement.style.setProperty('--services-bg', data.servicesBgColor || '#ffffff');
             document.documentElement.style.setProperty('--faq-bg', data.faqBgColor || '#ffffff');
             document.documentElement.style.setProperty('--contact-bg', data.contactBgColor || '#f9fafb');
+            
+            // Update header
+            document.getElementById('header-name').textContent = data.name;
+            document.getElementById('header-favicon').src = data.profileImage;
             
             // Update profile information
             document.getElementById('profile-name').textContent = data.name;
