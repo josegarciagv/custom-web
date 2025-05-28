@@ -20,8 +20,8 @@ const DOMAIN = process.env.DOMAIN || ''
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Middleware
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
+app.use(express.json({ limit: '50mb' })) // Increased limit for base64 images
+app.use(express.urlencoded({ extended: true, limit: '50mb' }))
 app.use(cors())
 app.use(helmet({
   contentSecurityPolicy: false // Disable CSP for simplicity in development
@@ -30,7 +30,7 @@ app.use(helmet({
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")))
 
-// Create uploads directory if it doesn't exist
+// Create uploads directory if it doesn't exist (for temporary processing)
 const uploadsDir = path.join(__dirname, "public", "uploads")
 const imagesDir = path.join(__dirname, "public", "images")
 
@@ -42,21 +42,12 @@ if (!fs.existsSync(imagesDir)) {
   fs.mkdirSync(imagesDir, { recursive: true })
 }
 
-// Configure multer for file uploads
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, "public", "uploads"))
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9)
-    const ext = path.extname(file.originalname)
-    cb(null, file.fieldname + "-" + uniqueSuffix + ext)
-  }
-})
+// Configure multer for file uploads (memory storage for base64 conversion)
+const storage = multer.memoryStorage()
 
 const upload = multer({ 
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
     // Accept only images
     if (file.mimetype.startsWith("image/")) {
@@ -66,6 +57,18 @@ const upload = multer({
     }
   }
 })
+
+// Helper function to convert buffer to base64 data URL
+function bufferToBase64DataURL(buffer, mimetype) {
+  const base64 = buffer.toString('base64')
+  return `data:${mimetype};base64,${base64}`
+}
+
+// Helper function to optimize image size (basic compression)
+function optimizeImageBuffer(buffer, mimetype) {
+  // For now, return as-is. You could add image compression here using sharp or similar
+  return buffer
+}
 
 // Connect to MongoDB
 mongoose
@@ -109,19 +112,19 @@ const faqSchema = new mongoose.Schema({
   answer: { type: String, required: true }
 })
 
-// Profile Schema - Updated with new fields for FAQ and Contact backgrounds
+// Profile Schema - Updated to store base64 images
 const profileSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  profileImage: { type: String, required: true },
-  logoImage: { type: String, required: true },
+  profileImage: { type: String, required: true }, // Can be URL or base64 data URL
+  logoImage: { type: String, required: true }, // Can be URL or base64 data URL
   backgroundColor: { type: String, default: "#ffffff" },
   textColor: { type: String, default: "#333333" },
   accentColor: { type: String, default: "#4f46e5" },
   galleryBgColor: { type: String, default: "#f9fafb" },
   servicesBgColor: { type: String, default: "#ffffff" },
-  faqBgColor: { type: String, default: "#ffffff" }, // New field for FAQ background
-  contactBgColor: { type: String, default: "#f9fafb" }, // New field for Contact background
+  faqBgColor: { type: String, default: "#ffffff" },
+  contactBgColor: { type: String, default: "#f9fafb" },
   servicesSectionTitle: { type: String, default: "My Services" },
   gallerySectionTitle: { type: String, default: "My Gallery" },
   infoSectionTitle: { type: String, default: "Contact Information" },
@@ -133,7 +136,7 @@ const profileSchema = new mongoose.Schema({
   services: [serviceSchema],
   contactInfo: [contactInfoSchema],
   faqs: [faqSchema],
-  galleryImages: [{ type: String }],
+  galleryImages: [{ type: String }], // Array of base64 data URLs or regular URLs
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })
@@ -184,8 +187,8 @@ async function initializeDefaultProfile() {
         accentColor: "#4f46e5",
         galleryBgColor: "#f9fafb",
         servicesBgColor: "#ffffff",
-        faqBgColor: "#ffffff", // Default FAQ background
-        contactBgColor: "#f9fafb", // Default Contact background
+        faqBgColor: "#ffffff",
+        contactBgColor: "#f9fafb",
         servicesSectionTitle: "My Services",
         gallerySectionTitle: "My Gallery",
         infoSectionTitle: "Contact Information",
@@ -344,8 +347,8 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
       contactEmail,
       galleryBgColor,
       servicesBgColor,
-      faqBgColor, // New field
-      contactBgColor, // New field
+      faqBgColor,
+      contactBgColor,
       showContactForm,
       servicesSectionTitle,
       gallerySectionTitle,
@@ -377,8 +380,8 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (accentColor) profile.accentColor = accentColor
     if (galleryBgColor) profile.galleryBgColor = galleryBgColor
     if (servicesBgColor) profile.servicesBgColor = servicesBgColor
-    if (faqBgColor) profile.faqBgColor = faqBgColor // New field
-    if (contactBgColor) profile.contactBgColor = contactBgColor // New field
+    if (faqBgColor) profile.faqBgColor = faqBgColor
+    if (contactBgColor) profile.contactBgColor = contactBgColor
     
     // Update contact settings
     if (contactEmail) profile.contactEmail = contactEmail
@@ -388,15 +391,16 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     
     // Update profile image if provided
     if (req.file) {
-      // Remove old file if it's not a default image
-      if (profile.profileImage && !profile.profileImage.startsWith("/images/")) {
-        const oldPath = path.join(__dirname, "public", profile.profileImage)
-        if (fs.existsSync(oldPath)) {
-          fs.unlinkSync(oldPath)
-        }
+      try {
+        // Convert image to base64 data URL
+        const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+        profile.profileImage = base64DataURL
+        console.log("Profile image converted to base64 and stored in database")
+      } catch (error) {
+        console.error("Error converting profile image to base64:", error)
+        throw new Error("Failed to process profile image")
       }
-      
-      profile.profileImage = `/uploads/${req.file.filename}`
     }
     
     profile.updatedAt = new Date()
@@ -424,15 +428,16 @@ app.put("/api/logo", authenticate, upload.single("logoImage"), async (req, res) 
     
     // Update logo image if provided
     if (req.file) {
-      // Remove old file if it's not a default image
-      if (profile.logoImage && !profile.logoImage.startsWith("/images/")) {
-        const oldPath = path.join(__dirname, "public", profile.logoImage)
-        if (fs.existsSync(oldPath)) {
-          fs.unlinkSync(oldPath)
-        }
+      try {
+        // Convert image to base64 data URL
+        const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+        profile.logoImage = base64DataURL
+        console.log("Logo image converted to base64 and stored in database")
+      } catch (error) {
+        console.error("Error converting logo image to base64:", error)
+        throw new Error("Failed to process logo image")
       }
-      
-      profile.logoImage = `/uploads/${req.file.filename}`
     }
     
     profile.updatedAt = new Date()
@@ -921,8 +926,24 @@ app.post("/api/gallery", authenticate, upload.array("images", 10), async (req, r
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Get uploaded file paths
-    const uploadedImages = req.files.map(file => `/uploads/${file.filename}`)
+    // Convert uploaded files to base64 data URLs
+    const uploadedImages = []
+    
+    for (const file of req.files) {
+      try {
+        const optimizedBuffer = optimizeImageBuffer(file.buffer, file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, file.mimetype)
+        uploadedImages.push(base64DataURL)
+        console.log(`Gallery image converted to base64: ${file.originalname}`)
+      } catch (error) {
+        console.error(`Error converting image ${file.originalname} to base64:`, error)
+        // Continue with other images even if one fails
+      }
+    }
+    
+    if (uploadedImages.length === 0) {
+      return res.status(400).json({ message: "No images were successfully processed" })
+    }
     
     // Add to gallery
     profile.galleryImages = [...profile.galleryImages, ...uploadedImages]
@@ -957,22 +978,13 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
       return res.status(400).json({ message: "Invalid image index" })
     }
     
-    // Get image path
-    const imagePath = profile.galleryImages[index]
-    
-    // Remove from array
+    // Remove from array (no need to delete files since they're stored as base64 in DB)
     profile.galleryImages.splice(index, 1)
     profile.updatedAt = new Date()
     
     await profile.save()
     
-    // Delete file if it's not a default image
-    if (imagePath && !imagePath.startsWith("/images/")) {
-      const fullPath = path.join(__dirname, "public", imagePath)
-      if (fs.existsSync(fullPath)) {
-        fs.unlinkSync(fullPath)
-      }
-    }
+    console.log("Gallery image deleted from database")
     
     res.json({
       message: "Image deleted successfully",
@@ -1013,6 +1025,7 @@ async function startServer() {
       console.log(`Server running on port ${PORT}`);
       console.log(`Application URL: https://${DOMAIN}`);
       console.log(`Admin login: https://${DOMAIN}/custom-web/login`);
+      console.log("✅ Images are stored as base64 in MongoDB - they will persist across deployments");
     });
   } catch (error) {
     console.error("Server startup error:", error);
