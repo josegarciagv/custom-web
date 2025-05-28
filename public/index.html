@@ -25,6 +25,8 @@
         --services-bg: #ffffff;
         --faq-bg: #ffffff;
         --contact-bg: #f9fafb;
+        --products-bg: #f9fafb;
+        --blog-bg: #ffffff;
         --header-height: 70px;
       }
 
@@ -415,6 +417,208 @@
       .service-description {
         color: #666;
         font-size: 0.95rem;
+      }
+
+      /* Products Section Styles - NEW */
+      .products-section {
+        padding: 3rem 0;
+        background-color: var(--products-bg);
+        margin-bottom: 3rem;
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .product-card {
+        background-color: var(--secondary-bg);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .product-image-container {
+        position: relative;
+        width: 100%;
+        padding-top: 66%; /* 3:2 aspect ratio */
+        overflow: hidden;
+      }
+
+      .product-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .product-card:hover .product-image {
+        transform: scale(1.05);
+      }
+
+      .product-icon-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 180px;
+        background-color: rgba(79, 70, 229, 0.1);
+      }
+
+      .product-icon {
+        font-size: 4rem;
+        color: var(--primary-color);
+      }
+
+      .product-content {
+        padding: 1.5rem;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .product-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .product-description {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+      }
+
+      .product-price {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+      }
+
+      .product-link {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        width: fit-content;
+      }
+
+      .product-link:hover {
+        background-color: #4338ca;
+      }
+
+      /* Blog Section Styles - NEW */
+      .blog-section {
+        padding: 3rem 0;
+        background-color: var(--blog-bg);
+        margin-bottom: 3rem;
+      }
+
+      .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      .blog-card {
+        background-color: var(--secondary-bg);
+        border-radius: 0.75rem;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .blog-image-container {
+        position: relative;
+        width: 100%;
+        padding-top: 56.25%; /* 16:9 aspect ratio */
+        overflow: hidden;
+      }
+
+      .blog-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+      }
+
+      .blog-card:hover .blog-image {
+        transform: scale(1.05);
+      }
+
+      .blog-content {
+        padding: 1.5rem;
+      }
+
+      .blog-date {
+        font-size: 0.85rem;
+        color: #666;
+        margin-bottom: 0.5rem;
+      }
+
+      .blog-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.75rem;
+        color: var(--text-color);
+      }
+
+      .blog-excerpt {
+        color: #666;
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .blog-read-more {
+        display: inline-flex;
+        align-items: center;
+        color: var(--primary-color);
+        font-weight: 500;
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .blog-read-more:hover {
+        opacity: 0.8;
+      }
+
+      .blog-read-more i {
+        margin-left: 0.25rem;
+        font-size: 0.85rem;
       }
 
       .gallery-section {
@@ -849,6 +1053,163 @@
         display: none;
       }
 
+      /* Confirmation Modal Styles - NEW */
+      .confirm-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .confirm-modal.active {
+        display: flex;
+      }
+
+      .confirm-modal-content {
+        background-color: var(--bg-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        text-align: center;
+      }
+
+      .confirm-modal-icon {
+        font-size: 3rem;
+        color: var(--error-color);
+        margin-bottom: 1rem;
+      }
+
+      .confirm-modal-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .confirm-modal-message {
+        color: #666;
+        margin-bottom: 1.5rem;
+      }
+
+      .confirm-modal-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .confirm-modal-button {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        border: none;
+      }
+
+      .confirm-modal-cancel {
+        background-color: #e5e7eb;
+        color: #4b5563;
+      }
+
+      .confirm-modal-cancel:hover {
+        background-color: #d1d5db;
+      }
+
+      .confirm-modal-confirm {
+        background-color: var(--error-color);
+        color: white;
+      }
+
+      .confirm-modal-confirm:hover {
+        background-color: #dc2626;
+      }
+
+      /* Blog Post Modal Styles - NEW */
+      .blog-post-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(5px);
+      }
+
+      .blog-post-modal.active {
+        display: flex;
+      }
+
+      .blog-post-modal-content {
+        background-color: var(--bg-color);
+        border-radius: 1rem;
+        padding: 2rem;
+        max-width: 800px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      }
+
+      .blog-post-modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-post-modal-title {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      .blog-post-modal-close {
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: #666;
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 50%;
+        transition: all 0.3s ease;
+      }
+
+      .blog-post-modal-close:hover {
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+      }
+
+      .blog-post-modal-date {
+        font-size: 0.9rem;
+        color: #666;
+        margin-bottom: 1rem;
+      }
+
+      .blog-post-modal-image {
+        width: 100%;
+        max-height: 400px;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .blog-post-modal-content p {
+        margin-bottom: 1rem;
+        line-height: 1.7;
+      }
+
       @media (max-width: 768px) {
         .header-container {
           padding: 0 1rem;
@@ -882,6 +1243,16 @@
         }
 
         .services-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+
+        .blog-grid {
           grid-template-columns: 1fr;
           gap: 1rem;
         }
@@ -927,6 +1298,14 @@
         .modal-counter {
           bottom: 10px;
           font-size: 0.8rem;
+        }
+
+        .blog-post-modal-content {
+          padding: 1.5rem;
+        }
+
+        .blog-post-modal-title {
+          font-size: 1.5rem;
         }
       }
     </style>
@@ -1078,11 +1457,31 @@
           </div>
         </section>
 
+        <!-- NEW: Products Section -->
+        <section id="products-section" class="products-section">
+          <div class="container">
+            <h2 class="section-title" id="products-title">My Products</h2>
+            <div class="products-grid" id="products-grid">
+              <!-- Products will be loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
         <section id="gallery-section" class="gallery-section">
           <div class="container">
             <h2 class="section-title" id="gallery-title">My Gallery</h2>
             <div class="gallery" id="gallery">
               <!-- Gallery images will be loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <!-- NEW: Blog Section -->
+        <section id="blog-section" class="blog-section">
+          <div class="container">
+            <h2 class="section-title" id="blog-title">Latest Blog Posts</h2>
+            <div class="blog-grid" id="blog-grid">
+              <!-- Blog posts will be loaded dynamically -->
             </div>
           </div>
         </section>
@@ -1184,6 +1583,61 @@
         <div class="modal-counter" id="modal-counter">1 / 1</div>
       </div>
 
+      <!-- NEW: Blog Post Modal -->
+      <div class="blog-post-modal" id="blog-post-modal">
+        <div class="blog-post-modal-content">
+          <div class="blog-post-modal-header">
+            <h2 class="blog-post-modal-title" id="blog-post-modal-title">
+              Blog Post Title
+            </h2>
+            <button class="blog-post-modal-close" id="blog-post-modal-close">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div class="blog-post-modal-date" id="blog-post-modal-date">
+            January 1, 2023
+          </div>
+          <img
+            src="/placeholder.svg"
+            alt="Blog Post"
+            class="blog-post-modal-image"
+            id="blog-post-modal-image"
+          />
+          <div id="blog-post-modal-body">
+            <!-- Blog post content will be loaded dynamically -->
+          </div>
+        </div>
+      </div>
+
+      <!-- NEW: Confirmation Modal -->
+      <div class="confirm-modal" id="confirm-modal">
+        <div class="confirm-modal-content">
+          <div class="confirm-modal-icon">
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+          <h3 class="confirm-modal-title" id="confirm-modal-title">
+            Confirm Action
+          </h3>
+          <p class="confirm-modal-message" id="confirm-modal-message">
+            Are you sure you want to proceed with this action?
+          </p>
+          <div class="confirm-modal-buttons">
+            <button
+              class="confirm-modal-button confirm-modal-cancel"
+              id="confirm-modal-cancel"
+            >
+              Cancel
+            </button>
+            <button
+              class="confirm-modal-button confirm-modal-confirm"
+              id="confirm-modal-confirm"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </div>
+
       <footer class="footer">
         <p>
           &copy; <span id="current-year"></span>
@@ -1199,6 +1653,8 @@
       let galleryImages = [];
       let currentImageIndex = 0;
       let profileData = {};
+      let blogPosts = [];
+      let products = [];
 
       // Set current year in footer
       document.getElementById("current-year").textContent =
@@ -1489,6 +1945,14 @@
             "--contact-bg",
             data.contactBgColor || "#f9fafb"
           );
+          document.documentElement.style.setProperty(
+            "--products-bg",
+            data.productsBgColor || "#f9fafb"
+          );
+          document.documentElement.style.setProperty(
+            "--blog-bg",
+            data.blogBgColor || "#ffffff"
+          );
 
           // Update header
           document.getElementById("header-name").textContent = data.name;
@@ -1527,6 +1991,16 @@
               data.faqSectionTitle;
           }
 
+          if (data.productsSectionTitle) {
+            document.getElementById("products-title").textContent =
+              data.productsSectionTitle;
+          }
+
+          if (data.blogSectionTitle) {
+            document.getElementById("blog-title").textContent =
+              data.blogSectionTitle;
+          }
+
           // Update footer name
           document.getElementById("footer-name").textContent = data.name;
 
@@ -1543,14 +2017,24 @@
           // Store gallery images for modal navigation
           galleryImages = data.galleryImages || [];
 
+          // Store blog posts and products
+          blogPosts = data.blogPosts || [];
+          products = data.products || [];
+
           // Load social links
           loadSocialLinks(data.links || []);
 
           // Load services
           loadServices(data.services || []);
 
+          // Load products
+          loadProducts(data.products || []);
+
           // Load gallery images
           loadGalleryImages(data.galleryImages || []);
+
+          // Load blog posts
+          loadBlogPosts(data.blogPosts || []);
 
           // Load contact information
           loadContactInfo(data.contactInfo || []);
@@ -1569,6 +2053,14 @@
 
           if (!data.faqs || data.faqs.length === 0) {
             document.getElementById("faq-section").classList.add("hidden");
+          }
+
+          if (!data.products || data.products.length === 0) {
+            document.getElementById("products-section").classList.add("hidden");
+          }
+
+          if (!data.blogPosts || data.blogPosts.length === 0) {
+            document.getElementById("blog-section").classList.add("hidden");
           }
 
           // Mark data as loaded
@@ -1644,6 +2136,78 @@
         }
       }
 
+      // Load products - NEW
+      function loadProducts(products) {
+        const productsGrid = document.getElementById("products-grid");
+        productsGrid.innerHTML = "";
+
+        if (products.length > 0) {
+          products.forEach((product) => {
+            const productCard = document.createElement("div");
+            productCard.className = "product-card";
+
+            // Image or Icon
+            if (product.image) {
+              const imageContainer = document.createElement("div");
+              imageContainer.className = "product-image-container";
+
+              const img = document.createElement("img");
+              img.src = product.image;
+              img.alt = product.title;
+              img.className = "product-image";
+
+              imageContainer.appendChild(img);
+              productCard.appendChild(imageContainer);
+            } else if (product.icon) {
+              const iconContainer = document.createElement("div");
+              iconContainer.className = "product-icon-container";
+
+              const icon = document.createElement("i");
+              icon.className = `fas fa-${product.icon} product-icon`;
+
+              iconContainer.appendChild(icon);
+              productCard.appendChild(iconContainer);
+            }
+
+            const productContent = document.createElement("div");
+            productContent.className = "product-content";
+
+            const productTitle = document.createElement("h3");
+            productTitle.className = "product-title";
+            productTitle.textContent = product.title;
+
+            const productDescription = document.createElement("p");
+            productDescription.className = "product-description";
+            productDescription.textContent = product.description;
+
+            const productPrice = document.createElement("div");
+            productPrice.className = "product-price";
+            productPrice.textContent = product.price;
+
+            productContent.appendChild(productTitle);
+            productContent.appendChild(productDescription);
+            productContent.appendChild(productPrice);
+
+            // Optional link button
+            if (product.url) {
+              const productLink = document.createElement("a");
+              productLink.href = product.url;
+              productLink.className = "product-link";
+              productLink.target = "_blank";
+              productLink.rel = "noopener noreferrer";
+              productLink.textContent = product.buttonText || "Learn More";
+
+              productContent.appendChild(productLink);
+            }
+
+            productCard.appendChild(productContent);
+            productsGrid.appendChild(productCard);
+          });
+        } else {
+          document.getElementById("products-section").classList.add("hidden");
+        }
+      }
+
       // Load gallery images
       function loadGalleryImages(images) {
         const gallery = document.getElementById("gallery");
@@ -1667,6 +2231,122 @@
           document.getElementById("gallery-section").classList.add("hidden");
         }
       }
+
+      // Load blog posts - NEW
+      function loadBlogPosts(posts) {
+        const blogGrid = document.getElementById("blog-grid");
+        blogGrid.innerHTML = "";
+
+        if (posts.length > 0) {
+          posts.forEach((post, index) => {
+            const blogCard = document.createElement("div");
+            blogCard.className = "blog-card";
+
+            if (post.image) {
+              const imageContainer = document.createElement("div");
+              imageContainer.className = "blog-image-container";
+
+              const img = document.createElement("img");
+              img.src = post.image;
+              img.alt = post.title;
+              img.className = "blog-image";
+
+              imageContainer.appendChild(img);
+              blogCard.appendChild(imageContainer);
+            }
+
+            const blogContent = document.createElement("div");
+            blogContent.className = "blog-content";
+
+            const blogDate = document.createElement("div");
+            blogDate.className = "blog-date";
+            blogDate.textContent = post.date;
+
+            const blogTitle = document.createElement("h3");
+            blogTitle.className = "blog-title";
+            blogTitle.textContent = post.title;
+
+            const blogExcerpt = document.createElement("p");
+            blogExcerpt.className = "blog-excerpt";
+            blogExcerpt.textContent =
+              post.excerpt || post.content.substring(0, 150) + "...";
+
+            const blogReadMore = document.createElement("a");
+            blogReadMore.href = "javascript:void(0)";
+            blogReadMore.className = "blog-read-more";
+            blogReadMore.textContent = "Read More ";
+            blogReadMore.innerHTML += '<i class="fas fa-arrow-right"></i>';
+            blogReadMore.addEventListener("click", () => openBlogPost(index));
+
+            blogContent.appendChild(blogDate);
+            blogContent.appendChild(blogTitle);
+            blogContent.appendChild(blogExcerpt);
+            blogContent.appendChild(blogReadMore);
+
+            blogCard.appendChild(blogContent);
+            blogGrid.appendChild(blogCard);
+          });
+        } else {
+          document.getElementById("blog-section").classList.add("hidden");
+        }
+      }
+
+      // Open blog post modal - NEW
+      function openBlogPost(postIndex) {
+        if (blogPosts.length === 0 || postIndex >= blogPosts.length) return;
+
+        const post = blogPosts[postIndex];
+        const modal = document.getElementById("blog-post-modal");
+        const title = document.getElementById("blog-post-modal-title");
+        const date = document.getElementById("blog-post-modal-date");
+        const image = document.getElementById("blog-post-modal-image");
+        const body = document.getElementById("blog-post-modal-body");
+
+        title.textContent = post.title;
+        date.textContent = post.date;
+
+        if (post.image) {
+          image.src = post.image;
+          image.alt = post.title;
+          image.style.display = "block";
+        } else {
+          image.style.display = "none";
+        }
+
+        // Convert content to paragraphs
+        body.innerHTML = "";
+        const paragraphs = post.content.split("\n\n");
+        paragraphs.forEach((paragraph) => {
+          if (paragraph.trim()) {
+            const p = document.createElement("p");
+            p.textContent = paragraph;
+            body.appendChild(p);
+          }
+        });
+
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close blog post modal - NEW
+      document
+        .getElementById("blog-post-modal-close")
+        .addEventListener("click", () => {
+          document.getElementById("blog-post-modal").classList.remove("active");
+          document.body.style.overflow = "auto";
+        });
+
+      // Close blog post modal when clicking outside - NEW
+      document
+        .getElementById("blog-post-modal")
+        .addEventListener("click", (e) => {
+          if (e.target === document.getElementById("blog-post-modal")) {
+            document
+              .getElementById("blog-post-modal")
+              .classList.remove("active");
+            document.body.style.overflow = "auto";
+          }
+        });
 
       // Load contact information
       function loadContactInfo(contactInfo) {
@@ -1735,9 +2415,9 @@
             const faqQuestion = document.createElement("div");
             faqQuestion.className = "faq-question";
             faqQuestion.innerHTML = `
-                    <span>${faq.question}</span>
-                    <i class="fas fa-chevron-down"></i>
-                `;
+                <span>${faq.question}</span>
+                <i class="fas fa-chevron-down"></i>
+            `;
 
             const faqAnswer = document.createElement("div");
             faqAnswer.className = "faq-answer";
@@ -1761,6 +2441,58 @@
           document.getElementById("faq-section").classList.add("hidden");
         }
       }
+
+      // Confirmation Modal - NEW
+      const confirmModal = document.getElementById("confirm-modal");
+      const confirmModalTitle = document.getElementById("confirm-modal-title");
+      const confirmModalMessage = document.getElementById(
+        "confirm-modal-message"
+      );
+      const confirmModalCancel = document.getElementById(
+        "confirm-modal-cancel"
+      );
+      const confirmModalConfirm = document.getElementById(
+        "confirm-modal-confirm"
+      );
+
+      // Show confirmation modal
+      function showConfirmModal(title, message, onConfirm) {
+        confirmModalTitle.textContent = title;
+        confirmModalMessage.textContent = message;
+
+        // Reset event listeners
+        const newConfirmBtn = confirmModalConfirm.cloneNode(true);
+        confirmModalConfirm.parentNode.replaceChild(
+          newConfirmBtn,
+          confirmModalConfirm
+        );
+
+        // Add new event listener
+        newConfirmBtn.addEventListener("click", () => {
+          onConfirm();
+          closeConfirmModal();
+        });
+
+        // Show modal
+        confirmModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close confirmation modal
+      function closeConfirmModal() {
+        confirmModal.classList.remove("active");
+        document.body.style.overflow = "auto";
+      }
+
+      // Cancel button click
+      confirmModalCancel.addEventListener("click", closeConfirmModal);
+
+      // Close modal when clicking outside
+      confirmModal.addEventListener("click", (e) => {
+        if (e.target === confirmModal) {
+          closeConfirmModal();
+        }
+      });
 
       // Enhanced Modal functionality
       const modal = document.getElementById("image-modal");
