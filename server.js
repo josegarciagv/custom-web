@@ -98,6 +98,26 @@ const serviceSchema = new mongoose.Schema({
   icon: { type: String, default: "star" }
 })
 
+// Product Schema
+const productSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  description: { type: String, required: true },
+  price: { type: String, required: true },
+  buttonText: { type: String, default: "Learn More" },
+  url: { type: String },
+  image: { type: String },
+  icon: { type: String }
+})
+
+// Blog Post Schema
+const blogPostSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  date: { type: String, required: true },
+  excerpt: { type: String },
+  content: { type: String, required: true },
+  image: { type: String }
+})
+
 // Contact Info Schema
 const contactInfoSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -112,7 +132,7 @@ const faqSchema = new mongoose.Schema({
   answer: { type: String, required: true }
 })
 
-// Profile Schema - Updated to store base64 images
+// Profile Schema - Updated to store base64 images and include products and blog posts
 const profileSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
@@ -123,9 +143,13 @@ const profileSchema = new mongoose.Schema({
   accentColor: { type: String, default: "#4f46e5" },
   galleryBgColor: { type: String, default: "#f9fafb" },
   servicesBgColor: { type: String, default: "#ffffff" },
+  productsBgColor: { type: String, default: "#f9fafb" },
+  blogBgColor: { type: String, default: "#ffffff" },
   faqBgColor: { type: String, default: "#ffffff" },
   contactBgColor: { type: String, default: "#f9fafb" },
   servicesSectionTitle: { type: String, default: "My Services" },
+  productsSectionTitle: { type: String, default: "My Products" },
+  blogSectionTitle: { type: String, default: "Latest Blog Posts" },
   gallerySectionTitle: { type: String, default: "My Gallery" },
   infoSectionTitle: { type: String, default: "Contact Information" },
   faqSectionTitle: { type: String, default: "Frequently Asked Questions" },
@@ -134,6 +158,8 @@ const profileSchema = new mongoose.Schema({
   contactEmail: { type: String, default: "" },
   links: [linkSchema],
   services: [serviceSchema],
+  products: [productSchema],
+  blogPosts: [blogPostSchema],
   contactInfo: [contactInfoSchema],
   faqs: [faqSchema],
   galleryImages: [{ type: String }], // Array of base64 data URLs or regular URLs
@@ -187,9 +213,13 @@ async function initializeDefaultProfile() {
         accentColor: "#4f46e5",
         galleryBgColor: "#f9fafb",
         servicesBgColor: "#ffffff",
+        productsBgColor: "#f9fafb",
+        blogBgColor: "#ffffff",
         faqBgColor: "#ffffff",
         contactBgColor: "#f9fafb",
         servicesSectionTitle: "My Services",
+        productsSectionTitle: "My Products",
+        blogSectionTitle: "Latest Blog Posts",
         gallerySectionTitle: "My Gallery",
         infoSectionTitle: "Contact Information",
         faqSectionTitle: "Frequently Asked Questions",
@@ -215,6 +245,36 @@ async function initializeDefaultProfile() {
             title: "Mobile Apps", 
             description: "Native and cross-platform mobile applications for iOS and Android.",
             icon: "mobile"
+          }
+        ],
+        products: [
+          {
+            title: "Premium Website Template",
+            description: "A responsive website template with modern design and features.",
+            price: "$99",
+            buttonText: "Buy Now",
+            icon: "desktop"
+          },
+          {
+            title: "SEO Optimization Package",
+            description: "Comprehensive SEO optimization to improve your website's visibility.",
+            price: "$199",
+            buttonText: "Learn More",
+            icon: "search"
+          }
+        ],
+        blogPosts: [
+          {
+            title: "Getting Started with Web Development",
+            date: "January 15, 2023",
+            excerpt: "Learn the basics of web development and how to get started.",
+            content: "Web development is an exciting field that combines creativity and technical skills. In this post, we'll explore the fundamentals of web development and provide resources for beginners."
+          },
+          {
+            title: "The Importance of Responsive Design",
+            date: "February 10, 2023",
+            excerpt: "Why responsive design is crucial for modern websites.",
+            content: "In today's mobile-first world, responsive design is no longer optional. This post explains why responsive design matters and how to implement it effectively."
           }
         ],
         contactInfo: [
@@ -347,10 +407,14 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
       contactEmail,
       galleryBgColor,
       servicesBgColor,
+      productsBgColor,
+      blogBgColor,
       faqBgColor,
       contactBgColor,
       showContactForm,
       servicesSectionTitle,
+      productsSectionTitle,
+      blogSectionTitle,
       gallerySectionTitle,
       infoSectionTitle,
       faqSectionTitle,
@@ -369,6 +433,8 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     
     // Update section titles
     if (servicesSectionTitle) profile.servicesSectionTitle = servicesSectionTitle
+    if (productsSectionTitle) profile.productsSectionTitle = productsSectionTitle
+    if (blogSectionTitle) profile.blogSectionTitle = blogSectionTitle
     if (gallerySectionTitle) profile.gallerySectionTitle = gallerySectionTitle
     if (infoSectionTitle) profile.infoSectionTitle = infoSectionTitle
     if (faqSectionTitle) profile.faqSectionTitle = faqSectionTitle
@@ -380,6 +446,8 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (accentColor) profile.accentColor = accentColor
     if (galleryBgColor) profile.galleryBgColor = galleryBgColor
     if (servicesBgColor) profile.servicesBgColor = servicesBgColor
+    if (productsBgColor) profile.productsBgColor = productsBgColor
+    if (blogBgColor) profile.blogBgColor = blogBgColor
     if (faqBgColor) profile.faqBgColor = faqBgColor
     if (contactBgColor) profile.contactBgColor = contactBgColor
     
@@ -654,6 +722,306 @@ app.delete("/api/services/:index", authenticate, async (req, res) => {
   } catch (error) {
     console.error("Error deleting service:", error)
     res.status(500).json({ message: "Failed to delete service", error: error.message })
+  }
+})
+
+// Add product (authenticated)
+app.post("/api/products", authenticate, upload.single("productImage"), async (req, res) => {
+  try {
+    const { title, description, price, buttonText, url, icon } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Create new product
+    const newProduct = {
+      title,
+      description,
+      price,
+      buttonText: buttonText || "Learn More"
+    }
+    
+    // Add URL if provided
+    if (url) newProduct.url = url
+    
+    // Add icon if provided
+    if (icon) newProduct.icon = icon
+    
+    // Add image if provided
+    if (req.file) {
+      try {
+        // Convert image to base64 data URL
+        const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+        newProduct.image = base64DataURL
+      } catch (error) {
+        console.error("Error converting product image to base64:", error)
+        throw new Error("Failed to process product image")
+      }
+    }
+    
+    // Add to products array
+    profile.products.push(newProduct)
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Product added successfully",
+      product: profile.products[profile.products.length - 1],
+      profile
+    })
+  } catch (error) {
+    console.error("Error adding product:", error)
+    res.status(500).json({ message: "Failed to add product", error: error.message })
+  }
+})
+
+// Update product (authenticated)
+app.put("/api/products/:index", authenticate, upload.single("productImage"), async (req, res) => {
+  try {
+    const { index } = req.params
+    const { title, description, price, buttonText, url, icon } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.products.length) {
+      return res.status(400).json({ message: "Invalid product index" })
+    }
+    
+    // Update product fields
+    if (title) profile.products[index].title = title
+    if (description) profile.products[index].description = description
+    if (price) profile.products[index].price = price
+    if (buttonText) profile.products[index].buttonText = buttonText
+    
+    // Update URL (can be removed by sending empty string)
+    if (url !== undefined) {
+      if (url === "") {
+        delete profile.products[index].url
+      } else {
+        profile.products[index].url = url
+      }
+    }
+    
+    // Update icon (can be removed by sending empty string)
+    if (icon !== undefined) {
+      if (icon === "") {
+        delete profile.products[index].icon
+      } else {
+        profile.products[index].icon = icon
+      }
+    }
+    
+    // Update image if provided
+    if (req.file) {
+      try {
+        // Convert image to base64 data URL
+        const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+        profile.products[index].image = base64DataURL
+        // Remove icon if image is provided
+        delete profile.products[index].icon
+      } catch (error) {
+        console.error("Error converting product image to base64:", error)
+        throw new Error("Failed to process product image")
+      }
+    }
+    
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Product updated successfully",
+      product: profile.products[index],
+      profile
+    })
+  } catch (error) {
+    console.error("Error updating product:", error)
+    res.status(500).json({ message: "Failed to update product", error: error.message })
+  }
+})
+
+// Delete product (authenticated)
+app.delete("/api/products/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.products.length) {
+      return res.status(400).json({ message: "Invalid product index" })
+    }
+    
+    // Remove product
+    profile.products.splice(index, 1)
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Product deleted successfully",
+      profile
+    })
+  } catch (error) {
+    console.error("Error deleting product:", error)
+    res.status(500).json({ message: "Failed to delete product", error: error.message })
+  }
+})
+
+// Add blog post (authenticated)
+app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (req, res) => {
+  try {
+    const { title, date, excerpt, content } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Create new blog post
+    const newBlogPost = {
+      title,
+      date: date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
+      content
+    }
+    
+    // Add excerpt if provided
+    if (excerpt) newBlogPost.excerpt = excerpt
+    
+    // Add image if provided
+    if (req.file) {
+      try {
+        // Convert image to base64 data URL
+        const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+        newBlogPost.image = base64DataURL
+      } catch (error) {
+        console.error("Error converting blog post image to base64:", error)
+        throw new Error("Failed to process blog post image")
+      }
+    }
+    
+    // Add to blog posts array
+    profile.blogPosts.push(newBlogPost)
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Blog post added successfully",
+      blogPost: profile.blogPosts[profile.blogPosts.length - 1],
+      profile
+    })
+  } catch (error) {
+    console.error("Error adding blog post:", error)
+    res.status(500).json({ message: "Failed to add blog post", error: error.message })
+  }
+})
+
+// Update blog post (authenticated)
+app.put("/api/blogPosts/:index", authenticate, upload.single("blogPostImage"), async (req, res) => {
+  try {
+    const { index } = req.params
+    const { title, date, excerpt, content } = req.body
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.blogPosts.length) {
+      return res.status(400).json({ message: "Invalid blog post index" })
+    }
+    
+    // Update blog post fields
+    if (title) profile.blogPosts[index].title = title
+    if (date) profile.blogPosts[index].date = date
+    if (content) profile.blogPosts[index].content = content
+    
+    // Update excerpt (can be removed by sending empty string)
+    if (excerpt !== undefined) {
+      if (excerpt === "") {
+        delete profile.blogPosts[index].excerpt
+      } else {
+        profile.blogPosts[index].excerpt = excerpt
+      }
+    }
+    
+    // Update image if provided
+    if (req.file) {
+      try {
+        // Convert image to base64 data URL
+        const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+        const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+        profile.blogPosts[index].image = base64DataURL
+      } catch (error) {
+        console.error("Error converting blog post image to base64:", error)
+        throw new Error("Failed to process blog post image")
+      }
+    }
+    
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Blog post updated successfully",
+      blogPost: profile.blogPosts[index],
+      profile
+    })
+  } catch (error) {
+    console.error("Error updating blog post:", error)
+    res.status(500).json({ message: "Failed to update blog post", error: error.message })
+  }
+})
+
+// Delete blog post (authenticated)
+app.delete("/api/blogPosts/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+    
+    const profile = await Profile.findOne()
+    
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+    
+    // Check if index is valid
+    if (index < 0 || index >= profile.blogPosts.length) {
+      return res.status(400).json({ message: "Invalid blog post index" })
+    }
+    
+    // Remove blog post
+    profile.blogPosts.splice(index, 1)
+    profile.updatedAt = new Date()
+    
+    await profile.save()
+    
+    res.json({
+      message: "Blog post deleted successfully",
+      profile
+    })
+  } catch (error) {
+    console.error("Error deleting blog post:", error)
+    res.status(500).json({ message: "Failed to delete blog post", error: error.message })
   }
 })
 
@@ -996,7 +1364,7 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
   }
 })
 
-// Route for all HTML pages - UPDATED to include /contact
+// Route for all HTML pages
 app.get(["/", "/custom-web/login", "/custom-web/admin", "/contact"], (req, res) => {
   const requestPath = req.path;
   
