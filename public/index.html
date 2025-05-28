@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Custom Web Profile</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-    :root {
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Custom Web Profile</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      :root {
         --primary-color: #4f46e5;
         --text-color: #333;
         --bg-color: #fff;
@@ -20,42 +26,42 @@
         --faq-bg: #ffffff;
         --contact-bg: #f9fafb;
         --header-height: 70px;
-    }
-    
-    * {
+      }
+
+      * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-    }
-    
-    body {
-        font-family: 'Inter', sans-serif;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--bg-color);
         padding-top: var(--header-height);
-    }
+      }
 
-    /* Header Styles */
-    .header {
+      /* Header Styles - UPDATED to match body color */
+      .header {
         position: fixed;
         top: 0;
         left: 0;
         right: 0;
         height: var(--header-height);
-        background-color: rgba(255, 255, 255, 0.95);
+        background-color: var(--bg-color);
         backdrop-filter: blur(10px);
         border-bottom: 1px solid var(--border-color);
         z-index: 1000;
         transition: all 0.3s ease;
-    }
+      }
 
-    .header.scrolled {
-        background-color: rgba(255, 255, 255, 0.98);
+      .header.scrolled {
+        background-color: var(--bg-color);
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
+      }
 
-    .header-container {
+      .header-container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 2rem;
@@ -63,9 +69,9 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-    }
+      }
 
-    .header-logo {
+      .header-logo {
         display: flex;
         align-items: center;
         gap: 0.75rem;
@@ -74,27 +80,27 @@
         font-weight: 600;
         font-size: 1.1rem;
         transition: all 0.3s ease;
-    }
+      }
 
-    .header-logo:hover {
+      .header-logo:hover {
         color: var(--primary-color);
-    }
+      }
 
-    .header-favicon {
+      .header-favicon {
         width: 40px;
         height: 40px;
         border-radius: 50%;
         object-fit: cover;
         border: 2px solid var(--primary-color);
         transition: all 0.3s ease;
-    }
+      }
 
-    .header-favicon:hover {
+      .header-favicon:hover {
         transform: scale(1.05);
         box-shadow: 0 4px 8px rgba(79, 70, 229, 0.3);
-    }
+      }
 
-    .share-button {
+      .share-button {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -108,20 +114,20 @@
         font-size: 1.2rem;
         transition: all 0.3s ease;
         box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
-    }
+      }
 
-    .share-button:hover {
+      .share-button:hover {
         background-color: #4338ca;
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
-    }
+      }
 
-    .share-button:active {
+      .share-button:active {
         transform: scale(0.95);
-    }
+      }
 
-    /* Share Modal Styles */
-    .share-modal {
+      /* Share Modal Styles */
+      .share-modal {
         display: none;
         position: fixed;
         top: 0;
@@ -133,13 +139,13 @@
         justify-content: center;
         align-items: center;
         backdrop-filter: blur(5px);
-    }
+      }
 
-    .share-modal.active {
+      .share-modal.active {
         display: flex;
-    }
+      }
 
-    .share-modal-content {
+      .share-modal-content {
         background-color: var(--bg-color);
         border-radius: 1rem;
         padding: 2rem;
@@ -148,26 +154,26 @@
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
         transform: scale(0.9);
         transition: all 0.3s ease;
-    }
+      }
 
-    .share-modal.active .share-modal-content {
+      .share-modal.active .share-modal-content {
         transform: scale(1);
-    }
+      }
 
-    .share-modal-header {
+      .share-modal-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 1.5rem;
-    }
+      }
 
-    .share-modal-title {
+      .share-modal-title {
         font-size: 1.5rem;
         font-weight: 600;
         color: var(--text-color);
-    }
+      }
 
-    .share-modal-close {
+      .share-modal-close {
         background: none;
         border: none;
         font-size: 1.5rem;
@@ -176,21 +182,21 @@
         padding: 0.5rem;
         border-radius: 50%;
         transition: all 0.3s ease;
-    }
+      }
 
-    .share-modal-close:hover {
+      .share-modal-close:hover {
         background-color: var(--secondary-bg);
         color: var(--text-color);
-    }
+      }
 
-    .share-options {
+      .share-options {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
         gap: 1rem;
         margin-bottom: 1.5rem;
-    }
+      }
 
-    .share-option {
+      .share-option {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -204,42 +210,42 @@
         cursor: pointer;
         border: none;
         font-family: inherit;
-    }
+      }
 
-    .share-option:hover {
+      .share-option:hover {
         background-color: var(--primary-color);
         color: white;
         transform: translateY(-2px);
-    }
+      }
 
-    .share-option-icon {
+      .share-option-icon {
         font-size: 1.5rem;
-    }
+      }
 
-    .share-option-text {
+      .share-option-text {
         font-size: 0.8rem;
         font-weight: 500;
-    }
+      }
 
-    .share-url-container {
+      .share-url-container {
         margin-top: 1rem;
         padding-top: 1rem;
         border-top: 1px solid var(--border-color);
-    }
+      }
 
-    .share-url-label {
+      .share-url-label {
         font-size: 0.9rem;
         font-weight: 500;
         margin-bottom: 0.5rem;
         color: var(--text-color);
-    }
+      }
 
-    .share-url-input-container {
+      .share-url-input-container {
         display: flex;
         gap: 0.5rem;
-    }
+      }
 
-    .share-url-input {
+      .share-url-input {
         flex: 1;
         padding: 0.75rem;
         border: 1px solid var(--border-color);
@@ -247,9 +253,9 @@
         font-size: 0.9rem;
         background-color: var(--secondary-bg);
         color: var(--text-color);
-    }
+      }
 
-    .copy-url-button {
+      .copy-url-button {
         padding: 0.75rem 1rem;
         background-color: var(--primary-color);
         color: white;
@@ -259,18 +265,18 @@
         font-size: 0.9rem;
         font-weight: 500;
         transition: all 0.3s ease;
-    }
+      }
 
-    .copy-url-button:hover {
+      .copy-url-button:hover {
         background-color: #4338ca;
-    }
+      }
 
-    .copy-url-button.copied {
+      .copy-url-button.copied {
         background-color: var(--success-color);
-    }
-    
-    /* Loading Screen Styles */
-    .loading-screen {
+      }
+
+      /* Loading Screen Styles */
+      .loading-screen {
         position: fixed;
         top: 0;
         left: 0;
@@ -283,49 +289,53 @@
         align-items: center;
         z-index: 9999;
         transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
-    }
-    
-    .loading-screen.hidden {
+      }
+
+      .loading-screen.hidden {
         opacity: 0;
         visibility: hidden;
-    }
-    
-    .loading-spinner {
+      }
+
+      .loading-spinner {
         width: 60px;
         height: 60px;
         border: 4px solid rgba(79, 70, 229, 0.2);
         border-top: 4px solid var(--primary-color);
         border-radius: 50%;
         animation: spin 1s linear infinite;
-    }
-    
-    @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-    }
-    
-    /* Main Content Styles */
-    .main-content {
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Main Content Styles */
+      .main-content {
         opacity: 0;
         transition: opacity 0.5s ease-in;
-    }
-    
-    .main-content.loaded {
+      }
+
+      .main-content.loaded {
         opacity: 1;
-    }
-    
-    .container {
+      }
+
+      .container {
         max-width: 1200px;
         margin: 0 auto;
         padding: 2rem;
-    }
-    
-    header {
+      }
+
+      header {
         text-align: center;
         margin-bottom: 3rem;
-    }
-    
-    .profile-image {
+      }
+
+      .profile-image {
         width: 150px;
         height: 150px;
         border-radius: 50%;
@@ -333,56 +343,56 @@
         margin-bottom: 1.5rem;
         border: 3px solid var(--primary-color);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-    
-    .profile-name {
+      }
+
+      .profile-name {
         font-size: 2.5rem;
         font-weight: 700;
         margin-bottom: 0.5rem;
         color: var(--text-color);
-    }
-    
-    .profile-description {
+      }
+
+      .profile-description {
         font-size: 1.1rem;
         max-width: 700px;
         margin: 0 auto 2rem;
         color: #666;
-    }
-    
-    .section-title {
+      }
+
+      .section-title {
         font-size: 1.8rem;
         font-weight: 600;
         margin-bottom: 1.5rem;
         text-align: center;
-    }
-    
-    .services-section {
+      }
+
+      .services-section {
         padding: 3rem 0;
         background-color: var(--services-bg);
         margin-bottom: 3rem;
-    }
-    
-    .services-grid {
+      }
+
+      .services-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
         gap: 2rem;
         margin-bottom: 1rem;
-    }
-    
-    .service-card {
+      }
+
+      .service-card {
         background-color: var(--secondary-bg);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    
-    .service-card:hover {
+      }
+
+      .service-card:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-    }
-    
-    .service-icon {
+      }
+
+      .service-icon {
         width: 50px;
         height: 50px;
         border-radius: 50%;
@@ -393,34 +403,34 @@
         justify-content: center;
         margin-bottom: 1rem;
         font-size: 1.5rem;
-    }
-    
-    .service-title {
+      }
+
+      .service-title {
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
         color: var(--text-color);
-    }
-    
-    .service-description {
+      }
+
+      .service-description {
         color: #666;
         font-size: 0.95rem;
-    }
-    
-    .gallery-section {
+      }
+
+      .gallery-section {
         padding: 3rem 0;
         background-color: var(--gallery-bg);
         margin-bottom: 3rem;
-    }
-    
-    .gallery {
+      }
+
+      .gallery {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 1.5rem;
         margin-bottom: 1rem;
-    }
-    
-    .gallery-item {
+      }
+
+      .gallery-item {
         position: relative;
         border-radius: 0.5rem;
         overflow: hidden;
@@ -428,28 +438,28 @@
         cursor: pointer;
         transition: transform 0.3s ease;
         aspect-ratio: 3/2;
-    }
-    
-    .gallery-item:hover {
+      }
+
+      .gallery-item:hover {
         transform: translateY(-5px);
-    }
-    
-    .gallery-image {
+      }
+
+      .gallery-image {
         width: 100%;
         height: 100%;
         object-fit: cover;
-    }
-    
-    .links-container {
+      }
+
+      .links-container {
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
         gap: 1rem;
         margin: 2rem auto;
         max-width: 600px;
-    }
-    
-    .social-link {
+      }
+
+      .social-link {
         display: flex;
         align-items: center;
         padding: 0.5rem 1rem;
@@ -459,63 +469,65 @@
         text-decoration: none;
         font-weight: 500;
         transition: all 0.3s ease;
-    }
-    
-    .social-link:hover {
+      }
+
+      .social-link:hover {
         background-color: var(--primary-color);
         color: white;
-    }
-    
-    .social-link i {
+      }
+
+      .social-link i {
         margin-right: 0.5rem;
-    }
-    
-    .contact-section {
+      }
+
+      .contact-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
         background-color: var(--contact-bg);
-    }
-    
-    .contact-form {
+      }
+
+      .contact-form {
         max-width: 600px;
         margin: 0 auto;
         background-color: var(--secondary-bg);
         padding: 2rem;
         border-radius: 0.75rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    .form-group {
+      }
+
+      .form-group {
         margin-bottom: 1.5rem;
-    }
-    
-    .form-label {
+      }
+
+      .form-label {
         display: block;
         margin-bottom: 0.5rem;
         font-weight: 500;
-    }
-    
-    .form-input, .form-textarea {
+      }
+
+      .form-input,
+      .form-textarea {
         width: 100%;
         padding: 0.75rem;
         border: 1px solid var(--border-color);
         border-radius: 0.5rem;
         font-size: 1rem;
         transition: border-color 0.3s ease;
-    }
-    
-    .form-textarea {
+      }
+
+      .form-textarea {
         min-height: 150px;
         resize: vertical;
-    }
-    
-    .form-input:focus, .form-textarea:focus {
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-    }
-    
-    .submit-button {
+      }
+
+      .submit-button {
         display: inline-flex;
         align-items: center;
         justify-content: center;
@@ -528,18 +540,18 @@
         border: none;
         cursor: pointer;
         transition: background-color 0.3s ease;
-    }
-    
-    .submit-button:hover {
+      }
+
+      .submit-button:hover {
         background-color: #4338ca;
-    }
-    
-    .submit-button:disabled {
+      }
+
+      .submit-button:disabled {
         background-color: #9ca3af;
         cursor: not-allowed;
-    }
-    
-    .loading {
+      }
+
+      .loading {
         display: inline-block;
         width: 1rem;
         height: 1rem;
@@ -548,29 +560,29 @@
         border-top-color: white;
         animation: spin 1s ease-in-out infinite;
         margin-right: 0.5rem;
-    }
-    
-    .alert {
+      }
+
+      .alert {
         padding: 1rem;
         border-radius: 0.5rem;
         margin-bottom: 1.5rem;
         display: none;
-    }
-    
-    .alert-success {
+      }
+
+      .alert-success {
         background-color: #d1fae5;
         color: #065f46;
         border: 1px solid #34d399;
-    }
-    
-    .alert-error {
+      }
+
+      .alert-error {
         background-color: #fee2e2;
         color: #b91c1c;
         border: 1px solid #f87171;
-    }
-    
-    /* Enhanced Modal Styles */
-    .modal {
+      }
+
+      /* Enhanced Modal Styles */
+      .modal {
         display: none;
         position: fixed;
         top: 0;
@@ -581,26 +593,26 @@
         z-index: 1000;
         justify-content: center;
         align-items: center;
-    }
-    
-    .modal-content {
+      }
+
+      .modal-content {
         position: relative;
         max-width: 95%;
         max-height: 95%;
         display: flex;
         align-items: center;
         justify-content: center;
-    }
-    
-    .modal-image {
+      }
+
+      .modal-image {
         max-width: 100%;
         max-height: 90vh;
         object-fit: contain;
         border-radius: 8px;
         box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
-    }
-    
-    .modal-nav {
+      }
+
+      .modal-nav {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
@@ -617,28 +629,28 @@
         color: #333;
         transition: all 0.3s ease;
         z-index: 1001;
-    }
-    
-    .modal-nav:hover {
+      }
+
+      .modal-nav:hover {
         background-color: white;
         transform: translateY(-50%) scale(1.1);
-    }
-    
-    .modal-nav:disabled {
+      }
+
+      .modal-nav:disabled {
         opacity: 0.5;
         cursor: not-allowed;
         transform: translateY(-50%) scale(1);
-    }
-    
-    .modal-nav.prev {
+      }
+
+      .modal-nav.prev {
         left: 20px;
-    }
-    
-    .modal-nav.next {
+      }
+
+      .modal-nav.next {
         right: 20px;
-    }
-    
-    .close-modal {
+      }
+
+      .close-modal {
         position: absolute;
         top: 20px;
         right: 20px;
@@ -655,14 +667,14 @@
         color: #333;
         transition: all 0.3s ease;
         z-index: 1001;
-    }
-    
-    .close-modal:hover {
+      }
+
+      .close-modal:hover {
         background-color: white;
         transform: scale(1.1);
-    }
-    
-    .modal-counter {
+      }
+
+      .modal-counter {
         position: absolute;
         bottom: 20px;
         left: 50%;
@@ -673,9 +685,9 @@
         border-radius: 20px;
         font-size: 0.9rem;
         z-index: 1001;
-    }
-    
-    .modal-title {
+      }
+
+      .modal-title {
         position: absolute;
         top: 20px;
         left: 20px;
@@ -686,21 +698,22 @@
         font-size: 0.9rem;
         max-width: calc(100% - 120px);
         z-index: 1001;
-    }
-    
-    .info-section {
+      }
+
+      .info-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
         background-color: var(--secondary-bg);
-    }
-    
-    .info-grid {
+      }
+
+      .info-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 2rem;
-    }
-    
-    .info-card {
+      }
+
+      /* UPDATED: Contact Information cards with hover animation like services */
+      .info-card {
         background-color: var(--bg-color);
         border-radius: 0.75rem;
         padding: 1.5rem;
@@ -709,9 +722,20 @@
         flex-direction: column;
         align-items: center;
         text-align: center;
-    }
-    
-    .info-icon {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .info-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Asegurar que los enlaces mantengan su color en hover del card */
+      .info-card:hover .info-content a {
+        color: var(--primary-color);
+      }
+
+      .info-icon {
         width: 50px;
         height: 50px;
         border-radius: 50%;
@@ -722,38 +746,62 @@
         justify-content: center;
         margin-bottom: 1rem;
         font-size: 1.5rem;
-    }
-    
-    .info-title {
+      }
+
+      .info-title {
         font-size: 1.1rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-    }
-    
-    .info-content {
+      }
+
+      .info-content {
         color: #666;
-    }
-    
-    .faq-section {
+      }
+
+      /* NUEVO: Estilos para enlaces en contact information */
+      .info-content a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-weight: 500;
+        transition: opacity 0.3s ease;
+      }
+
+      .info-content a:hover {
+        opacity: 0.8;
+        color: var(--primary-color); /* Mantiene el color del perfil */
+      }
+
+      .info-content a:visited {
+        color: var(--primary-color); /* Mantiene el color después de visitado */
+      }
+
+      .info-content a:focus {
+        color: var(--primary-color);
+        outline: 2px solid var(--primary-color);
+        outline-offset: 2px;
+        border-radius: 2px;
+      }
+
+      .faq-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
         background-color: var(--faq-bg);
-    }
-    
-    .faq-container {
+      }
+
+      .faq-container {
         max-width: 800px;
         margin: 0 auto;
-    }
-    
-    .faq-item {
+      }
+
+      .faq-item {
         margin-bottom: 1.5rem;
         border: 1px solid var(--border-color);
         border-radius: 0.75rem;
         overflow: hidden;
         transition: all 0.3s ease;
-    }
-    
-    .faq-question {
+      }
+
+      .faq-question {
         padding: 1.25rem;
         background-color: var(--secondary-bg);
         font-weight: 600;
@@ -761,361 +809,449 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-    }
-    
-    .faq-question:hover {
+      }
+
+      .faq-question:hover {
         background-color: rgba(79, 70, 229, 0.05);
-    }
-    
-    .faq-answer {
+      }
+
+      .faq-answer {
         padding: 0;
         max-height: 0;
         overflow: hidden;
         transition: all 0.3s ease;
-    }
-    
-    .faq-answer-content {
+      }
+
+      .faq-answer-content {
         padding: 0 1.25rem 1.25rem;
         color: #666;
-    }
-    
-    .faq-item.active {
+      }
+
+      .faq-item.active {
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    }
-    
-    .faq-item.active .faq-answer {
+      }
+
+      .faq-item.active .faq-answer {
         max-height: 1000px;
         transition: max-height 0.5s ease;
-    }
-    
-    .footer {
+      }
+
+      .footer {
         text-align: center;
         margin-top: 4rem;
         padding-top: 2rem;
         border-top: 1px solid var(--border-color);
         color: #666;
         font-size: 0.9rem;
-    }
-    
-    .hidden {
+      }
+
+      .hidden {
         display: none;
-    }
-    
-    @media (max-width: 768px) {
+      }
+
+      @media (max-width: 768px) {
         .header-container {
-            padding: 0 1rem;
+          padding: 0 1rem;
         }
 
         .header-favicon {
-            width: 35px;
-            height: 35px;
+          width: 35px;
+          height: 35px;
         }
 
         .share-button {
-            width: 40px;
-            height: 40px;
-            font-size: 1.1rem;
+          width: 40px;
+          height: 40px;
+          font-size: 1.1rem;
         }
 
         .share-modal-content {
-            padding: 1.5rem;
+          padding: 1.5rem;
         }
 
         .share-options {
-            grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(3, 1fr);
         }
-        
+
         .container {
-            padding: 1rem;
+          padding: 1rem;
         }
-        
+
         .profile-name {
-            font-size: 2rem;
+          font-size: 2rem;
         }
-        
+
         .services-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
+          grid-template-columns: 1fr;
+          gap: 1rem;
         }
-        
+
         .gallery {
-            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-            gap: 1rem;
+          grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+          gap: 1rem;
         }
-        
+
         .info-grid {
-            grid-template-columns: 1fr;
+          grid-template-columns: 1fr;
         }
-        
+
         .modal-nav {
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
         }
-        
+
         .modal-nav.prev {
-            left: 10px;
+          left: 10px;
         }
-        
+
         .modal-nav.next {
-            right: 10px;
+          right: 10px;
         }
-        
+
         .close-modal {
-            top: 10px;
-            right: 10px;
-            width: 40px;
-            height: 40px;
-            font-size: 1.2rem;
+          top: 10px;
+          right: 10px;
+          width: 40px;
+          height: 40px;
+          font-size: 1.2rem;
         }
-        
+
         .modal-title {
-            top: 10px;
-            left: 10px;
-            font-size: 0.8rem;
-            max-width: calc(100% - 80px);
+          top: 10px;
+          left: 10px;
+          font-size: 0.8rem;
+          max-width: calc(100% - 80px);
         }
-        
+
         .modal-counter {
-            bottom: 10px;
-            font-size: 0.8rem;
+          bottom: 10px;
+          font-size: 0.8rem;
         }
-    }
-</style>
-</head>
-<body>
-<!-- Header -->
-<div class="header" id="header">
-    <div class="header-container">
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header" id="header">
+      <div class="header-container">
         <a href="#" class="header-logo" id="header-logo">
-            <img src="/images/profile.jpg" alt="Favicon" class="header-favicon" id="header-favicon">
-            <span id="header-name">Profile</span>
+          <img
+            src="/images/profile.jpg"
+            alt="Favicon"
+            class="header-favicon"
+            id="header-favicon"
+          />
+          <span id="header-name">Profile</span>
         </a>
-        
-        <button class="share-button" id="share-button" title="Share this profile">
-            <i class="fas fa-share-alt"></i>
+
+        <button
+          class="share-button"
+          id="share-button"
+          title="Share this profile"
+        >
+          <i class="fas fa-share-alt"></i>
         </button>
+      </div>
     </div>
-</div>
 
-<!-- Share Modal -->
-<div class="share-modal" id="share-modal">
-    <div class="share-modal-content">
+    <!-- Share Modal -->
+    <div class="share-modal" id="share-modal">
+      <div class="share-modal-content">
         <div class="share-modal-header">
-            <h3 class="share-modal-title">Share Profile</h3>
-            <button class="share-modal-close" id="share-modal-close">
-                <i class="fas fa-times"></i>
-            </button>
+          <h3 class="share-modal-title">Share Profile</h3>
+          <button class="share-modal-close" id="share-modal-close">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
-        
+
         <div class="share-options">
-            <button class="share-option" id="share-native" title="Share via device">
-                <i class="fas fa-share-alt share-option-icon"></i>
-                <span class="share-option-text">Share</span>
-            </button>
-            
-            <a class="share-option" id="share-twitter" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-twitter share-option-icon"></i>
-                <span class="share-option-text">Twitter</span>
-            </a>
-            
-            <a class="share-option" id="share-facebook" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-facebook-f share-option-icon"></i>
-                <span class="share-option-text">Facebook</span>
-            </a>
-            
-            <a class="share-option" id="share-linkedin" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-linkedin-in share-option-icon"></i>
-                <span class="share-option-text">LinkedIn</span>
-            </a>
-            
-            <a class="share-option" id="share-whatsapp" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-whatsapp share-option-icon"></i>
-                <span class="share-option-text">WhatsApp</span>
-            </a>
-            
-            <a class="share-option" id="share-telegram" target="_blank" rel="noopener noreferrer">
-                <i class="fab fa-telegram-plane share-option-icon"></i>
-                <span class="share-option-text">Telegram</span>
-            </a>
+          <button
+            class="share-option"
+            id="share-native"
+            title="Share via device"
+          >
+            <i class="fas fa-share-alt share-option-icon"></i>
+            <span class="share-option-text">Share</span>
+          </button>
+
+          <a
+            class="share-option"
+            id="share-twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-twitter share-option-icon"></i>
+            <span class="share-option-text">Twitter</span>
+          </a>
+
+          <a
+            class="share-option"
+            id="share-facebook"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-facebook-f share-option-icon"></i>
+            <span class="share-option-text">Facebook</span>
+          </a>
+
+          <a
+            class="share-option"
+            id="share-linkedin"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-linkedin-in share-option-icon"></i>
+            <span class="share-option-text">LinkedIn</span>
+          </a>
+
+          <a
+            class="share-option"
+            id="share-whatsapp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-whatsapp share-option-icon"></i>
+            <span class="share-option-text">WhatsApp</span>
+          </a>
+
+          <a
+            class="share-option"
+            id="share-telegram"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <i class="fab fa-telegram-plane share-option-icon"></i>
+            <span class="share-option-text">Telegram</span>
+          </a>
         </div>
-        
+
         <div class="share-url-container">
-            <div class="share-url-label">Copy Link</div>
-            <div class="share-url-input-container">
-                <input type="text" class="share-url-input" id="share-url-input" readonly>
-                <button class="copy-url-button" id="copy-url-button">Copy</button>
-            </div>
+          <div class="share-url-label">Copy Link</div>
+          <div class="share-url-input-container">
+            <input
+              type="text"
+              class="share-url-input"
+              id="share-url-input"
+              readonly
+            />
+            <button class="copy-url-button" id="copy-url-button">Copy</button>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-<!-- Loading Screen -->
-<div class="loading-screen" id="loading-screen">
-    <div class="loading-spinner"></div>
-</div>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+      <div class="loading-spinner"></div>
+    </div>
 
-<!-- Main Content -->
-<div class="main-content" id="main-content">
-    <div class="container">
+    <!-- Main Content -->
+    <div class="main-content" id="main-content">
+      <div class="container">
         <header>
-            <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
-            <h1 class="profile-name" id="profile-name">John Doe</h1>
-            <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
+          <img
+            src="/images/profile.jpg"
+            alt="Profile"
+            class="profile-image"
+            id="profile-image"
+          />
+          <h1 class="profile-name" id="profile-name">John Doe</h1>
+          <p class="profile-description" id="profile-description">
+            Welcome to my personal profile! I'm a passionate web developer with
+            expertise in creating responsive and user-friendly websites. Feel
+            free to browse through my work and get in touch if you'd like to
+            collaborate.
+          </p>
         </header>
-        
-        <div class="links-container" id="links-container">
-            <!-- Social links will be loaded dynamically -->
-        </div>
-        
-        <section id="services-section" class="services-section">
-            <div class="container">
-                <h2 class="section-title" id="services-title">My Services</h2>
-                <div class="services-grid" id="services-grid">
-                    <!-- Services will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
-        
-        <section id="gallery-section" class="gallery-section">
-            <div class="container">
-                <h2 class="section-title" id="gallery-title">My Gallery</h2>
-                <div class="gallery" id="gallery">
-                    <!-- Gallery images will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
-        
-        <section id="faq-section" class="faq-section">
-            <div class="container">
-                <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
-                <div class="faq-container" id="faq-container">
-                    <!-- FAQs will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
-        
-        <section id="info-section" class="info-section">
-            <div class="container">
-                <h2 class="section-title" id="info-title">Contact Information</h2>
-                <div class="info-grid" id="info-grid">
-                    <!-- Contact info will be loaded dynamically -->
-                </div>
-            </div>
-        </section>
-        
-        <section id="contact-section" class="contact-section">
-            <div class="container">
-                <h2 class="section-title" id="contact-title">Contact Me</h2>
-                <div class="contact-form">
-                    <div class="alert alert-success" id="success-alert">
-                        Your message has been sent successfully! I'll get back to you soon.
-                    </div>
-                    <div class="alert alert-error" id="error-alert">
-                        There was an error sending your message. Please try again.
-                    </div>
-                    <form id="contact-form">
-                        <div class="form-group">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message" class="form-label">Message</label>
-                            <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message" required></textarea>
-                        </div>
-                        <button type="submit" class="submit-button" id="submit-button">
-                            <span id="loading" class="loading hidden"></span>
-                            <span id="button-text">Send Message</span>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </section>
-    </div>
 
-    <!-- Enhanced Modal -->
-    <div class="modal" id="image-modal">
+        <div class="links-container" id="links-container">
+          <!-- Social links will be loaded dynamically -->
+        </div>
+
+        <section id="services-section" class="services-section">
+          <div class="container">
+            <h2 class="section-title" id="services-title">My Services</h2>
+            <div class="services-grid" id="services-grid">
+              <!-- Services will be loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <section id="gallery-section" class="gallery-section">
+          <div class="container">
+            <h2 class="section-title" id="gallery-title">My Gallery</h2>
+            <div class="gallery" id="gallery">
+              <!-- Gallery images will be loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <section id="faq-section" class="faq-section">
+          <div class="container">
+            <h2 class="section-title" id="faq-title">
+              Frequently Asked Questions
+            </h2>
+            <div class="faq-container" id="faq-container">
+              <!-- FAQs will be loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <section id="info-section" class="info-section">
+          <div class="container">
+            <h2 class="section-title" id="info-title">Contact Information</h2>
+            <div class="info-grid" id="info-grid">
+              <!-- Contact info will be loaded dynamically -->
+            </div>
+          </div>
+        </section>
+
+        <section id="contact-section" class="contact-section">
+          <div class="container">
+            <h2 class="section-title" id="contact-title">Contact Me</h2>
+            <div class="contact-form">
+              <div class="alert alert-success" id="success-alert">
+                Your message has been sent successfully! I'll get back to you
+                soon.
+              </div>
+              <div class="alert alert-error" id="error-alert">
+                There was an error sending your message. Please try again.
+              </div>
+              <form id="contact-form">
+                <div class="form-group">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-input"
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-textarea"
+                    placeholder="Enter your message"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="submit-button" id="submit-button">
+                  <span id="loading" class="loading hidden"></span>
+                  <span id="button-text">Send Message</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Enhanced Modal -->
+      <div class="modal" id="image-modal">
         <div class="modal-title" id="modal-title">Gallery Image</div>
         <button class="close-modal" id="close-modal">
-            <i class="fas fa-times"></i>
+          <i class="fas fa-times"></i>
         </button>
         <button class="modal-nav prev" id="prev-image">
-            <i class="fas fa-chevron-left"></i>
+          <i class="fas fa-chevron-left"></i>
         </button>
         <button class="modal-nav next" id="next-image">
-            <i class="fas fa-chevron-right"></i>
+          <i class="fas fa-chevron-right"></i>
         </button>
         <div class="modal-content">
-            <img src="/placeholder.svg" alt="Gallery Image" class="modal-image" id="modal-image">
+          <img
+            src="/placeholder.svg"
+            alt="Gallery Image"
+            class="modal-image"
+            id="modal-image"
+          />
         </div>
         <div class="modal-counter" id="modal-counter">1 / 1</div>
+      </div>
+
+      <footer class="footer">
+        <p>
+          &copy; <span id="current-year"></span>
+          <span id="footer-name">Custom Web Profile</span>. All rights reserved.
+        </p>
+      </footer>
     </div>
 
-    <footer class="footer">
-        <p>&copy; <span id="current-year"></span> <span id="footer-name">Custom Web Profile</span>. All rights reserved.</p>
-    </footer>
-</div>
+    <script>
+      // Loading management
+      let isDataLoaded = false;
+      let isImagesLoaded = false;
+      let galleryImages = [];
+      let currentImageIndex = 0;
+      let profileData = {};
 
-<script>
-    // Loading management
-    let isDataLoaded = false;
-    let isImagesLoaded = false;
-    let galleryImages = [];
-    let currentImageIndex = 0;
-    let profileData = {};
-    
-    // Set current year in footer
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+      // Set current year in footer
+      document.getElementById("current-year").textContent =
+        new Date().getFullYear();
 
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-        const header = document.getElementById('header');
+      // Header scroll effect
+      window.addEventListener("scroll", () => {
+        const header = document.getElementById("header");
         if (window.scrollY > 50) {
-            header.classList.add('scrolled');
+          header.classList.add("scrolled");
         } else {
-            header.classList.remove('scrolled');
+          header.classList.remove("scrolled");
         }
-    });
+      });
 
-    // Share functionality
-    const shareButton = document.getElementById('share-button');
-    const shareModal = document.getElementById('share-modal');
-    const shareModalClose = document.getElementById('share-modal-close');
-    const shareUrlInput = document.getElementById('share-url-input');
-    const copyUrlButton = document.getElementById('copy-url-button');
+      // Share functionality
+      const shareButton = document.getElementById("share-button");
+      const shareModal = document.getElementById("share-modal");
+      const shareModalClose = document.getElementById("share-modal-close");
+      const shareUrlInput = document.getElementById("share-url-input");
+      const copyUrlButton = document.getElementById("copy-url-button");
 
-    // Share button click
-    shareButton.addEventListener('click', () => {
+      // Share button click
+      shareButton.addEventListener("click", () => {
         openShareModal();
-    });
+      });
 
-    // Close share modal
-    shareModalClose.addEventListener('click', () => {
+      // Close share modal
+      shareModalClose.addEventListener("click", () => {
         closeShareModal();
-    });
+      });
 
-    // Close modal when clicking outside
-    shareModal.addEventListener('click', (e) => {
+      // Close modal when clicking outside
+      shareModal.addEventListener("click", (e) => {
         if (e.target === shareModal) {
-            closeShareModal();
+          closeShareModal();
         }
-    });
+      });
 
-    // ESC key to close modal
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && shareModal.classList.contains('active')) {
-            closeShareModal();
+      // ESC key to close modal
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && shareModal.classList.contains("active")) {
+          closeShareModal();
         }
-    });
+      });
 
-    function openShareModal() {
+      function openShareModal() {
         const currentUrl = window.location.href;
-        const title = profileData.name ? `${profileData.name} - Profile` : 'Check out this profile';
-        const description = profileData.description || 'Amazing profile to check out!';
+        const title = profileData.name
+          ? `${profileData.name} - Profile`
+          : "Check out this profile";
+        const description =
+          profileData.description || "Amazing profile to check out!";
 
         // Set URL in input
         shareUrlInput.value = currentUrl;
@@ -1124,637 +1260,692 @@
         updateShareLinks(currentUrl, title, description);
 
         // Show modal
-        shareModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    }
+        shareModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
 
-    function closeShareModal() {
-        shareModal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-        
+      function closeShareModal() {
+        shareModal.classList.remove("active");
+        document.body.style.overflow = "auto";
+
         // Reset copy button
-        copyUrlButton.textContent = 'Copy';
-        copyUrlButton.classList.remove('copied');
-    }
+        copyUrlButton.textContent = "Copy";
+        copyUrlButton.classList.remove("copied");
+      }
 
-    function updateShareLinks(url, title, description) {
+      function updateShareLinks(url, title, description) {
         const encodedUrl = encodeURIComponent(url);
         const encodedTitle = encodeURIComponent(title);
         const encodedDescription = encodeURIComponent(description);
 
         // Twitter
-        document.getElementById('share-twitter').href = 
-            `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
+        document.getElementById(
+          "share-twitter"
+        ).href = `https://twitter.com/intent/tweet?url=${encodedUrl}&text=${encodedTitle}`;
 
-        // Facebook
-        document.getElementById('share-facebook').href = 
-            `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}`;
+        // Facebook - FIXED
+        document.getElementById(
+          "share-facebook"
+        ).href = `https://www.facebook.com/sharer/sharer.php?u=${encodedUrl}&quote=${encodedTitle}`;
 
         // LinkedIn
-        document.getElementById('share-linkedin').href = 
-            `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
+        document.getElementById(
+          "share-linkedin"
+        ).href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}`;
 
         // WhatsApp
-        document.getElementById('share-whatsapp').href = 
-            `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
+        document.getElementById(
+          "share-whatsapp"
+        ).href = `https://wa.me/?text=${encodedTitle}%20${encodedUrl}`;
 
         // Telegram
-        document.getElementById('share-telegram').href = 
-            `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
-    }
+        document.getElementById(
+          "share-telegram"
+        ).href = `https://t.me/share/url?url=${encodedUrl}&text=${encodedTitle}`;
+      }
 
-    // Native share API
-    document.getElementById('share-native').addEventListener('click', async () => {
-        if (navigator.share) {
+      // Native share API
+      document
+        .getElementById("share-native")
+        .addEventListener("click", async () => {
+          if (navigator.share) {
             try {
-                await navigator.share({
-                    title: profileData.name ? `${profileData.name} - Profile` : 'Check out this profile',
-                    text: profileData.description || 'Amazing profile to check out!',
-                    url: window.location.href
-                });
-                closeShareModal();
+              await navigator.share({
+                title: profileData.name
+                  ? `${profileData.name} - Profile`
+                  : "Check out this profile",
+                text:
+                  profileData.description || "Amazing profile to check out!",
+                url: window.location.href,
+              });
+              closeShareModal();
             } catch (error) {
-                console.log('Error sharing:', error);
-                // Fallback to copy URL
-                copyToClipboard();
+              console.log("Error sharing:", error);
+              // Fallback to copy URL
+              copyToClipboard();
             }
-        } else {
+          } else {
             // Fallback to copy URL
             copyToClipboard();
-        }
-    });
-
-    // Copy URL functionality
-    copyUrlButton.addEventListener('click', () => {
-        copyToClipboard();
-    });
-
-    async function copyToClipboard() {
-        try {
-            await navigator.clipboard.writeText(shareUrlInput.value);
-            copyUrlButton.textContent = 'Copied!';
-            copyUrlButton.classList.add('copied');
-            
-            setTimeout(() => {
-                copyUrlButton.textContent = 'Copy';
-                copyUrlButton.classList.remove('copied');
-            }, 2000);
-        } catch (error) {
-            // Fallback for older browsers
-            shareUrlInput.select();
-            document.execCommand('copy');
-            copyUrlButton.textContent = 'Copied!';
-            copyUrlButton.classList.add('copied');
-            
-            setTimeout(() => {
-                copyUrlButton.textContent = 'Copy';
-                copyUrlButton.classList.remove('copied');
-            }, 2000);
-        }
-    }
-    
-    // Hide loading screen when everything is ready
-    function hideLoadingScreen() {
-        if (isDataLoaded && isImagesLoaded) {
-            const loadingScreen = document.getElementById('loading-screen');
-            const mainContent = document.getElementById('main-content');
-            
-            setTimeout(() => {
-                loadingScreen.classList.add('hidden');
-                mainContent.classList.add('loaded');
-            }, 300);
-        }
-    }
-    
-    // Check if all images are loaded
-    function checkImagesLoaded() {
-        const images = document.querySelectorAll('img');
-        let loadedCount = 0;
-        
-        if (images.length === 0) {
-            isImagesLoaded = true;
-            hideLoadingScreen();
-            return;
-        }
-        
-        images.forEach(img => {
-            if (img.complete) {
-                loadedCount++;
-            } else {
-                img.addEventListener('load', () => {
-                    loadedCount++;
-                    if (loadedCount === images.length) {
-                        isImagesLoaded = true;
-                        hideLoadingScreen();
-                    }
-                });
-                
-                img.addEventListener('error', () => {
-                    loadedCount++;
-                    if (loadedCount === images.length) {
-                        isImagesLoaded = true;
-                        hideLoadingScreen();
-                    }
-                });
-            }
+          }
         });
-        
-        if (loadedCount === images.length) {
-            isImagesLoaded = true;
-            hideLoadingScreen();
+
+      // Copy URL functionality
+      copyUrlButton.addEventListener("click", () => {
+        copyToClipboard();
+      });
+
+      async function copyToClipboard() {
+        try {
+          await navigator.clipboard.writeText(shareUrlInput.value);
+          copyUrlButton.textContent = "Copied!";
+          copyUrlButton.classList.add("copied");
+
+          setTimeout(() => {
+            copyUrlButton.textContent = "Copy";
+            copyUrlButton.classList.remove("copied");
+          }, 2000);
+        } catch (error) {
+          // Fallback for older browsers
+          shareUrlInput.select();
+          document.execCommand("copy");
+          copyUrlButton.textContent = "Copied!";
+          copyUrlButton.classList.add("copied");
+
+          setTimeout(() => {
+            copyUrlButton.textContent = "Copy";
+            copyUrlButton.classList.remove("copied");
+          }, 2000);
         }
-    }
-    
-    // Update meta tags for social sharing
-    function updateMetaTags(data) {
+      }
+
+      // Hide loading screen when everything is ready
+      function hideLoadingScreen() {
+        if (isDataLoaded && isImagesLoaded) {
+          const loadingScreen = document.getElementById("loading-screen");
+          const mainContent = document.getElementById("main-content");
+
+          setTimeout(() => {
+            loadingScreen.classList.add("hidden");
+            mainContent.classList.add("loaded");
+          }, 300);
+        }
+      }
+
+      // Check if all images are loaded
+      function checkImagesLoaded() {
+        const images = document.querySelectorAll("img");
+        let loadedCount = 0;
+
+        if (images.length === 0) {
+          isImagesLoaded = true;
+          hideLoadingScreen();
+          return;
+        }
+
+        images.forEach((img) => {
+          if (img.complete) {
+            loadedCount++;
+          } else {
+            img.addEventListener("load", () => {
+              loadedCount++;
+              if (loadedCount === images.length) {
+                isImagesLoaded = true;
+                hideLoadingScreen();
+              }
+            });
+
+            img.addEventListener("error", () => {
+              loadedCount++;
+              if (loadedCount === images.length) {
+                isImagesLoaded = true;
+                hideLoadingScreen();
+              }
+            });
+          }
+        });
+
+        if (loadedCount === images.length) {
+          isImagesLoaded = true;
+          hideLoadingScreen();
+        }
+      }
+
+      // Update meta tags for social sharing
+      function updateMetaTags(data) {
         // Remove existing meta tags
-        const existingMetas = document.querySelectorAll('meta[property^="og:"], meta[name="twitter:"], meta[name="description"]');
-        existingMetas.forEach(meta => meta.remove());
-        
+        const existingMetas = document.querySelectorAll(
+          'meta[property^="og:"], meta[name="twitter:"], meta[name="description"]'
+        );
+        existingMetas.forEach((meta) => meta.remove());
+
         // Add new meta tags
         const metaTags = [
-            { name: 'description', content: data.description },
-            { property: 'og:title', content: `${data.name} - Profile` },
-            { property: 'og:description', content: data.description },
-            { property: 'og:image', content: window.location.origin + data.profileImage },
-            { property: 'og:url', content: window.location.href },
-            { property: 'og:type', content: 'profile' },
-            { property: 'og:site_name', content: data.name },
-            { name: 'twitter:card', content: 'summary_large_image' },
-            { name: 'twitter:title', content: `${data.name} - Profile` },
-            { name: 'twitter:description', content: data.description },
-            { name: 'twitter:image', content: window.location.origin + data.profileImage }
+          { name: "description", content: data.description },
+          { property: "og:title", content: `${data.name} - Profile` },
+          { property: "og:description", content: data.description },
+          {
+            property: "og:image",
+            content: window.location.origin + data.profileImage,
+          },
+          { property: "og:url", content: window.location.href },
+          { property: "og:type", content: "profile" },
+          { property: "og:site_name", content: data.name },
+          { name: "twitter:card", content: "summary_large_image" },
+          { name: "twitter:title", content: `${data.name} - Profile` },
+          { name: "twitter:description", content: data.description },
+          {
+            name: "twitter:image",
+            content: window.location.origin + data.profileImage,
+          },
         ];
-        
-        metaTags.forEach(tag => {
-            const meta = document.createElement('meta');
-            if (tag.name) meta.name = tag.name;
-            if (tag.property) meta.property = tag.property;
-            meta.content = tag.content;
-            document.head.appendChild(meta);
+
+        metaTags.forEach((tag) => {
+          const meta = document.createElement("meta");
+          if (tag.name) meta.name = tag.name;
+          if (tag.property) meta.property = tag.property;
+          meta.content = tag.content;
+          document.head.appendChild(meta);
         });
-    }
-    
-    // Fetch profile data
-    async function fetchProfileData() {
+      }
+
+      // Fetch profile data
+      async function fetchProfileData() {
         try {
-            const response = await fetch('/api/profile');
-            if (!response.ok) {
-                throw new Error('Failed to fetch profile data');
-            }
-            
-            const data = await response.json();
-            profileData = data; // Store for share functionality
-            
-            // Apply theme colors
-            document.documentElement.style.setProperty('--bg-color', data.backgroundColor || '#ffffff');
-            document.documentElement.style.setProperty('--text-color', data.textColor || '#333333');
-            document.documentElement.style.setProperty('--primary-color', data.accentColor || '#4f46e5');
-            document.documentElement.style.setProperty('--gallery-bg', data.galleryBgColor || '#f9fafb');
-            document.documentElement.style.setProperty('--services-bg', data.servicesBgColor || '#ffffff');
-            document.documentElement.style.setProperty('--faq-bg', data.faqBgColor || '#ffffff');
-            document.documentElement.style.setProperty('--contact-bg', data.contactBgColor || '#f9fafb');
-            
-            // Update header
-            document.getElementById('header-name').textContent = data.name;
-            document.getElementById('header-favicon').src = data.profileImage;
-            
-            // Update profile information
-            document.getElementById('profile-name').textContent = data.name;
-            document.getElementById('profile-description').textContent = data.description;
-            document.getElementById('profile-image').src = data.profileImage;
-            
-            // Update section titles
-            if (data.servicesSectionTitle) {
-                document.getElementById('services-title').textContent = data.servicesSectionTitle;
-            }
-            
-            if (data.gallerySectionTitle) {
-                document.getElementById('gallery-title').textContent = data.gallerySectionTitle;
-            }
-            
-            if (data.contactSectionTitle) {
-                document.getElementById('contact-title').textContent = data.contactSectionTitle;
-            }
-            
-            if (data.infoSectionTitle) {
-                document.getElementById('info-title').textContent = data.infoSectionTitle;
-            }
-            
-            if (data.faqSectionTitle) {
-                document.getElementById('faq-title').textContent = data.faqSectionTitle;
-            }
-            
-            // Update footer name
-            document.getElementById('footer-name').textContent = data.name;
-            
-            // Set favicon
-            const favicon = document.createElement('link');
-            favicon.rel = 'icon';
-            favicon.href = data.profileImage;
-            document.head.appendChild(favicon);
-            
-            // Update page title and meta tags
-            document.title = `${data.name} - Profile`;
-            updateMetaTags(data);
-            
-            // Store gallery images for modal navigation
-            galleryImages = data.galleryImages || [];
-            
-            // Load social links
-            loadSocialLinks(data.links || []);
-            
-            // Load services
-            loadServices(data.services || []);
-            
-            // Load gallery images
-            loadGalleryImages(data.galleryImages || []);
-            
-            // Load contact information
-            loadContactInfo(data.contactInfo || []);
-            
-            // Load FAQs
-            loadFaqs(data.faqs || []);
-            
-            // Show/hide sections based on settings
-            if (!data.showContactForm) {
-                document.getElementById('contact-section').classList.add('hidden');
-            }
-            
-            if (!data.contactInfo || data.contactInfo.length === 0) {
-                document.getElementById('info-section').classList.add('hidden');
-            }
-            
-            if (!data.faqs || data.faqs.length === 0) {
-                document.getElementById('faq-section').classList.add('hidden');
-            }
-            
-            // Mark data as loaded
-            isDataLoaded = true;
-            
-            // Check if images are loaded after a short delay
-            setTimeout(() => {
-                checkImagesLoaded();
-            }, 100);
-            
-        } catch (error) {
-            console.error('Error fetching profile data:', error);
-            // Even on error, mark as loaded to prevent infinite loading
-            isDataLoaded = true;
+          const response = await fetch("/api/profile");
+          if (!response.ok) {
+            throw new Error("Failed to fetch profile data");
+          }
+
+          const data = await response.json();
+          profileData = data; // Store for share functionality
+
+          // Apply theme colors
+          document.documentElement.style.setProperty(
+            "--bg-color",
+            data.backgroundColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
+            "--text-color",
+            data.textColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--primary-color",
+            data.accentColor || "#4f46e5"
+          );
+          document.documentElement.style.setProperty(
+            "--gallery-bg",
+            data.galleryBgColor || "#f9fafb"
+          );
+          document.documentElement.style.setProperty(
+            "--services-bg",
+            data.servicesBgColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
+            "--faq-bg",
+            data.faqBgColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
+            "--contact-bg",
+            data.contactBgColor || "#f9fafb"
+          );
+
+          // Update header
+          document.getElementById("header-name").textContent = data.name;
+          document.getElementById("header-favicon").src =
+            data.logoImage || data.profileImage;
+
+          // Update profile information
+          document.getElementById("profile-name").textContent = data.name;
+          document.getElementById("profile-description").textContent =
+            data.description;
+          document.getElementById("profile-image").src = data.profileImage;
+
+          // Update section titles
+          if (data.servicesSectionTitle) {
+            document.getElementById("services-title").textContent =
+              data.servicesSectionTitle;
+          }
+
+          if (data.gallerySectionTitle) {
+            document.getElementById("gallery-title").textContent =
+              data.gallerySectionTitle;
+          }
+
+          if (data.contactSectionTitle) {
+            document.getElementById("contact-title").textContent =
+              data.contactSectionTitle;
+          }
+
+          if (data.infoSectionTitle) {
+            document.getElementById("info-title").textContent =
+              data.infoSectionTitle;
+          }
+
+          if (data.faqSectionTitle) {
+            document.getElementById("faq-title").textContent =
+              data.faqSectionTitle;
+          }
+
+          // Update footer name
+          document.getElementById("footer-name").textContent = data.name;
+
+          // Set favicon
+          const favicon = document.createElement("link");
+          favicon.rel = "icon";
+          favicon.href = data.logoImage || data.profileImage;
+          document.head.appendChild(favicon);
+
+          // Update page title and meta tags
+          document.title = `${data.name} - Profile`;
+          updateMetaTags(data);
+
+          // Store gallery images for modal navigation
+          galleryImages = data.galleryImages || [];
+
+          // Load social links
+          loadSocialLinks(data.links || []);
+
+          // Load services
+          loadServices(data.services || []);
+
+          // Load gallery images
+          loadGalleryImages(data.galleryImages || []);
+
+          // Load contact information
+          loadContactInfo(data.contactInfo || []);
+
+          // Load FAQs
+          loadFaqs(data.faqs || []);
+
+          // Show/hide sections based on settings
+          if (!data.showContactForm) {
+            document.getElementById("contact-section").classList.add("hidden");
+          }
+
+          if (!data.contactInfo || data.contactInfo.length === 0) {
+            document.getElementById("info-section").classList.add("hidden");
+          }
+
+          if (!data.faqs || data.faqs.length === 0) {
+            document.getElementById("faq-section").classList.add("hidden");
+          }
+
+          // Mark data as loaded
+          isDataLoaded = true;
+
+          // Check if images are loaded after a short delay
+          setTimeout(() => {
             checkImagesLoaded();
+          }, 100);
+        } catch (error) {
+          console.error("Error fetching profile data:", error);
+          // Even on error, mark as loaded to prevent infinite loading
+          isDataLoaded = true;
+          checkImagesLoaded();
         }
-    }
-    
-    // Load social links
-    function loadSocialLinks(links) {
-        const linksContainer = document.getElementById('links-container');
-        linksContainer.innerHTML = '';
-        
+      }
+
+      // Load social links
+      function loadSocialLinks(links) {
+        const linksContainer = document.getElementById("links-container");
+        linksContainer.innerHTML = "";
+
         if (links.length > 0) {
-            links.forEach(link => {
-                const socialLink = document.createElement('a');
-                socialLink.href = link.url;
-                socialLink.className = 'social-link';
-                socialLink.target = '_blank';
-                socialLink.rel = 'noopener noreferrer';
-                
-                const icon = document.createElement('i');
-                icon.className = `fab fa-${link.icon}`;
-                
-                const text = document.createTextNode(link.text);
-                
-                socialLink.appendChild(icon);
-                socialLink.appendChild(text);
-                linksContainer.appendChild(socialLink);
-            });
+          links.forEach((link) => {
+            const socialLink = document.createElement("a");
+            socialLink.href = link.url;
+            socialLink.className = "social-link";
+            socialLink.target = "_blank";
+            socialLink.rel = "noopener noreferrer";
+
+            const icon = document.createElement("i");
+            icon.className = `fab fa-${link.icon}`;
+
+            const text = document.createTextNode(link.text);
+
+            socialLink.appendChild(icon);
+            socialLink.appendChild(text);
+            linksContainer.appendChild(socialLink);
+          });
         }
-    }
-    
-    // Load services
-    function loadServices(services) {
-        const servicesGrid = document.getElementById('services-grid');
-        servicesGrid.innerHTML = '';
-        
+      }
+
+      // Load services
+      function loadServices(services) {
+        const servicesGrid = document.getElementById("services-grid");
+        servicesGrid.innerHTML = "";
+
         if (services.length > 0) {
-            services.forEach(service => {
-                const serviceCard = document.createElement('div');
-                serviceCard.className = 'service-card';
-                
-                const serviceIcon = document.createElement('div');
-                serviceIcon.className = 'service-icon';
-                serviceIcon.innerHTML = `<i class="fas fa-${service.icon}"></i>`;
-                
-                const serviceTitle = document.createElement('h3');
-                serviceTitle.className = 'service-title';
-                serviceTitle.textContent = service.title;
-                
-                const serviceDescription = document.createElement('p');
-                serviceDescription.className = 'service-description';
-                serviceDescription.textContent = service.description;
-                
-                serviceCard.appendChild(serviceIcon);
-                serviceCard.appendChild(serviceTitle);
-                serviceCard.appendChild(serviceDescription);
-                
-                servicesGrid.appendChild(serviceCard);
-            });
+          services.forEach((service) => {
+            const serviceCard = document.createElement("div");
+            serviceCard.className = "service-card";
+
+            const serviceIcon = document.createElement("div");
+            serviceIcon.className = "service-icon";
+            serviceIcon.innerHTML = `<i class="fas fa-${service.icon}"></i>`;
+
+            const serviceTitle = document.createElement("h3");
+            serviceTitle.className = "service-title";
+            serviceTitle.textContent = service.title;
+
+            const serviceDescription = document.createElement("p");
+            serviceDescription.className = "service-description";
+            serviceDescription.textContent = service.description;
+
+            serviceCard.appendChild(serviceIcon);
+            serviceCard.appendChild(serviceTitle);
+            serviceCard.appendChild(serviceDescription);
+
+            servicesGrid.appendChild(serviceCard);
+          });
         } else {
-            document.getElementById('services-section').classList.add('hidden');
+          document.getElementById("services-section").classList.add("hidden");
         }
-    }
-    
-    // Load gallery images
-    function loadGalleryImages(images) {
-        const gallery = document.getElementById('gallery');
-        gallery.innerHTML = '';
-        
+      }
+
+      // Load gallery images
+      function loadGalleryImages(images) {
+        const gallery = document.getElementById("gallery");
+        gallery.innerHTML = "";
+
         if (images.length > 0) {
-            images.forEach((image, index) => {
-                const galleryItem = document.createElement('div');
-                galleryItem.className = 'gallery-item';
-                galleryItem.addEventListener('click', () => openModal(index));
-                
-                const img = document.createElement('img');
-                img.src = image;
-                img.alt = `Gallery Image ${index + 1}`;
-                img.className = 'gallery-image';
-                
-                galleryItem.appendChild(img);
-                gallery.appendChild(galleryItem);
-            });
+          images.forEach((image, index) => {
+            const galleryItem = document.createElement("div");
+            galleryItem.className = "gallery-item";
+            galleryItem.addEventListener("click", () => openModal(index));
+
+            const img = document.createElement("img");
+            img.src = image;
+            img.alt = `Gallery Image ${index + 1}`;
+            img.className = "gallery-image";
+
+            galleryItem.appendChild(img);
+            gallery.appendChild(galleryItem);
+          });
         } else {
-            document.getElementById('gallery-section').classList.add('hidden');
+          document.getElementById("gallery-section").classList.add("hidden");
         }
-    }
-    
-    // Load contact information
-    function loadContactInfo(contactInfo) {
-        const infoGrid = document.getElementById('info-grid');
-        infoGrid.innerHTML = '';
-        
+      }
+
+      // Load contact information
+      function loadContactInfo(contactInfo) {
+        const infoGrid = document.getElementById("info-grid");
+        infoGrid.innerHTML = "";
+
         if (contactInfo.length > 0) {
-            contactInfo.forEach(info => {
-                const infoCard = document.createElement('div');
-                infoCard.className = 'info-card';
-                
-                const infoIcon = document.createElement('div');
-                infoIcon.className = 'info-icon';
-                infoIcon.innerHTML = `<i class="fas fa-${info.icon}"></i>`;
-                
-                const infoTitle = document.createElement('h3');
-                infoTitle.className = 'info-title';
-                infoTitle.textContent = info.title;
-                
-                const infoContent = document.createElement('p');
-                infoContent.className = 'info-content';
-                
-                if (info.type === 'link' && info.value) {
-                    const link = document.createElement('a');
-                    link.href = info.type === 'email' ? `mailto:${info.value}` : 
-                                info.type === 'phone' ? `tel:${info.value}` : 
-                                info.value;
-                    link.textContent = info.value;
-                    link.target = '_blank';
-                    link.rel = 'noopener noreferrer';
-                    infoContent.appendChild(link);
-                } else {
-                    infoContent.textContent = info.value;
-                }
-                
-                infoCard.appendChild(infoIcon);
-                infoCard.appendChild(infoTitle);
-                infoCard.appendChild(infoContent);
-                
-                infoGrid.appendChild(infoCard);
-            });
+          contactInfo.forEach((info) => {
+            const infoCard = document.createElement("div");
+            infoCard.className = "info-card";
+
+            const infoIcon = document.createElement("div");
+            infoIcon.className = "info-icon";
+            infoIcon.innerHTML = `<i class="fas fa-${info.icon}"></i>`;
+
+            const infoTitle = document.createElement("h3");
+            infoTitle.className = "info-title";
+            infoTitle.textContent = info.title;
+
+            const infoContent = document.createElement("p");
+            infoContent.className = "info-content";
+
+            if (info.type === "email") {
+              const link = document.createElement("a");
+              link.href = `mailto:${info.value}`;
+              link.textContent = info.value;
+              infoContent.appendChild(link);
+            } else if (info.type === "phone") {
+              const link = document.createElement("a");
+              link.href = `tel:${info.value}`;
+              link.textContent = info.value;
+              infoContent.appendChild(link);
+            } else if (info.type === "link") {
+              const link = document.createElement("a");
+              link.href = info.value;
+              link.textContent = info.value;
+              link.target = "_blank";
+              link.rel = "noopener noreferrer";
+              infoContent.appendChild(link);
+            } else {
+              infoContent.textContent = info.value;
+            }
+
+            infoCard.appendChild(infoIcon);
+            infoCard.appendChild(infoTitle);
+            infoCard.appendChild(infoContent);
+
+            infoGrid.appendChild(infoCard);
+          });
         } else {
-            document.getElementById('info-section').classList.add('hidden');
+          document.getElementById("info-section").classList.add("hidden");
         }
-    }
-    
-    // Load FAQs
-    function loadFaqs(faqs) {
-        const faqContainer = document.getElementById('faq-container');
-        faqContainer.innerHTML = '';
-        
+      }
+
+      // Load FAQs
+      function loadFaqs(faqs) {
+        const faqContainer = document.getElementById("faq-container");
+        faqContainer.innerHTML = "";
+
         if (faqs.length > 0) {
-            faqs.forEach((faq, index) => {
-                const faqItem = document.createElement('div');
-                faqItem.className = 'faq-item';
-                faqItem.id = `faq-${index}`;
-                
-                const faqQuestion = document.createElement('div');
-                faqQuestion.className = 'faq-question';
-                faqQuestion.innerHTML = `
+          faqs.forEach((faq, index) => {
+            const faqItem = document.createElement("div");
+            faqItem.className = "faq-item";
+            faqItem.id = `faq-${index}`;
+
+            const faqQuestion = document.createElement("div");
+            faqQuestion.className = "faq-question";
+            faqQuestion.innerHTML = `
                     <span>${faq.question}</span>
                     <i class="fas fa-chevron-down"></i>
                 `;
-                
-                const faqAnswer = document.createElement('div');
-                faqAnswer.className = 'faq-answer';
-                
-                const faqAnswerContent = document.createElement('div');
-                faqAnswerContent.className = 'faq-answer-content';
-                faqAnswerContent.textContent = faq.answer;
-                
-                faqAnswer.appendChild(faqAnswerContent);
-                
-                faqItem.appendChild(faqQuestion);
-                faqItem.appendChild(faqAnswer);
-                
-                faqQuestion.addEventListener('click', () => {
-                    faqItem.classList.toggle('active');
-                });
-                
-                faqContainer.appendChild(faqItem);
+
+            const faqAnswer = document.createElement("div");
+            faqAnswer.className = "faq-answer";
+
+            const faqAnswerContent = document.createElement("div");
+            faqAnswerContent.className = "faq-answer-content";
+            faqAnswerContent.textContent = faq.answer;
+
+            faqAnswer.appendChild(faqAnswerContent);
+
+            faqItem.appendChild(faqQuestion);
+            faqItem.appendChild(faqAnswer);
+
+            faqQuestion.addEventListener("click", () => {
+              faqItem.classList.toggle("active");
             });
+
+            faqContainer.appendChild(faqItem);
+          });
         } else {
-            document.getElementById('faq-section').classList.add('hidden');
+          document.getElementById("faq-section").classList.add("hidden");
         }
-    }
-    
-    // Enhanced Modal functionality
-    const modal = document.getElementById('image-modal');
-    const modalImage = document.getElementById('modal-image');
-    const modalTitle = document.getElementById('modal-title');
-    const modalCounter = document.getElementById('modal-counter');
-    const closeModal = document.getElementById('close-modal');
-    const prevImage = document.getElementById('prev-image');
-    const nextImage = document.getElementById('next-image');
-    
-    function openModal(imageIndex) {
+      }
+
+      // Enhanced Modal functionality
+      const modal = document.getElementById("image-modal");
+      const modalImage = document.getElementById("modal-image");
+      const modalTitle = document.getElementById("modal-title");
+      const modalCounter = document.getElementById("modal-counter");
+      const closeModal = document.getElementById("close-modal");
+      const prevImage = document.getElementById("prev-image");
+      const nextImage = document.getElementById("next-image");
+
+      function openModal(imageIndex) {
         if (galleryImages.length === 0) return;
-        
+
         currentImageIndex = imageIndex;
         updateModalContent();
-        modal.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-    
-    function updateModalContent() {
+        modal.style.display = "flex";
+        document.body.style.overflow = "hidden";
+      }
+
+      function updateModalContent() {
         if (galleryImages.length === 0) return;
-        
+
         modalImage.src = galleryImages[currentImageIndex];
         modalTitle.textContent = `Gallery Image ${currentImageIndex + 1}`;
-        modalCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
-        
+        modalCounter.textContent = `${currentImageIndex + 1} / ${
+          galleryImages.length
+        }`;
+
         // Update navigation buttons
         prevImage.disabled = currentImageIndex === 0;
         nextImage.disabled = currentImageIndex === galleryImages.length - 1;
-        
+
         // Hide navigation if only one image
         if (galleryImages.length <= 1) {
-            prevImage.style.display = 'none';
-            nextImage.style.display = 'none';
+          prevImage.style.display = "none";
+          nextImage.style.display = "none";
         } else {
-            prevImage.style.display = 'flex';
-            nextImage.style.display = 'flex';
+          prevImage.style.display = "flex";
+          nextImage.style.display = "flex";
         }
-    }
-    
-    function closeModalFunction() {
-        modal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-    }
-    
-    function showPrevImage() {
+      }
+
+      function closeModalFunction() {
+        modal.style.display = "none";
+        document.body.style.overflow = "auto";
+      }
+
+      function showPrevImage() {
         if (currentImageIndex > 0) {
-            currentImageIndex--;
-            updateModalContent();
+          currentImageIndex--;
+          updateModalContent();
         }
-    }
-    
-    function showNextImage() {
+      }
+
+      function showNextImage() {
         if (currentImageIndex < galleryImages.length - 1) {
-            currentImageIndex++;
-            updateModalContent();
+          currentImageIndex++;
+          updateModalContent();
         }
-    }
-    
-    // Modal event listeners
-    closeModal.addEventListener('click', closeModalFunction);
-    prevImage.addEventListener('click', showPrevImage);
-    nextImage.addEventListener('click', showNextImage);
-    
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-        if (modal.style.display === 'flex') {
-            switch(e.key) {
-                case 'Escape':
-                    closeModalFunction();
-                    break;
-                case 'ArrowLeft':
-                    showPrevImage();
-                    break;
-                case 'ArrowRight':
-                    showNextImage();
-                    break;
-            }
+      }
+
+      // Modal event listeners
+      closeModal.addEventListener("click", closeModalFunction);
+      prevImage.addEventListener("click", showPrevImage);
+      nextImage.addEventListener("click", showNextImage);
+
+      // Keyboard navigation
+      document.addEventListener("keydown", (e) => {
+        if (modal.style.display === "flex") {
+          switch (e.key) {
+            case "Escape":
+              closeModalFunction();
+              break;
+            case "ArrowLeft":
+              showPrevImage();
+              break;
+            case "ArrowRight":
+              showNextImage();
+              break;
+          }
         }
-    });
-    
-    // Close modal when clicking outside
-    window.addEventListener('click', (event) => {
+      });
+
+      // Close modal when clicking outside
+      window.addEventListener("click", (event) => {
         if (event.target === modal) {
-            closeModalFunction();
+          closeModalFunction();
         }
-    });
-    
-    // Touch/swipe support for mobile
-    let touchStartX = 0;
-    let touchEndX = 0;
-    
-    modal.addEventListener('touchstart', (e) => {
+      });
+
+      // Touch/swipe support for mobile
+      let touchStartX = 0;
+      let touchEndX = 0;
+
+      modal.addEventListener("touchstart", (e) => {
         touchStartX = e.changedTouches[0].screenX;
-    });
-    
-    modal.addEventListener('touchend', (e) => {
+      });
+
+      modal.addEventListener("touchend", (e) => {
         touchEndX = e.changedTouches[0].screenX;
         handleSwipe();
-    });
-    
-    function handleSwipe() {
+      });
+
+      function handleSwipe() {
         const swipeThreshold = 50;
         const diff = touchStartX - touchEndX;
-        
+
         if (Math.abs(diff) > swipeThreshold) {
-            if (diff > 0) {
-                // Swipe left - next image
-                showNextImage();
-            } else {
-                // Swipe right - previous image
-                showPrevImage();
-            }
+          if (diff > 0) {
+            // Swipe left - next image
+            showNextImage();
+          } else {
+            // Swipe right - previous image
+            showPrevImage();
+          }
         }
-    }
-    
-    // Contact form submission
-    const contactForm = document.getElementById('contact-form');
-    const submitButton = document.getElementById('submit-button');
-    const loadingSpinner = document.getElementById('loading');
-    const buttonText = document.getElementById('button-text');
-    const successAlert = document.getElementById('success-alert');
-    const errorAlert = document.getElementById('error-alert');
-    
-    contactForm.addEventListener('submit', async (e) => {
+      }
+
+      // Contact form submission
+      const contactForm = document.getElementById("contact-form");
+      const submitButton = document.getElementById("submit-button");
+      const loadingSpinner = document.getElementById("loading");
+      const buttonText = document.getElementById("button-text");
+      const successAlert = document.getElementById("success-alert");
+      const errorAlert = document.getElementById("error-alert");
+
+      contactForm.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         // Reset alerts
-        successAlert.style.display = 'none';
-        errorAlert.style.display = 'none';
-        
+        successAlert.style.display = "none";
+        errorAlert.style.display = "none";
+
         // Show loading state
         submitButton.disabled = true;
-        loadingSpinner.classList.remove('hidden');
-        buttonText.textContent = 'Sending...';
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-        
+        loadingSpinner.classList.remove("hidden");
+        buttonText.textContent = "Sending...";
+
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
         try {
-            const response = await fetch('/api/contact', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, email, message })
-            });
-            
-            if (!response.ok) {
-                throw new Error('Failed to send message');
-            }
-            
-            // Show success message
-            successAlert.style.display = 'block';
-            
-            // Reset form
-            contactForm.reset();
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ name, email, message }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to send message");
+          }
+
+          // Show success message
+          successAlert.style.display = "block";
+
+          // Reset form
+          contactForm.reset();
         } catch (error) {
-            console.error('Error sending message:', error);
-            errorAlert.style.display = 'block';
+          console.error("Error sending message:", error);
+          errorAlert.style.display = "block";
         } finally {
-            // Reset button state
-            submitButton.disabled = false;
-            loadingSpinner.classList.add('hidden');
-            buttonText.textContent = 'Send Message';
+          // Reset button state
+          submitButton.disabled = false;
+          loadingSpinner.classList.add("hidden");
+          buttonText.textContent = "Send Message";
         }
-    });
-    
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', () => {
+      });
+
+      // Initialize when page loads
+      document.addEventListener("DOMContentLoaded", () => {
         // Fetch profile data
         fetchProfileData();
-        
+
         // Fallback: hide loading screen after 8 seconds maximum
         setTimeout(() => {
-            if (!isDataLoaded || !isImagesLoaded) {
-                isDataLoaded = true;
-                isImagesLoaded = true;
-                hideLoadingScreen();
-            }
+          if (!isDataLoaded || !isImagesLoaded) {
+            isDataLoaded = true;
+            isImagesLoaded = true;
+            hideLoadingScreen();
+          }
         }, 8000);
-    });
-</script>
-</body>
+      });
+    </script>
+  </body>
 </html>

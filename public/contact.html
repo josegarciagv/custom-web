@@ -1,728 +1,743 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact - Custom Web</title>
-  <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  />
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-  />
-  <style>
-    :root {
-      --primary-color: #4f46e5;
-      --text-color: #333;
-      --bg-color: #fff;
-      --secondary-bg: #f9fafb;
-      --border-color: #e5e7eb;
-      --error-color: #ef4444;
-      --success-color: #10b981;
-      --accent-color: #4f46e5;
-      --contact-bg-color: #f9fafb;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact - Custom Web</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --text-color: #333;
+        --bg-color: #fff;
+        --secondary-bg: #f9fafb;
+        --border-color: #e5e7eb;
+        --error-color: #ef4444;
+        --success-color: #10b981;
+        --accent-color: #4f46e5;
+        --contact-bg-color: #f9fafb;
+      }
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    body {
-      font-family: "Inter", sans-serif;
-      line-height: 1.6;
-      color: var(--text-color);
-      background-color: var(--bg-color);
-      transition: all 0.3s ease;
-    }
+      body {
+        font-family: "Inter", sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        background-color: var(--bg-color);
+        transition: all 0.3s ease;
+      }
 
-    .loading-screen {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-color: var(--bg-color);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      transition: opacity 0.5s ease;
-    }
+      .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: var(--bg-color);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+      }
 
-    .loading-spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid var(--border-color);
-      border-top: 4px solid var(--accent-color);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-    }
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid var(--border-color);
+        border-top: 4px solid var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
 
-    .hidden {
-      display: none !important;
-    }
+      .hidden {
+        display: none !important;
+      }
 
-    .fade-out {
-      opacity: 0;
-      pointer-events: none;
-    }
+      .fade-out {
+        opacity: 0;
+        pointer-events: none;
+      }
 
-    /* Header */
-    .header {
-      background-color: var(--bg-color);
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      padding: 1rem 0;
-    }
+      /* Header */
+      .header {
+        background-color: var(--bg-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 1rem 0;
+      }
 
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-    }
-
-    .logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .site-name {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-color);
-      text-decoration: none;
-    }
-
-    .home-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      background-color: var(--accent-color);
-      color: white;
-      text-decoration: none;
-      border-radius: 0.5rem;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-
-    .home-button:hover {
-      background-color: var(--accent-color);
-      filter: brightness(0.9);
-      transform: translateY(-1px);
-    }
-
-    /* Main Content */
-    .main-content {
-      min-height: calc(100vh - 80px);
-      padding: 2rem 0;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    .page-header {
-      text-align: center;
-      margin-bottom: 3rem;
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .page-title {
-      font-size: 2.5rem;
-      font-weight: 700;
-      color: var(--text-color);
-      margin-bottom: 1rem;
-    }
-
-    .page-subtitle {
-      font-size: 1.1rem;
-      color: var(--text-color);
-      opacity: 0.7;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    /* Contact Content */
-    .contact-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-
-    .contact-info-section,
-    .contact-form-section {
-      background-color: var(--contact-bg-color);
-      padding: 2rem;
-      border-radius: 1rem;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .section-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--text-color);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .section-icon {
-      color: var(--accent-color);
-      font-size: 1.25rem;
-    }
-
-    /* Contact Information */
-    .contact-info-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 1.25rem;
-    }
-
-    .contact-info-item {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      padding: 1rem;
-      background-color: var(--bg-color);
-      border-radius: 0.75rem;
-      transition: all 0.3s ease;
-      border: 2px solid transparent;
-    }
-
-    .contact-info-item:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border-color: var(--accent-color);
-    }
-
-    .contact-icon {
-      width: 40px;
-      height: 40px;
-      background-color: var(--accent-color);
-      color: white;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      flex-shrink: 0;
-    }
-
-    .contact-details h4 {
-      font-weight: 600;
-      color: var(--text-color);
-      margin-bottom: 0.25rem;
-    }
-
-    .contact-details p {
-      color: var(--text-color);
-      opacity: 0.8;
-    }
-
-    .contact-details a {
-      color: var(--accent-color);
-      text-decoration: none;
-      transition: opacity 0.3s ease;
-    }
-
-    .contact-details a:hover {
-      opacity: 0.8;
-    }
-
-    /* Contact Form */
-    .contact-form {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-    }
-
-    .form-label {
-      font-weight: 500;
-      color: var(--text-color);
-      font-size: 0.9rem;
-    }
-
-    .form-input,
-    .form-textarea {
-      padding: 0.875rem 1rem;
-      border: 2px solid var(--border-color);
-      border-radius: 0.75rem;
-      font-size: 1rem;
-      font-family: inherit;
-      transition: all 0.3s ease;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-    }
-
-    .form-input:focus,
-    .form-textarea:focus {
-      outline: none;
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-      transform: translateY(-1px);
-    }
-
-    .form-textarea {
-      resize: vertical;
-      min-height: 120px;
-    }
-
-    .submit-button {
-      padding: 0.875rem 2rem;
-      background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
-      color: white;
-      border: none;
-      border-radius: 0.75rem;
-      font-size: 1rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .submit-button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transition: left 0.5s;
-    }
-
-    .submit-button:hover::before {
-      left: 100%;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
-    }
-
-    .submit-button:disabled {
-      background: #a5a5a5;
-      cursor: not-allowed;
-      transform: none;
-      box-shadow: none;
-    }
-
-    .loading-btn {
-      display: inline-block;
-      width: 1rem;
-      height: 1rem;
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      border-radius: 50%;
-      border-top-color: white;
-      animation: spin 1s ease-in-out infinite;
-      margin-right: 0.5rem;
-    }
-
-    /* Messages */
-    .message {
-      padding: 1rem;
-      border-radius: 0.75rem;
-      margin-bottom: 1rem;
-      display: none;
-      animation: slideInDown 0.3s ease-out;
-    }
-
-    .message.success {
-      background-color: rgba(16, 185, 129, 0.1);
-      color: var(--success-color);
-      border-left: 4px solid var(--success-color);
-    }
-
-    .message.error {
-      background-color: rgba(239, 68, 68, 0.1);
-      color: var(--error-color);
-      border-left: 4px solid var(--error-color);
-    }
-
-    /* No Contact Available */
-    .no-contact {
-      text-align: center;
-      padding: 4rem 2rem;
-      animation: fadeInUp 0.6s ease-out;
-    }
-
-    .no-contact-icon {
-      font-size: 4rem;
-      color: var(--accent-color);
-      margin-bottom: 1.5rem;
-      opacity: 0.6;
-    }
-
-    .no-contact h2 {
-      font-size: 1.75rem;
-      font-weight: 600;
-      color: var(--text-color);
-      margin-bottom: 1rem;
-    }
-
-    .no-contact p {
-      font-size: 1.1rem;
-      color: var(--text-color);
-      opacity: 0.7;
-      margin-bottom: 2rem;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .no-contact .home-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 2rem;
-      font-size: 1rem;
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
       .header-content {
-        padding: 0 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .site-name {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+        text-decoration: none;
+      }
+
+      .home-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        background-color: var(--accent-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        transition: all 0.3s ease;
+      }
+
+      .home-button:hover {
+        background-color: var(--accent-color);
+        filter: brightness(0.9);
+        transform: translateY(-1px);
+      }
+
+      /* Main Content */
+      .main-content {
+        min-height: calc(100vh - 80px);
+        padding: 2rem 0;
       }
 
       .container {
-        padding: 0 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
       }
 
-      .contact-content {
-        grid-template-columns: 1fr;
-        gap: 2rem;
+      .page-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        animation: fadeInUp 0.6s ease-out;
       }
 
       .page-title {
-        font-size: 2rem;
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+      }
+
+      .page-subtitle {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      /* Contact Content */
+      .contact-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 3rem;
+        margin-bottom: 3rem;
       }
 
       .contact-info-section,
       .contact-form-section {
-        padding: 1.5rem;
+        background-color: var(--contact-bg-color);
+        padding: 2rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .section-icon {
+        color: var(--accent-color);
+        font-size: 1.25rem;
+      }
+
+      /* Contact Information */
+      .contact-info-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
       }
 
       .contact-info-item {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.75rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .page-title {
-        font-size: 1.75rem;
-      }
-
-      .contact-info-section,
-      .contact-form-section {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
         padding: 1rem;
+        background-color: var(--bg-color);
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        border: 2px solid transparent;
       }
-    }
 
-    /* Animations */
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
+      .contact-info-item:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        border-color: var(--accent-color);
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
 
-    @keyframes slideInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-20px);
+      .contact-icon {
+        width: 40px;
+        height: 40px;
+        background-color: var(--accent-color);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        flex-shrink: 0;
       }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
+      .contact-details h4 {
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.25rem;
       }
-    }
-  </style>
-</head>
-<body>
-  <!-- Loading Screen -->
-  <div class="loading-screen" id="loadingScreen">
-    <div class="loading-spinner"></div>
-  </div>
 
-  <!-- Header -->
-  <header class="header">
-    <div class="header-content">
-      <div class="logo-container">
-        <img src="/placeholder.svg" alt="Logo" class="logo hidden" id="headerLogo" />
-        <a href="/" class="site-name" id="siteName">Custom Web</a>
-      </div>
-      <a href="/" class="home-button">
-        <i class="fas fa-home"></i>
-        Home
-      </a>
+      .contact-details p {
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      .contact-details a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: opacity 0.3s ease;
+      }
+
+      .contact-details a:hover {
+        opacity: 0.8;
+      }
+
+      /* Contact Form */
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      .form-label {
+        font-weight: 500;
+        color: var(--text-color);
+        font-size: 0.9rem;
+      }
+
+      .form-input,
+      .form-textarea {
+        padding: 0.875rem 1rem;
+        border: 2px solid var(--border-color);
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+      }
+
+      .form-input:focus,
+      .form-textarea:focus {
+        outline: none;
+        border-color: var(--accent-color);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        transform: translateY(-1px);
+      }
+
+      .form-textarea {
+        resize: vertical;
+        min-height: 120px;
+      }
+
+      .submit-button {
+        padding: 0.875rem 2rem;
+        background: linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--primary-color)
+        );
+        color: white;
+        border: none;
+        border-radius: 0.75rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .submit-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s;
+      }
+
+      .submit-button:hover::before {
+        left: 100%;
+      }
+
+      .submit-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+      }
+
+      .submit-button:disabled {
+        background: #a5a5a5;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+      }
+
+      .loading-btn {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-right: 0.5rem;
+      }
+
+      /* Messages */
+      .message {
+        padding: 1rem;
+        border-radius: 0.75rem;
+        margin-bottom: 1rem;
+        display: none;
+        animation: slideInDown 0.3s ease-out;
+      }
+
+      .message.success {
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success-color);
+        border-left: 4px solid var(--success-color);
+      }
+
+      .message.error {
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--error-color);
+        border-left: 4px solid var(--error-color);
+      }
+
+      /* No Contact Available */
+      .no-contact {
+        text-align: center;
+        padding: 4rem 2rem;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .no-contact-icon {
+        font-size: 4rem;
+        color: var(--accent-color);
+        margin-bottom: 1.5rem;
+        opacity: 0.6;
+      }
+
+      .no-contact h2 {
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 1rem;
+      }
+
+      .no-contact p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        opacity: 0.7;
+        margin-bottom: 2rem;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .no-contact .home-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.875rem 2rem;
+        font-size: 1rem;
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .header-content {
+          padding: 0 1rem;
+        }
+
+        .container {
+          padding: 0 1rem;
+        }
+
+        .contact-content {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .page-title {
+          font-size: 2rem;
+        }
+
+        .contact-info-section,
+        .contact-form-section {
+          padding: 1.5rem;
+        }
+
+        .contact-info-item {
+          flex-direction: column;
+          text-align: center;
+          gap: 0.75rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .page-title {
+          font-size: 1.75rem;
+        }
+
+        .contact-info-section,
+        .contact-form-section {
+          padding: 1rem;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideInDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+      <div class="loading-spinner"></div>
     </div>
-  </header>
 
-  <!-- Main Content -->
-  <main class="main-content">
-    <div class="container">
-      <!-- Page Header -->
-      <div class="page-header">
-        <h1 class="page-title" id="pageTitle">Contact Us</h1>
-        <p class="page-subtitle" id="pageSubtitle">
-          We'd love to hear from you! Get in touch with us.
-        </p>
-      </div>
-
-      <!-- Contact Content -->
-      <div id="contactContent" class="hidden">
-        <div class="contact-content">
-          <!-- Contact Information -->
-          <div class="contact-info-section" id="contactInfoSection">
-            <h2 class="section-title">
-              <i class="fas fa-info-circle section-icon"></i>
-              <span id="contactInfoTitle">Contact Information</span>
-            </h2>
-            <ul class="contact-info-list" id="contactInfoList">
-              <!-- Contact info items will be populated here -->
-            </ul>
-          </div>
-
-          <!-- Contact Form -->
-          <div class="contact-form-section" id="contactFormSection">
-            <h2 class="section-title">
-              <i class="fas fa-envelope section-icon"></i>
-              <span id="contactFormTitle">Send Message</span>
-            </h2>
-            
-            <div class="message success" id="successMessage"></div>
-            <div class="message error" id="errorMessage"></div>
-
-            <form class="contact-form" id="contactForm">
-              <div class="form-group">
-                <label for="name" class="form-label">Full Name *</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  class="form-input"
-                  placeholder="Enter your full name"
-                  required
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="email" class="form-label">Email Address *</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  class="form-input"
-                  placeholder="Enter your email address"
-                  required
-                />
-              </div>
-
-              <div class="form-group">
-                <label for="message" class="form-label">Message *</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  class="form-textarea"
-                  placeholder="Enter your message here..."
-                  required
-                ></textarea>
-              </div>
-
-              <button type="submit" class="submit-button" id="submitButton">
-                <span class="loading-btn hidden" id="loadingBtn"></span>
-                <span id="buttonText">Send Message</span>
-              </button>
-            </form>
-          </div>
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo-container">
+          <img
+            src="/placeholder.svg"
+            alt="Logo"
+            class="logo hidden"
+            id="headerLogo"
+          />
+          <a href="/" class="site-name" id="siteName">Custom Web</a>
         </div>
-      </div>
-
-      <!-- No Contact Available -->
-      <div id="noContactSection" class="no-contact hidden">
-        <div class="no-contact-icon">
-          <i class="fas fa-envelope-open"></i>
-        </div>
-        <h2>Contact Not Available</h2>
-        <p>
-          Contact information and form are currently disabled. 
-          Please visit our homepage to explore other ways to connect with us.
-        </p>
         <a href="/" class="home-button">
           <i class="fas fa-home"></i>
-          Back to Homepage
+          Home
         </a>
       </div>
-    </div>
-  </main>
+    </header>
 
-  <script>
-    // DOM Elements
-    const loadingScreen = document.getElementById('loadingScreen');
-    const headerLogo = document.getElementById('headerLogo');
-    const siteName = document.getElementById('siteName');
-    const pageTitle = document.getElementById('pageTitle');
-    const pageSubtitle = document.getElementById('pageSubtitle');
-    const contactContent = document.getElementById('contactContent');
-    const noContactSection = document.getElementById('noContactSection');
-    const contactInfoSection = document.getElementById('contactInfoSection');
-    const contactFormSection = document.getElementById('contactFormSection');
-    const contactInfoList = document.getElementById('contactInfoList');
-    const contactForm = document.getElementById('contactForm');
-    const submitButton = document.getElementById('submitButton');
-    const loadingBtn = document.getElementById('loadingBtn');
-    const buttonText = document.getElementById('buttonText');
-    const successMessage = document.getElementById('successMessage');
-    const errorMessage = document.getElementById('errorMessage');
+    <!-- Main Content -->
+    <main class="main-content">
+      <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+          <h1 class="page-title" id="pageTitle">Contact Us</h1>
+          <p class="page-subtitle" id="pageSubtitle">
+            We'd love to hear from you! Get in touch with us.
+          </p>
+        </div>
 
-    // Icon mapping for contact info
-    const iconMap = {
-      'envelope': 'fas fa-envelope',
-      'phone': 'fas fa-phone',
-      'map-marker-alt': 'fas fa-map-marker-alt',
-      'link': 'fas fa-link',
-      'globe': 'fas fa-globe',
-      'linkedin': 'fab fa-linkedin',
-      'twitter': 'fab fa-twitter',
-      'facebook': 'fab fa-facebook',
-      'instagram': 'fab fa-instagram',
-      'github': 'fab fa-github'
-    };
+        <!-- Contact Content -->
+        <div id="contactContent" class="hidden">
+          <div class="contact-content">
+            <!-- Contact Information -->
+            <div class="contact-info-section" id="contactInfoSection">
+              <h2 class="section-title">
+                <i class="fas fa-info-circle section-icon"></i>
+                <span id="contactInfoTitle">Contact Information</span>
+              </h2>
+              <ul class="contact-info-list" id="contactInfoList">
+                <!-- Contact info items will be populated here -->
+              </ul>
+            </div>
 
-    // Apply profile theme
-    function applyProfileTheme(profile) {
-      const root = document.documentElement;
-      
-      if (profile.backgroundColor) {
-        root.style.setProperty('--bg-color', profile.backgroundColor);
-      }
-      
-      if (profile.textColor) {
-        root.style.setProperty('--text-color', profile.textColor);
-      }
-      
-      if (profile.accentColor) {
-        root.style.setProperty('--accent-color', profile.accentColor);
-        root.style.setProperty('--primary-color', profile.accentColor);
-      }
+            <!-- Contact Form -->
+            <div class="contact-form-section" id="contactFormSection">
+              <h2 class="section-title">
+                <i class="fas fa-envelope section-icon"></i>
+                <span id="contactFormTitle">Send Message</span>
+              </h2>
 
-      if (profile.contactBgColor) {
-        root.style.setProperty('--contact-bg-color', profile.contactBgColor);
-      }
-    }
+              <div class="message success" id="successMessage"></div>
+              <div class="message error" id="errorMessage"></div>
 
-    // Display profile info
-    function displayProfileInfo(profile) {
-      // Update favicon
-      if (profile.logoImage) {
-        const favicon = document.querySelector('link[rel="icon"]');
-        if (favicon) {
-          favicon.href = profile.logoImage;
-        } else {
-          const newFavicon = document.createElement('link');
-          newFavicon.rel = 'icon';
-          newFavicon.type = 'image/x-icon';
-          newFavicon.href = profile.logoImage;
-          document.head.appendChild(newFavicon);
+              <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                  <label for="name" class="form-label">Full Name *</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-input"
+                    placeholder="Enter your full name"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="email" class="form-label">Email Address *</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="Enter your email address"
+                    required
+                  />
+                </div>
+
+                <div class="form-group">
+                  <label for="message" class="form-label">Message *</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-textarea"
+                    placeholder="Enter your message here..."
+                    required
+                  ></textarea>
+                </div>
+
+                <button type="submit" class="submit-button" id="submitButton">
+                  <span class="loading-btn hidden" id="loadingBtn"></span>
+                  <span id="buttonText">Send Message</span>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- No Contact Available -->
+        <div id="noContactSection" class="no-contact hidden">
+          <div class="no-contact-icon">
+            <i class="fas fa-envelope-open"></i>
+          </div>
+          <h2>Contact Not Available</h2>
+          <p>
+            Contact information and form are currently disabled. Please visit
+            our homepage to explore other ways to connect with us.
+          </p>
+          <a href="/" class="home-button">
+            <i class="fas fa-home"></i>
+            Back to Homepage
+          </a>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // DOM Elements
+      const loadingScreen = document.getElementById("loadingScreen");
+      const headerLogo = document.getElementById("headerLogo");
+      const siteName = document.getElementById("siteName");
+      const pageTitle = document.getElementById("pageTitle");
+      const pageSubtitle = document.getElementById("pageSubtitle");
+      const contactContent = document.getElementById("contactContent");
+      const noContactSection = document.getElementById("noContactSection");
+      const contactInfoSection = document.getElementById("contactInfoSection");
+      const contactFormSection = document.getElementById("contactFormSection");
+      const contactInfoList = document.getElementById("contactInfoList");
+      const contactForm = document.getElementById("contactForm");
+      const submitButton = document.getElementById("submitButton");
+      const loadingBtn = document.getElementById("loadingBtn");
+      const buttonText = document.getElementById("buttonText");
+      const successMessage = document.getElementById("successMessage");
+      const errorMessage = document.getElementById("errorMessage");
+
+      // Icon mapping for contact info
+      const iconMap = {
+        envelope: "fas fa-envelope",
+        phone: "fas fa-phone",
+        "map-marker-alt": "fas fa-map-marker-alt",
+        link: "fas fa-link",
+        globe: "fas fa-globe",
+        linkedin: "fab fa-linkedin",
+        twitter: "fab fa-twitter",
+        facebook: "fab fa-facebook",
+        instagram: "fab fa-instagram",
+        github: "fab fa-github",
+      };
+
+      // Apply profile theme
+      function applyProfileTheme(profile) {
+        const root = document.documentElement;
+
+        if (profile.backgroundColor) {
+          root.style.setProperty("--bg-color", profile.backgroundColor);
+        }
+
+        if (profile.textColor) {
+          root.style.setProperty("--text-color", profile.textColor);
+        }
+
+        if (profile.accentColor) {
+          root.style.setProperty("--accent-color", profile.accentColor);
+          root.style.setProperty("--primary-color", profile.accentColor);
+        }
+
+        if (profile.contactBgColor) {
+          root.style.setProperty("--contact-bg-color", profile.contactBgColor);
         }
       }
 
-      // Update header logo and name
-      if (profile.logoImage) {
-        headerLogo.src = profile.logoImage;
-        headerLogo.alt = profile.name ? `${profile.name} Logo` : 'Logo';
-        headerLogo.classList.remove('hidden');
-      }
-
-      if (profile.name) {
-        siteName.textContent = profile.name;
-        document.title = `Contact - ${profile.name}`;
-      }
-
-      // Update page content with profile data
-      if (profile.contactSectionTitle) {
-        pageTitle.textContent = profile.contactSectionTitle;
-      }
-
-      // Update subtitle to be more personalized
-      if (profile.name) {
-        pageSubtitle.textContent = `We'd love to hear from you! Get in touch with ${profile.name}.`;
-      }
-
-      if (profile.infoSectionTitle) {
-        document.getElementById('contactInfoTitle').textContent = profile.infoSectionTitle;
-      }
-    }
-
-    // Render contact information
-    function renderContactInfo(contactInfo) {
-      if (!contactInfo || contactInfo.length === 0) {
-        contactInfoSection.style.display = 'none';
-        return;
-      }
-
-      contactInfoList.innerHTML = '';
-
-      contactInfo.forEach(info => {
-        const li = document.createElement('li');
-        li.className = 'contact-info-item';
-
-        const iconClass = iconMap[info.icon] || 'fas fa-info-circle';
-        
-        let valueContent = info.value;
-        if (info.type === 'email') {
-          valueContent = `<a href="mailto:${info.value}">${info.value}</a>`;
-        } else if (info.type === 'phone') {
-          valueContent = `<a href="tel:${info.value}">${info.value}</a>`;
-        } else if (info.type === 'link') {
-          valueContent = `<a href="${info.value}" target="_blank" rel="noopener noreferrer">${info.value}</a>`;
+      // Display profile info
+      function displayProfileInfo(profile) {
+        // Update favicon
+        if (profile.logoImage) {
+          const favicon = document.querySelector('link[rel="icon"]');
+          if (favicon) {
+            favicon.href = profile.logoImage;
+          } else {
+            const newFavicon = document.createElement("link");
+            newFavicon.rel = "icon";
+            newFavicon.type = "image/x-icon";
+            newFavicon.href = profile.logoImage;
+            document.head.appendChild(newFavicon);
+          }
         }
 
-        li.innerHTML = `
+        // Update header logo and name
+        if (profile.logoImage) {
+          headerLogo.src = profile.logoImage;
+          headerLogo.alt = profile.name ? `${profile.name} Logo` : "Logo";
+          headerLogo.classList.remove("hidden");
+        }
+
+        if (profile.name) {
+          siteName.textContent = profile.name;
+          document.title = `Contact - ${profile.name}`;
+        }
+
+        // Update page content with profile data
+        if (profile.contactSectionTitle) {
+          pageTitle.textContent = profile.contactSectionTitle;
+        }
+
+        // Update subtitle to be more personalized
+        if (profile.name) {
+          pageSubtitle.textContent = `We'd love to hear from you! Get in touch with ${profile.name}.`;
+        }
+
+        if (profile.infoSectionTitle) {
+          document.getElementById("contactInfoTitle").textContent =
+            profile.infoSectionTitle;
+        }
+      }
+
+      // Render contact information
+      function renderContactInfo(contactInfo) {
+        if (!contactInfo || contactInfo.length === 0) {
+          contactInfoSection.style.display = "none";
+          return;
+        }
+
+        contactInfoList.innerHTML = "";
+
+        contactInfo.forEach((info) => {
+          const li = document.createElement("li");
+          li.className = "contact-info-item";
+
+          const iconClass = iconMap[info.icon] || "fas fa-info-circle";
+
+          let valueContent = info.value;
+          if (info.type === "email") {
+            valueContent = `<a href="mailto:${info.value}">${info.value}</a>`;
+          } else if (info.type === "phone") {
+            valueContent = `<a href="tel:${info.value}">${info.value}</a>`;
+          } else if (info.type === "link") {
+            valueContent = `<a href="${info.value}" target="_blank" rel="noopener noreferrer">${info.value}</a>`;
+          }
+
+          li.innerHTML = `
           <div class="contact-icon">
             <i class="${iconClass}"></i>
           </div>
@@ -732,140 +747,142 @@
           </div>
         `;
 
-        contactInfoList.appendChild(li);
-      });
-    }
-
-    // Show message
-    function showMessage(message, type = 'error') {
-      successMessage.style.display = 'none';
-      errorMessage.style.display = 'none';
-
-      if (type === 'success') {
-        successMessage.textContent = message;
-        successMessage.style.display = 'block';
-      } else {
-        errorMessage.textContent = message;
-        errorMessage.style.display = 'block';
-      }
-
-      // Auto-hide after 5 seconds
-      setTimeout(() => {
-        successMessage.style.display = 'none';
-        errorMessage.style.display = 'none';
-      }, 5000);
-    }
-
-    // Handle form submission
-    contactForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const formData = new FormData(contactForm);
-      const data = {
-        name: formData.get('name'),
-        email: formData.get('email'),
-        message: formData.get('message')
-      };
-
-      // Show loading state
-      submitButton.disabled = true;
-      loadingBtn.classList.remove('hidden');
-      buttonText.textContent = 'Sending...';
-
-      try {
-        const response = await fetch('/api/contact', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(data),
+          contactInfoList.appendChild(li);
         });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.message || 'Failed to send message');
-        }
-
-        showMessage('Message sent successfully! We\'ll get back to you soon.', 'success');
-        contactForm.reset();
-
-      } catch (error) {
-        showMessage(error.message);
-      } finally {
-        // Reset button state
-        submitButton.disabled = false;
-        loadingBtn.classList.add('hidden');
-        buttonText.textContent = 'Send Message';
       }
-    });
 
-    // Load profile and setup page
-    async function loadProfile() {
-      try {
-        const response = await fetch('/api/profile');
-        
-        if (!response.ok) {
-          throw new Error('Profile not found');
-        }
+      // Show message
+      function showMessage(message, type = "error") {
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
 
-        const profile = await response.json();
-
-        // Apply theme
-        applyProfileTheme(profile);
-
-        // Display profile info
-        displayProfileInfo(profile);
-
-        // Check if contact is available
-        const hasContactInfo = profile.contactInfo && profile.contactInfo.length > 0;
-        const hasContactForm = profile.showContactForm;
-
-        if (!hasContactInfo && !hasContactForm) {
-          // Show no contact section
-          noContactSection.classList.remove('hidden');
-          contactContent.classList.add('hidden');
+        if (type === "success") {
+          successMessage.textContent = message;
+          successMessage.style.display = "block";
         } else {
-          // Show contact content
-          contactContent.classList.remove('hidden');
-          noContactSection.classList.add('hidden');
-
-          // Render contact info
-          if (hasContactInfo) {
-            renderContactInfo(profile.contactInfo);
-          } else {
-            contactInfoSection.style.display = 'none';
-          }
-
-          // Show/hide contact form
-          if (!hasContactForm) {
-            contactFormSection.style.display = 'none';
-          }
-
-          // Adjust layout if only one section is visible
-          if (!hasContactInfo || !hasContactForm) {
-            contactContent.style.gridTemplateColumns = '1fr';
-          }
+          errorMessage.textContent = message;
+          errorMessage.style.display = "block";
         }
 
-      } catch (error) {
-        console.error('Error loading profile:', error);
-        // Show no contact section as fallback
-        noContactSection.classList.remove('hidden');
-        contactContent.classList.add('hidden');
-      } finally {
-        // Hide loading screen
+        // Auto-hide after 5 seconds
         setTimeout(() => {
-          loadingScreen.classList.add('fade-out');
-          setTimeout(() => {
-            loadingScreen.classList.add('hidden');
-          }, 500);
-        }, 800);
+          successMessage.style.display = "none";
+          errorMessage.style.display = "none";
+        }, 5000);
       }
-    }
 
-    // Initialize page
-    document.addEventListener('DOMContentLoaded', loadProfile);
-  </script>
-</body>
+      // Handle form submission
+      contactForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(contactForm);
+        const data = {
+          name: formData.get("name"),
+          email: formData.get("email"),
+          message: formData.get("message"),
+        };
+
+        // Show loading state
+        submitButton.disabled = true;
+        loadingBtn.classList.remove("hidden");
+        buttonText.textContent = "Sending...";
+
+        try {
+          const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          });
+
+          const result = await response.json();
+
+          if (!response.ok) {
+            throw new Error(result.message || "Failed to send message");
+          }
+
+          showMessage(
+            "Message sent successfully! We'll get back to you soon.",
+            "success"
+          );
+          contactForm.reset();
+        } catch (error) {
+          showMessage(error.message);
+        } finally {
+          // Reset button state
+          submitButton.disabled = false;
+          loadingBtn.classList.add("hidden");
+          buttonText.textContent = "Send Message";
+        }
+      });
+
+      // Load profile and setup page
+      async function loadProfile() {
+        try {
+          const response = await fetch("/api/profile");
+
+          if (!response.ok) {
+            throw new Error("Profile not found");
+          }
+
+          const profile = await response.json();
+
+          // Apply theme
+          applyProfileTheme(profile);
+
+          // Display profile info
+          displayProfileInfo(profile);
+
+          // Check if contact is available
+          const hasContactInfo =
+            profile.contactInfo && profile.contactInfo.length > 0;
+          const hasContactForm = profile.showContactForm;
+
+          if (!hasContactInfo && !hasContactForm) {
+            // Show no contact section
+            noContactSection.classList.remove("hidden");
+            contactContent.classList.add("hidden");
+          } else {
+            // Show contact content
+            contactContent.classList.remove("hidden");
+            noContactSection.classList.add("hidden");
+
+            // Render contact info
+            if (hasContactInfo) {
+              renderContactInfo(profile.contactInfo);
+            } else {
+              contactInfoSection.style.display = "none";
+            }
+
+            // Show/hide contact form
+            if (!hasContactForm) {
+              contactFormSection.style.display = "none";
+            }
+
+            // Adjust layout if only one section is visible
+            if (!hasContactInfo || !hasContactForm) {
+              contactContent.style.gridTemplateColumns = "1fr";
+            }
+          }
+        } catch (error) {
+          console.error("Error loading profile:", error);
+          // Show no contact section as fallback
+          noContactSection.classList.remove("hidden");
+          contactContent.classList.add("hidden");
+        } finally {
+          // Hide loading screen
+          setTimeout(() => {
+            loadingScreen.classList.add("fade-out");
+            setTimeout(() => {
+              loadingScreen.classList.add("hidden");
+            }, 500);
+          }, 800);
+        }
+      }
+
+      // Initialize page
+      document.addEventListener("DOMContentLoaded", loadProfile);
+    </script>
+  </body>
 </html>

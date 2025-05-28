@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found - Custom Web</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -167,8 +167,12 @@
       }
 
       @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
       }
 
       @media (max-width: 768px) {
@@ -229,7 +233,7 @@
         The page you are looking for might have been removed, had its name
         changed, or is temporarily unavailable.
       </p>
-      
+
       <div class="buttons-container">
         <a href="/" class="home-button">
           <span class="loading-spinner hidden" id="loadingSpinner"></span>
@@ -245,104 +249,105 @@
       // Función para aplicar los colores del perfil
       function applyProfileTheme(profile) {
         const root = document.documentElement;
-        
+
         if (profile.backgroundColor) {
-          root.style.setProperty('--bg-color', profile.backgroundColor);
+          root.style.setProperty("--bg-color", profile.backgroundColor);
         }
-        
+
         if (profile.textColor) {
-          root.style.setProperty('--text-color', profile.textColor);
+          root.style.setProperty("--text-color", profile.textColor);
         }
-        
+
         if (profile.accentColor) {
-          root.style.setProperty('--accent-color', profile.accentColor);
-          root.style.setProperty('--primary-color', profile.accentColor);
+          root.style.setProperty("--accent-color", profile.accentColor);
+          root.style.setProperty("--primary-color", profile.accentColor);
         }
       }
 
       // Función para mostrar el logo del perfil
       function displayProfileLogo(profile) {
-        const logoContainer = document.getElementById('logoContainer');
-        const profileLogo = document.getElementById('profileLogo');
-        
+        const logoContainer = document.getElementById("logoContainer");
+        const profileLogo = document.getElementById("profileLogo");
+
         if (profile.logoImage) {
           profileLogo.src = profile.logoImage;
-          profileLogo.alt = profile.name ? `${profile.name} Logo` : 'Profile Logo';
-          logoContainer.classList.remove('hidden');
+          profileLogo.alt = profile.name
+            ? `${profile.name} Logo`
+            : "Profile Logo";
+          logoContainer.classList.remove("hidden");
         }
       }
 
       // Función para configurar el botón de contacto
       function setupContactButton(profile) {
-        const contactButton = document.getElementById('contactButton');
-        
+        const contactButton = document.getElementById("contactButton");
+
         if (profile.showContactForm) {
-          contactButton.href = '/contact';
-          contactButton.style.display = 'inline-block';
+          contactButton.href = "/contact";
+          contactButton.style.display = "inline-block";
         } else {
-          contactButton.style.display = 'none';
+          contactButton.style.display = "none";
         }
       }
 
       // Función para cargar el perfil
       async function loadProfile() {
         try {
-          const response = await fetch('/api/profile');
-          
+          const response = await fetch("/api/profile");
+
           if (response.ok) {
             const profile = await response.json();
-            
+
             // Aplicar tema del perfil
             applyProfileTheme(profile);
-            
+
             // Mostrar logo del perfil
             displayProfileLogo(profile);
-            
+
             // Configurar botón de contacto
             setupContactButton(profile);
-            
+
             // Actualizar título de la página
             if (profile.name) {
               document.title = `Page Not Found - ${profile.name}`;
             }
-            
           } else {
-            console.log('Profile not found, using default theme');
+            console.log("Profile not found, using default theme");
           }
         } catch (error) {
-          console.error('Error loading profile:', error);
+          console.error("Error loading profile:", error);
           // Usar tema por defecto si hay error
         }
       }
 
       // Función para manejar el clic en "Back to Home"
       function handleHomeClick(event) {
-        const loadingSpinner = document.getElementById('loadingSpinner');
-        const button = event.target.closest('.home-button');
-        
-        loadingSpinner.classList.remove('hidden');
-        button.style.pointerEvents = 'none';
-        
+        const loadingSpinner = document.getElementById("loadingSpinner");
+        const button = event.target.closest(".home-button");
+
+        loadingSpinner.classList.remove("hidden");
+        button.style.pointerEvents = "none";
+
         // Permitir que la navegación continúe normalmente
         setTimeout(() => {
-          loadingSpinner.classList.add('hidden');
-          button.style.pointerEvents = 'auto';
+          loadingSpinner.classList.add("hidden");
+          button.style.pointerEvents = "auto";
         }, 1000);
       }
 
       // Event listeners
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         // Cargar perfil al cargar la página
         loadProfile();
-        
+
         // Agregar event listener al botón de home
-        const homeButton = document.querySelector('.home-button');
-        homeButton.addEventListener('click', handleHomeClick);
-        
+        const homeButton = document.querySelector(".home-button");
+        homeButton.addEventListener("click", handleHomeClick);
+
         // Efecto de parallax sutil en el scroll (si hay contenido adicional)
-        window.addEventListener('scroll', function() {
+        window.addEventListener("scroll", function () {
           const scrolled = window.pageYOffset;
-          const errorContainer = document.querySelector('.error-container');
+          const errorContainer = document.querySelector(".error-container");
           errorContainer.style.transform = `translateY(${scrolled * 0.1}px)`;
         });
       });
@@ -350,14 +355,14 @@
       // Función para detectar si la página de contacto existe
       async function checkContactPage() {
         try {
-          const response = await fetch('/contact', { method: 'HEAD' });
-          const contactButton = document.getElementById('contactButton');
-          
+          const response = await fetch("/contact", { method: "HEAD" });
+          const contactButton = document.getElementById("contactButton");
+
           if (!response.ok) {
-            contactButton.style.display = 'none';
+            contactButton.style.display = "none";
           }
         } catch (error) {
-          console.log('Contact page check failed');
+          console.log("Contact page check failed");
         }
       }
 
@@ -365,20 +370,22 @@
       checkContactPage();
 
       // Agregar efectos de teclado para accesibilidad
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter' || event.key === ' ') {
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter" || event.key === " ") {
           const focusedElement = document.activeElement;
-          if (focusedElement.classList.contains('home-button') || 
-              focusedElement.classList.contains('contact-button')) {
+          if (
+            focusedElement.classList.contains("home-button") ||
+            focusedElement.classList.contains("contact-button")
+          ) {
             focusedElement.click();
           }
         }
       });
 
       // Precargar la página principal para navegación más rápida
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = '/';
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = "/";
       document.head.appendChild(link);
     </script>
   </body>

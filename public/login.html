@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Login - Custom Web</title>
-    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -31,7 +31,11 @@
         font-family: "Inter", sans-serif;
         line-height: 1.6;
         color: var(--text-color);
-        background: linear-gradient(135deg, var(--secondary-bg) 0%, var(--bg-color) 100%);
+        background: linear-gradient(
+          135deg,
+          var(--secondary-bg) 0%,
+          var(--bg-color) 100%
+        );
         display: flex;
         justify-content: center;
         align-items: center;
@@ -43,7 +47,8 @@
       .login-container {
         background-color: var(--bg-color);
         border-radius: 1rem;
-        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
         width: 100%;
         max-width: 420px;
         padding: 2.5rem;
@@ -53,13 +58,17 @@
       }
 
       .login-container::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: 0;
         right: 0;
         height: 4px;
-        background: linear-gradient(90deg, var(--accent-color), var(--primary-color));
+        background: linear-gradient(
+          90deg,
+          var(--accent-color),
+          var(--primary-color)
+        );
       }
 
       .logo-container {
@@ -152,7 +161,11 @@
       .login-button {
         width: 100%;
         padding: 0.875rem 1rem;
-        background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+        background: linear-gradient(
+          135deg,
+          var(--accent-color),
+          var(--primary-color)
+        );
         color: white;
         border: none;
         border-radius: 0.75rem;
@@ -165,13 +178,18 @@
       }
 
       .login-button::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
         transition: left 0.5s;
       }
 
@@ -309,9 +327,16 @@
       }
 
       @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
       }
 
       .shake {
@@ -352,7 +377,12 @@
     <div class="login-container">
       <!-- Logo del perfil -->
       <div class="logo-container">
-        <img src="/placeholder.svg" alt="Logo" class="logo hidden" id="profileLogo" />
+        <img
+          src="/placeholder.svg"
+          alt="Logo"
+          class="logo hidden"
+          id="profileLogo"
+        />
         <div class="profile-name hidden" id="profileName"></div>
       </div>
 
@@ -404,9 +434,7 @@
         </button>
       </form>
 
-      <a href="/" class="home-link" id="homeLink">
-        ← Back to Home
-      </a>
+      <a href="/" class="home-link" id="homeLink"> ← Back to Home </a>
     </div>
 
     <script>
@@ -426,22 +454,22 @@
       // Función para aplicar los colores del perfil
       function applyProfileTheme(profile) {
         const root = document.documentElement;
-        
+
         if (profile.backgroundColor) {
-          root.style.setProperty('--bg-color', profile.backgroundColor);
+          root.style.setProperty("--bg-color", profile.backgroundColor);
         }
-        
+
         if (profile.textColor) {
-          root.style.setProperty('--text-color', profile.textColor);
+          root.style.setProperty("--text-color", profile.textColor);
         }
-        
+
         if (profile.accentColor) {
-          root.style.setProperty('--accent-color', profile.accentColor);
-          root.style.setProperty('--primary-color', profile.accentColor);
+          root.style.setProperty("--accent-color", profile.accentColor);
+          root.style.setProperty("--primary-color", profile.accentColor);
         }
 
         if (profile.galleryBgColor) {
-          root.style.setProperty('--secondary-bg', profile.galleryBgColor);
+          root.style.setProperty("--secondary-bg", profile.galleryBgColor);
         }
       }
 
@@ -449,13 +477,15 @@
       function displayProfileInfo(profile) {
         if (profile.logoImage) {
           profileLogo.src = profile.logoImage;
-          profileLogo.alt = profile.name ? `${profile.name} Logo` : 'Profile Logo';
-          profileLogo.classList.remove('hidden');
+          profileLogo.alt = profile.name
+            ? `${profile.name} Logo`
+            : "Profile Logo";
+          profileLogo.classList.remove("hidden");
         }
 
         if (profile.name) {
           profileName.textContent = profile.name;
-          profileName.classList.remove('hidden');
+          profileName.classList.remove("hidden");
           document.title = `Admin Login - ${profile.name}`;
         }
       }
@@ -463,22 +493,21 @@
       // Función para cargar el perfil
       async function loadProfile() {
         try {
-          const response = await fetch('/api/profile');
-          
+          const response = await fetch("/api/profile");
+
           if (response.ok) {
             const profile = await response.json();
-            
+
             // Aplicar tema del perfil
             applyProfileTheme(profile);
-            
+
             // Mostrar información del perfil
             displayProfileInfo(profile);
-            
           } else {
-            console.log('Profile not found, using default theme');
+            console.log("Profile not found, using default theme");
           }
         } catch (error) {
-          console.error('Error loading profile:', error);
+          console.error("Error loading profile:", error);
         }
       }
 
@@ -487,7 +516,7 @@
         const token = localStorage.getItem("authToken");
         if (token) {
           // Show success message and redirect
-          showMessage("Already logged in! Redirecting...", 'success');
+          showMessage("Already logged in! Redirecting...", "success");
           setTimeout(() => {
             window.location.href = "/custom-web/admin";
           }, 1000);
@@ -495,19 +524,19 @@
       }
 
       // Show message function
-      function showMessage(message, type = 'error') {
+      function showMessage(message, type = "error") {
         const errorEl = document.getElementById("login-error");
         const successEl = document.getElementById("login-success");
-        
+
         // Hide both messages first
         errorEl.style.display = "none";
         successEl.style.display = "none";
-        
-        if (type === 'error') {
+
+        if (type === "error") {
           errorEl.textContent = message;
           errorEl.style.display = "block";
-          loginForm.classList.add('shake');
-          setTimeout(() => loginForm.classList.remove('shake'), 500);
+          loginForm.classList.add("shake");
+          setTimeout(() => loginForm.classList.remove("shake"), 500);
         } else {
           successEl.textContent = message;
           successEl.style.display = "block";
@@ -515,10 +544,13 @@
       }
 
       // Password toggle functionality
-      passwordToggle.addEventListener('click', function() {
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        passwordToggle.textContent = type === 'password' ? '👁️' : '🙈';
+      passwordToggle.addEventListener("click", function () {
+        const type =
+          passwordInput.getAttribute("type") === "password"
+            ? "text"
+            : "password";
+        passwordInput.setAttribute("type", type);
+        passwordToggle.textContent = type === "password" ? "👁️" : "🙈";
       });
 
       // Handle login form submission
@@ -526,11 +558,11 @@
         e.preventDefault();
 
         // Reset messages
-        showMessage('', 'clear');
+        showMessage("", "clear");
 
         // Validate inputs
         if (!emailInput.value.trim() || !passwordInput.value.trim()) {
-          showMessage('Please fill in all fields');
+          showMessage("Please fill in all fields");
           return;
         }
 
@@ -561,13 +593,12 @@
           localStorage.setItem("authToken", data.token);
 
           // Show success message
-          showMessage("Login successful! Redirecting...", 'success');
+          showMessage("Login successful! Redirecting...", "success");
 
           // Redirect to admin panel after a short delay
           setTimeout(() => {
             window.location.href = "/custom-web/admin";
           }, 1500);
-
         } catch (error) {
           // Show error message
           showMessage(error.message);
@@ -588,10 +619,10 @@
       });
 
       // Handle Enter key on inputs
-      [emailInput, passwordInput].forEach(input => {
-        input.addEventListener('keypress', function(e) {
-          if (e.key === 'Enter') {
-            loginForm.dispatchEvent(new Event('submit'));
+      [emailInput, passwordInput].forEach((input) => {
+        input.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            loginForm.dispatchEvent(new Event("submit"));
           }
         });
       });
@@ -600,26 +631,26 @@
       emailInput.focus();
 
       // Initialize page
-      document.addEventListener("DOMContentLoaded", function() {
+      document.addEventListener("DOMContentLoaded", function () {
         loadProfile();
         checkAuthStatus();
       });
 
       // Add some keyboard shortcuts
-      document.addEventListener('keydown', function(e) {
+      document.addEventListener("keydown", function (e) {
         // Escape key to clear form
-        if (e.key === 'Escape') {
-          emailInput.value = '';
-          passwordInput.value = '';
-          showMessage('', 'clear');
+        if (e.key === "Escape") {
+          emailInput.value = "";
+          passwordInput.value = "";
+          showMessage("", "clear");
           emailInput.focus();
         }
       });
 
       // Preload admin page for faster navigation
-      const link = document.createElement('link');
-      link.rel = 'prefetch';
-      link.href = '/custom-web/admin';
+      const link = document.createElement("link");
+      link.rel = "prefetch";
+      link.href = "/custom-web/admin";
       document.head.appendChild(link);
     </script>
   </body>
