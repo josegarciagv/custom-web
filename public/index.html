@@ -19,7 +19,6 @@
         --services-bg: #ffffff;
         --faq-bg: #ffffff;
         --contact-bg: #f9fafb;
-        --header-height: 70px;
     }
     
     * {
@@ -33,154 +32,6 @@
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--bg-color);
-        padding-top: var(--header-height);
-    }
-    
-    /* Header Styles */
-    .header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: var(--header-height);
-        background-color: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border-color);
-        z-index: 1000;
-        transition: all 0.3s ease;
-    }
-    
-    .header.scrolled {
-        background-color: rgba(255, 255, 255, 0.98);
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    }
-    
-    .header-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 2rem;
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    
-    .header-logo {
-        display: flex;
-        align-items: center;
-        gap: 0.75rem;
-        text-decoration: none;
-        color: var(--text-color);
-        font-weight: 600;
-        font-size: 1.1rem;
-    }
-    
-    .header-logo-img {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        object-fit: cover;
-        border: 2px solid var(--primary-color);
-    }
-    
-    .header-nav {
-        display: flex;
-        align-items: center;
-        gap: 2rem;
-    }
-    
-    .nav-link {
-        text-decoration: none;
-        color: var(--text-color);
-        font-weight: 500;
-        padding: 0.5rem 1rem;
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-        position: relative;
-    }
-    
-    .nav-link:hover {
-        color: var(--primary-color);
-        background-color: rgba(79, 70, 229, 0.1);
-    }
-    
-    .nav-link.active {
-        color: var(--primary-color);
-        background-color: rgba(79, 70, 229, 0.1);
-    }
-    
-    .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: -2px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 20px;
-        height: 2px;
-        background-color: var(--primary-color);
-        border-radius: 1px;
-    }
-    
-    /* Mobile Menu */
-    .mobile-menu-btn {
-        display: none;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        color: var(--text-color);
-        cursor: pointer;
-        padding: 0.5rem;
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-    }
-    
-    .mobile-menu-btn:hover {
-        background-color: rgba(79, 70, 229, 0.1);
-        color: var(--primary-color);
-    }
-    
-    .mobile-menu {
-        position: fixed;
-        top: var(--header-height);
-        left: 0;
-        right: 0;
-        background-color: rgba(255, 255, 255, 0.98);
-        backdrop-filter: blur(10px);
-        border-bottom: 1px solid var(--border-color);
-        transform: translateY(-100%);
-        opacity: 0;
-        visibility: hidden;
-        transition: all 0.3s ease;
-        z-index: 999;
-    }
-    
-    .mobile-menu.active {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-    }
-    
-    .mobile-nav {
-        padding: 1rem 2rem;
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-    
-    .mobile-nav-link {
-        text-decoration: none;
-        color: var(--text-color);
-        font-weight: 500;
-        padding: 1rem;
-        border-radius: 0.5rem;
-        transition: all 0.3s ease;
-        text-align: center;
-    }
-    
-    .mobile-nav-link:hover,
-    .mobile-nav-link.active {
-        color: var(--primary-color);
-        background-color: rgba(79, 70, 229, 0.1);
     }
     
     /* Loading Screen Styles */
@@ -234,10 +85,9 @@
         padding: 2rem;
     }
     
-    .hero-section {
+    header {
         text-align: center;
         margin-bottom: 3rem;
-        padding: 4rem 0;
     }
     
     .profile-image {
@@ -493,7 +343,7 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.95);
-        z-index: 2000;
+        z-index: 1000;
         justify-content: center;
         align-items: center;
     }
@@ -531,7 +381,7 @@
         font-size: 1.5rem;
         color: #333;
         transition: all 0.3s ease;
-        z-index: 2001;
+        z-index: 1001;
     }
     
     .modal-nav:hover {
@@ -569,7 +419,7 @@
         font-size: 1.5rem;
         color: #333;
         transition: all 0.3s ease;
-        z-index: 2001;
+        z-index: 1001;
     }
     
     .close-modal:hover {
@@ -587,7 +437,7 @@
         padding: 8px 16px;
         border-radius: 20px;
         font-size: 0.9rem;
-        z-index: 2001;
+        z-index: 1001;
     }
     
     .modal-title {
@@ -600,7 +450,7 @@
         border-radius: 20px;
         font-size: 0.9rem;
         max-width: calc(100% - 120px);
-        z-index: 2001;
+        z-index: 1001;
     }
     
     .info-section {
@@ -716,35 +566,9 @@
         display: none;
     }
     
-    /* Smooth scrolling */
-    html {
-        scroll-behavior: smooth;
-    }
-    
-    /* Section scroll offset for fixed header */
-    .section {
-        scroll-margin-top: calc(var(--header-height) + 2rem);
-    }
-    
     @media (max-width: 768px) {
-        .header-container {
-            padding: 0 1rem;
-        }
-        
-        .header-nav {
-            display: none;
-        }
-        
-        .mobile-menu-btn {
-            display: block;
-        }
-        
         .container {
             padding: 1rem;
-        }
-        
-        .hero-section {
-            padding: 2rem 0;
         }
         
         .profile-name {
@@ -802,30 +626,6 @@
 </style>
 </head>
 <body>
-<!-- Header -->
-<header class="header" id="header">
-    <div class="header-container">
-        <a href="#home" class="header-logo" id="header-logo">
-            <img src="/images/profile.jpg" alt="Logo" class="header-logo-img" id="header-logo-img">
-            <span id="header-name">Profile</span>
-        </a>
-        
-        <nav class="header-nav" id="header-nav">
-            <!-- Navigation links will be loaded dynamically -->
-        </nav>
-        
-        <button class="mobile-menu-btn" id="mobile-menu-btn">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-    
-    <div class="mobile-menu" id="mobile-menu">
-        <nav class="mobile-nav" id="mobile-nav">
-            <!-- Mobile navigation links will be loaded dynamically -->
-        </nav>
-    </div>
-</header>
-
 <!-- Loading Screen -->
 <div class="loading-screen" id="loading-screen">
     <div class="loading-spinner"></div>
@@ -833,85 +633,85 @@
 
 <!-- Main Content -->
 <div class="main-content" id="main-content">
-    <section id="home" class="hero-section section">
-        <div class="container">
+    <div class="container">
+        <header>
             <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
             <h1 class="profile-name" id="profile-name">John Doe</h1>
             <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
-            
-            <div class="links-container" id="links-container">
-                <!-- Social links will be loaded dynamically -->
-            </div>
+        </header>
+        
+        <div class="links-container" id="links-container">
+            <!-- Social links will be loaded dynamically -->
         </div>
-    </section>
-    
-    <section id="services" class="services-section section">
-        <div class="container">
-            <h2 class="section-title" id="services-title">My Services</h2>
-            <div class="services-grid" id="services-grid">
-                <!-- Services will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-    
-    <section id="gallery" class="gallery-section section">
-        <div class="container">
-            <h2 class="section-title" id="gallery-title">My Gallery</h2>
-            <div class="gallery" id="gallery">
-                <!-- Gallery images will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-    
-    <section id="info" class="info-section section">
-        <div class="container">
-            <h2 class="section-title" id="info-title">Contact Information</h2>
-            <div class="info-grid" id="info-grid">
-                <!-- Contact info will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-    
-    <section id="faq" class="faq-section section">
-        <div class="container">
-            <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
-            <div class="faq-container" id="faq-container">
-                <!-- FAQs will be loaded dynamically -->
-            </div>
-        </div>
-    </section>
-    
-    <section id="contact" class="contact-section section">
-        <div class="container">
-            <h2 class="section-title" id="contact-title">Contact Me</h2>
-            <div class="contact-form">
-                <div class="alert alert-success" id="success-alert">
-                    Your message has been sent successfully! I'll get back to you soon.
+        
+        <section id="services-section" class="services-section">
+            <div class="container">
+                <h2 class="section-title" id="services-title">My Services</h2>
+                <div class="services-grid" id="services-grid">
+                    <!-- Services will be loaded dynamically -->
                 </div>
-                <div class="alert alert-error" id="error-alert">
-                    There was an error sending your message. Please try again.
-                </div>
-                <form id="contact-form">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button" id="submit-button">
-                        <span id="loading" class="loading hidden"></span>
-                        <span id="button-text">Send Message</span>
-                    </button>
-                </form>
             </div>
-        </div>
-    </section>
+        </section>
+        
+        <section id="gallery-section" class="gallery-section">
+            <div class="container">
+                <h2 class="section-title" id="gallery-title">My Gallery</h2>
+                <div class="gallery" id="gallery">
+                    <!-- Gallery images will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+        
+        <section id="info-section" class="info-section">
+            <div class="container">
+                <h2 class="section-title" id="info-title">Contact Information</h2>
+                <div class="info-grid" id="info-grid">
+                    <!-- Contact info will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+        
+        <section id="faq-section" class="faq-section">
+            <div class="container">
+                <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
+                <div class="faq-container" id="faq-container">
+                    <!-- FAQs will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+        
+        <section id="contact-section" class="contact-section">
+            <div class="container">
+                <h2 class="section-title" id="contact-title">Contact Me</h2>
+                <div class="contact-form">
+                    <div class="alert alert-success" id="success-alert">
+                        Your message has been sent successfully! I'll get back to you soon.
+                    </div>
+                    <div class="alert alert-error" id="error-alert">
+                        There was an error sending your message. Please try again.
+                    </div>
+                    <form id="contact-form">
+                        <div class="form-group">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Enter your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message" class="form-label">Message</label>
+                            <textarea id="message" name="message" class="form-textarea" placeholder="Enter your message" required></textarea>
+                        </div>
+                        <button type="submit" class="submit-button" id="submit-button">
+                            <span id="loading" class="loading hidden"></span>
+                            <span id="button-text">Send Message</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
 
     <!-- Enhanced Modal -->
     <div class="modal" id="image-modal">
@@ -942,137 +742,9 @@
     let isImagesLoaded = false;
     let galleryImages = [];
     let currentImageIndex = 0;
-    let availableSections = [];
     
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
-    
-    // Header scroll effect
-    window.addEventListener('scroll', () => {
-        const header = document.getElementById('header');
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Update active navigation link
-        updateActiveNavLink();
-    });
-    
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    
-    mobileMenuBtn.addEventListener('click', () => {
-        mobileMenu.classList.toggle('active');
-        const icon = mobileMenuBtn.querySelector('i');
-        if (mobileMenu.classList.contains('active')) {
-            icon.className = 'fas fa-times';
-        } else {
-            icon.className = 'fas fa-bars';
-        }
-    });
-    
-    // Close mobile menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-            mobileMenu.classList.remove('active');
-            mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
-        }
-    });
-    
-    // Update active navigation link based on scroll position
-    function updateActiveNavLink() {
-        const sections = availableSections.map(section => document.getElementById(section.id));
-        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-        
-        let currentSection = '';
-        
-        sections.forEach(section => {
-            if (section) {
-                const rect = section.getBoundingClientRect();
-                if (rect.top <= 100 && rect.bottom >= 100) {
-                    currentSection = section.id;
-                }
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('active');
-            if (link.getAttribute('href') === `#${currentSection}`) {
-                link.classList.add('active');
-            }
-        });
-    }
-    
-    // Generate navigation based on available sections
-    function generateNavigation(data) {
-        availableSections = [
-            { id: 'home', label: 'Home', always: true }
-        ];
-        
-        // Add sections based on available data
-        if (data.services && data.services.length > 0) {
-            availableSections.push({ id: 'services', label: data.servicesSectionTitle || 'Services' });
-        }
-        
-        if (data.galleryImages && data.galleryImages.length > 0) {
-            availableSections.push({ id: 'gallery', label: data.gallerySectionTitle || 'Gallery' });
-        }
-        
-        if (data.contactInfo && data.contactInfo.length > 0) {
-            availableSections.push({ id: 'info', label: data.infoSectionTitle || 'Contact Info' });
-        }
-        
-        if (data.faqs && data.faqs.length > 0) {
-            availableSections.push({ id: 'faq', label: data.faqSectionTitle || 'FAQ' });
-        }
-        
-        if (data.showContactForm !== false) {
-            availableSections.push({ id: 'contact', label: data.contactSectionTitle || 'Contact' });
-        }
-        
-        // Generate desktop navigation
-        const headerNav = document.getElementById('header-nav');
-        headerNav.innerHTML = '';
-        
-        availableSections.forEach(section => {
-            const link = document.createElement('a');
-            link.href = `#${section.id}`;
-            link.className = 'nav-link';
-            link.textContent = section.label;
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById(section.id).scrollIntoView({ behavior: 'smooth' });
-            });
-            headerNav.appendChild(link);
-        });
-        
-        // Generate mobile navigation
-        const mobileNav = document.getElementById('mobile-nav');
-        mobileNav.innerHTML = '';
-        
-        availableSections.forEach(section => {
-            const link = document.createElement('a');
-            link.href = `#${section.id}`;
-            link.className = 'mobile-nav-link';
-            link.textContent = section.label;
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                document.getElementById(section.id).scrollIntoView({ behavior: 'smooth' });
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
-            });
-            mobileNav.appendChild(link);
-        });
-        
-        // Set first link as active
-        setTimeout(() => {
-            const firstLink = document.querySelector('.nav-link');
-            if (firstLink) firstLink.classList.add('active');
-        }, 100);
-    }
     
     // Hide loading screen when everything is ready
     function hideLoadingScreen() {
@@ -1175,10 +847,6 @@
             document.documentElement.style.setProperty('--faq-bg', data.faqBgColor || '#ffffff');
             document.documentElement.style.setProperty('--contact-bg', data.contactBgColor || '#f9fafb');
             
-            // Update header
-            document.getElementById('header-name').textContent = data.name;
-            document.getElementById('header-logo-img').src = data.profileImage;
-            
             // Update profile information
             document.getElementById('profile-name').textContent = data.name;
             document.getElementById('profile-description').textContent = data.description;
@@ -1221,9 +889,6 @@
             // Store gallery images for modal navigation
             galleryImages = data.galleryImages || [];
             
-            // Generate navigation
-            generateNavigation(data);
-            
             // Load social links
             loadSocialLinks(data.links || []);
             
@@ -1241,23 +906,15 @@
             
             // Show/hide sections based on settings
             if (!data.showContactForm) {
-                document.getElementById('contact').classList.add('hidden');
+                document.getElementById('contact-section').classList.add('hidden');
             }
             
             if (!data.contactInfo || data.contactInfo.length === 0) {
-                document.getElementById('info').classList.add('hidden');
+                document.getElementById('info-section').classList.add('hidden');
             }
             
             if (!data.faqs || data.faqs.length === 0) {
-                document.getElementById('faq').classList.add('hidden');
-            }
-            
-            if (!data.services || data.services.length === 0) {
-                document.getElementById('services').classList.add('hidden');
-            }
-            
-            if (!data.galleryImages || data.galleryImages.length === 0) {
-                document.getElementById('gallery').classList.add('hidden');
+                document.getElementById('faq-section').classList.add('hidden');
             }
             
             // Mark data as loaded
@@ -1329,6 +986,8 @@
                 
                 servicesGrid.appendChild(serviceCard);
             });
+        } else {
+            document.getElementById('services-section').classList.add('hidden');
         }
     }
     
@@ -1351,6 +1010,8 @@
                 galleryItem.appendChild(img);
                 gallery.appendChild(galleryItem);
             });
+        } else {
+            document.getElementById('gallery-section').classList.add('hidden');
         }
     }
     
@@ -1394,6 +1055,8 @@
                 
                 infoGrid.appendChild(infoCard);
             });
+        } else {
+            document.getElementById('info-section').classList.add('hidden');
         }
     }
     
@@ -1433,6 +1096,8 @@
                 
                 faqContainer.appendChild(faqItem);
             });
+        } else {
+            document.getElementById('faq-section').classList.add('hidden');
         }
     }
     
