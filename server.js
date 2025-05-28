@@ -996,14 +996,16 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
   }
 })
 
-// Route for all HTML pages
-app.get(["/", "/custom-web/login", "/custom-web/admin"], (req, res) => {
+// Route for all HTML pages - UPDATED to include /contact
+app.get(["/", "/custom-web/login", "/custom-web/admin", "/contact"], (req, res) => {
   const requestPath = req.path;
   
   if (requestPath === "/custom-web/login") {
     res.sendFile(path.join(__dirname, "public", "login.html"));
   } else if (requestPath === "/custom-web/admin") {
     res.sendFile(path.join(__dirname, "public", "admin.html"));
+  } else if (requestPath === "/contact") {
+    res.sendFile(path.join(__dirname, "public", "contact.html"));
   } else {
     res.sendFile(path.join(__dirname, "public", "index.html"));
   }
@@ -1025,6 +1027,7 @@ async function startServer() {
       console.log(`Server running on port ${PORT}`);
       console.log(`Application URL: https://${DOMAIN}`);
       console.log(`Admin login: https://${DOMAIN}/custom-web/login`);
+      console.log(`Contact page: https://${DOMAIN}/contact`);
       console.log("✅ Images are stored as base64 in MongoDB - they will persist across deployments");
     });
   } catch (error) {
