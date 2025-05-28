@@ -684,136 +684,44 @@
         margin-right: 0.5rem;
       }
 
-      /* UPDATED: Contact Section Styles to match contact.html */
       .contact-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
         background-color: var(--contact-bg);
       }
 
-      .contact-content {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 3rem;
-        margin-bottom: 3rem;
-      }
-
-      .contact-info-section,
-      .contact-form-section {
-        background-color: var(--bg-color);
-        padding: 2rem;
-        border-radius: 1rem;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        animation: fadeInUp 0.6s ease-out;
-      }
-
-      .contact-section-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: var(--text-color);
-        margin-bottom: 1.5rem;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .section-icon {
-        color: var(--primary-color);
-        font-size: 1.25rem;
-      }
-
-      /* Contact Information */
-      .contact-info-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-      }
-
-      .contact-info-item {
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        padding: 1rem;
-        background-color: var(--secondary-bg);
-        border-radius: 0.75rem;
-        transition: all 0.3s ease;
-        border: 2px solid transparent;
-      }
-
-      .contact-info-item:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        border-color: var(--primary-color);
-      }
-
-      .contact-icon {
-        width: 40px;
-        height: 40px;
-        background-color: var(--primary-color);
-        color: white;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1rem;
-        flex-shrink: 0;
-      }
-
-      .contact-details h4 {
-        font-weight: 600;
-        color: var(--text-color);
-        margin-bottom: 0.25rem;
-      }
-
-      .contact-details p {
-        color: var(--text-color);
-        opacity: 0.8;
-      }
-
-      .contact-details a {
-        color: var(--primary-color);
-        text-decoration: none;
-        transition: opacity 0.3s ease;
-      }
-
-      .contact-details a:hover {
-        opacity: 0.8;
-      }
-
-      /* Contact Form */
       .contact-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.5rem;
+        max-width: 600px;
+        margin: 0 auto;
+        background-color: var(--secondary-bg);
+        padding: 2rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       }
 
       .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-        margin-bottom: 0;
+        margin-bottom: 1.5rem;
       }
 
       .form-label {
-        font-weight: 500;
-        color: var(--text-color);
-        font-size: 0.9rem;
         display: block;
         margin-bottom: 0.5rem;
+        font-weight: 500;
       }
 
       .form-input,
       .form-textarea {
-        padding: 0.875rem 1rem;
-        border: 2px solid var(--border-color);
-        border-radius: 0.75rem;
-        font-size: 1rem;
-        font-family: inherit;
-        transition: all 0.3s ease;
-        background-color: var(--bg-color);
-        color: var(--text-color);
         width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      .form-textarea {
+        min-height: 150px;
+        resize: vertical;
       }
 
       .form-input:focus,
@@ -821,68 +729,33 @@
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-        transform: translateY(-1px);
-      }
-
-      .form-textarea {
-        resize: vertical;
-        min-height: 120px;
       }
 
       .submit-button {
-        padding: 0.875rem 2rem;
-        background: linear-gradient(
-          135deg,
-          var(--primary-color),
-          var(--primary-color)
-        );
-        color: white;
-        border: none;
-        border-radius: 0.75rem;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-      }
-
-      .submit-button::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-          90deg,
-          transparent,
-          rgba(255, 255, 255, 0.2),
-          transparent
-        );
-        transition: left 0.5s;
-      }
-
-      .submit-button:hover::before {
-        left: 100%;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
       }
 
       .submit-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        background-color: #4338ca;
       }
 
       .submit-button:disabled {
-        background: #a5a5a5;
+        background-color: #9ca3af;
         cursor: not-allowed;
-        transform: none;
-        box-shadow: none;
       }
 
-      .loading-btn {
+      .loading {
         display: inline-block;
         width: 1rem;
         height: 1rem;
@@ -893,25 +766,142 @@
         margin-right: 0.5rem;
       }
 
-      /* Messages */
-      .message {
+      .alert {
         padding: 1rem;
-        border-radius: 0.75rem;
-        margin-bottom: 1rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1.5rem;
         display: none;
-        animation: slideInDown 0.3s ease-out;
       }
 
-      .message.success {
-        background-color: rgba(16, 185, 129, 0.1);
-        color: var(--success-color);
-        border-left: 4px solid var(--success-color);
+      .alert-success {
+        background-color: #d1fae5;
+        color: #065f46;
+        border: 1px solid #34d399;
       }
 
-      .message.error {
-        background-color: rgba(239, 68, 68, 0.1);
-        color: var(--error-color);
-        border-left: 4px solid var(--error-color);
+      .alert-error {
+        background-color: #fee2e2;
+        color: #b91c1c;
+        border: 1px solid #f87171;
+      }
+
+      /* Enhanced Modal Styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        position: relative;
+        max-width: 95%;
+        max-height: 95%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal-image {
+        max-width: 100%;
+        max-height: 90vh;
+        object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      }
+
+      .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #333;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+
+      .modal-nav:hover {
+        background-color: white;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .modal-nav:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: translateY(-50%) scale(1);
+      }
+
+      .modal-nav.prev {
+        left: 20px;
+      }
+
+      .modal-nav.next {
+        right: 20px;
+      }
+
+      .close-modal {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #333;
+        transition: all 0.3s ease;
+        z-index: 1001;
+      }
+
+      .close-modal:hover {
+        background-color: white;
+        transform: scale(1.1);
+      }
+
+      .modal-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        z-index: 1001;
+      }
+
+      .modal-title {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        max-width: calc(100% - 120px);
+        z-index: 1001;
       }
 
       .info-section {
@@ -1220,29 +1210,6 @@
         line-height: 1.7;
       }
 
-      /* Animations */
-      @keyframes fadeInUp {
-        from {
-          opacity: 0;
-          transform: translateY(30px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
-      @keyframes slideInDown {
-        from {
-          opacity: 0;
-          transform: translateY(-20px);
-        }
-        to {
-          opacity: 1;
-          transform: translateY(0);
-        }
-      }
-
       @media (max-width: 768px) {
         .header-container {
           padding: 0 1rem;
@@ -1339,18 +1306,6 @@
 
         .blog-post-modal-title {
           font-size: 1.5rem;
-        }
-
-        /* Contact section responsive */
-        .contact-content {
-          grid-template-columns: 1fr;
-          gap: 2rem;
-        }
-
-        .contact-info-item {
-          flex-direction: column;
-          text-align: center;
-          gap: 0.75rem;
         }
       }
     </style>
@@ -1551,81 +1506,55 @@
           </div>
         </section>
 
-        <!-- UPDATED: Contact Section to match contact.html -->
         <section id="contact-section" class="contact-section">
           <div class="container">
             <h2 class="section-title" id="contact-title">Contact Me</h2>
-
-            <div class="contact-content">
-              <!-- Contact Information -->
-              <div class="contact-info-section" id="contactInfoSection">
-                <h2 class="contact-section-title">
-                  <i class="fas fa-info-circle section-icon"></i>
-                  <span id="contactInfoTitle">Contact Information</span>
-                </h2>
-                <ul class="contact-info-list" id="contactInfoList">
-                  <!-- Contact info items will be populated here -->
-                </ul>
+            <div class="contact-form">
+              <div class="alert alert-success" id="success-alert">
+                Your message has been sent successfully! I'll get back to you
+                soon.
               </div>
-
-              <!-- Contact Form -->
-              <div class="contact-form-section" id="contactFormSection">
-                <h2 class="contact-section-title">
-                  <i class="fas fa-envelope section-icon"></i>
-                  <span id="contactFormTitle">Send Message</span>
-                </h2>
-
-                <div class="message success" id="successMessage"></div>
-                <div class="message error" id="errorMessage"></div>
-
-                <form class="contact-form" id="contact-form">
-                  <div class="form-group">
-                    <label for="name" class="form-label">Full Name *</label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      class="form-input"
-                      placeholder="Enter your full name"
-                      required
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="email" class="form-label"
-                      >Email Address *</label
-                    >
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      class="form-input"
-                      placeholder="Enter your email address"
-                      required
-                    />
-                  </div>
-
-                  <div class="form-group">
-                    <label for="message" class="form-label">Message *</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      class="form-textarea"
-                      placeholder="Enter your message here..."
-                      required
-                    ></textarea>
-                  </div>
-
-                  <button
-                    type="submit"
-                    class="submit-button"
-                    id="submit-button"
-                  >
-                    <span class="loading-btn hidden" id="loading-btn"></span>
-                    <span id="button-text">Send Message</span>
-                  </button>
-                </form>
+              <div class="alert alert-error" id="error-alert">
+                There was an error sending your message. Please try again.
               </div>
+              <form id="contact-form">
+                <div class="form-group">
+                  <label for="name" class="form-label">Name</label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    class="form-input"
+                    placeholder="Enter your name"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    class="form-input"
+                    placeholder="Enter your email"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="message" class="form-label">Message</label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    class="form-textarea"
+                    placeholder="Enter your message"
+                    required
+                  ></textarea>
+                </div>
+                <button type="submit" class="submit-button" id="submit-button">
+                  <span id="loading" class="loading hidden"></span>
+                  <span id="button-text">Send Message</span>
+                </button>
+              </form>
             </div>
           </div>
         </section>
