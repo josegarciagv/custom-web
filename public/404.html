@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Page Not Found - Custom Web</title>
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -13,6 +14,7 @@
         --primary-color: #4f46e5;
         --text-color: #333;
         --bg-color: #fff;
+        --accent-color: #4f46e5;
       }
 
       * {
@@ -33,51 +35,140 @@
         min-height: 100vh;
         padding: 2rem;
         text-align: center;
+        transition: all 0.3s ease;
       }
 
       .error-container {
         max-width: 600px;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .logo-container {
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out 0.2s forwards;
+      }
+
+      .logo {
+        max-width: 120px;
+        max-height: 120px;
+        width: auto;
+        height: auto;
+        border-radius: 50%;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .logo:hover {
+        transform: scale(1.05);
       }
 
       .error-code {
         font-size: 8rem;
         font-weight: 700;
-        color: var(--primary-color);
+        color: var(--accent-color);
         line-height: 1;
         margin-bottom: 1rem;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       }
 
       .error-title {
         font-size: 2rem;
         font-weight: 600;
         margin-bottom: 1rem;
+        color: var(--text-color);
       }
 
       .error-message {
         font-size: 1.1rem;
         margin-bottom: 2rem;
-        color: #666;
+        color: var(--text-color);
+        opacity: 0.8;
+        line-height: 1.6;
+      }
+
+      .buttons-container {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
       }
 
       .home-button {
         display: inline-block;
-        background-color: var(--primary-color);
+        background-color: var(--accent-color);
         color: white;
         padding: 0.75rem 1.5rem;
         border-radius: 0.5rem;
         font-weight: 600;
         text-decoration: none;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 10px rgba(79, 70, 229, 0.3);
       }
 
       .home-button:hover {
-        background-color: #4338ca;
+        background-color: var(--accent-color);
+        filter: brightness(0.9);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4);
       }
 
-      .error-image {
-        max-width: 100%;
-        height: auto;
-        margin-bottom: 2rem;
+      .contact-button {
+        display: inline-block;
+        background-color: transparent;
+        color: var(--accent-color);
+        padding: 0.75rem 1.5rem;
+        border: 2px solid var(--accent-color);
+        border-radius: 0.5rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+      }
+
+      .contact-button:hover {
+        background-color: var(--accent-color);
+        color: white;
+        transform: translateY(-2px);
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 2px solid #f3f3f3;
+        border-top: 2px solid var(--accent-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 8px;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
       }
 
       @media (max-width: 768px) {
@@ -88,22 +179,207 @@
         .error-title {
           font-size: 1.5rem;
         }
+
+        .error-message {
+          font-size: 1rem;
+        }
+
+        .buttons-container {
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .home-button,
+        .contact-button {
+          width: 100%;
+          max-width: 250px;
+        }
+
+        .logo {
+          max-width: 80px;
+          max-height: 80px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        body {
+          padding: 1rem;
+        }
+
+        .error-code {
+          font-size: 4rem;
+        }
+
+        .error-title {
+          font-size: 1.25rem;
+        }
       }
     </style>
   </head>
   <body>
     <div class="error-container">
+      <!-- Logo del perfil -->
+      <div class="logo-container hidden" id="logoContainer">
+        <img src="/placeholder.svg" alt="Logo" class="logo" id="profileLogo" />
+      </div>
+
       <div class="error-code">404</div>
       <h1 class="error-title">Page Not Found</h1>
       <p class="error-message">
         The page you are looking for might have been removed, had its name
         changed, or is temporarily unavailable.
       </p>
-      <a href="/" class="home-button">Back to Home</a>
+      
+      <div class="buttons-container">
+        <a href="/" class="home-button">
+          <span class="loading-spinner hidden" id="loadingSpinner"></span>
+          Back to Home
+        </a>
+        <a href="/contact" class="contact-button" id="contactButton">
+          Contact Us
+        </a>
+      </div>
     </div>
 
     <script>
-      // You can add custom 404 page behavior here if needed
+      // Función para aplicar los colores del perfil
+      function applyProfileTheme(profile) {
+        const root = document.documentElement;
+        
+        if (profile.backgroundColor) {
+          root.style.setProperty('--bg-color', profile.backgroundColor);
+        }
+        
+        if (profile.textColor) {
+          root.style.setProperty('--text-color', profile.textColor);
+        }
+        
+        if (profile.accentColor) {
+          root.style.setProperty('--accent-color', profile.accentColor);
+          root.style.setProperty('--primary-color', profile.accentColor);
+        }
+      }
+
+      // Función para mostrar el logo del perfil
+      function displayProfileLogo(profile) {
+        const logoContainer = document.getElementById('logoContainer');
+        const profileLogo = document.getElementById('profileLogo');
+        
+        if (profile.logoImage) {
+          profileLogo.src = profile.logoImage;
+          profileLogo.alt = profile.name ? `${profile.name} Logo` : 'Profile Logo';
+          logoContainer.classList.remove('hidden');
+        }
+      }
+
+      // Función para configurar el botón de contacto
+      function setupContactButton(profile) {
+        const contactButton = document.getElementById('contactButton');
+        
+        if (profile.showContactForm) {
+          contactButton.href = '/contact';
+          contactButton.style.display = 'inline-block';
+        } else {
+          contactButton.style.display = 'none';
+        }
+      }
+
+      // Función para cargar el perfil
+      async function loadProfile() {
+        try {
+          const response = await fetch('/api/profile');
+          
+          if (response.ok) {
+            const profile = await response.json();
+            
+            // Aplicar tema del perfil
+            applyProfileTheme(profile);
+            
+            // Mostrar logo del perfil
+            displayProfileLogo(profile);
+            
+            // Configurar botón de contacto
+            setupContactButton(profile);
+            
+            // Actualizar título de la página
+            if (profile.name) {
+              document.title = `Page Not Found - ${profile.name}`;
+            }
+            
+          } else {
+            console.log('Profile not found, using default theme');
+          }
+        } catch (error) {
+          console.error('Error loading profile:', error);
+          // Usar tema por defecto si hay error
+        }
+      }
+
+      // Función para manejar el clic en "Back to Home"
+      function handleHomeClick(event) {
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const button = event.target.closest('.home-button');
+        
+        loadingSpinner.classList.remove('hidden');
+        button.style.pointerEvents = 'none';
+        
+        // Permitir que la navegación continúe normalmente
+        setTimeout(() => {
+          loadingSpinner.classList.add('hidden');
+          button.style.pointerEvents = 'auto';
+        }, 1000);
+      }
+
+      // Event listeners
+      document.addEventListener('DOMContentLoaded', function() {
+        // Cargar perfil al cargar la página
+        loadProfile();
+        
+        // Agregar event listener al botón de home
+        const homeButton = document.querySelector('.home-button');
+        homeButton.addEventListener('click', handleHomeClick);
+        
+        // Efecto de parallax sutil en el scroll (si hay contenido adicional)
+        window.addEventListener('scroll', function() {
+          const scrolled = window.pageYOffset;
+          const errorContainer = document.querySelector('.error-container');
+          errorContainer.style.transform = `translateY(${scrolled * 0.1}px)`;
+        });
+      });
+
+      // Función para detectar si la página de contacto existe
+      async function checkContactPage() {
+        try {
+          const response = await fetch('/contact', { method: 'HEAD' });
+          const contactButton = document.getElementById('contactButton');
+          
+          if (!response.ok) {
+            contactButton.style.display = 'none';
+          }
+        } catch (error) {
+          console.log('Contact page check failed');
+        }
+      }
+
+      // Verificar página de contacto
+      checkContactPage();
+
+      // Agregar efectos de teclado para accesibilidad
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          const focusedElement = document.activeElement;
+          if (focusedElement.classList.contains('home-button') || 
+              focusedElement.classList.contains('contact-button')) {
+            focusedElement.click();
+          }
+        }
+      });
+
+      // Precargar la página principal para navegación más rápida
+      const link = document.createElement('link');
+      link.rel = 'prefetch';
+      link.href = '/';
+      document.head.appendChild(link);
     </script>
   </body>
 </html>
