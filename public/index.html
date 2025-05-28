@@ -19,6 +19,7 @@
         --services-bg: #ffffff;
         --faq-bg: #ffffff;
         --contact-bg: #f9fafb;
+        --header-height: 70px;
     }
     
     * {
@@ -32,6 +33,199 @@
         line-height: 1.6;
         color: var(--text-color);
         background-color: var(--bg-color);
+        padding-top: var(--header-height);
+    }
+    
+    /* Header Styles */
+    .header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: var(--header-height);
+        background-color: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        z-index: 1000;
+        transition: all 0.3s ease;
+    }
+    
+    .header.scrolled {
+        background-color: rgba(255, 255, 255, 0.98);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .header-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .header-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    
+    .header-logo-img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--primary-color);
+    }
+    
+    .header-nav {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+    }
+    
+    .nav-link {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        position: relative;
+    }
+    
+    .nav-link:hover {
+        color: var(--primary-color);
+        background-color: rgba(79, 70, 229, 0.1);
+    }
+    
+    .nav-link.active {
+        color: var(--primary-color);
+        background-color: rgba(79, 70, 229, 0.1);
+    }
+    
+    .nav-link.active::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 20px;
+        height: 2px;
+        background-color: var(--primary-color);
+        border-radius: 1px;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        color: var(--text-color);
+        cursor: pointer;
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+    }
+    
+    .mobile-menu-btn:hover {
+        background-color: rgba(79, 70, 229, 0.1);
+        color: var(--primary-color);
+    }
+    
+    .mobile-menu {
+        position: fixed;
+        top: var(--header-height);
+        left: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border-color);
+        transform: translateY(-100%);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 999;
+    }
+    
+    .mobile-menu.active {
+        transform: translateY(0);
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    .mobile-nav {
+        padding: 1rem 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .mobile-nav-link {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 500;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    
+    .mobile-nav-link:hover,
+    .mobile-nav-link.active {
+        color: var(--primary-color);
+        background-color: rgba(79, 70, 229, 0.1);
+    }
+    
+    /* Loading Screen Styles */
+    .loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(10px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+    }
+    
+    .loading-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+    
+    .loading-spinner {
+        width: 60px;
+        height: 60px;
+        border: 4px solid rgba(79, 70, 229, 0.2);
+        border-top: 4px solid var(--primary-color);
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    
+    /* Main Content Styles */
+    .main-content {
+        opacity: 0;
+        transition: opacity 0.5s ease-in;
+    }
+    
+    .main-content.loaded {
+        opacity: 1;
     }
     
     .container {
@@ -40,9 +234,10 @@
         padding: 2rem;
     }
     
-    header {
+    .hero-section {
         text-align: center;
         margin-bottom: 3rem;
+        padding: 4rem 0;
     }
     
     .profile-image {
@@ -270,10 +465,6 @@
         margin-right: 0.5rem;
     }
     
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-    
     .alert {
         padding: 1rem;
         border-radius: 0.5rem;
@@ -293,6 +484,7 @@
         border: 1px solid #f87171;
     }
     
+    /* Enhanced Modal Styles */
     .modal {
         display: none;
         position: fixed;
@@ -300,31 +492,115 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.9);
-        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.95);
+        z-index: 2000;
         justify-content: center;
         align-items: center;
     }
     
     .modal-content {
-        max-width: 90%;
-        max-height: 90%;
+        position: relative;
+        max-width: 95%;
+        max-height: 95%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .modal-image {
         max-width: 100%;
         max-height: 90vh;
         object-fit: contain;
+        border-radius: 8px;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .modal-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 1.5rem;
+        color: #333;
+        transition: all 0.3s ease;
+        z-index: 2001;
+    }
+    
+    .modal-nav:hover {
+        background-color: white;
+        transform: translateY(-50%) scale(1.1);
+    }
+    
+    .modal-nav:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: translateY(-50%) scale(1);
+    }
+    
+    .modal-nav.prev {
+        left: 20px;
+    }
+    
+    .modal-nav.next {
+        right: 20px;
     }
     
     .close-modal {
         position: absolute;
         top: 20px;
-        right: 30px;
-        color: white;
-        font-size: 40px;
-        font-weight: bold;
+        right: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         cursor: pointer;
+        font-size: 1.5rem;
+        color: #333;
+        transition: all 0.3s ease;
+        z-index: 2001;
+    }
+    
+    .close-modal:hover {
+        background-color: white;
+        transform: scale(1.1);
+    }
+    
+    .modal-counter {
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        z-index: 2001;
+    }
+    
+    .modal-title {
+        position: absolute;
+        top: 20px;
+        left: 20px;
+        background-color: rgba(0, 0, 0, 0.7);
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        max-width: calc(100% - 120px);
+        z-index: 2001;
     }
     
     .info-section {
@@ -440,9 +716,35 @@
         display: none;
     }
     
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Section scroll offset for fixed header */
+    .section {
+        scroll-margin-top: calc(var(--header-height) + 2rem);
+    }
+    
     @media (max-width: 768px) {
+        .header-container {
+            padding: 0 1rem;
+        }
+        
+        .header-nav {
+            display: none;
+        }
+        
+        .mobile-menu-btn {
+            display: block;
+        }
+        
         .container {
             padding: 1rem;
+        }
+        
+        .hero-section {
+            padding: 2rem 0;
         }
         
         .profile-name {
@@ -462,22 +764,88 @@
         .info-grid {
             grid-template-columns: 1fr;
         }
+        
+        .modal-nav {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .modal-nav.prev {
+            left: 10px;
+        }
+        
+        .modal-nav.next {
+            right: 10px;
+        }
+        
+        .close-modal {
+            top: 10px;
+            right: 10px;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+        
+        .modal-title {
+            top: 10px;
+            left: 10px;
+            font-size: 0.8rem;
+            max-width: calc(100% - 80px);
+        }
+        
+        .modal-counter {
+            bottom: 10px;
+            font-size: 0.8rem;
+        }
     }
 </style>
 </head>
 <body>
-<div class="container">
-    <header>
-        <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
-        <h1 class="profile-name" id="profile-name">John Doe</h1>
-        <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
-    </header>
-    
-    <div class="links-container" id="links-container">
-        <!-- Social links will be loaded dynamically -->
+<!-- Header -->
+<header class="header" id="header">
+    <div class="header-container">
+        <a href="#home" class="header-logo" id="header-logo">
+            <img src="/images/profile.jpg" alt="Logo" class="header-logo-img" id="header-logo-img">
+            <span id="header-name">Profile</span>
+        </a>
+        
+        <nav class="header-nav" id="header-nav">
+            <!-- Navigation links will be loaded dynamically -->
+        </nav>
+        
+        <button class="mobile-menu-btn" id="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
     
-    <section id="services-section" class="services-section">
+    <div class="mobile-menu" id="mobile-menu">
+        <nav class="mobile-nav" id="mobile-nav">
+            <!-- Mobile navigation links will be loaded dynamically -->
+        </nav>
+    </div>
+</header>
+
+<!-- Loading Screen -->
+<div class="loading-screen" id="loading-screen">
+    <div class="loading-spinner"></div>
+</div>
+
+<!-- Main Content -->
+<div class="main-content" id="main-content">
+    <section id="home" class="hero-section section">
+        <div class="container">
+            <img src="/images/profile.jpg" alt="Profile" class="profile-image" id="profile-image">
+            <h1 class="profile-name" id="profile-name">John Doe</h1>
+            <p class="profile-description" id="profile-description">Welcome to my personal profile! I'm a passionate web developer with expertise in creating responsive and user-friendly websites. Feel free to browse through my work and get in touch if you'd like to collaborate.</p>
+            
+            <div class="links-container" id="links-container">
+                <!-- Social links will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+    
+    <section id="services" class="services-section section">
         <div class="container">
             <h2 class="section-title" id="services-title">My Services</h2>
             <div class="services-grid" id="services-grid">
@@ -486,7 +854,7 @@
         </div>
     </section>
     
-    <section id="gallery-section" class="gallery-section">
+    <section id="gallery" class="gallery-section section">
         <div class="container">
             <h2 class="section-title" id="gallery-title">My Gallery</h2>
             <div class="gallery" id="gallery">
@@ -495,7 +863,7 @@
         </div>
     </section>
     
-    <section id="info-section" class="info-section">
+    <section id="info" class="info-section section">
         <div class="container">
             <h2 class="section-title" id="info-title">Contact Information</h2>
             <div class="info-grid" id="info-grid">
@@ -504,7 +872,7 @@
         </div>
     </section>
     
-    <section id="faq-section" class="faq-section">
+    <section id="faq" class="faq-section section">
         <div class="container">
             <h2 class="section-title" id="faq-title">Frequently Asked Questions</h2>
             <div class="faq-container" id="faq-container">
@@ -513,7 +881,7 @@
         </div>
     </section>
     
-    <section id="contact-section" class="contact-section">
+    <section id="contact" class="contact-section section">
         <div class="container">
             <h2 class="section-title" id="contact-title">Contact Me</h2>
             <div class="contact-form">
@@ -544,22 +912,249 @@
             </div>
         </div>
     </section>
-</div>
 
-<div class="modal" id="image-modal">
-    <span class="close-modal" id="close-modal">&times;</span>
-    <div class="modal-content">
-        <img src="/placeholder.svg" alt="Gallery Image" class="modal-image" id="modal-image">
+    <!-- Enhanced Modal -->
+    <div class="modal" id="image-modal">
+        <div class="modal-title" id="modal-title">Gallery Image</div>
+        <button class="close-modal" id="close-modal">
+            <i class="fas fa-times"></i>
+        </button>
+        <button class="modal-nav prev" id="prev-image">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="modal-nav next" id="next-image">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <div class="modal-content">
+            <img src="/placeholder.svg" alt="Gallery Image" class="modal-image" id="modal-image">
+        </div>
+        <div class="modal-counter" id="modal-counter">1 / 1</div>
     </div>
-</div>
 
-<footer class="footer">
-    <p>&copy; <span id="current-year"></span> <span id="footer-name">Custom Web Profile</span>. All rights reserved.</p>
-</footer>
+    <footer class="footer">
+        <p>&copy; <span id="current-year"></span> <span id="footer-name">Custom Web Profile</span>. All rights reserved.</p>
+    </footer>
+</div>
 
 <script>
+    // Loading management
+    let isDataLoaded = false;
+    let isImagesLoaded = false;
+    let galleryImages = [];
+    let currentImageIndex = 0;
+    let availableSections = [];
+    
     // Set current year in footer
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Header scroll effect
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('header');
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+        
+        // Update active navigation link
+        updateActiveNavLink();
+    });
+    
+    // Mobile menu toggle
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('active');
+        const icon = mobileMenuBtn.querySelector('i');
+        if (mobileMenu.classList.contains('active')) {
+            icon.className = 'fas fa-times';
+        } else {
+            icon.className = 'fas fa-bars';
+        }
+    });
+    
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.remove('active');
+            mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+        }
+    });
+    
+    // Update active navigation link based on scroll position
+    function updateActiveNavLink() {
+        const sections = availableSections.map(section => document.getElementById(section.id));
+        const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+        
+        let currentSection = '';
+        
+        sections.forEach(section => {
+            if (section) {
+                const rect = section.getBoundingClientRect();
+                if (rect.top <= 100 && rect.bottom >= 100) {
+                    currentSection = section.id;
+                }
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSection}`) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    // Generate navigation based on available sections
+    function generateNavigation(data) {
+        availableSections = [
+            { id: 'home', label: 'Home', always: true }
+        ];
+        
+        // Add sections based on available data
+        if (data.services && data.services.length > 0) {
+            availableSections.push({ id: 'services', label: data.servicesSectionTitle || 'Services' });
+        }
+        
+        if (data.galleryImages && data.galleryImages.length > 0) {
+            availableSections.push({ id: 'gallery', label: data.gallerySectionTitle || 'Gallery' });
+        }
+        
+        if (data.contactInfo && data.contactInfo.length > 0) {
+            availableSections.push({ id: 'info', label: data.infoSectionTitle || 'Contact Info' });
+        }
+        
+        if (data.faqs && data.faqs.length > 0) {
+            availableSections.push({ id: 'faq', label: data.faqSectionTitle || 'FAQ' });
+        }
+        
+        if (data.showContactForm !== false) {
+            availableSections.push({ id: 'contact', label: data.contactSectionTitle || 'Contact' });
+        }
+        
+        // Generate desktop navigation
+        const headerNav = document.getElementById('header-nav');
+        headerNav.innerHTML = '';
+        
+        availableSections.forEach(section => {
+            const link = document.createElement('a');
+            link.href = `#${section.id}`;
+            link.className = 'nav-link';
+            link.textContent = section.label;
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById(section.id).scrollIntoView({ behavior: 'smooth' });
+            });
+            headerNav.appendChild(link);
+        });
+        
+        // Generate mobile navigation
+        const mobileNav = document.getElementById('mobile-nav');
+        mobileNav.innerHTML = '';
+        
+        availableSections.forEach(section => {
+            const link = document.createElement('a');
+            link.href = `#${section.id}`;
+            link.className = 'mobile-nav-link';
+            link.textContent = section.label;
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById(section.id).scrollIntoView({ behavior: 'smooth' });
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').className = 'fas fa-bars';
+            });
+            mobileNav.appendChild(link);
+        });
+        
+        // Set first link as active
+        setTimeout(() => {
+            const firstLink = document.querySelector('.nav-link');
+            if (firstLink) firstLink.classList.add('active');
+        }, 100);
+    }
+    
+    // Hide loading screen when everything is ready
+    function hideLoadingScreen() {
+        if (isDataLoaded && isImagesLoaded) {
+            const loadingScreen = document.getElementById('loading-screen');
+            const mainContent = document.getElementById('main-content');
+            
+            setTimeout(() => {
+                loadingScreen.classList.add('hidden');
+                mainContent.classList.add('loaded');
+            }, 300);
+        }
+    }
+    
+    // Check if all images are loaded
+    function checkImagesLoaded() {
+        const images = document.querySelectorAll('img');
+        let loadedCount = 0;
+        
+        if (images.length === 0) {
+            isImagesLoaded = true;
+            hideLoadingScreen();
+            return;
+        }
+        
+        images.forEach(img => {
+            if (img.complete) {
+                loadedCount++;
+            } else {
+                img.addEventListener('load', () => {
+                    loadedCount++;
+                    if (loadedCount === images.length) {
+                        isImagesLoaded = true;
+                        hideLoadingScreen();
+                    }
+                });
+                
+                img.addEventListener('error', () => {
+                    loadedCount++;
+                    if (loadedCount === images.length) {
+                        isImagesLoaded = true;
+                        hideLoadingScreen();
+                    }
+                });
+            }
+        });
+        
+        if (loadedCount === images.length) {
+            isImagesLoaded = true;
+            hideLoadingScreen();
+        }
+    }
+    
+    // Update meta tags for social sharing
+    function updateMetaTags(data) {
+        // Remove existing meta tags
+        const existingMetas = document.querySelectorAll('meta[property^="og:"], meta[name="twitter:"], meta[name="description"]');
+        existingMetas.forEach(meta => meta.remove());
+        
+        // Add new meta tags
+        const metaTags = [
+            { name: 'description', content: data.description },
+            { property: 'og:title', content: `${data.name} - Profile` },
+            { property: 'og:description', content: data.description },
+            { property: 'og:image', content: window.location.origin + data.profileImage },
+            { property: 'og:url', content: window.location.href },
+            { property: 'og:type', content: 'profile' },
+            { property: 'og:site_name', content: data.name },
+            { name: 'twitter:card', content: 'summary_large_image' },
+            { name: 'twitter:title', content: `${data.name} - Profile` },
+            { name: 'twitter:description', content: data.description },
+            { name: 'twitter:image', content: window.location.origin + data.profileImage }
+        ];
+        
+        metaTags.forEach(tag => {
+            const meta = document.createElement('meta');
+            if (tag.name) meta.name = tag.name;
+            if (tag.property) meta.property = tag.property;
+            meta.content = tag.content;
+            document.head.appendChild(meta);
+        });
+    }
     
     // Fetch profile data
     async function fetchProfileData() {
@@ -579,6 +1174,10 @@
             document.documentElement.style.setProperty('--services-bg', data.servicesBgColor || '#ffffff');
             document.documentElement.style.setProperty('--faq-bg', data.faqBgColor || '#ffffff');
             document.documentElement.style.setProperty('--contact-bg', data.contactBgColor || '#f9fafb');
+            
+            // Update header
+            document.getElementById('header-name').textContent = data.name;
+            document.getElementById('header-logo-img').src = data.profileImage;
             
             // Update profile information
             document.getElementById('profile-name').textContent = data.name;
@@ -615,19 +1214,15 @@
             favicon.href = data.profileImage;
             document.head.appendChild(favicon);
             
-            // Set meta tags for SEO
-            const metaTitle = document.createElement('meta');
-            metaTitle.name = 'title';
-            metaTitle.content = data.name + ' - Profile';
-            document.head.appendChild(metaTitle);
+            // Update page title and meta tags
+            document.title = `${data.name} - Profile`;
+            updateMetaTags(data);
             
-            const metaDescription = document.createElement('meta');
-            metaDescription.name = 'description';
-            metaDescription.content = data.description;
-            document.head.appendChild(metaDescription);
+            // Store gallery images for modal navigation
+            galleryImages = data.galleryImages || [];
             
-            // Update page title
-            document.title = data.name + ' - Profile';
+            // Generate navigation
+            generateNavigation(data);
             
             // Load social links
             loadSocialLinks(data.links || []);
@@ -646,18 +1241,38 @@
             
             // Show/hide sections based on settings
             if (!data.showContactForm) {
-                document.getElementById('contact-section').classList.add('hidden');
+                document.getElementById('contact').classList.add('hidden');
             }
             
             if (!data.contactInfo || data.contactInfo.length === 0) {
-                document.getElementById('info-section').classList.add('hidden');
+                document.getElementById('info').classList.add('hidden');
             }
             
             if (!data.faqs || data.faqs.length === 0) {
-                document.getElementById('faq-section').classList.add('hidden');
+                document.getElementById('faq').classList.add('hidden');
             }
+            
+            if (!data.services || data.services.length === 0) {
+                document.getElementById('services').classList.add('hidden');
+            }
+            
+            if (!data.galleryImages || data.galleryImages.length === 0) {
+                document.getElementById('gallery').classList.add('hidden');
+            }
+            
+            // Mark data as loaded
+            isDataLoaded = true;
+            
+            // Check if images are loaded after a short delay
+            setTimeout(() => {
+                checkImagesLoaded();
+            }, 100);
+            
         } catch (error) {
             console.error('Error fetching profile data:', error);
+            // Even on error, mark as loaded to prevent infinite loading
+            isDataLoaded = true;
+            checkImagesLoaded();
         }
     }
     
@@ -714,8 +1329,6 @@
                 
                 servicesGrid.appendChild(serviceCard);
             });
-        } else {
-            document.getElementById('services-section').classList.add('hidden');
         }
     }
     
@@ -725,21 +1338,19 @@
         gallery.innerHTML = '';
         
         if (images.length > 0) {
-            images.forEach(image => {
+            images.forEach((image, index) => {
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
-                galleryItem.addEventListener('click', () => openModal(image));
+                galleryItem.addEventListener('click', () => openModal(index));
                 
                 const img = document.createElement('img');
                 img.src = image;
-                img.alt = 'Gallery Image';
+                img.alt = `Gallery Image ${index + 1}`;
                 img.className = 'gallery-image';
                 
                 galleryItem.appendChild(img);
                 gallery.appendChild(galleryItem);
             });
-        } else {
-            document.getElementById('gallery-section').classList.add('hidden');
         }
     }
     
@@ -783,8 +1394,6 @@
                 
                 infoGrid.appendChild(infoCard);
             });
-        } else {
-            document.getElementById('info-section').classList.add('hidden');
         }
     }
     
@@ -824,8 +1433,121 @@
                 
                 faqContainer.appendChild(faqItem);
             });
+        }
+    }
+    
+    // Enhanced Modal functionality
+    const modal = document.getElementById('image-modal');
+    const modalImage = document.getElementById('modal-image');
+    const modalTitle = document.getElementById('modal-title');
+    const modalCounter = document.getElementById('modal-counter');
+    const closeModal = document.getElementById('close-modal');
+    const prevImage = document.getElementById('prev-image');
+    const nextImage = document.getElementById('next-image');
+    
+    function openModal(imageIndex) {
+        if (galleryImages.length === 0) return;
+        
+        currentImageIndex = imageIndex;
+        updateModalContent();
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function updateModalContent() {
+        if (galleryImages.length === 0) return;
+        
+        modalImage.src = galleryImages[currentImageIndex];
+        modalTitle.textContent = `Gallery Image ${currentImageIndex + 1}`;
+        modalCounter.textContent = `${currentImageIndex + 1} / ${galleryImages.length}`;
+        
+        // Update navigation buttons
+        prevImage.disabled = currentImageIndex === 0;
+        nextImage.disabled = currentImageIndex === galleryImages.length - 1;
+        
+        // Hide navigation if only one image
+        if (galleryImages.length <= 1) {
+            prevImage.style.display = 'none';
+            nextImage.style.display = 'none';
         } else {
-            document.getElementById('faq-section').classList.add('hidden');
+            prevImage.style.display = 'flex';
+            nextImage.style.display = 'flex';
+        }
+    }
+    
+    function closeModalFunction() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+    
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            updateModalContent();
+        }
+    }
+    
+    function showNextImage() {
+        if (currentImageIndex < galleryImages.length - 1) {
+            currentImageIndex++;
+            updateModalContent();
+        }
+    }
+    
+    // Modal event listeners
+    closeModal.addEventListener('click', closeModalFunction);
+    prevImage.addEventListener('click', showPrevImage);
+    nextImage.addEventListener('click', showNextImage);
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (modal.style.display === 'flex') {
+            switch(e.key) {
+                case 'Escape':
+                    closeModalFunction();
+                    break;
+                case 'ArrowLeft':
+                    showPrevImage();
+                    break;
+                case 'ArrowRight':
+                    showNextImage();
+                    break;
+            }
+        }
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModalFunction();
+        }
+    });
+    
+    // Touch/swipe support for mobile
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    modal.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    });
+    
+    modal.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                // Swipe left - next image
+                showNextImage();
+            } else {
+                // Swipe right - previous image
+                showPrevImage();
+            }
         }
     }
     
@@ -882,28 +1604,20 @@
         }
     });
     
-    // Modal functionality
-    const modal = document.getElementById('image-modal');
-    const modalImage = document.getElementById('modal-image');
-    const closeModal = document.getElementById('close-modal');
-    
-    function openModal(imageSrc) {
-        modal.style.display = 'flex';
-        modalImage.src = imageSrc;
-    }
-    
-    closeModal.addEventListener('click', () => {
-        modal.style.display = 'none';
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+        // Fetch profile data
+        fetchProfileData();
+        
+        // Fallback: hide loading screen after 8 seconds maximum
+        setTimeout(() => {
+            if (!isDataLoaded || !isImagesLoaded) {
+                isDataLoaded = true;
+                isImagesLoaded = true;
+                hideLoadingScreen();
+            }
+        }, 8000);
     });
-    
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-    
-    // Load profile data when page loads
-    document.addEventListener('DOMContentLoaded', fetchProfileData);
 </script>
 </body>
 </html>
