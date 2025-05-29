@@ -786,6 +786,7 @@
       }
     </style>
   </head>
+
   <body>
     <div class="admin-container">
       <aside class="sidebar">
@@ -904,6 +905,26 @@
             >
               <i class="fas fa-envelope sidebar-nav-icon"></i>
               <span class="sidebar-nav-text">Contact Form</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a
+              href="#order"
+              class="sidebar-nav-link"
+              data-section="order-section"
+            >
+              <i class="fas fa-sort sidebar-nav-icon"></i>
+              <span class="sidebar-nav-text">Section Order</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a
+              href="#custom-code"
+              class="sidebar-nav-link"
+              data-section="custom-code-section"
+            >
+              <i class="fas fa-code sidebar-nav-icon"></i>
+              <span class="sidebar-nav-text">Custom Code</span>
             </a>
           </li>
         </ul>
@@ -1283,6 +1304,175 @@
                     id="contact-bg-color"
                     class="form-input"
                     value="#f9fafb"
+                  />
+                </div>
+              </div>
+
+              <!-- Section specific text and card colors -->
+              <div class="form-group">
+                <label for="services-text-color" class="form-label"
+                  >Services Text Color</label
+                >
+                <div class="color-input-container">
+                  <div
+                    class="color-preview"
+                    id="services-text-color-preview"
+                  ></div>
+                  <input
+                    type="color"
+                    id="services-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="services-card-color" class="form-label"
+                  >Services Card Color</label
+                >
+                <div class="color-input-container">
+                  <div
+                    class="color-preview"
+                    id="services-card-color-preview"
+                  ></div>
+                  <input
+                    type="color"
+                    id="services-card-color"
+                    class="form-input"
+                    value="#f9fafb"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="products-text-color" class="form-label"
+                  >Products Text Color</label
+                >
+                <div class="color-input-container">
+                  <div
+                    class="color-preview"
+                    id="products-text-color-preview"
+                  ></div>
+                  <input
+                    type="color"
+                    id="products-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="products-card-color" class="form-label"
+                  >Products Card Color</label
+                >
+                <div class="color-input-container">
+                  <div
+                    class="color-preview"
+                    id="products-card-color-preview"
+                  ></div>
+                  <input
+                    type="color"
+                    id="products-card-color"
+                    class="form-input"
+                    value="#ffffff"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="blog-text-color" class="form-label"
+                  >Blog Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="blog-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="blog-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="blog-card-color" class="form-label"
+                  >Blog Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="blog-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="blog-card-color"
+                    class="form-input"
+                    value="#f9fafb"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="faq-text-color" class="form-label"
+                  >FAQ Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="faq-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="faq-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="faq-card-color" class="form-label"
+                  >FAQ Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="faq-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="faq-card-color"
+                    class="form-input"
+                    value="#ffffff"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-info-text-color" class="form-label"
+                  >Contact Info Text Color</label
+                >
+                <div class="color-input-container">
+                  <div
+                    class="color-preview"
+                    id="contact-info-text-color-preview"
+                  ></div>
+                  <input
+                    type="color"
+                    id="contact-info-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-info-card-color" class="form-label"
+                  >Contact Info Card Color</label
+                >
+                <div class="color-input-container">
+                  <div
+                    class="color-preview"
+                    id="contact-info-card-color-preview"
+                  ></div>
+                  <input
+                    type="color"
+                    id="contact-info-card-color"
+                    class="form-input"
+                    value="#ffffff"
                   />
                 </div>
               </div>
@@ -1859,8 +2049,8 @@
                     <input type="checkbox" id="show-contact-form" checked />
                     <span class="slider"></span>
                   </label>
-                  <span style="margin-left: 1rem" id="contact-form-status"
-                    >Enabled</span
+                  <span style="margin-left: 1rem" id="contact-form-status">
+                    Enabled</span
                   >
                 </div>
                 <small class="form-text"
@@ -1876,6 +2066,63 @@
               >
                 <span id="contact-loading" class="loading hidden"></span>
                 <span id="contact-button-text">Save Changes</span>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Section Order Section -->
+        <section id="order-section" class="section hidden">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Section Order</h2>
+            </div>
+            <form id="order-form">
+              <div class="form-group">
+                <label for="section-order" class="form-label"
+                  >Order (comma separated section IDs)</label
+                >
+                <input
+                  type="text"
+                  id="section-order"
+                  class="form-input"
+                  placeholder="services-section,products-section,gallery-section,blog-section,faq-section,info-section,contact-section,custom-code-section"
+                />
+              </div>
+              <button
+                type="submit"
+                class="button primary-button"
+                id="save-order-button"
+              >
+                <span id="order-loading" class="loading hidden"></span>
+                <span id="order-button-text">Save Changes</span>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Custom Code Section -->
+        <section id="custom-code-section" class="section hidden">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Custom Code</h2>
+            </div>
+            <form id="custom-code-form">
+              <div class="form-group">
+                <label for="custom-code" class="form-label">HTML/JS/CSS</label>
+                <textarea
+                  id="custom-code"
+                  class="form-textarea"
+                  placeholder="&lt;script&gt;console.log('hi')&lt;/script&gt;"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="button primary-button"
+                id="save-custom-code-button"
+              >
+                <span id="custom-code-loading" class="loading hidden"></span>
+                <span id="custom-code-button-text">Save Changes</span>
               </button>
             </form>
           </div>
@@ -1958,10 +2205,32 @@
       const accentColorInput = document.getElementById("accent-color");
       const galleryBgColorInput = document.getElementById("gallery-bg-color");
       const servicesBgColorInput = document.getElementById("services-bg-color");
+      const servicesTextColorInput = document.getElementById(
+        "services-text-color"
+      );
+      const servicesCardColorInput = document.getElementById(
+        "services-card-color"
+      );
       const productsBgColorInput = document.getElementById("products-bg-color");
+      const productsTextColorInput = document.getElementById(
+        "products-text-color"
+      );
+      const productsCardColorInput = document.getElementById(
+        "products-card-color"
+      );
       const blogBgColorInput = document.getElementById("blog-bg-color");
+      const blogTextColorInput = document.getElementById("blog-text-color");
+      const blogCardColorInput = document.getElementById("blog-card-color");
       const faqBgColorInput = document.getElementById("faq-bg-color");
+      const faqTextColorInput = document.getElementById("faq-text-color");
+      const faqCardColorInput = document.getElementById("faq-card-color");
       const contactBgColorInput = document.getElementById("contact-bg-color");
+      const contactInfoTextColorInput = document.getElementById(
+        "contact-info-text-color"
+      );
+      const contactInfoCardColorInput = document.getElementById(
+        "contact-info-card-color"
+      );
       const backgroundColorPreview = document.getElementById(
         "background-color-preview"
       );
@@ -1975,15 +2244,45 @@
       const servicesBgColorPreview = document.getElementById(
         "services-bg-color-preview"
       );
+      const servicesTextColorPreview = document.getElementById(
+        "services-text-color-preview"
+      );
+      const servicesCardColorPreview = document.getElementById(
+        "services-card-color-preview"
+      );
       const productsBgColorPreview = document.getElementById(
         "products-bg-color-preview"
+      );
+      const productsTextColorPreview = document.getElementById(
+        "products-text-color-preview"
+      );
+      const productsCardColorPreview = document.getElementById(
+        "products-card-color-preview"
       );
       const blogBgColorPreview = document.getElementById(
         "blog-bg-color-preview"
       );
+      const blogTextColorPreview = document.getElementById(
+        "blog-text-color-preview"
+      );
+      const blogCardColorPreview = document.getElementById(
+        "blog-card-color-preview"
+      );
       const faqBgColorPreview = document.getElementById("faq-bg-color-preview");
+      const faqTextColorPreview = document.getElementById(
+        "faq-text-color-preview"
+      );
+      const faqCardColorPreview = document.getElementById(
+        "faq-card-color-preview"
+      );
       const contactBgColorPreview = document.getElementById(
         "contact-bg-color-preview"
+      );
+      const contactInfoTextColorPreview = document.getElementById(
+        "contact-info-text-color-preview"
+      );
+      const contactInfoCardColorPreview = document.getElementById(
+        "contact-info-card-color-preview"
       );
       const saveAppearanceButton = document.getElementById(
         "save-appearance-button"
@@ -2109,6 +2408,24 @@
       const saveContactButton = document.getElementById("save-contact-button");
       const contactLoading = document.getElementById("contact-loading");
       const contactButtonText = document.getElementById("contact-button-text");
+
+      // Section Order Elements
+      const orderForm = document.getElementById("order-form");
+      const sectionOrderInput = document.getElementById("section-order");
+      const saveOrderButton = document.getElementById("save-order-button");
+      const orderLoading = document.getElementById("order-loading");
+      const orderButtonText = document.getElementById("order-button-text");
+
+      // Custom Code Elements
+      const customCodeForm = document.getElementById("custom-code-form");
+      const customCodeInput = document.getElementById("custom-code");
+      const saveCustomCodeButton = document.getElementById(
+        "save-custom-code-button"
+      );
+      const customCodeLoading = document.getElementById("custom-code-loading");
+      const customCodeButtonText = document.getElementById(
+        "custom-code-button-text"
+      );
 
       // Service Icons List
       const serviceIcons = [
@@ -2310,6 +2627,47 @@
         }, 3000);
       }
 
+      // FIXED: Update color previews function
+      function updateColorPreviews(data) {
+        // Update all color preview elements with saved values
+        backgroundColorPreview.style.backgroundColor =
+          data.backgroundColor || "#ffffff";
+        textColorPreview.style.backgroundColor = data.textColor || "#333333";
+        accentColorPreview.style.backgroundColor =
+          data.accentColor || "#4f46e5";
+        galleryBgColorPreview.style.backgroundColor =
+          data.galleryBgColor || "#f9fafb";
+        servicesBgColorPreview.style.backgroundColor =
+          data.servicesBgColor || "#ffffff";
+        servicesTextColorPreview.style.backgroundColor =
+          data.servicesTextColor || "#333333";
+        servicesCardColorPreview.style.backgroundColor =
+          data.servicesCardColor || "#f9fafb";
+        productsBgColorPreview.style.backgroundColor =
+          data.productsBgColor || "#f9fafb";
+        productsTextColorPreview.style.backgroundColor =
+          data.productsTextColor || "#333333";
+        productsCardColorPreview.style.backgroundColor =
+          data.productsCardColor || "#ffffff";
+        blogBgColorPreview.style.backgroundColor =
+          data.blogBgColor || "#ffffff";
+        blogTextColorPreview.style.backgroundColor =
+          data.blogTextColor || "#333333";
+        blogCardColorPreview.style.backgroundColor =
+          data.blogCardColor || "#f9fafb";
+        faqBgColorPreview.style.backgroundColor = data.faqBgColor || "#ffffff";
+        faqTextColorPreview.style.backgroundColor =
+          data.faqTextColor || "#333333";
+        faqCardColorPreview.style.backgroundColor =
+          data.faqCardColor || "#ffffff";
+        contactBgColorPreview.style.backgroundColor =
+          data.contactBgColor || "#f9fafb";
+        contactInfoTextColorPreview.style.backgroundColor =
+          data.contactInfoTextColor || "#333333";
+        contactInfoCardColorPreview.style.backgroundColor =
+          data.contactInfoCardColor || "#ffffff";
+      }
+
       // Initialize service icons
       function initServiceIcons() {
         serviceIconGrid.innerHTML = "";
@@ -2465,22 +2823,24 @@
         blogBgColorInput.value = data.blogBgColor || "#ffffff";
         faqBgColorInput.value = data.faqBgColor || "#ffffff";
         contactBgColorInput.value = data.contactBgColor || "#f9fafb";
-        backgroundColorPreview.style.backgroundColor =
-          data.backgroundColor || "#ffffff";
-        textColorPreview.style.backgroundColor = data.textColor || "#333333";
-        accentColorPreview.style.backgroundColor =
-          data.accentColor || "#4f46e5";
-        galleryBgColorPreview.style.backgroundColor =
-          data.galleryBgColor || "#f9fafb";
-        servicesBgColorPreview.style.backgroundColor =
-          data.servicesBgColor || "#ffffff";
-        productsBgColorPreview.style.backgroundColor =
-          data.productsBgColor || "#f9fafb";
-        blogBgColorPreview.style.backgroundColor =
-          data.blogBgColor || "#ffffff";
-        faqBgColorPreview.style.backgroundColor = data.faqBgColor || "#ffffff";
-        contactBgColorPreview.style.backgroundColor =
-          data.contactBgColor || "#f9fafb";
+        servicesTextColorInput.value = data.servicesTextColor || "#333333";
+        servicesCardColorInput.value = data.servicesCardColor || "#f9fafb";
+        productsTextColorInput.value = data.productsTextColor || "#333333";
+        productsCardColorInput.value = data.productsCardColor || "#ffffff";
+        blogTextColorInput.value = data.blogTextColor || "#333333";
+        blogCardColorInput.value = data.blogCardColor || "#f9fafb";
+        faqTextColorInput.value = data.faqTextColor || "#333333";
+        faqCardColorInput.value = data.faqCardColor || "#ffffff";
+        contactInfoTextColorInput.value =
+          data.contactInfoTextColor || "#333333";
+        contactInfoCardColorInput.value =
+          data.contactInfoCardColor || "#ffffff";
+
+        // FIXED: Update color previews with saved values
+        updateColorPreviews(data);
+
+        sectionOrderInput.value = (data.sectionOrder || []).join(",");
+        customCodeInput.value = data.customCode || "";
 
         // Contact section
         contactEmailInput.value = data.contactEmail || "";
@@ -2735,7 +3095,7 @@
           } else {
             const blogPostIcon = document.createElement("div");
             blogPostIcon.className = "blog-post-icon";
-            blogPostIcon.innerHTML = '<i class="fas fa-blog"></i>';
+            blogPostIcon.innerHTML = `<i class="fas fa-blog"></i>`;
             blogPostInfo.appendChild(blogPostIcon);
           }
 
@@ -2864,7 +3224,7 @@
 
           const faqIcon = document.createElement("div");
           faqIcon.className = "faq-icon";
-          faqIcon.innerHTML = '<i class="fas fa-question-circle"></i>';
+          faqIcon.innerHTML = `<i class="fas fa-question-circle"></i>`;
 
           const faqContent = document.createElement("div");
           faqContent.className = "faq-content";
@@ -3383,10 +3743,20 @@
               accentColor: accentColorInput.value,
               galleryBgColor: galleryBgColorInput.value,
               servicesBgColor: servicesBgColorInput.value,
+              servicesTextColor: servicesTextColorInput.value,
+              servicesCardColor: servicesCardColorInput.value,
               productsBgColor: productsBgColorInput.value,
+              productsTextColor: productsTextColorInput.value,
+              productsCardColor: productsCardColorInput.value,
               blogBgColor: blogBgColorInput.value,
+              blogTextColor: blogTextColorInput.value,
+              blogCardColor: blogCardColorInput.value,
               faqBgColor: faqBgColorInput.value,
+              faqTextColor: faqTextColorInput.value,
+              faqCardColor: faqCardColorInput.value,
               contactBgColor: contactBgColorInput.value,
+              contactInfoTextColor: contactInfoTextColorInput.value,
+              contactInfoCardColor: contactInfoCardColorInput.value,
             }),
           });
 
@@ -3542,7 +3912,7 @@
 
           if (isImageTab && productImageInput.files.length > 0) {
             formData.append("productImage", productImageInput.files[0]);
-          } else if (!isImageTab) {
+          } else {
             formData.append("icon", productIconInput.value);
           }
 
@@ -3572,6 +3942,7 @@
           productUrlInput.value = "";
           productImageInput.value = "";
           productImagePreview.src = "/placeholder.svg";
+          productIconInput.value = "box";
 
           showNotification("success", "Success", "Product added successfully");
         } catch (error) {
@@ -3585,7 +3956,7 @@
         }
       });
 
-      // Add blog post form - NEW
+      // Add blog post form
       addBlogPostForm.addEventListener("submit", async (e) => {
         e.preventDefault();
 
@@ -3599,23 +3970,12 @@
 
           const formData = new FormData();
           formData.append("title", blogPostTitleInput.value);
-          formData.append(
-            "date",
-            blogPostDateInput.value ||
-              new Date().toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })
-          );
+          formData.append("date", blogPostDateInput.value);
+          formData.append("excerpt", blogPostExcerptInput.value);
           formData.append("content", blogPostContentInput.value);
 
-          if (blogPostExcerptInput.value) {
-            formData.append("excerpt", blogPostExcerptInput.value);
-          }
-
           if (blogPostImageInput.files.length > 0) {
-            formData.append("blogPostImage", blogPostImageInput.files[0]);
+            formData.append("image", blogPostImageInput.files[0]);
           }
 
           const response = await fetch("/api/blogPosts", {
@@ -3698,7 +4058,6 @@
           // Reset form
           linkTextInput.value = "";
           linkUrlInput.value = "";
-          linkIconInput.value = "link";
 
           showNotification("success", "Success", "Link added successfully");
         } catch (error) {
@@ -3751,8 +4110,6 @@
           // Reset form
           contactInfoTitleInput.value = "";
           contactInfoValueInput.value = "";
-          contactInfoTypeInput.value = "text";
-          contactInfoIconInput.value = "envelope";
 
           showNotification(
             "success",
@@ -3876,71 +4233,161 @@
         }
       });
 
-      // Toggle contact form status text
-      showContactFormToggle.addEventListener("change", () => {
-        contactFormStatus.textContent = showContactFormToggle.checked
-          ? "Enabled"
-          : "Disabled";
+      // Section order form
+      orderForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        try {
+          const token = checkAuthStatus();
+
+          // Show loading state
+          saveOrderButton.disabled = true;
+          orderLoading.classList.remove("hidden");
+          orderButtonText.textContent = "Saving...";
+
+          const sectionOrder = sectionOrderInput.value
+            .split(",")
+            .map((s) => s.trim());
+
+          const response = await fetch("/api/profile", {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              sectionOrder: sectionOrder,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to update section order");
+          }
+
+          const data = await response.json();
+          profileData = data.profile;
+
+          showNotification(
+            "success",
+            "Success",
+            "Section order updated successfully"
+          );
+        } catch (error) {
+          console.error("Error updating section order:", error);
+          showNotification("error", "Error", "Failed to update section order");
+        } finally {
+          // Reset button state
+          saveOrderButton.disabled = false;
+          orderLoading.classList.add("hidden");
+          orderButtonText.textContent = "Save Changes";
+        }
       });
 
-      // Profile image preview
+      // Custom code form
+      customCodeForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        try {
+          const token = checkAuthStatus();
+
+          // Show loading state
+          saveCustomCodeButton.disabled = true;
+          customCodeLoading.classList.remove("hidden");
+          customCodeButtonText.textContent = "Saving...";
+
+          const response = await fetch("/api/profile", {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              customCode: customCodeInput.value,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to update custom code");
+          }
+
+          const data = await response.json();
+          profileData = data.profile;
+
+          showNotification(
+            "success",
+            "Success",
+            "Custom code updated successfully"
+          );
+        } catch (error) {
+          console.error("Error updating custom code:", error);
+          showNotification("error", "Error", "Failed to update custom code");
+        } finally {
+          // Reset button state
+          saveCustomCodeButton.disabled = false;
+          customCodeLoading.classList.add("hidden");
+          customCodeButtonText.textContent = "Save Changes";
+        }
+      });
+
+      // Profile image input
       profileImageInput.addEventListener("change", (e) => {
-        if (profileImageInput.files.length > 0) {
-          const file = profileImageInput.files[0];
+        if (profileImageInput.files && profileImageInput.files[0]) {
           const reader = new FileReader();
 
           reader.onload = (e) => {
             profileImagePreview.src = e.target.result;
             profileImageDisplay.src = e.target.result;
+            sidebarLogo.src = e.target.result;
           };
 
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(profileImageInput.files[0]);
         }
       });
 
-      // Logo image preview
-      logoImageInput.addEventListener("change", (e) => {
-        if (logoImageInput.files.length > 0) {
-          const file = logoImageInput.files[0];
-          const reader = new FileReader();
-
-          reader.onload = (e) => {
-            logoPreview.src = e.target.result;
-          };
-
-          reader.readAsDataURL(file);
-        }
-      });
-
-      // Product image preview - NEW
+      // Product image input
       productImageInput.addEventListener("change", (e) => {
-        if (productImageInput.files.length > 0) {
-          const file = productImageInput.files[0];
+        if (productImageInput.files && productImageInput.files[0]) {
           const reader = new FileReader();
 
           reader.onload = (e) => {
             productImagePreview.src = e.target.result;
           };
 
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(productImageInput.files[0]);
         }
       });
 
-      // Blog post image preview - NEW
+      // Blog post image input
       blogPostImageInput.addEventListener("change", (e) => {
-        if (blogPostImageInput.files.length > 0) {
-          const file = blogPostImageInput.files[0];
+        if (blogPostImageInput.files && blogPostImageInput.files[0]) {
           const reader = new FileReader();
 
           reader.onload = (e) => {
             blogPostImagePreview.src = e.target.result;
           };
 
-          reader.readAsDataURL(file);
+          reader.readAsDataURL(blogPostImageInput.files[0]);
         }
       });
 
-      // Color input previews
+      // Show contact form toggle
+      showContactFormToggle.addEventListener("change", () => {
+        contactFormStatus.textContent = showContactFormToggle.checked
+          ? "Enabled"
+          : "Disabled";
+      });
+
+      // Service icon search
+      serviceIconSearch.addEventListener("input", () => {
+        initServiceIcons();
+      });
+
+      // Product icon search
+      productIconSearch.addEventListener("input", () => {
+        initProductIcons();
+      });
+
+      // Color input listeners for real-time preview updates
       backgroundColorInput.addEventListener("input", () => {
         backgroundColorPreview.style.backgroundColor =
           backgroundColorInput.value;
@@ -3963,61 +4410,102 @@
           servicesBgColorInput.value;
       });
 
+      servicesTextColorInput.addEventListener("input", () => {
+        servicesTextColorPreview.style.backgroundColor =
+          servicesTextColorInput.value;
+      });
+
+      servicesCardColorInput.addEventListener("input", () => {
+        servicesCardColorPreview.style.backgroundColor =
+          servicesCardColorInput.value;
+      });
+
       productsBgColorInput.addEventListener("input", () => {
         productsBgColorPreview.style.backgroundColor =
           productsBgColorInput.value;
+      });
+
+      productsTextColorInput.addEventListener("input", () => {
+        productsTextColorPreview.style.backgroundColor =
+          productsTextColorInput.value;
+      });
+
+      productsCardColorInput.addEventListener("input", () => {
+        productsCardColorPreview.style.backgroundColor =
+          productsCardColorInput.value;
       });
 
       blogBgColorInput.addEventListener("input", () => {
         blogBgColorPreview.style.backgroundColor = blogBgColorInput.value;
       });
 
+      blogTextColorInput.addEventListener("input", () => {
+        blogTextColorPreview.style.backgroundColor = blogTextColorInput.value;
+      });
+
+      blogCardColorInput.addEventListener("input", () => {
+        blogCardColorPreview.style.backgroundColor = blogCardColorInput.value;
+      });
+
       faqBgColorInput.addEventListener("input", () => {
         faqBgColorPreview.style.backgroundColor = faqBgColorInput.value;
+      });
+
+      faqTextColorInput.addEventListener("input", () => {
+        faqTextColorPreview.style.backgroundColor = faqTextColorInput.value;
+      });
+
+      faqCardColorInput.addEventListener("input", () => {
+        faqCardColorPreview.style.backgroundColor = faqCardColorInput.value;
       });
 
       contactBgColorInput.addEventListener("input", () => {
         contactBgColorPreview.style.backgroundColor = contactBgColorInput.value;
       });
 
-      // Service icon search
-      serviceIconSearch.addEventListener("input", () => {
-        initServiceIcons();
+      contactInfoTextColorInput.addEventListener("input", () => {
+        contactInfoTextColorPreview.style.backgroundColor =
+          contactInfoTextColorInput.value;
       });
 
-      // Product icon search - NEW
-      productIconSearch.addEventListener("input", () => {
-        initProductIcons();
+      contactInfoCardColorInput.addEventListener("input", () => {
+        contactInfoCardColorPreview.style.backgroundColor =
+          contactInfoCardColorInput.value;
       });
 
-      // Set current date for blog post if empty
-      if (blogPostDateInput) {
-        blogPostDateInput.addEventListener("focus", () => {
-          if (!blogPostDateInput.value) {
-            const today = new Date();
-            const formattedDate = today.toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            });
-            blogPostDateInput.value = formattedDate;
-          }
-        });
-      }
+      // Auto-fill current date for blog posts
+      const today = new Date();
+      const monthNames = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
+      const currentDate = `${
+        monthNames[today.getMonth()]
+      } ${today.getDate()}, ${today.getFullYear()}`;
+      blogPostDateInput.value = currentDate;
 
-      // Initialize
+      // Initial load
       document.addEventListener("DOMContentLoaded", () => {
-        // Check auth status
         checkAuthStatus();
-
-        // Fetch profile data
         fetchProfileData();
-
-        // Initialize service icons
         initServiceIcons();
-
-        // Initialize product icons
         initProductIcons();
+
+        // Set active class on first sidebar link
+        sidebarLinks[0].classList.add("active");
+
+        // Show first section
+        sections[0].classList.remove("hidden");
       });
     </script>
   </body>

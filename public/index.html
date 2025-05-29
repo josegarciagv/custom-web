@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom Web Profile</title>
+    <!-- Status bar color matching body -->
+    <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
+    <meta
+      name="msapplication-navbutton-color"
+      content="#ffffff"
+      id="ms-nav-color-meta"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="default"
+      id="apple-status-bar-meta"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -23,10 +35,20 @@
         --error-color: #ef4444;
         --gallery-bg: #f9fafb;
         --services-bg: #ffffff;
+        --services-text: #333333;
+        --services-card: #f9fafb;
         --faq-bg: #ffffff;
+        --faq-text: #333333;
+        --faq-card: #ffffff;
         --contact-bg: #f9fafb;
+        --contact-info-text: #333333;
+        --contact-info-card: #ffffff;
         --products-bg: #f9fafb;
+        --products-text: #333333;
+        --products-card: #ffffff;
         --blog-bg: #ffffff;
+        --blog-text: #333333;
+        --blog-card: #f9fafb;
         --header-height: 70px;
       }
 
@@ -118,8 +140,10 @@
         box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
       }
 
+      /* UPDATED: Share button hover uses dynamic primary color */
       .share-button:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
       }
@@ -269,8 +293,10 @@
         transition: all 0.3s ease;
       }
 
+      /* UPDATED: Copy button hover uses dynamic primary color */
       .copy-url-button:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
       }
 
       .copy-url-button.copied {
@@ -368,6 +394,12 @@
         text-align: center;
       }
 
+      /* Custom Code Section Styles */
+      .custom-code-section {
+        padding: 3rem 0;
+        margin-bottom: 3rem;
+      }
+
       .services-section {
         padding: 3rem 0;
         background-color: var(--services-bg);
@@ -382,7 +414,7 @@
       }
 
       .service-card {
-        background-color: var(--secondary-bg);
+        background-color: var(--services-card);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -411,11 +443,11 @@
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: var(--text-color);
+        color: var(--services-text);
       }
 
       .service-description {
-        color: #666;
+        color: var(--services-text);
         font-size: 0.95rem;
       }
 
@@ -434,7 +466,7 @@
       }
 
       .product-card {
-        background-color: var(--secondary-bg);
+        background-color: var(--products-card);
         border-radius: 0.75rem;
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -493,11 +525,11 @@
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: var(--text-color);
+        color: var(--products-text);
       }
 
       .product-description {
-        color: #666;
+        color: var(--products-text);
         font-size: 0.95rem;
         margin-bottom: 1rem;
         flex-grow: 1;
@@ -524,8 +556,10 @@
         width: fit-content;
       }
 
+      /* UPDATED: Product link hover uses dynamic primary color */
       .product-link:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
       }
 
       /* Blog Section Styles - NEW */
@@ -543,7 +577,7 @@
       }
 
       .blog-card {
-        background-color: var(--secondary-bg);
+        background-color: var(--blog-card);
         border-radius: 0.75rem;
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -590,11 +624,11 @@
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.75rem;
-        color: var(--text-color);
+        color: var(--blog-text);
       }
 
       .blog-excerpt {
-        color: #666;
+        color: var(--blog-text);
         font-size: 0.95rem;
         margin-bottom: 1rem;
         display: -webkit-box;
@@ -684,6 +718,7 @@
         margin-right: 0.5rem;
       }
 
+      /* UPDATED: Contact Section Styles to match the image */
       .contact-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
@@ -693,34 +728,60 @@
       .contact-form {
         max-width: 600px;
         margin: 0 auto;
-        background-color: var(--secondary-bg);
-        padding: 2rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        background-color: var(--bg-color);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Contact form title with icon */
+      .contact-form-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 2rem;
+      }
+
+      .contact-form-icon {
+        color: var(--primary-color);
+        font-size: 1.5rem;
       }
 
       .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
       }
 
       .form-label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         font-weight: 500;
+        color: var(--text-color);
+        font-size: 1rem;
       }
 
       .form-input,
       .form-textarea {
         width: 100%;
-        padding: 0.75rem;
-        border: 1px solid var(--border-color);
-        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+        border: 2px solid var(--border-color);
+        border-radius: 0.75rem;
         font-size: 1rem;
-        transition: border-color 0.3s ease;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+      }
+
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: #9ca3af;
       }
 
       .form-textarea {
-        min-height: 150px;
+        min-height: 140px;
         resize: vertical;
       }
 
@@ -729,30 +790,41 @@
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        background-color: var(--bg-color);
       }
 
       .submit-button {
+        width: 100%;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         background-color: var(--primary-color);
         color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 0.75rem;
         font-weight: 600;
+        font-size: 1rem;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
       }
 
+      /* UPDATED: Submit button hover uses dynamic primary color */
       .submit-button:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
       }
 
       .submit-button:disabled {
         background-color: #9ca3af;
         cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+        filter: none;
       }
 
       .loading {
@@ -768,21 +840,22 @@
 
       .alert {
         padding: 1rem;
-        border-radius: 0.5rem;
+        border-radius: 0.75rem;
         margin-bottom: 1.5rem;
         display: none;
+        font-weight: 500;
       }
 
       .alert-success {
-        background-color: #d1fae5;
-        color: #065f46;
-        border: 1px solid #34d399;
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success-color);
+        border: 1px solid rgba(16, 185, 129, 0.3);
       }
 
       .alert-error {
-        background-color: #fee2e2;
-        color: #b91c1c;
-        border: 1px solid #f87171;
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--error-color);
+        border: 1px solid rgba(239, 68, 68, 0.3);
       }
 
       /* Enhanced Modal Styles */
@@ -918,7 +991,7 @@
 
       /* UPDATED: Contact Information cards with hover animation like services */
       .info-card {
-        background-color: var(--bg-color);
+        background-color: var(--contact-info-card);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -956,10 +1029,11 @@
         font-size: 1.1rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
+        color: var(--contact-info-text);
       }
 
       .info-content {
-        color: #666;
+        color: var(--contact-info-text);
       }
 
       /* NUEVO: Estilos para enlaces en contact information */
@@ -1007,7 +1081,7 @@
 
       .faq-question {
         padding: 1.25rem;
-        background-color: var(--secondary-bg);
+        background-color: var(--faq-card);
         font-weight: 600;
         cursor: pointer;
         display: flex;
@@ -1028,7 +1102,7 @@
 
       .faq-answer-content {
         padding: 0 1.25rem 1.25rem;
-        color: #666;
+        color: var(--faq-text);
       }
 
       .faq-item.active {
@@ -1050,7 +1124,7 @@
       }
 
       .hidden {
-        display: none;
+        display: none !important;
       }
 
       /* Confirmation Modal Styles - NEW */
@@ -1307,6 +1381,15 @@
         .blog-post-modal-title {
           font-size: 1.5rem;
         }
+
+        /* Contact form responsive */
+        .contact-form {
+          padding: 2rem;
+        }
+
+        .contact-form-title {
+          font-size: 1.5rem;
+        }
       }
     </style>
   </head>
@@ -1506,10 +1589,17 @@
           </div>
         </section>
 
+        <!-- UPDATED: Contact Section with improved styling -->
         <section id="contact-section" class="contact-section">
           <div class="container">
             <h2 class="section-title" id="contact-title">Contact Me</h2>
             <div class="contact-form">
+              <!-- Contact form title with icon -->
+              <h3 class="contact-form-title">
+                <i class="fas fa-envelope contact-form-icon"></i>
+                Send Message
+              </h3>
+
               <div class="alert alert-success" id="success-alert">
                 Your message has been sent successfully! I'll get back to you
                 soon.
@@ -1519,34 +1609,34 @@
               </div>
               <form id="contact-form">
                 <div class="form-group">
-                  <label for="name" class="form-label">Name</label>
+                  <label for="name" class="form-label">Full Name *</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     class="form-input"
-                    placeholder="Enter your name"
+                    placeholder="Enter your full name"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="email" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email Address *</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     class="form-input"
-                    placeholder="Enter your email"
+                    placeholder="Enter your email address"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="message" class="form-label">Message</label>
+                  <label for="message" class="form-label">Message *</label>
                   <textarea
                     id="message"
                     name="message"
                     class="form-textarea"
-                    placeholder="Enter your message"
+                    placeholder="Enter your message here..."
                     required
                   ></textarea>
                 </div>
@@ -1555,6 +1645,15 @@
                   <span id="button-text">Send Message</span>
                 </button>
               </form>
+            </div>
+          </div>
+        </section>
+
+        <!-- NEW: Custom Code Section - PROPERLY POSITIONED -->
+        <section id="custom-code-section" class="custom-code-section">
+          <div class="container">
+            <div id="custom-code-placeholder">
+              <!-- Custom code will be injected here -->
             </div>
           </div>
         </section>
@@ -1905,6 +2004,48 @@
         });
       }
 
+      // UPDATED: Function to update status bar color
+      function updateStatusBarColor(bgColor) {
+        // Update theme-color meta tag
+        const themeColorMeta = document.getElementById("theme-color-meta");
+        if (themeColorMeta) {
+          themeColorMeta.content = bgColor;
+        }
+
+        // Update MS navigation button color
+        const msNavColorMeta = document.getElementById("ms-nav-color-meta");
+        if (msNavColorMeta) {
+          msNavColorMeta.content = bgColor;
+        }
+
+        // Update Apple status bar style based on background color
+        const appleStatusBarMeta = document.getElementById(
+          "apple-status-bar-meta"
+        );
+        if (appleStatusBarMeta) {
+          // Determine if background is light or dark
+          const isLightBackground = isLightColor(bgColor);
+          appleStatusBarMeta.content = isLightBackground
+            ? "default"
+            : "black-translucent";
+        }
+      }
+
+      // Helper function to determine if a color is light or dark
+      function isLightColor(color) {
+        // Convert hex to RGB
+        const hex = color.replace("#", "");
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+
+        // Calculate luminance
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+        // Return true if light (luminance > 0.5)
+        return luminance > 0.5;
+      }
+
       // Fetch profile data
       async function fetchProfileData() {
         try {
@@ -1938,21 +2079,64 @@
             data.servicesBgColor || "#ffffff"
           );
           document.documentElement.style.setProperty(
+            "--services-text",
+            data.servicesTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--services-card",
+            data.servicesCardColor || "#f9fafb"
+          );
+          document.documentElement.style.setProperty(
             "--faq-bg",
             data.faqBgColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
+            "--faq-text",
+            data.faqTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--faq-card",
+            data.faqCardColor || "#ffffff"
           );
           document.documentElement.style.setProperty(
             "--contact-bg",
             data.contactBgColor || "#f9fafb"
           );
           document.documentElement.style.setProperty(
+            "--contact-info-text",
+            data.contactInfoTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--contact-info-card",
+            data.contactInfoCardColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
             "--products-bg",
             data.productsBgColor || "#f9fafb"
+          );
+          document.documentElement.style.setProperty(
+            "--products-text",
+            data.productsTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--products-card",
+            data.productsCardColor || "#ffffff"
           );
           document.documentElement.style.setProperty(
             "--blog-bg",
             data.blogBgColor || "#ffffff"
           );
+          document.documentElement.style.setProperty(
+            "--blog-text",
+            data.blogTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--blog-card",
+            data.blogCardColor || "#f9fafb"
+          );
+
+          // UPDATED: Update status bar color to match body background
+          updateStatusBarColor(data.backgroundColor || "#ffffff");
 
           // Update header
           document.getElementById("header-name").textContent = data.name;
@@ -2042,25 +2226,97 @@
           // Load FAQs
           loadFaqs(data.faqs || []);
 
-          // Show/hide sections based on settings
-          if (!data.showContactForm) {
-            document.getElementById("contact-section").classList.add("hidden");
+          // FIXED: Reorder sections if order provided
+          if (data.sectionOrder && data.sectionOrder.length > 0) {
+            reorderSections(data.sectionOrder);
           }
 
-          if (!data.contactInfo || data.contactInfo.length === 0) {
-            document.getElementById("info-section").classList.add("hidden");
+          // UPDATED: Inject custom code if provided - now in proper section
+          if (data.customCode) {
+            const placeholder = document.getElementById(
+              "custom-code-placeholder"
+            );
+            if (placeholder) {
+              placeholder.innerHTML = data.customCode;
+            }
           }
 
-          if (!data.faqs || data.faqs.length === 0) {
-            document.getElementById("faq-section").classList.add("hidden");
+          // FIXED: Show/hide sections based on content - COMPREHENSIVE CHECK
+          // Hide services section if no services
+          if (!data.services || data.services.length === 0) {
+            document.getElementById("services-section").classList.add("hidden");
+          } else {
+            document
+              .getElementById("services-section")
+              .classList.remove("hidden");
           }
 
+          // Hide products section if no products
           if (!data.products || data.products.length === 0) {
             document.getElementById("products-section").classList.add("hidden");
+          } else {
+            document
+              .getElementById("products-section")
+              .classList.remove("hidden");
           }
 
+          // Hide gallery section if no gallery images
+          if (!data.galleryImages || data.galleryImages.length === 0) {
+            document.getElementById("gallery-section").classList.add("hidden");
+          } else {
+            document
+              .getElementById("gallery-section")
+              .classList.remove("hidden");
+          }
+
+          // Hide blog section if no blog posts
           if (!data.blogPosts || data.blogPosts.length === 0) {
             document.getElementById("blog-section").classList.add("hidden");
+          } else {
+            document.getElementById("blog-section").classList.remove("hidden");
+          }
+
+          // Hide FAQ section if no FAQs
+          if (!data.faqs || data.faqs.length === 0) {
+            document.getElementById("faq-section").classList.add("hidden");
+          } else {
+            document.getElementById("faq-section").classList.remove("hidden");
+          }
+
+          // Hide contact info section if no contact info
+          if (!data.contactInfo || data.contactInfo.length === 0) {
+            document.getElementById("info-section").classList.add("hidden");
+          } else {
+            document.getElementById("info-section").classList.remove("hidden");
+          }
+
+          // Hide contact form section if disabled
+          if (!data.showContactForm) {
+            document.getElementById("contact-section").classList.add("hidden");
+          } else {
+            document
+              .getElementById("contact-section")
+              .classList.remove("hidden");
+          }
+
+          // Hide custom code section if no custom code
+          if (!data.customCode || data.customCode.trim() === "") {
+            document
+              .getElementById("custom-code-section")
+              .classList.add("hidden");
+          } else {
+            document
+              .getElementById("custom-code-section")
+              .classList.remove("hidden");
+          }
+
+          // Hide links container if no links
+          if (!data.links || data.links.length === 0) {
+            document.getElementById("links-container").classList.add("hidden");
+          } else {
+            document
+              .getElementById("links-container")
+              .classList.remove("hidden");
           }
 
           // Mark data as loaded
@@ -2131,8 +2387,6 @@
 
             servicesGrid.appendChild(serviceCard);
           });
-        } else {
-          document.getElementById("services-section").classList.add("hidden");
         }
       }
 
@@ -2203,8 +2457,6 @@
             productCard.appendChild(productContent);
             productsGrid.appendChild(productCard);
           });
-        } else {
-          document.getElementById("products-section").classList.add("hidden");
         }
       }
 
@@ -2227,8 +2479,6 @@
             galleryItem.appendChild(img);
             gallery.appendChild(galleryItem);
           });
-        } else {
-          document.getElementById("gallery-section").classList.add("hidden");
         }
       }
 
@@ -2286,8 +2536,6 @@
             blogCard.appendChild(blogContent);
             blogGrid.appendChild(blogCard);
           });
-        } else {
-          document.getElementById("blog-section").classList.add("hidden");
         }
       }
 
@@ -2396,8 +2644,6 @@
 
             infoGrid.appendChild(infoCard);
           });
-        } else {
-          document.getElementById("info-section").classList.add("hidden");
         }
       }
 
@@ -2415,9 +2661,9 @@
             const faqQuestion = document.createElement("div");
             faqQuestion.className = "faq-question";
             faqQuestion.innerHTML = `
-                <span>${faq.question}</span>
-                <i class="fas fa-chevron-down"></i>
-            `;
+              <span>${faq.question}</span>
+              <i class="fas fa-chevron-down"></i>
+          `;
 
             const faqAnswer = document.createElement("div");
             faqAnswer.className = "faq-answer";
@@ -2437,8 +2683,59 @@
 
             faqContainer.appendChild(faqItem);
           });
-        } else {
-          document.getElementById("faq-section").classList.add("hidden");
+        }
+      }
+
+      // FIXED: Reorder page sections based on saved order
+      function reorderSections(order) {
+        const container = document.querySelector("#main-content > .container");
+        if (!container) return;
+
+        // Get the header and links container first
+        const header = container.querySelector("header");
+        const linksContainer = container.querySelector(".links-container");
+        const footer = container.querySelector(".footer");
+
+        // Store all sections in a map for easy access
+        const sectionsMap = new Map();
+        const allSections = container.querySelectorAll("section");
+
+        allSections.forEach((section) => {
+          sectionsMap.set(section.id, section);
+        });
+
+        // Clear container but keep header and links
+        container.innerHTML = "";
+        if (header) container.appendChild(header);
+        if (linksContainer) container.appendChild(linksContainer);
+
+        // Parse the order string if it's a string
+        let sectionOrder = order;
+        if (typeof order === "string") {
+          sectionOrder = order
+            .split(",")
+            .map((id) => id.trim())
+            .filter((id) => id);
+        }
+
+        // Add sections in the specified order
+        sectionOrder.forEach((id) => {
+          const section = sectionsMap.get(id);
+          if (section) {
+            container.appendChild(section);
+          }
+        });
+
+        // Add any remaining sections that weren't in the order
+        sectionsMap.forEach((section, id) => {
+          if (!sectionOrder.includes(id) && !container.contains(section)) {
+            container.appendChild(section);
+          }
+        });
+
+        // Add footer at the end
+        if (footer) {
+          container.appendChild(footer);
         }
       }
 

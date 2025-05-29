@@ -378,7 +378,7 @@
       <!-- Logo del perfil -->
       <div class="logo-container">
         <img
-          src="/placeholder.svg"
+          src="/images/logo.png"
           alt="Logo"
           class="logo hidden"
           id="profileLogo"
@@ -537,7 +537,7 @@
           errorEl.style.display = "block";
           loginForm.classList.add("shake");
           setTimeout(() => loginForm.classList.remove("shake"), 500);
-        } else {
+        } else if (type === "success") {
           successEl.textContent = message;
           successEl.style.display = "block";
         }
@@ -558,7 +558,8 @@
         e.preventDefault();
 
         // Reset messages
-        showMessage("", "clear");
+        loginError.style.display = "none";
+        loginSuccess.style.display = "none";
 
         // Validate inputs
         if (!emailInput.value.trim() || !passwordInput.value.trim()) {
@@ -600,8 +601,10 @@
             window.location.href = "/custom-web/admin";
           }, 1500);
         } catch (error) {
+          console.error("Login error:", error);
+
           // Show error message
-          showMessage(error.message);
+          showMessage(error.message || "Login failed. Please try again.");
 
           // Reset button state
           loginButton.disabled = false;
@@ -622,6 +625,7 @@
       [emailInput, passwordInput].forEach((input) => {
         input.addEventListener("keypress", function (e) {
           if (e.key === "Enter") {
+            e.preventDefault();
             loginForm.dispatchEvent(new Event("submit"));
           }
         });
@@ -642,7 +646,8 @@
         if (e.key === "Escape") {
           emailInput.value = "";
           passwordInput.value = "";
-          showMessage("", "clear");
+          loginError.style.display = "none";
+          loginSuccess.style.display = "none";
           emailInput.focus();
         }
       });

@@ -20,17 +20,17 @@ const DOMAIN = process.env.DOMAIN || ''
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // Middleware
-app.use(express.json({ limit: '50mb' })) // Increased limit for base64 images
+app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ extended: true, limit: '50mb' }))
 app.use(cors())
 app.use(helmet({
-  contentSecurityPolicy: false // Disable CSP for simplicity in development
+  contentSecurityPolicy: false
 }))
 
 // Serve static files
 app.use(express.static(path.join(__dirname, "public")))
 
-// Create uploads directory if it doesn't exist (for temporary processing)
+// Create uploads directory if it doesn't exist
 const uploadsDir = path.join(__dirname, "public", "uploads")
 const imagesDir = path.join(__dirname, "public", "images")
 
@@ -42,14 +42,13 @@ if (!fs.existsSync(imagesDir)) {
   fs.mkdirSync(imagesDir, { recursive: true })
 }
 
-// Configure multer for file uploads (memory storage for base64 conversion)
+// Configure multer for file uploads
 const storage = multer.memoryStorage()
 
-const upload = multer({ 
+const upload = multer({
   storage,
-  limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
+  limits: { fileSize: 10 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
-    // Accept only images
     if (file.mimetype.startsWith("image/")) {
       cb(null, true)
     } else {
@@ -58,15 +57,32 @@ const upload = multer({
   }
 })
 
+// Middleware to use multer only for multipart requests
+function conditionalUpload(fieldName) {
+  return (req, res, next) => {
+    if (req.is("multipart/form-data")) {
+      const handler = upload.single(fieldName)
+      handler(req, res, (err) => {
+        if (err) {
+          console.error("Multer error:", err)
+          return res.status(400).json({ message: "File upload error", error: err.message })
+        }
+        next()
+      })
+    } else {
+      next()
+    }
+  }
+}
+
 // Helper function to convert buffer to base64 data URL
 function bufferToBase64DataURL(buffer, mimetype) {
   const base64 = buffer.toString('base64')
   return `data:${mimetype};base64,${base64}`
 }
 
-// Helper function to optimize image size (basic compression)
+// Helper function to optimize image size
 function optimizeImageBuffer(buffer, mimetype) {
-  // For now, return as-is. You could add image compression here using sharp or similar
   return buffer
 }
 
@@ -132,21 +148,31 @@ const faqSchema = new mongoose.Schema({
   answer: { type: String, required: true }
 })
 
-// Profile Schema - Updated to store base64 images and include products and blog posts
+// Profile Schema
 const profileSchema = new mongoose.Schema({
   name: { type: String, required: true },
   description: { type: String, required: true },
-  profileImage: { type: String, required: true }, // Can be URL or base64 data URL
-  logoImage: { type: String, required: true }, // Can be URL or base64 data URL
+  profileImage: { type: String, required: true },
+  logoImage: { type: String, required: true },
   backgroundColor: { type: String, default: "#ffffff" },
   textColor: { type: String, default: "#333333" },
   accentColor: { type: String, default: "#4f46e5" },
   galleryBgColor: { type: String, default: "#f9fafb" },
   servicesBgColor: { type: String, default: "#ffffff" },
+  servicesTextColor: { type: String, default: "#333333" },
+  servicesCardColor: { type: String, default: "#f9fafb" },
   productsBgColor: { type: String, default: "#f9fafb" },
+  productsTextColor: { type: String, default: "#333333" },
+  productsCardColor: { type: String, default: "#ffffff" },
   blogBgColor: { type: String, default: "#ffffff" },
+  blogTextColor: { type: String, default: "#333333" },
+  blogCardColor: { type: String, default: "#f9fafb" },
   faqBgColor: { type: String, default: "#ffffff" },
+  faqTextColor: { type: String, default: "#333333" },
+  faqCardColor: { type: String, default: "#ffffff" },
   contactBgColor: { type: String, default: "#f9fafb" },
+  contactInfoTextColor: { type: String, default: "#333333" },
+  contactInfoCardColor: { type: String, default: "#ffffff" },
   servicesSectionTitle: { type: String, default: "My Services" },
   productsSectionTitle: { type: String, default: "My Products" },
   blogSectionTitle: { type: String, default: "Latest Blog Posts" },
@@ -154,6 +180,20 @@ const profileSchema = new mongoose.Schema({
   infoSectionTitle: { type: String, default: "Contact Information" },
   faqSectionTitle: { type: String, default: "Frequently Asked Questions" },
   contactSectionTitle: { type: String, default: "Contact Me" },
+  sectionOrder: {
+    type: [String],
+    default: [
+      "links-section",
+      "services-section",
+      "products-section",
+      "blog-section",
+      "gallery-section",
+      "info-section",
+      "faq-section",
+      "contact-section"
+    ]
+  },
+  customCode: { type: String, default: "" },
   showContactForm: { type: Boolean, default: true },
   contactEmail: { type: String, default: "" },
   links: [linkSchema],
@@ -162,7 +202,7 @@ const profileSchema = new mongoose.Schema({
   blogPosts: [blogPostSchema],
   contactInfo: [contactInfoSchema],
   faqs: [faqSchema],
-  galleryImages: [{ type: String }], // Array of base64 data URLs or regular URLs
+  galleryImages: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 })
@@ -213,10 +253,20 @@ async function initializeDefaultProfile() {
         accentColor: "#4f46e5",
         galleryBgColor: "#f9fafb",
         servicesBgColor: "#ffffff",
+        servicesTextColor: "#333333",
+        servicesCardColor: "#f9fafb",
         productsBgColor: "#f9fafb",
+        productsTextColor: "#333333",
+        productsCardColor: "#ffffff",
         blogBgColor: "#ffffff",
+        blogTextColor: "#333333",
+        blogCardColor: "#f9fafb",
         faqBgColor: "#ffffff",
+        faqTextColor: "#333333",
+        faqCardColor: "#ffffff",
         contactBgColor: "#f9fafb",
+        contactInfoTextColor: "#333333",
+        contactInfoCardColor: "#ffffff",
         servicesSectionTitle: "My Services",
         productsSectionTitle: "My Products",
         blogSectionTitle: "Latest Blog Posts",
@@ -224,6 +274,17 @@ async function initializeDefaultProfile() {
         infoSectionTitle: "Contact Information",
         faqSectionTitle: "Frequently Asked Questions",
         contactSectionTitle: "Contact Me",
+        sectionOrder: [
+          "links-section",
+          "services-section",
+          "products-section",
+          "blog-section",
+          "gallery-section",
+          "info-section",
+          "faq-section",
+          "contact-section"
+        ],
+        customCode: "",
         showContactForm: true,
         contactEmail: "admin@example.com",
         links: [
@@ -328,7 +389,6 @@ async function initializeDefaultAdmin() {
     const adminCount = await User.countDocuments()
     
     if (adminCount === 0) {
-      // Hash password
       const salt = await bcrypt.genSalt(10)
       const hashedPassword = await bcrypt.hash(process.env.ADMIN_PASSWORD || "admin123", salt)
       
@@ -352,19 +412,16 @@ app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body
 
-    // Find user
     const user = await User.findOne({ email })
     if (!user) {
       return res.status(400).json({ message: "Invalid credentials" })
     }
 
-    // Check password
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
       return res.status(400).json({ message: "Invalid credentials" })
     }
 
-    // Generate JWT token
     const token = jwt.sign({ id: user._id, email: user.email }, process.env.JWT_SECRET || "your_jwt_secret", {
       expiresIn: "1d",
     })
@@ -395,8 +452,8 @@ app.get("/api/profile", async (req, res) => {
   }
 })
 
-// Update profile (authenticated)
-app.put("/api/profile", authenticate, upload.single("profileImage"), async (req, res) => {
+// Update profile (authenticated) - FIXED
+app.put("/api/profile", authenticate, conditionalUpload("profileImage"), async (req, res) => {
   try {
     const { 
       name, 
@@ -411,6 +468,18 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
       blogBgColor,
       faqBgColor,
       contactBgColor,
+      servicesTextColor,
+      servicesCardColor,
+      productsTextColor,
+      productsCardColor,
+      blogTextColor,
+      blogCardColor,
+      faqTextColor,
+      faqCardColor,
+      contactInfoTextColor,
+      contactInfoCardColor,
+      sectionOrder,
+      customCode,
       showContactForm,
       servicesSectionTitle,
       productsSectionTitle,
@@ -450,6 +519,18 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (blogBgColor) profile.blogBgColor = blogBgColor
     if (faqBgColor) profile.faqBgColor = faqBgColor
     if (contactBgColor) profile.contactBgColor = contactBgColor
+    if (servicesTextColor) profile.servicesTextColor = servicesTextColor
+    if (servicesCardColor) profile.servicesCardColor = servicesCardColor
+    if (productsTextColor) profile.productsTextColor = productsTextColor
+    if (productsCardColor) profile.productsCardColor = productsCardColor
+    if (blogTextColor) profile.blogTextColor = blogTextColor
+    if (blogCardColor) profile.blogCardColor = blogCardColor
+    if (faqTextColor) profile.faqTextColor = faqTextColor
+    if (faqCardColor) profile.faqCardColor = faqCardColor
+    if (contactInfoTextColor) profile.contactInfoTextColor = contactInfoTextColor
+    if (contactInfoCardColor) profile.contactInfoCardColor = contactInfoCardColor
+    if (sectionOrder) profile.sectionOrder = Array.isArray(sectionOrder) ? sectionOrder : sectionOrder.split(',')
+    if (customCode !== undefined) profile.customCode = customCode
     
     // Update contact settings
     if (contactEmail) profile.contactEmail = contactEmail
@@ -460,7 +541,6 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     // Update profile image if provided
     if (req.file) {
       try {
-        // Convert image to base64 data URL
         const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
         const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
         profile.profileImage = base64DataURL
@@ -486,7 +566,7 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
 })
 
 // Update logo (authenticated)
-app.put("/api/logo", authenticate, upload.single("logoImage"), async (req, res) => {
+app.put("/api/logo", authenticate, conditionalUpload("logoImage"), async (req, res) => {
   try {
     const profile = await Profile.findOne()
     
@@ -494,10 +574,8 @@ app.put("/api/logo", authenticate, upload.single("logoImage"), async (req, res) 
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Update logo image if provided
     if (req.file) {
       try {
-        // Convert image to base64 data URL
         const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
         const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
         profile.logoImage = base64DataURL
@@ -533,7 +611,6 @@ app.post("/api/links", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Add new link
     profile.links.push({
       text,
       url,
@@ -567,12 +644,10 @@ app.put("/api/links/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.links.length) {
       return res.status(400).json({ message: "Invalid link index" })
     }
     
-    // Update link
     if (text) profile.links[index].text = text
     if (url) profile.links[index].url = url
     if (icon) profile.links[index].icon = icon
@@ -603,12 +678,10 @@ app.delete("/api/links/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.links.length) {
       return res.status(400).json({ message: "Invalid link index" })
     }
     
-    // Remove link
     profile.links.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -635,7 +708,6 @@ app.post("/api/services", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Add new service
     profile.services.push({
       title,
       description,
@@ -668,7 +740,6 @@ app.put("/api/services/:index", authenticate, async (req, res) => {
     if (!profile) {
       return res.status(404).json({ message: "Profile not found" })
     }
-    
 
     if (index < 0 || index >= profile.services.length) {
       return res.status(400).json({ message: "Invalid service index" })
@@ -704,12 +775,10 @@ app.delete("/api/services/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.services.length) {
       return res.status(400).json({ message: "Invalid service index" })
     }
     
-    // Remove service
     profile.services.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -726,7 +795,7 @@ app.delete("/api/services/:index", authenticate, async (req, res) => {
 })
 
 // Add product (authenticated)
-app.post("/api/products", authenticate, upload.single("productImage"), async (req, res) => {
+app.post("/api/products", authenticate, conditionalUpload("productImage"), async (req, res) => {
   try {
     const { title, description, price, buttonText, url, icon } = req.body
     
@@ -736,7 +805,6 @@ app.post("/api/products", authenticate, upload.single("productImage"), async (re
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Create new product
     const newProduct = {
       title,
       description,
@@ -744,16 +812,11 @@ app.post("/api/products", authenticate, upload.single("productImage"), async (re
       buttonText: buttonText || "Learn More"
     }
     
-    // Add URL if provided
     if (url) newProduct.url = url
-    
-    // Add icon if provided
     if (icon) newProduct.icon = icon
     
-    // Add image if provided
     if (req.file) {
       try {
-        // Convert image to base64 data URL
         const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
         const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
         newProduct.image = base64DataURL
@@ -763,7 +826,6 @@ app.post("/api/products", authenticate, upload.single("productImage"), async (re
       }
     }
     
-    // Add to products array
     profile.products.push(newProduct)
     profile.updatedAt = new Date()
     
@@ -781,7 +843,7 @@ app.post("/api/products", authenticate, upload.single("productImage"), async (re
 })
 
 // Update product (authenticated)
-app.put("/api/products/:index", authenticate, upload.single("productImage"), async (req, res) => {
+app.put("/api/products/:index", authenticate, conditionalUpload("productImage"), async (req, res) => {
   try {
     const { index } = req.params
     const { title, description, price, buttonText, url, icon } = req.body
@@ -792,18 +854,15 @@ app.put("/api/products/:index", authenticate, upload.single("productImage"), asy
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.products.length) {
       return res.status(400).json({ message: "Invalid product index" })
     }
     
-    // Update product fields
     if (title) profile.products[index].title = title
     if (description) profile.products[index].description = description
     if (price) profile.products[index].price = price
     if (buttonText) profile.products[index].buttonText = buttonText
     
-    // Update URL (can be removed by sending empty string)
     if (url !== undefined) {
       if (url === "") {
         delete profile.products[index].url
@@ -812,7 +871,6 @@ app.put("/api/products/:index", authenticate, upload.single("productImage"), asy
       }
     }
     
-    // Update icon (can be removed by sending empty string)
     if (icon !== undefined) {
       if (icon === "") {
         delete profile.products[index].icon
@@ -821,14 +879,11 @@ app.put("/api/products/:index", authenticate, upload.single("productImage"), asy
       }
     }
     
-    // Update image if provided
     if (req.file) {
       try {
-        // Convert image to base64 data URL
         const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
         const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
         profile.products[index].image = base64DataURL
-        // Remove icon if image is provided
         delete profile.products[index].icon
       } catch (error) {
         console.error("Error converting product image to base64:", error)
@@ -862,12 +917,10 @@ app.delete("/api/products/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.products.length) {
       return res.status(400).json({ message: "Invalid product index" })
     }
     
-    // Remove product
     profile.products.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -884,7 +937,7 @@ app.delete("/api/products/:index", authenticate, async (req, res) => {
 })
 
 // Add blog post (authenticated)
-app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (req, res) => {
+app.post("/api/blogPosts", authenticate, conditionalUpload("blogPostImage"), async (req, res) => {
   try {
     const { title, date, excerpt, content } = req.body
     
@@ -894,20 +947,16 @@ app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Create new blog post
     const newBlogPost = {
       title,
       date: date || new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }),
       content
     }
     
-    // Add excerpt if provided
     if (excerpt) newBlogPost.excerpt = excerpt
     
-    // Add image if provided
     if (req.file) {
       try {
-        // Convert image to base64 data URL
         const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
         const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
         newBlogPost.image = base64DataURL
@@ -917,7 +966,6 @@ app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (
       }
     }
     
-    // Add to blog posts array
     profile.blogPosts.push(newBlogPost)
     profile.updatedAt = new Date()
     
@@ -935,7 +983,7 @@ app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (
 })
 
 // Update blog post (authenticated)
-app.put("/api/blogPosts/:index", authenticate, upload.single("blogPostImage"), async (req, res) => {
+app.put("/api/blogPosts/:index", authenticate, conditionalUpload("blogPostImage"), async (req, res) => {
   try {
     const { index } = req.params
     const { title, date, excerpt, content } = req.body
@@ -946,17 +994,14 @@ app.put("/api/blogPosts/:index", authenticate, upload.single("blogPostImage"), a
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.blogPosts.length) {
       return res.status(400).json({ message: "Invalid blog post index" })
     }
     
-    // Update blog post fields
     if (title) profile.blogPosts[index].title = title
     if (date) profile.blogPosts[index].date = date
     if (content) profile.blogPosts[index].content = content
     
-    // Update excerpt (can be removed by sending empty string)
     if (excerpt !== undefined) {
       if (excerpt === "") {
         delete profile.blogPosts[index].excerpt
@@ -965,10 +1010,8 @@ app.put("/api/blogPosts/:index", authenticate, upload.single("blogPostImage"), a
       }
     }
     
-    // Update image if provided
     if (req.file) {
       try {
-        // Convert image to base64 data URL
         const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
         const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
         profile.blogPosts[index].image = base64DataURL
@@ -1004,12 +1047,10 @@ app.delete("/api/blogPosts/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.blogPosts.length) {
       return res.status(400).json({ message: "Invalid blog post index" })
     }
     
-    // Remove blog post
     profile.blogPosts.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -1036,7 +1077,6 @@ app.post("/api/contactInfo", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Add new contact info
     profile.contactInfo.push({
       title,
       value,
@@ -1071,12 +1111,10 @@ app.put("/api/contactInfo/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.contactInfo.length) {
       return res.status(400).json({ message: "Invalid contact info index" })
     }
     
-    // Update contact info
     if (title) profile.contactInfo[index].title = title
     if (value) profile.contactInfo[index].value = value
     if (type) profile.contactInfo[index].type = type
@@ -1108,12 +1146,10 @@ app.delete("/api/contactInfo/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.contactInfo.length) {
       return res.status(400).json({ message: "Invalid contact info index" })
     }
     
-    // Remove contact info
     profile.contactInfo.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -1140,7 +1176,6 @@ app.post("/api/faqs", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Add new FAQ
     profile.faqs.push({
       question,
       answer
@@ -1173,12 +1208,10 @@ app.put("/api/faqs/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.faqs.length) {
       return res.status(400).json({ message: "Invalid FAQ index" })
     }
     
-    // Update FAQ
     if (question) profile.faqs[index].question = question
     if (answer) profile.faqs[index].answer = answer
     
@@ -1208,12 +1241,10 @@ app.delete("/api/faqs/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.faqs.length) {
       return res.status(400).json({ message: "Invalid FAQ index" })
     }
     
-    // Remove FAQ
     profile.faqs.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -1244,14 +1275,12 @@ app.post("/api/contact", async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if contact form is enabled
     if (!profile.showContactForm) {
       return res.status(403).json({ message: "Contact form is disabled" })
     }
     
     const toEmail = profile.contactEmail || "admin@example.com"
     
-    // Send email using external service
     const response = await fetch('https://2.vil0.com/send-email', {
       method: 'POST',
       headers: {
@@ -1294,7 +1323,6 @@ app.post("/api/gallery", authenticate, upload.array("images", 10), async (req, r
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Convert uploaded files to base64 data URLs
     const uploadedImages = []
     
     for (const file of req.files) {
@@ -1305,7 +1333,6 @@ app.post("/api/gallery", authenticate, upload.array("images", 10), async (req, r
         console.log(`Gallery image converted to base64: ${file.originalname}`)
       } catch (error) {
         console.error(`Error converting image ${file.originalname} to base64:`, error)
-        // Continue with other images even if one fails
       }
     }
     
@@ -1313,7 +1340,6 @@ app.post("/api/gallery", authenticate, upload.array("images", 10), async (req, r
       return res.status(400).json({ message: "No images were successfully processed" })
     }
     
-    // Add to gallery
     profile.galleryImages = [...profile.galleryImages, ...uploadedImages]
     profile.updatedAt = new Date()
     
@@ -1341,12 +1367,10 @@ app.delete("/api/gallery/:index", authenticate, async (req, res) => {
       return res.status(404).json({ message: "Profile not found" })
     }
     
-    // Check if index is valid
     if (index < 0 || index >= profile.galleryImages.length) {
       return res.status(400).json({ message: "Invalid image index" })
     }
     
-    // Remove from array (no need to delete files since they're stored as base64 in DB)
     profile.galleryImages.splice(index, 1)
     profile.updatedAt = new Date()
     
@@ -1387,7 +1411,6 @@ app.use((req, res) => {
 // Start server
 async function startServer() {
   try {
-    // Initialize default data
     await initializeDefaultProfile();
     await initializeDefaultAdmin();
     
