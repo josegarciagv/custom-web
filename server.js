@@ -143,10 +143,20 @@ const profileSchema = new mongoose.Schema({
   accentColor: { type: String, default: "#4f46e5" },
   galleryBgColor: { type: String, default: "#f9fafb" },
   servicesBgColor: { type: String, default: "#ffffff" },
+  servicesTextColor: { type: String, default: "#333333" },
+  servicesCardColor: { type: String, default: "#f9fafb" },
   productsBgColor: { type: String, default: "#f9fafb" },
+  productsTextColor: { type: String, default: "#333333" },
+  productsCardColor: { type: String, default: "#ffffff" },
   blogBgColor: { type: String, default: "#ffffff" },
+  blogTextColor: { type: String, default: "#333333" },
+  blogCardColor: { type: String, default: "#f9fafb" },
   faqBgColor: { type: String, default: "#ffffff" },
+  faqTextColor: { type: String, default: "#333333" },
+  faqCardColor: { type: String, default: "#ffffff" },
   contactBgColor: { type: String, default: "#f9fafb" },
+  contactInfoTextColor: { type: String, default: "#333333" },
+  contactInfoCardColor: { type: String, default: "#ffffff" },
   servicesSectionTitle: { type: String, default: "My Services" },
   productsSectionTitle: { type: String, default: "My Products" },
   blogSectionTitle: { type: String, default: "Latest Blog Posts" },
@@ -154,6 +164,20 @@ const profileSchema = new mongoose.Schema({
   infoSectionTitle: { type: String, default: "Contact Information" },
   faqSectionTitle: { type: String, default: "Frequently Asked Questions" },
   contactSectionTitle: { type: String, default: "Contact Me" },
+  sectionOrder: {
+    type: [String],
+    default: [
+      "links-section",
+      "services-section",
+      "products-section",
+      "blog-section",
+      "gallery-section",
+      "info-section",
+      "faq-section",
+      "contact-section"
+    ]
+  },
+  customCode: { type: String, default: "" },
   showContactForm: { type: Boolean, default: true },
   contactEmail: { type: String, default: "" },
   links: [linkSchema],
@@ -211,19 +235,40 @@ async function initializeDefaultProfile() {
         backgroundColor: "#ffffff",
         textColor: "#333333",
         accentColor: "#4f46e5",
-        galleryBgColor: "#f9fafb",
-        servicesBgColor: "#ffffff",
-        productsBgColor: "#f9fafb",
-        blogBgColor: "#ffffff",
-        faqBgColor: "#ffffff",
-        contactBgColor: "#f9fafb",
-        servicesSectionTitle: "My Services",
-        productsSectionTitle: "My Products",
-        blogSectionTitle: "Latest Blog Posts",
-        gallerySectionTitle: "My Gallery",
-        infoSectionTitle: "Contact Information",
-        faqSectionTitle: "Frequently Asked Questions",
-        contactSectionTitle: "Contact Me",
+      galleryBgColor: "#f9fafb",
+      servicesBgColor: "#ffffff",
+      servicesTextColor: "#333333",
+      servicesCardColor: "#f9fafb",
+      productsBgColor: "#f9fafb",
+      productsTextColor: "#333333",
+      productsCardColor: "#ffffff",
+      blogBgColor: "#ffffff",
+      blogTextColor: "#333333",
+      blogCardColor: "#f9fafb",
+      faqBgColor: "#ffffff",
+      faqTextColor: "#333333",
+      faqCardColor: "#ffffff",
+      contactBgColor: "#f9fafb",
+      contactInfoTextColor: "#333333",
+      contactInfoCardColor: "#ffffff",
+      servicesSectionTitle: "My Services",
+      productsSectionTitle: "My Products",
+      blogSectionTitle: "Latest Blog Posts",
+      gallerySectionTitle: "My Gallery",
+      infoSectionTitle: "Contact Information",
+      faqSectionTitle: "Frequently Asked Questions",
+      contactSectionTitle: "Contact Me",
+      sectionOrder: [
+        "links-section",
+        "services-section",
+        "products-section",
+        "blog-section",
+        "gallery-section",
+        "info-section",
+        "faq-section",
+        "contact-section"
+      ],
+      customCode: "",
         showContactForm: true,
         contactEmail: "admin@example.com",
         links: [
@@ -411,6 +456,18 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
       blogBgColor,
       faqBgColor,
       contactBgColor,
+      servicesTextColor,
+      servicesCardColor,
+      productsTextColor,
+      productsCardColor,
+      blogTextColor,
+      blogCardColor,
+      faqTextColor,
+      faqCardColor,
+      contactInfoTextColor,
+      contactInfoCardColor,
+      sectionOrder,
+      customCode,
       showContactForm,
       servicesSectionTitle,
       productsSectionTitle,
@@ -450,6 +507,18 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (blogBgColor) profile.blogBgColor = blogBgColor
     if (faqBgColor) profile.faqBgColor = faqBgColor
     if (contactBgColor) profile.contactBgColor = contactBgColor
+    if (servicesTextColor) profile.servicesTextColor = servicesTextColor
+    if (servicesCardColor) profile.servicesCardColor = servicesCardColor
+    if (productsTextColor) profile.productsTextColor = productsTextColor
+    if (productsCardColor) profile.productsCardColor = productsCardColor
+    if (blogTextColor) profile.blogTextColor = blogTextColor
+    if (blogCardColor) profile.blogCardColor = blogCardColor
+    if (faqTextColor) profile.faqTextColor = faqTextColor
+    if (faqCardColor) profile.faqCardColor = faqCardColor
+    if (contactInfoTextColor) profile.contactInfoTextColor = contactInfoTextColor
+    if (contactInfoCardColor) profile.contactInfoCardColor = contactInfoCardColor
+    if (sectionOrder) profile.sectionOrder = Array.isArray(sectionOrder) ? sectionOrder : sectionOrder.split(',')
+    if (customCode !== undefined) profile.customCode = customCode
     
     // Update contact settings
     if (contactEmail) profile.contactEmail = contactEmail

@@ -35,10 +35,20 @@
         --error-color: #ef4444;
         --gallery-bg: #f9fafb;
         --services-bg: #ffffff;
+        --services-text: #333333;
+        --services-card: #f9fafb;
         --faq-bg: #ffffff;
+        --faq-text: #333333;
+        --faq-card: #ffffff;
         --contact-bg: #f9fafb;
+        --contact-info-text: #333333;
+        --contact-info-card: #ffffff;
         --products-bg: #f9fafb;
+        --products-text: #333333;
+        --products-card: #ffffff;
         --blog-bg: #ffffff;
+        --blog-text: #333333;
+        --blog-card: #f9fafb;
         --header-height: 70px;
       }
 
@@ -398,7 +408,7 @@
       }
 
       .service-card {
-        background-color: var(--secondary-bg);
+        background-color: var(--services-card);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -427,11 +437,11 @@
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: var(--text-color);
+        color: var(--services-text);
       }
 
       .service-description {
-        color: #666;
+        color: var(--services-text);
         font-size: 0.95rem;
       }
 
@@ -450,7 +460,7 @@
       }
 
       .product-card {
-        background-color: var(--secondary-bg);
+        background-color: var(--products-card);
         border-radius: 0.75rem;
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -509,11 +519,11 @@
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
-        color: var(--text-color);
+        color: var(--products-text);
       }
 
       .product-description {
-        color: #666;
+        color: var(--products-text);
         font-size: 0.95rem;
         margin-bottom: 1rem;
         flex-grow: 1;
@@ -561,7 +571,7 @@
       }
 
       .blog-card {
-        background-color: var(--secondary-bg);
+        background-color: var(--blog-card);
         border-radius: 0.75rem;
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -608,11 +618,11 @@
         font-size: 1.25rem;
         font-weight: 600;
         margin-bottom: 0.75rem;
-        color: var(--text-color);
+        color: var(--blog-text);
       }
 
       .blog-excerpt {
-        color: #666;
+        color: var(--blog-text);
         font-size: 0.95rem;
         margin-bottom: 1rem;
         display: -webkit-box;
@@ -975,7 +985,7 @@
 
       /* UPDATED: Contact Information cards with hover animation like services */
       .info-card {
-        background-color: var(--bg-color);
+        background-color: var(--contact-info-card);
         border-radius: 0.75rem;
         padding: 1.5rem;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
@@ -1013,10 +1023,11 @@
         font-size: 1.1rem;
         font-weight: 600;
         margin-bottom: 0.5rem;
+        color: var(--contact-info-text);
       }
 
       .info-content {
-        color: #666;
+        color: var(--contact-info-text);
       }
 
       /* NUEVO: Estilos para enlaces en contact information */
@@ -1064,7 +1075,7 @@
 
       .faq-question {
         padding: 1.25rem;
-        background-color: var(--secondary-bg);
+        background-color: var(--faq-card);
         font-weight: 600;
         cursor: pointer;
         display: flex;
@@ -1085,7 +1096,7 @@
 
       .faq-answer-content {
         padding: 0 1.25rem 1.25rem;
-        color: #666;
+        color: var(--faq-text);
       }
 
       .faq-item.active {
@@ -2053,20 +2064,60 @@
             data.servicesBgColor || "#ffffff"
           );
           document.documentElement.style.setProperty(
+            "--services-text",
+            data.servicesTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--services-card",
+            data.servicesCardColor || "#f9fafb"
+          );
+          document.documentElement.style.setProperty(
             "--faq-bg",
             data.faqBgColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
+            "--faq-text",
+            data.faqTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--faq-card",
+            data.faqCardColor || "#ffffff"
           );
           document.documentElement.style.setProperty(
             "--contact-bg",
             data.contactBgColor || "#f9fafb"
           );
           document.documentElement.style.setProperty(
+            "--contact-info-text",
+            data.contactInfoTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--contact-info-card",
+            data.contactInfoCardColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
             "--products-bg",
             data.productsBgColor || "#f9fafb"
           );
           document.documentElement.style.setProperty(
+            "--products-text",
+            data.productsTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--products-card",
+            data.productsCardColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
             "--blog-bg",
             data.blogBgColor || "#ffffff"
+          );
+          document.documentElement.style.setProperty(
+            "--blog-text",
+            data.blogTextColor || "#333333"
+          );
+          document.documentElement.style.setProperty(
+            "--blog-card",
+            data.blogCardColor || "#f9fafb"
           );
 
           // UPDATED: Update status bar color to match body background
@@ -2159,6 +2210,24 @@
 
           // Load FAQs
           loadFaqs(data.faqs || []);
+
+          // Reorder sections if order provided
+          if (data.sectionOrder && data.sectionOrder.length > 0) {
+            reorderSections(data.sectionOrder);
+          }
+
+          // Inject custom code if provided
+          if (data.customCode) {
+            const placeholder = document.getElementById("custom-code-placeholder");
+            if (placeholder) {
+              placeholder.innerHTML = data.customCode;
+            } else {
+              const div = document.createElement("div");
+              div.id = "custom-code-placeholder";
+              div.innerHTML = data.customCode;
+              document.body.appendChild(div);
+            }
+          }
 
           // Show/hide sections based on settings
           if (!data.showContactForm) {
@@ -2560,6 +2629,18 @@
         }
       }
 
+      // Reorder page sections based on saved order
+      function reorderSections(order) {
+        const container = document.querySelector("#main-content > .container");
+        if (!container) return;
+        order.forEach((id) => {
+          const section = document.getElementById(id);
+          if (section) {
+            container.appendChild(section);
+          }
+        });
+      }
+
       // Confirmation Modal - NEW
       const confirmModal = document.getElementById("confirm-modal");
       const confirmModalTitle = document.getElementById("confirm-modal-title");
@@ -2797,5 +2878,6 @@
         }, 8000);
       });
     </script>
+    <div id="custom-code-placeholder"></div>
   </body>
 </html>
