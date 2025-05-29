@@ -441,7 +441,26 @@ app.get("/api/profile", async (req, res) => {
 })
 
 // Update profile (authenticated)
-app.put("/api/profile", authenticate, upload.single("profileImage"), async (req, res) => {
+// Update profile (authenticated)
+app.put(
+  "/api/profile",
+  authenticate,
+  (req, res, next) => {
+    // Only use multer if a multipart request is sent
+    const contentType = req.headers["content-type"] || "";
+    if (contentType.startsWith("multipart/form-data")) {
+      upload.single("profileImage")(req, res, (err) => {
+        if (err) {
+          console.error("Multer error:", err);
+          return res.status(400).json({ message: err.message });
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  },
+  async (req, res) => {
   try {
     const { 
       name, 
