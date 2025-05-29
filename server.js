@@ -440,13 +440,27 @@ app.get("/api/profile", async (req, res) => {
   }
 })
 
-// Update profile (authenticated)
+// Get profile data (public)
+app.get("/api/profile", async (req, res) => {
+  try {
+    const profile = await Profile.findOne();
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    res.json(profile);
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: "Failed to fetch profile", error: error.message });
+  }
+});
+
 // Update profile (authenticated)
 app.put(
   "/api/profile",
   authenticate,
   (req, res, next) => {
-    // Only use multer if a multipart request is sent
     const contentType = req.headers["content-type"] || "";
     if (contentType.startsWith("multipart/form-data")) {
       upload.single("profileImage")(req, res, (err) => {
@@ -460,6 +474,7 @@ app.put(
       next();
     }
   },
+
   async (req, res) => {
   try {
     const { 
