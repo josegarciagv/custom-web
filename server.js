@@ -458,8 +458,27 @@ app.get("/api/profile", async (req, res) => {
   }
 })
 
+// Get profile data (public)
+app.get("/api/profile", async (req, res) => {
+  try {
+    const profile = await Profile.findOne();
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    res.json(profile);
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: "Failed to fetch profile", error: error.message });
+  }
+});
+
 // Update profile (authenticated)
 app.put("/api/profile", authenticate, conditionalUpload("profileImage"), async (req, res) => {
+
+
+  async (req, res) => {
   try {
     const { 
       name, 
