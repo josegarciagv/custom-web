@@ -684,6 +684,7 @@
         margin-right: 0.5rem;
       }
 
+      /* UPDATED: Contact Section Styles to match the image */
       .contact-section {
         padding: 3rem 0;
         margin-bottom: 3rem;
@@ -693,34 +694,60 @@
       .contact-form {
         max-width: 600px;
         margin: 0 auto;
-        background-color: var(--secondary-bg);
-        padding: 2rem;
-        border-radius: 0.75rem;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        background-color: var(--bg-color);
+        padding: 2.5rem;
+        border-radius: 1rem;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      /* Contact form title with icon */
+      .contact-form-title {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.75rem;
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 2rem;
+      }
+
+      .contact-form-icon {
+        color: var(--primary-color);
+        font-size: 1.5rem;
       }
 
       .form-group {
-        margin-bottom: 1.5rem;
+        margin-bottom: 1.75rem;
       }
 
       .form-label {
         display: block;
-        margin-bottom: 0.5rem;
+        margin-bottom: 0.75rem;
         font-weight: 500;
+        color: var(--text-color);
+        font-size: 1rem;
       }
 
       .form-input,
       .form-textarea {
         width: 100%;
-        padding: 0.75rem;
-        border: 1px solid var(--border-color);
-        border-radius: 0.5rem;
+        padding: 1rem 1.25rem;
+        border: 2px solid var(--border-color);
+        border-radius: 0.75rem;
         font-size: 1rem;
-        transition: border-color 0.3s ease;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        background-color: var(--secondary-bg);
+        color: var(--text-color);
+      }
+
+      .form-input::placeholder,
+      .form-textarea::placeholder {
+        color: #9ca3af;
       }
 
       .form-textarea {
-        min-height: 150px;
+        min-height: 140px;
         resize: vertical;
       }
 
@@ -729,30 +756,38 @@
         outline: none;
         border-color: var(--primary-color);
         box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        background-color: var(--bg-color);
       }
 
       .submit-button {
+        width: 100%;
         display: inline-flex;
         align-items: center;
         justify-content: center;
         background-color: var(--primary-color);
         color: white;
-        padding: 0.75rem 1.5rem;
-        border-radius: 0.5rem;
+        padding: 1rem 2rem;
+        border-radius: 0.75rem;
         font-weight: 600;
+        font-size: 1rem;
         text-decoration: none;
         border: none;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
       }
 
       .submit-button:hover {
         background-color: #4338ca;
+        transform: translateY(-1px);
+        box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
       }
 
       .submit-button:disabled {
         background-color: #9ca3af;
         cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
       }
 
       .loading {
@@ -768,21 +803,22 @@
 
       .alert {
         padding: 1rem;
-        border-radius: 0.5rem;
+        border-radius: 0.75rem;
         margin-bottom: 1.5rem;
         display: none;
+        font-weight: 500;
       }
 
       .alert-success {
-        background-color: #d1fae5;
-        color: #065f46;
-        border: 1px solid #34d399;
+        background-color: rgba(16, 185, 129, 0.1);
+        color: var(--success-color);
+        border: 1px solid rgba(16, 185, 129, 0.3);
       }
 
       .alert-error {
-        background-color: #fee2e2;
-        color: #b91c1c;
-        border: 1px solid #f87171;
+        background-color: rgba(239, 68, 68, 0.1);
+        color: var(--error-color);
+        border: 1px solid rgba(239, 68, 68, 0.3);
       }
 
       /* Enhanced Modal Styles */
@@ -1307,6 +1343,15 @@
         .blog-post-modal-title {
           font-size: 1.5rem;
         }
+
+        /* Contact form responsive */
+        .contact-form {
+          padding: 2rem;
+        }
+
+        .contact-form-title {
+          font-size: 1.5rem;
+        }
       }
     </style>
   </head>
@@ -1506,10 +1551,17 @@
           </div>
         </section>
 
+        <!-- UPDATED: Contact Section with improved styling -->
         <section id="contact-section" class="contact-section">
           <div class="container">
             <h2 class="section-title" id="contact-title">Contact Me</h2>
             <div class="contact-form">
+              <!-- Contact form title with icon -->
+              <h3 class="contact-form-title">
+                <i class="fas fa-envelope contact-form-icon"></i>
+                Send Message
+              </h3>
+
               <div class="alert alert-success" id="success-alert">
                 Your message has been sent successfully! I'll get back to you
                 soon.
@@ -1519,34 +1571,34 @@
               </div>
               <form id="contact-form">
                 <div class="form-group">
-                  <label for="name" class="form-label">Name</label>
+                  <label for="name" class="form-label">Full Name *</label>
                   <input
                     type="text"
                     id="name"
                     name="name"
                     class="form-input"
-                    placeholder="Enter your name"
+                    placeholder="Enter your full name"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="email" class="form-label">Email</label>
+                  <label for="email" class="form-label">Email Address *</label>
                   <input
                     type="email"
                     id="email"
                     name="email"
                     class="form-input"
-                    placeholder="Enter your email"
+                    placeholder="Enter your email address"
                     required
                   />
                 </div>
                 <div class="form-group">
-                  <label for="message" class="form-label">Message</label>
+                  <label for="message" class="form-label">Message *</label>
                   <textarea
                     id="message"
                     name="message"
                     class="form-textarea"
-                    placeholder="Enter your message"
+                    placeholder="Enter your message here..."
                     required
                   ></textarea>
                 </div>
