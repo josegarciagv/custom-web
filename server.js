@@ -440,24 +440,46 @@ app.get("/api/profile", async (req, res) => {
   }
 })
 
-// Update profile (authenticated). Use multer only when request is multipart
-const conditionalProfileUpload = (req, res, next) => {
-  if (req.is("multipart/form-data")) {
-    upload.single("profileImage")(req, res, next)
-  } else {
-    next()
-  }
-}
+// Get profile data (public)
+app.get("/api/profile", async (req, res) => {
+  try {
+    const profile = await Profile.findOne();
 
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" });
+    }
+
+    res.json(profile);
+  } catch (error) {
+    console.error("Error fetching profile:", error);
+    res.status(500).json({ message: "Failed to fetch profile", error: error.message });
+  }
+});
+
+// Update profile (authenticated)
 app.put(
   "/api/profile",
   authenticate,
-  conditionalProfileUpload,
+  (req, res, next) => {
+    const contentType = req.headers["content-type"] || "";
+    if (contentType.startsWith("multipart/form-data")) {
+      upload.single("profileImage")(req, res, (err) => {
+        if (err) {
+          console.error("Multer error:", err);
+          return res.status(400).json({ message: err.message });
+        }
+        next();
+      });
+    } else {
+      next();
+    }
+  },
+
   async (req, res) => {
-    try {
-      const {
-        name,
-        description,
+  try {
+    const { 
+      name, 
+      description, 
       backgroundColor, 
       textColor, 
       accentColor, 
