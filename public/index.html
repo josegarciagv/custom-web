@@ -4,6 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Custom Web Profile</title>
+    <!-- Status bar color matching body -->
+    <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
+    <meta
+      name="msapplication-navbutton-color"
+      content="#ffffff"
+      id="ms-nav-color-meta"
+    />
+    <meta
+      name="apple-mobile-web-app-status-bar-style"
+      content="default"
+      id="apple-status-bar-meta"
+    />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
@@ -118,8 +130,10 @@
         box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
       }
 
+      /* UPDATED: Share button hover uses dynamic primary color */
       .share-button:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
         transform: scale(1.05);
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
       }
@@ -269,8 +283,10 @@
         transition: all 0.3s ease;
       }
 
+      /* UPDATED: Copy button hover uses dynamic primary color */
       .copy-url-button:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
       }
 
       .copy-url-button.copied {
@@ -524,8 +540,10 @@
         width: fit-content;
       }
 
+      /* UPDATED: Product link hover uses dynamic primary color */
       .product-link:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
       }
 
       /* Blog Section Styles - NEW */
@@ -777,8 +795,10 @@
         box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
       }
 
+      /* UPDATED: Submit button hover uses dynamic primary color */
       .submit-button:hover {
-        background-color: #4338ca;
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
         transform: translateY(-1px);
         box-shadow: 0 6px 16px rgba(79, 70, 229, 0.4);
       }
@@ -788,6 +808,7 @@
         cursor: not-allowed;
         transform: none;
         box-shadow: none;
+        filter: none;
       }
 
       .loading {
@@ -1957,6 +1978,48 @@
         });
       }
 
+      // UPDATED: Function to update status bar color
+      function updateStatusBarColor(bgColor) {
+        // Update theme-color meta tag
+        const themeColorMeta = document.getElementById("theme-color-meta");
+        if (themeColorMeta) {
+          themeColorMeta.content = bgColor;
+        }
+
+        // Update MS navigation button color
+        const msNavColorMeta = document.getElementById("ms-nav-color-meta");
+        if (msNavColorMeta) {
+          msNavColorMeta.content = bgColor;
+        }
+
+        // Update Apple status bar style based on background color
+        const appleStatusBarMeta = document.getElementById(
+          "apple-status-bar-meta"
+        );
+        if (appleStatusBarMeta) {
+          // Determine if background is light or dark
+          const isLightBackground = isLightColor(bgColor);
+          appleStatusBarMeta.content = isLightBackground
+            ? "default"
+            : "black-translucent";
+        }
+      }
+
+      // Helper function to determine if a color is light or dark
+      function isLightColor(color) {
+        // Convert hex to RGB
+        const hex = color.replace("#", "");
+        const r = parseInt(hex.substr(0, 2), 16);
+        const g = parseInt(hex.substr(2, 2), 16);
+        const b = parseInt(hex.substr(4, 2), 16);
+
+        // Calculate luminance
+        const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
+
+        // Return true if light (luminance > 0.5)
+        return luminance > 0.5;
+      }
+
       // Fetch profile data
       async function fetchProfileData() {
         try {
@@ -2005,6 +2068,9 @@
             "--blog-bg",
             data.blogBgColor || "#ffffff"
           );
+
+          // UPDATED: Update status bar color to match body background
+          updateStatusBarColor(data.backgroundColor || "#ffffff");
 
           // Update header
           document.getElementById("header-name").textContent = data.name;
