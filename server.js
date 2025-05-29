@@ -45,7 +45,7 @@ if (!fs.existsSync(imagesDir)) {
 // Configure multer for file uploads (memory storage for base64 conversion)
 const storage = multer.memoryStorage()
 
-const upload = multer({ 
+const upload = multer({
   storage,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
@@ -57,6 +57,24 @@ const upload = multer({
     }
   }
 })
+
+// Middleware to use multer only for multipart requests
+function conditionalUpload(fieldName) {
+  return (req, res, next) => {
+    if (req.is("multipart/form-data")) {
+      const handler = upload.single(fieldName)
+      handler(req, res, (err) => {
+        if (err) {
+          console.error("Multer error:", err)
+          return res.status(400).json({ message: "File upload error", error: err.message })
+        }
+        next()
+      })
+    } else {
+      next()
+    }
+  }
+}
 
 // Helper function to convert buffer to base64 data URL
 function bufferToBase64DataURL(buffer, mimetype) {
@@ -143,10 +161,20 @@ const profileSchema = new mongoose.Schema({
   accentColor: { type: String, default: "#4f46e5" },
   galleryBgColor: { type: String, default: "#f9fafb" },
   servicesBgColor: { type: String, default: "#ffffff" },
+  servicesTextColor: { type: String, default: "#333333" },
+  servicesCardColor: { type: String, default: "#f9fafb" },
   productsBgColor: { type: String, default: "#f9fafb" },
+  productsTextColor: { type: String, default: "#333333" },
+  productsCardColor: { type: String, default: "#ffffff" },
   blogBgColor: { type: String, default: "#ffffff" },
+  blogTextColor: { type: String, default: "#333333" },
+  blogCardColor: { type: String, default: "#f9fafb" },
   faqBgColor: { type: String, default: "#ffffff" },
+  faqTextColor: { type: String, default: "#333333" },
+  faqCardColor: { type: String, default: "#ffffff" },
   contactBgColor: { type: String, default: "#f9fafb" },
+  contactInfoTextColor: { type: String, default: "#333333" },
+  contactInfoCardColor: { type: String, default: "#ffffff" },
   servicesSectionTitle: { type: String, default: "My Services" },
   productsSectionTitle: { type: String, default: "My Products" },
   blogSectionTitle: { type: String, default: "Latest Blog Posts" },
@@ -154,6 +182,20 @@ const profileSchema = new mongoose.Schema({
   infoSectionTitle: { type: String, default: "Contact Information" },
   faqSectionTitle: { type: String, default: "Frequently Asked Questions" },
   contactSectionTitle: { type: String, default: "Contact Me" },
+  sectionOrder: {
+    type: [String],
+    default: [
+      "links-section",
+      "services-section",
+      "products-section",
+      "blog-section",
+      "gallery-section",
+      "info-section",
+      "faq-section",
+      "contact-section"
+    ]
+  },
+  customCode: { type: String, default: "" },
   showContactForm: { type: Boolean, default: true },
   contactEmail: { type: String, default: "" },
   links: [linkSchema],
@@ -211,19 +253,40 @@ async function initializeDefaultProfile() {
         backgroundColor: "#ffffff",
         textColor: "#333333",
         accentColor: "#4f46e5",
-        galleryBgColor: "#f9fafb",
-        servicesBgColor: "#ffffff",
-        productsBgColor: "#f9fafb",
-        blogBgColor: "#ffffff",
-        faqBgColor: "#ffffff",
-        contactBgColor: "#f9fafb",
-        servicesSectionTitle: "My Services",
-        productsSectionTitle: "My Products",
-        blogSectionTitle: "Latest Blog Posts",
-        gallerySectionTitle: "My Gallery",
-        infoSectionTitle: "Contact Information",
-        faqSectionTitle: "Frequently Asked Questions",
-        contactSectionTitle: "Contact Me",
+      galleryBgColor: "#f9fafb",
+      servicesBgColor: "#ffffff",
+      servicesTextColor: "#333333",
+      servicesCardColor: "#f9fafb",
+      productsBgColor: "#f9fafb",
+      productsTextColor: "#333333",
+      productsCardColor: "#ffffff",
+      blogBgColor: "#ffffff",
+      blogTextColor: "#333333",
+      blogCardColor: "#f9fafb",
+      faqBgColor: "#ffffff",
+      faqTextColor: "#333333",
+      faqCardColor: "#ffffff",
+      contactBgColor: "#f9fafb",
+      contactInfoTextColor: "#333333",
+      contactInfoCardColor: "#ffffff",
+      servicesSectionTitle: "My Services",
+      productsSectionTitle: "My Products",
+      blogSectionTitle: "Latest Blog Posts",
+      gallerySectionTitle: "My Gallery",
+      infoSectionTitle: "Contact Information",
+      faqSectionTitle: "Frequently Asked Questions",
+      contactSectionTitle: "Contact Me",
+      sectionOrder: [
+        "links-section",
+        "services-section",
+        "products-section",
+        "blog-section",
+        "gallery-section",
+        "info-section",
+        "faq-section",
+        "contact-section"
+      ],
+      customCode: "",
         showContactForm: true,
         contactEmail: "admin@example.com",
         links: [
@@ -396,7 +459,7 @@ app.get("/api/profile", async (req, res) => {
 })
 
 // Update profile (authenticated)
-app.put("/api/profile", authenticate, upload.single("profileImage"), async (req, res) => {
+app.put("/api/profile", authenticate, conditionalUpload("profileImage"), async (req, res) => {
   try {
     const { 
       name, 
@@ -411,6 +474,18 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
       blogBgColor,
       faqBgColor,
       contactBgColor,
+      servicesTextColor,
+      servicesCardColor,
+      productsTextColor,
+      productsCardColor,
+      blogTextColor,
+      blogCardColor,
+      faqTextColor,
+      faqCardColor,
+      contactInfoTextColor,
+      contactInfoCardColor,
+      sectionOrder,
+      customCode,
       showContactForm,
       servicesSectionTitle,
       productsSectionTitle,
@@ -450,6 +525,18 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
     if (blogBgColor) profile.blogBgColor = blogBgColor
     if (faqBgColor) profile.faqBgColor = faqBgColor
     if (contactBgColor) profile.contactBgColor = contactBgColor
+    if (servicesTextColor) profile.servicesTextColor = servicesTextColor
+    if (servicesCardColor) profile.servicesCardColor = servicesCardColor
+    if (productsTextColor) profile.productsTextColor = productsTextColor
+    if (productsCardColor) profile.productsCardColor = productsCardColor
+    if (blogTextColor) profile.blogTextColor = blogTextColor
+    if (blogCardColor) profile.blogCardColor = blogCardColor
+    if (faqTextColor) profile.faqTextColor = faqTextColor
+    if (faqCardColor) profile.faqCardColor = faqCardColor
+    if (contactInfoTextColor) profile.contactInfoTextColor = contactInfoTextColor
+    if (contactInfoCardColor) profile.contactInfoCardColor = contactInfoCardColor
+    if (sectionOrder) profile.sectionOrder = Array.isArray(sectionOrder) ? sectionOrder : sectionOrder.split(',')
+    if (customCode !== undefined) profile.customCode = customCode
     
     // Update contact settings
     if (contactEmail) profile.contactEmail = contactEmail
@@ -486,7 +573,7 @@ app.put("/api/profile", authenticate, upload.single("profileImage"), async (req,
 })
 
 // Update logo (authenticated)
-app.put("/api/logo", authenticate, upload.single("logoImage"), async (req, res) => {
+app.put("/api/logo", authenticate, conditionalUpload("logoImage"), async (req, res) => {
   try {
     const profile = await Profile.findOne()
     
@@ -726,7 +813,7 @@ app.delete("/api/services/:index", authenticate, async (req, res) => {
 })
 
 // Add product (authenticated)
-app.post("/api/products", authenticate, upload.single("productImage"), async (req, res) => {
+app.post("/api/products", authenticate, conditionalUpload("productImage"), async (req, res) => {
   try {
     const { title, description, price, buttonText, url, icon } = req.body
     
@@ -781,7 +868,7 @@ app.post("/api/products", authenticate, upload.single("productImage"), async (re
 })
 
 // Update product (authenticated)
-app.put("/api/products/:index", authenticate, upload.single("productImage"), async (req, res) => {
+app.put("/api/products/:index", authenticate, conditionalUpload("productImage"), async (req, res) => {
   try {
     const { index } = req.params
     const { title, description, price, buttonText, url, icon } = req.body
@@ -884,7 +971,7 @@ app.delete("/api/products/:index", authenticate, async (req, res) => {
 })
 
 // Add blog post (authenticated)
-app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (req, res) => {
+app.post("/api/blogPosts", authenticate, conditionalUpload("blogPostImage"), async (req, res) => {
   try {
     const { title, date, excerpt, content } = req.body
     
@@ -935,7 +1022,7 @@ app.post("/api/blogPosts", authenticate, upload.single("blogPostImage"), async (
 })
 
 // Update blog post (authenticated)
-app.put("/api/blogPosts/:index", authenticate, upload.single("blogPostImage"), async (req, res) => {
+app.put("/api/blogPosts/:index", authenticate, conditionalUpload("blogPostImage"), async (req, res) => {
   try {
     const { index } = req.params
     const { title, date, excerpt, content } = req.body

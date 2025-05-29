@@ -906,6 +906,26 @@
               <span class="sidebar-nav-text">Contact Form</span>
             </a>
           </li>
+          <li class="sidebar-nav-item">
+            <a
+              href="#order"
+              class="sidebar-nav-link"
+              data-section="order-section"
+            >
+              <i class="fas fa-sort sidebar-nav-icon"></i>
+              <span class="sidebar-nav-text">Section Order</span>
+            </a>
+          </li>
+          <li class="sidebar-nav-item">
+            <a
+              href="#custom-code"
+              class="sidebar-nav-link"
+              data-section="custom-code-section"
+            >
+              <i class="fas fa-code sidebar-nav-icon"></i>
+              <span class="sidebar-nav-text">Custom Code</span>
+            </a>
+          </li>
         </ul>
       </aside>
 
@@ -1283,6 +1303,157 @@
                     id="contact-bg-color"
                     class="form-input"
                     value="#f9fafb"
+                  />
+                </div>
+              </div>
+
+              <!-- Section specific text and card colors -->
+              <div class="form-group">
+                <label for="services-text-color" class="form-label"
+                  >Services Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="services-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="services-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="services-card-color" class="form-label"
+                  >Services Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="services-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="services-card-color"
+                    class="form-input"
+                    value="#f9fafb"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="products-text-color" class="form-label"
+                  >Products Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="products-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="products-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="products-card-color" class="form-label"
+                  >Products Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="products-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="products-card-color"
+                    class="form-input"
+                    value="#ffffff"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="blog-text-color" class="form-label"
+                  >Blog Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="blog-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="blog-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="blog-card-color" class="form-label"
+                  >Blog Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="blog-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="blog-card-color"
+                    class="form-input"
+                    value="#f9fafb"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="faq-text-color" class="form-label"
+                  >FAQ Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="faq-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="faq-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="faq-card-color" class="form-label"
+                  >FAQ Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="faq-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="faq-card-color"
+                    class="form-input"
+                    value="#ffffff"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-info-text-color" class="form-label"
+                  >Contact Info Text Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="contact-info-text-color-preview"></div>
+                  <input
+                    type="color"
+                    id="contact-info-text-color"
+                    class="form-input"
+                    value="#333333"
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="contact-info-card-color" class="form-label"
+                  >Contact Info Card Color</label
+                >
+                <div class="color-input-container">
+                  <div class="color-preview" id="contact-info-card-color-preview"></div>
+                  <input
+                    type="color"
+                    id="contact-info-card-color"
+                    class="form-input"
+                    value="#ffffff"
                   />
                 </div>
               </div>
@@ -1880,6 +2051,49 @@
             </form>
           </div>
         </section>
+
+        <!-- Section Order Section -->
+        <section id="order-section" class="section hidden">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Section Order</h2>
+            </div>
+            <form id="order-form">
+              <div class="form-group">
+                <label for="section-order" class="form-label">Order (comma separated section IDs)</label>
+                <input
+                  type="text"
+                  id="section-order"
+                  class="form-input"
+                  placeholder="links-section,services-section,products-section,blog-section,gallery-section,info-section,faq-section,contact-section"
+                />
+              </div>
+              <button type="submit" class="button primary-button" id="save-order-button">
+                <span id="order-loading" class="loading hidden"></span>
+                <span id="order-button-text">Save Changes</span>
+              </button>
+            </form>
+          </div>
+        </section>
+
+        <!-- Custom Code Section -->
+        <section id="custom-code-section" class="section hidden">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Custom Code</h2>
+            </div>
+            <form id="custom-code-form">
+              <div class="form-group">
+                <label for="custom-code" class="form-label">HTML/JS/CSS</label>
+                <textarea id="custom-code" class="form-textarea" placeholder="&lt;script&gt;console.log('hi')&lt;/script&gt;"></textarea>
+              </div>
+              <button type="submit" class="button primary-button" id="save-custom-code-button">
+                <span id="custom-code-loading" class="loading hidden"></span>
+                <span id="custom-code-button-text">Save Changes</span>
+              </button>
+            </form>
+          </div>
+        </section>
       </main>
     </div>
 
@@ -1958,10 +2172,20 @@
       const accentColorInput = document.getElementById("accent-color");
       const galleryBgColorInput = document.getElementById("gallery-bg-color");
       const servicesBgColorInput = document.getElementById("services-bg-color");
+      const servicesTextColorInput = document.getElementById("services-text-color");
+      const servicesCardColorInput = document.getElementById("services-card-color");
       const productsBgColorInput = document.getElementById("products-bg-color");
+      const productsTextColorInput = document.getElementById("products-text-color");
+      const productsCardColorInput = document.getElementById("products-card-color");
       const blogBgColorInput = document.getElementById("blog-bg-color");
+      const blogTextColorInput = document.getElementById("blog-text-color");
+      const blogCardColorInput = document.getElementById("blog-card-color");
       const faqBgColorInput = document.getElementById("faq-bg-color");
+      const faqTextColorInput = document.getElementById("faq-text-color");
+      const faqCardColorInput = document.getElementById("faq-card-color");
       const contactBgColorInput = document.getElementById("contact-bg-color");
+      const contactInfoTextColorInput = document.getElementById("contact-info-text-color");
+      const contactInfoCardColorInput = document.getElementById("contact-info-card-color");
       const backgroundColorPreview = document.getElementById(
         "background-color-preview"
       );
@@ -1975,16 +2199,26 @@
       const servicesBgColorPreview = document.getElementById(
         "services-bg-color-preview"
       );
+      const servicesTextColorPreview = document.getElementById("services-text-color-preview");
+      const servicesCardColorPreview = document.getElementById("services-card-color-preview");
       const productsBgColorPreview = document.getElementById(
         "products-bg-color-preview"
       );
+      const productsTextColorPreview = document.getElementById("products-text-color-preview");
+      const productsCardColorPreview = document.getElementById("products-card-color-preview");
       const blogBgColorPreview = document.getElementById(
         "blog-bg-color-preview"
       );
+      const blogTextColorPreview = document.getElementById("blog-text-color-preview");
+      const blogCardColorPreview = document.getElementById("blog-card-color-preview");
       const faqBgColorPreview = document.getElementById("faq-bg-color-preview");
+      const faqTextColorPreview = document.getElementById("faq-text-color-preview");
+      const faqCardColorPreview = document.getElementById("faq-card-color-preview");
       const contactBgColorPreview = document.getElementById(
         "contact-bg-color-preview"
       );
+      const contactInfoTextColorPreview = document.getElementById("contact-info-text-color-preview");
+      const contactInfoCardColorPreview = document.getElementById("contact-info-card-color-preview");
       const saveAppearanceButton = document.getElementById(
         "save-appearance-button"
       );
@@ -2109,6 +2343,20 @@
       const saveContactButton = document.getElementById("save-contact-button");
       const contactLoading = document.getElementById("contact-loading");
       const contactButtonText = document.getElementById("contact-button-text");
+
+      // Section Order Elements
+      const orderForm = document.getElementById("order-form");
+      const sectionOrderInput = document.getElementById("section-order");
+      const saveOrderButton = document.getElementById("save-order-button");
+      const orderLoading = document.getElementById("order-loading");
+      const orderButtonText = document.getElementById("order-button-text");
+
+      // Custom Code Elements
+      const customCodeForm = document.getElementById("custom-code-form");
+      const customCodeInput = document.getElementById("custom-code");
+      const saveCustomCodeButton = document.getElementById("save-custom-code-button");
+      const customCodeLoading = document.getElementById("custom-code-loading");
+      const customCodeButtonText = document.getElementById("custom-code-button-text");
 
       // Service Icons List
       const serviceIcons = [
@@ -2465,6 +2713,16 @@
         blogBgColorInput.value = data.blogBgColor || "#ffffff";
         faqBgColorInput.value = data.faqBgColor || "#ffffff";
         contactBgColorInput.value = data.contactBgColor || "#f9fafb";
+        servicesTextColorInput.value = data.servicesTextColor || "#333333";
+        servicesCardColorInput.value = data.servicesCardColor || "#f9fafb";
+        productsTextColorInput.value = data.productsTextColor || "#333333";
+        productsCardColorInput.value = data.productsCardColor || "#ffffff";
+        blogTextColorInput.value = data.blogTextColor || "#333333";
+        blogCardColorInput.value = data.blogCardColor || "#f9fafb";
+        faqTextColorInput.value = data.faqTextColor || "#333333";
+        faqCardColorInput.value = data.faqCardColor || "#ffffff";
+        contactInfoTextColorInput.value = data.contactInfoTextColor || "#333333";
+        contactInfoCardColorInput.value = data.contactInfoCardColor || "#ffffff";
         backgroundColorPreview.style.backgroundColor =
           data.backgroundColor || "#ffffff";
         textColorPreview.style.backgroundColor = data.textColor || "#333333";
@@ -2481,6 +2739,19 @@
         faqBgColorPreview.style.backgroundColor = data.faqBgColor || "#ffffff";
         contactBgColorPreview.style.backgroundColor =
           data.contactBgColor || "#f9fafb";
+        servicesTextColorPreview.style.backgroundColor = data.servicesTextColor || "#333333";
+        servicesCardColorPreview.style.backgroundColor = data.servicesCardColor || "#f9fafb";
+        productsTextColorPreview.style.backgroundColor = data.productsTextColor || "#333333";
+        productsCardColorPreview.style.backgroundColor = data.productsCardColor || "#ffffff";
+        blogTextColorPreview.style.backgroundColor = data.blogTextColor || "#333333";
+        blogCardColorPreview.style.backgroundColor = data.blogCardColor || "#f9fafb";
+        faqTextColorPreview.style.backgroundColor = data.faqTextColor || "#333333";
+        faqCardColorPreview.style.backgroundColor = data.faqCardColor || "#ffffff";
+        contactInfoTextColorPreview.style.backgroundColor = data.contactInfoTextColor || "#333333";
+        contactInfoCardColorPreview.style.backgroundColor = data.contactInfoCardColor || "#ffffff";
+
+        sectionOrderInput.value = (data.sectionOrder || []).join(',');
+        customCodeInput.value = data.customCode || "";
 
         // Contact section
         contactEmailInput.value = data.contactEmail || "";
@@ -3383,10 +3654,20 @@
               accentColor: accentColorInput.value,
               galleryBgColor: galleryBgColorInput.value,
               servicesBgColor: servicesBgColorInput.value,
+              servicesTextColor: servicesTextColorInput.value,
+              servicesCardColor: servicesCardColorInput.value,
               productsBgColor: productsBgColorInput.value,
+              productsTextColor: productsTextColorInput.value,
+              productsCardColor: productsCardColorInput.value,
               blogBgColor: blogBgColorInput.value,
+              blogTextColor: blogTextColorInput.value,
+              blogCardColor: blogCardColorInput.value,
               faqBgColor: faqBgColorInput.value,
+              faqTextColor: faqTextColorInput.value,
+              faqCardColor: faqCardColorInput.value,
               contactBgColor: contactBgColorInput.value,
+              contactInfoTextColor: contactInfoTextColorInput.value,
+              contactInfoCardColor: contactInfoCardColorInput.value,
             }),
           });
 
@@ -3883,6 +4164,82 @@
           : "Disabled";
       });
 
+      // Section order form
+      orderForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+          const token = checkAuthStatus();
+          saveOrderButton.disabled = true;
+          orderLoading.classList.remove("hidden");
+          orderButtonText.textContent = "Saving...";
+
+          const response = await fetch("/api/profile", {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              sectionOrder: sectionOrderInput.value,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to update section order");
+          }
+
+          const data = await response.json();
+          profileData = data.profile;
+
+          showNotification("success", "Success", "Section order updated");
+        } catch (error) {
+          console.error("Error updating section order:", error);
+          showNotification("error", "Error", "Failed to update section order");
+        } finally {
+          saveOrderButton.disabled = false;
+          orderLoading.classList.add("hidden");
+          orderButtonText.textContent = "Save Changes";
+        }
+      });
+
+      // Custom code form
+      customCodeForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        try {
+          const token = checkAuthStatus();
+          saveCustomCodeButton.disabled = true;
+          customCodeLoading.classList.remove("hidden");
+          customCodeButtonText.textContent = "Saving...";
+
+          const response = await fetch("/api/profile", {
+            method: "PUT",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              customCode: customCodeInput.value,
+            }),
+          });
+
+          if (!response.ok) {
+            throw new Error("Failed to update custom code");
+          }
+
+          const data = await response.json();
+          profileData = data.profile;
+
+          showNotification("success", "Success", "Custom code updated");
+        } catch (error) {
+          console.error("Error updating custom code:", error);
+          showNotification("error", "Error", "Failed to update custom code");
+        } finally {
+          saveCustomCodeButton.disabled = false;
+          customCodeLoading.classList.add("hidden");
+          customCodeButtonText.textContent = "Save Changes";
+        }
+      });
+
       // Profile image preview
       profileImageInput.addEventListener("change", (e) => {
         if (profileImageInput.files.length > 0) {
@@ -3978,6 +4335,46 @@
 
       contactBgColorInput.addEventListener("input", () => {
         contactBgColorPreview.style.backgroundColor = contactBgColorInput.value;
+      });
+
+      servicesTextColorInput.addEventListener("input", () => {
+        servicesTextColorPreview.style.backgroundColor = servicesTextColorInput.value;
+      });
+
+      servicesCardColorInput.addEventListener("input", () => {
+        servicesCardColorPreview.style.backgroundColor = servicesCardColorInput.value;
+      });
+
+      productsTextColorInput.addEventListener("input", () => {
+        productsTextColorPreview.style.backgroundColor = productsTextColorInput.value;
+      });
+
+      productsCardColorInput.addEventListener("input", () => {
+        productsCardColorPreview.style.backgroundColor = productsCardColorInput.value;
+      });
+
+      blogTextColorInput.addEventListener("input", () => {
+        blogTextColorPreview.style.backgroundColor = blogTextColorInput.value;
+      });
+
+      blogCardColorInput.addEventListener("input", () => {
+        blogCardColorPreview.style.backgroundColor = blogCardColorInput.value;
+      });
+
+      faqTextColorInput.addEventListener("input", () => {
+        faqTextColorPreview.style.backgroundColor = faqTextColorInput.value;
+      });
+
+      faqCardColorInput.addEventListener("input", () => {
+        faqCardColorPreview.style.backgroundColor = faqCardColorInput.value;
+      });
+
+      contactInfoTextColorInput.addEventListener("input", () => {
+        contactInfoTextColorPreview.style.backgroundColor = contactInfoTextColorInput.value;
+      });
+
+      contactInfoCardColorInput.addEventListener("input", () => {
+        contactInfoCardColorPreview.style.backgroundColor = contactInfoCardColorInput.value;
       });
 
       // Service icon search
