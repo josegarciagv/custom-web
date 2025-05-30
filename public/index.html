@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Custom Web Profile</title>
+    <title>Juanito Component</title>
     <!-- Status bar color matching body -->
     <meta name="theme-color" content="#ffffff" id="theme-color-meta" />
     <meta
@@ -655,6 +655,321 @@
         font-size: 0.85rem;
       }
 
+      /* Enhanced Professional Block Styles */
+      .blocks-section {
+        margin-bottom: 0;
+      }
+
+      .block-section {
+        padding: 4rem 0;
+        margin-bottom: 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      /* Block Layout Styles */
+      .block-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .block-two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: center;
+        min-height: 500px;
+      }
+
+      .block-two-column.image-left {
+        grid-template-areas: "image content";
+      }
+
+      .block-two-column.image-right {
+        grid-template-areas: "content image";
+      }
+
+      .block-content-area {
+        grid-area: content;
+        padding: 2rem 0;
+      }
+
+      .block-image-area {
+        grid-area: image;
+        position: relative;
+      }
+
+      .block-centered {
+        text-align: center;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 2rem;
+      }
+
+      .block-hero {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        position: relative;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+      }
+
+      .block-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.4);
+        z-index: 1;
+      }
+
+      .block-hero .block-content-area {
+        position: relative;
+        z-index: 2;
+        color: white;
+        max-width: 800px;
+        padding: 0 2rem;
+      }
+
+      .block-feature-highlight {
+        background: linear-gradient(
+          135deg,
+          rgba(79, 70, 229, 0.1),
+          rgba(79, 70, 229, 0.05)
+        );
+        border-radius: 2rem;
+        padding: 4rem 3rem;
+        text-align: center;
+        border: 1px solid rgba(79, 70, 229, 0.2);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      }
+
+      .block-card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+        align-items: start;
+      }
+
+      .block-card {
+        background: var(--bg-color);
+        border-radius: 1.5rem;
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+      }
+
+      .block-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Typography Styles */
+      .block-subtitle {
+        font-size: 0.95rem;
+        font-weight: 600;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1rem;
+        opacity: 0.9;
+      }
+
+      .block-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        line-height: 1.2;
+        margin-bottom: 1.5rem;
+        color: inherit;
+      }
+
+      .block-hero .block-title {
+        font-size: 3.5rem;
+        margin-bottom: 2rem;
+      }
+
+      .block-centered .block-title,
+      .block-feature-highlight .block-title {
+        font-size: 2.8rem;
+      }
+
+      .block-description {
+        font-size: 1.1rem;
+        line-height: 1.7;
+        margin-bottom: 2.5rem;
+        color: inherit;
+        opacity: 0.8;
+      }
+
+      .block-hero .block-description {
+        font-size: 1.3rem;
+        margin-bottom: 3rem;
+      }
+
+      /* Button Styles */
+      .block-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem 2.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        text-decoration: none;
+        border-radius: 0.75rem;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        border: 2px solid transparent;
+        min-width: 140px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .block-button-primary {
+        background-color: var(--primary-color);
+        color: white;
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+      }
+
+      .block-button-primary:hover {
+        background-color: var(--primary-color);
+        filter: brightness(0.9);
+        transform: translateY(-3px);
+        box-shadow: 0 12px 25px rgba(79, 70, 229, 0.4);
+      }
+
+      .block-button-secondary {
+        background-color: transparent;
+        color: var(--primary-color);
+        border-color: var(--primary-color);
+        box-shadow: 0 4px 15px rgba(79, 70, 229, 0.2);
+      }
+
+      .block-button-secondary:hover {
+        background-color: var(--primary-color);
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+      }
+
+      .block-button-ghost {
+        background-color: transparent;
+        color: var(--primary-color);
+        border: none;
+        text-decoration: underline;
+        text-underline-offset: 6px;
+        text-decoration-thickness: 2px;
+      }
+
+      .block-button-ghost:hover {
+        opacity: 0.8;
+        text-decoration: none;
+        transform: translateY(-2px);
+      }
+
+      /* Image Styles */
+      .block-image-container {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+        border-radius: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+      }
+
+      .block-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+      }
+
+      .block-image-container:hover .block-image {
+        transform: scale(1.05);
+      }
+
+      .block-centered .block-image-container,
+      .block-feature-highlight .block-image-container {
+        max-width: 500px;
+        margin: 2rem auto 0;
+      }
+
+      /* Color Schemes */
+      .block-scheme-light {
+        background-color: #ffffff;
+        color: #333333;
+      }
+
+      .block-scheme-dark {
+        background-color: #1a1a1a;
+        color: #ffffff;
+      }
+
+      .block-scheme-dark .block-button-primary {
+        background-color: #ffffff;
+        color: #1a1a1a;
+        box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+      }
+
+      .block-scheme-dark .block-button-secondary {
+        border-color: #ffffff;
+        color: #ffffff;
+      }
+
+      .block-scheme-dark .block-button-secondary:hover {
+        background-color: #ffffff;
+        color: #1a1a1a;
+      }
+
+      /* Spacing Options */
+      .block-padding-none {
+        padding: 0;
+      }
+      .block-padding-small {
+        padding: 2rem 0;
+      }
+      .block-padding-normal {
+        padding: 4rem 0;
+      }
+      .block-padding-large {
+        padding: 6rem 0;
+      }
+
+      /* Animation Styles */
+      .block-animate {
+        opacity: 0;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .block-animate.animate-in {
+        opacity: 1;
+      }
+
+      .block-fade-in:not(.animate-in) {
+        transform: translateY(30px);
+      }
+
+      .block-slide-up:not(.animate-in) {
+        transform: translateY(60px);
+      }
+
+      .block-slide-left:not(.animate-in) {
+        transform: translateX(-60px);
+      }
+
+      .block-slide-right:not(.animate-in) {
+        transform: translateX(60px);
+      }
+
       .gallery-section {
         padding: 3rem 0;
         background-color: var(--gallery-bg);
@@ -1284,6 +1599,25 @@
         line-height: 1.7;
       }
 
+      /* Responsive Design */
+      @media (max-width: 1024px) {
+        .block-container {
+          padding: 0 1.5rem;
+        }
+
+        .block-two-column {
+          gap: 3rem;
+        }
+
+        .block-title {
+          font-size: 2.2rem;
+        }
+
+        .block-hero .block-title {
+          font-size: 3rem;
+        }
+      }
+
       @media (max-width: 768px) {
         .header-container {
           padding: 0 1rem;
@@ -1389,6 +1723,75 @@
 
         .contact-form-title {
           font-size: 1.5rem;
+        }
+
+        /* Block responsive styles */
+        .block-two-column {
+          grid-template-columns: 1fr;
+          grid-template-areas:
+            "content"
+            "image" !important;
+          gap: 2rem;
+          min-height: auto;
+        }
+
+        .block-content-area {
+          padding: 1rem 0;
+          text-align: center;
+        }
+
+        .block-image-container {
+          min-height: 300px;
+        }
+
+        .block-title {
+          font-size: 1.8rem;
+        }
+
+        .block-hero .block-title {
+          font-size: 2.5rem;
+        }
+
+        .block-centered .block-title,
+        .block-feature-highlight .block-title {
+          font-size: 2rem;
+        }
+
+        .block-hero {
+          min-height: 60vh;
+        }
+
+        .block-feature-highlight,
+        .block-card {
+          padding: 2rem;
+        }
+
+        .block-card-grid {
+          grid-template-columns: 1fr;
+          gap: 2rem;
+        }
+
+        .block-container {
+          padding: 0 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .block-section {
+          padding: 3rem 0;
+        }
+
+        .block-title {
+          font-size: 1.6rem;
+        }
+
+        .block-description {
+          font-size: 1rem;
+        }
+
+        .block-button {
+          padding: 0.875rem 2rem;
+          font-size: 0.9rem;
         }
       }
     </style>
@@ -1530,6 +1933,11 @@
         <div class="links-container" id="links-container">
           <!-- Social links will be loaded dynamically -->
         </div>
+
+        <!-- FIXED: Changed to section with proper ID -->
+        <section id="blocks-container" class="blocks-section">
+          <!-- Blocks will be inserted dynamically -->
+        </section>
 
         <section id="services-section" class="services-section">
           <div class="container">
@@ -2220,6 +2628,9 @@
           // Load blog posts
           loadBlogPosts(data.blogPosts || []);
 
+          // Load blocks with enhanced professional system
+          loadBlocks(data.blocks || []);
+
           // Load contact information
           loadContactInfo(data.contactInfo || []);
 
@@ -2316,6 +2727,15 @@
           } else {
             document
               .getElementById("links-container")
+              .classList.remove("hidden");
+          }
+
+          // Hide blocks section if no blocks
+          if (!data.blocks || data.blocks.length === 0) {
+            document.getElementById("blocks-container").classList.add("hidden");
+          } else {
+            document
+              .getElementById("blocks-container")
               .classList.remove("hidden");
           }
 
@@ -2596,6 +3016,219 @@
           }
         });
 
+      // Enhanced Professional loadBlocks function
+      function loadBlocks(blocks) {
+        const container = document.getElementById("blocks-container");
+
+        // Clear existing content
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+
+        if (!blocks || blocks.length === 0) {
+          return;
+        }
+
+        blocks.forEach((block, index) => {
+          const section = document.createElement("div");
+          section.className = "block-section";
+
+          // Apply padding
+          const padding = block.padding || "normal";
+          section.classList.add(`block-padding-${padding}`);
+
+          // Apply color scheme
+          applyBlockColorScheme(section, block);
+
+          // Apply animation
+          const animation = block.animation || "none";
+          if (animation !== "none") {
+            section.classList.add("block-animate", `block-${animation}`);
+          }
+
+          // Create container
+          const blockContainer = document.createElement("div");
+          blockContainer.className = "block-container";
+
+          // Create layout based on type
+          const layout = block.layout || "two-column";
+          const layoutElement = createBlockLayout(block, layout);
+
+          blockContainer.appendChild(layoutElement);
+          section.appendChild(blockContainer);
+          container.appendChild(section);
+        });
+
+        // Initialize animations
+        initBlockAnimations();
+      }
+
+      function applyBlockColorScheme(section, block) {
+        const colorScheme = block.colorScheme || "auto";
+
+        if (colorScheme === "custom") {
+          section.style.backgroundColor = block.bgColor || "#ffffff";
+          section.style.color = block.textColor || "#333333";
+        } else if (colorScheme !== "auto") {
+          section.classList.add(`block-scheme-${colorScheme}`);
+        } else {
+          // Use profile colors
+          section.style.backgroundColor = block.bgColor || "var(--bg-color)";
+          section.style.color = block.textColor || "var(--text-color)";
+        }
+      }
+
+      function createBlockLayout(block, layout) {
+        const wrapper = document.createElement("div");
+
+        switch (layout) {
+          case "two-column":
+            wrapper.className = `block-two-column image-${
+              block.imagePosition || "right"
+            }`;
+            wrapper.appendChild(createBlockContent(block));
+            if (block.image) {
+              wrapper.appendChild(createBlockImage(block));
+            }
+            break;
+
+          case "centered":
+            wrapper.className = "block-centered";
+            wrapper.appendChild(createBlockContent(block, true));
+            if (block.image) {
+              wrapper.appendChild(createBlockImage(block));
+            }
+            break;
+
+          case "hero":
+            wrapper.className = "block-hero";
+            if (block.image) {
+              wrapper.style.backgroundImage = `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${block.image})`;
+            }
+            wrapper.appendChild(createBlockContent(block, true));
+            break;
+
+          case "card-grid":
+            wrapper.className = "block-card-grid";
+            const card = document.createElement("div");
+            card.className = "block-card";
+            card.appendChild(createBlockContent(block, true));
+            if (block.image) {
+              card.appendChild(createBlockImage(block));
+            }
+            wrapper.appendChild(card);
+            break;
+
+          case "feature-highlight":
+            wrapper.className = "block-feature-highlight";
+            wrapper.appendChild(createBlockContent(block, true));
+            if (block.image) {
+              wrapper.appendChild(createBlockImage(block));
+            }
+            break;
+
+          default:
+            wrapper.className = `block-two-column image-${
+              block.imagePosition || "right"
+            }`;
+            wrapper.appendChild(createBlockContent(block));
+            if (block.image) {
+              wrapper.appendChild(createBlockImage(block));
+            }
+        }
+
+        return wrapper;
+      }
+
+      function createBlockContent(block, centered = false) {
+        const content = document.createElement("div");
+        content.className = "block-content-area";
+
+        // Subtitle (optional)
+        if (block.subtitle) {
+          const subtitle = document.createElement("div");
+          subtitle.className = "block-subtitle";
+          subtitle.textContent = block.subtitle;
+          content.appendChild(subtitle);
+        }
+
+        // Title
+        if (block.title) {
+          const title = document.createElement("h2");
+          title.className = "block-title";
+          title.textContent = block.title;
+          content.appendChild(title);
+        }
+
+        // Description
+        if (block.text) {
+          const description = document.createElement("p");
+          description.className = "block-description";
+          description.textContent = block.text;
+          content.appendChild(description);
+        }
+
+        // Button
+        if (block.buttonText && block.buttonUrl) {
+          const button = document.createElement("a");
+          button.href = block.buttonUrl;
+          button.className = `block-button block-button-${
+            block.buttonStyle || "primary"
+          }`;
+          button.textContent = block.buttonText;
+          button.target = "_blank";
+          button.rel = "noopener noreferrer";
+          content.appendChild(button);
+        }
+
+        return content;
+      }
+
+      function createBlockImage(block) {
+        const imageArea = document.createElement("div");
+        imageArea.className = "block-image-area";
+
+        const imageContainer = document.createElement("div");
+        imageContainer.className = "block-image-container";
+
+        const img = document.createElement("img");
+        img.src = block.image || "/placeholder.svg";
+        img.alt = block.title || "Block Image";
+        img.className = "block-image";
+
+        imageContainer.appendChild(img);
+        imageArea.appendChild(imageContainer);
+
+        return imageArea;
+      }
+
+      function initBlockAnimations() {
+        const animatedBlocks = document.querySelectorAll(".block-animate");
+
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting) {
+                setTimeout(() => {
+                  entry.target.classList.add("animate-in");
+                }, 200);
+              }
+            });
+          },
+          {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px",
+          }
+        );
+
+        animatedBlocks.forEach((block, index) => {
+          // Stagger animations slightly
+          setTimeout(() => {
+            observer.observe(block);
+          }, index * 100);
+        });
+      }
+
       // Load contact information
       function loadContactInfo(contactInfo) {
         const infoGrid = document.getElementById("info-grid");
@@ -2696,13 +3329,20 @@
         const linksContainer = container.querySelector(".links-container");
         const footer = container.querySelector(".footer");
 
-        // Store all sections in a map for easy access
-        const sectionsMap = new Map();
-        const allSections = container.querySelectorAll("section");
+        // Store all sections and divs in a map for easy access
+        const elementsMap = new Map();
 
+        // Get all sections
+        const allSections = container.querySelectorAll("section");
         allSections.forEach((section) => {
-          sectionsMap.set(section.id, section);
+          elementsMap.set(section.id, section);
         });
+
+        // Also get the blocks-container div (which is now a section)
+        const blocksContainer = container.querySelector("#blocks-container");
+        if (blocksContainer) {
+          elementsMap.set("blocks-container", blocksContainer);
+        }
 
         // Clear container but keep header and links
         container.innerHTML = "";
@@ -2720,16 +3360,16 @@
 
         // Add sections in the specified order
         sectionOrder.forEach((id) => {
-          const section = sectionsMap.get(id);
-          if (section) {
-            container.appendChild(section);
+          const element = elementsMap.get(id);
+          if (element) {
+            container.appendChild(element);
           }
         });
 
         // Add any remaining sections that weren't in the order
-        sectionsMap.forEach((section, id) => {
-          if (!sectionOrder.includes(id) && !container.contains(section)) {
-            container.appendChild(section);
+        elementsMap.forEach((element, id) => {
+          if (!sectionOrder.includes(id) && !container.contains(element)) {
+            container.appendChild(element);
           }
         });
 

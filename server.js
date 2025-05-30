@@ -134,6 +134,17 @@ const blogPostSchema = new mongoose.Schema({
   image: { type: String }
 })
 
+// Block Section Schema - NEW
+const blockSectionSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  text: { type: String, required: true },
+  buttonText: { type: String },
+  buttonUrl: { type: String },
+  image: { type: String },
+  bgColor: { type: String, default: "#ffffff" },
+  textColor: { type: String, default: "#333333" }
+})
+
 // Contact Info Schema
 const contactInfoSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -202,6 +213,7 @@ const profileSchema = new mongoose.Schema({
   blogPosts: [blogPostSchema],
   contactInfo: [contactInfoSchema],
   faqs: [faqSchema],
+  blocks: [blockSectionSchema],
   galleryImages: [{ type: String }],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
@@ -368,6 +380,7 @@ async function initializeDefaultProfile() {
             answer: "You can use the contact form on this page or email me directly at contact@example.com."
           }
         ],
+        blocks: [],
         galleryImages: [
           "/images/gallery-1.jpg",
           "/images/gallery-2.jpg",
@@ -1257,6 +1270,108 @@ app.delete("/api/faqs/:index", authenticate, async (req, res) => {
   } catch (error) {
     console.error("Error deleting FAQ:", error)
     res.status(500).json({ message: "Failed to delete FAQ", error: error.message })
+  }
+})
+
+// Add block section (authenticated) - NEW
+app.post("/api/blocks", authenticate, conditionalUpload("blockImage"), async (req, res) => {
+  try {
+    const { title, text, buttonText, buttonUrl, bgColor, textColor } = req.body
+
+    const profile = await Profile.findOne()
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+
+    const newBlock = { title, text }
+    if (buttonText) newBlock.buttonText = buttonText
+    if (buttonUrl) newBlock.buttonUrl = buttonUrl
+    if (bgColor) newBlock.bgColor = bgColor
+    if (textColor) newBlock.textColor = textColor
+
+    if (req.file) {
+      const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+      const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+      newBlock.image = base64DataURL
+    }
+
+    profile.blocks.push(newBlock)
+    profile.updatedAt = new Date()
+
+    await profile.save()
+
+    res.json({ message: "Block added successfully", block: profile.blocks[profile.blocks.length - 1], profile })
+  } catch (error) {
+    console.error("Error adding block:", error)
+    res.status(500).json({ message: "Failed to add block", error: error.message })
+  }
+})
+
+// Update block section (authenticated) - NEW
+app.put("/api/blocks/:index", authenticate, conditionalUpload("blockImage"), async (req, res) => {
+  try {
+    const { index } = req.params
+    const { title, text, buttonText, buttonUrl, bgColor, textColor } = req.body
+
+    const profile = await Profile.findOne()
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+
+    if (index < 0 || index >= profile.blocks.length) {
+      return res.status(400).json({ message: "Invalid block index" })
+    }
+
+    if (title) profile.blocks[index].title = title
+    if (text) profile.blocks[index].text = text
+    if (buttonText !== undefined) profile.blocks[index].buttonText = buttonText
+    if (buttonUrl !== undefined) profile.blocks[index].buttonUrl = buttonUrl
+    if (bgColor) profile.blocks[index].bgColor = bgColor
+    if (textColor) profile.blocks[index].textColor = textColor
+
+    if (req.file) {
+      const optimizedBuffer = optimizeImageBuffer(req.file.buffer, req.file.mimetype)
+      const base64DataURL = bufferToBase64DataURL(optimizedBuffer, req.file.mimetype)
+      profile.blocks[index].image = base64DataURL
+    }
+
+    profile.updatedAt = new Date()
+
+    await profile.save()
+
+    res.json({ message: "Block updated successfully", block: profile.blocks[index], profile })
+  } catch (error) {
+    console.error("Error updating block:", error)
+    res.status(500).json({ message: "Failed to update block", error: error.message })
+  }
+})
+
+// Delete block section (authenticated) - NEW
+app.delete("/api/blocks/:index", authenticate, async (req, res) => {
+  try {
+    const { index } = req.params
+
+    const profile = await Profile.findOne()
+
+    if (!profile) {
+      return res.status(404).json({ message: "Profile not found" })
+    }
+
+    if (index < 0 || index >= profile.blocks.length) {
+      return res.status(400).json({ message: "Invalid block index" })
+    }
+
+    profile.blocks.splice(index, 1)
+    profile.updatedAt = new Date()
+
+    await profile.save()
+
+    res.json({ message: "Block deleted successfully", profile })
+  } catch (error) {
+    console.error("Error deleting block:", error)
+    res.status(500).json({ message: "Failed to delete block", error: error.message })
   }
 })
 
